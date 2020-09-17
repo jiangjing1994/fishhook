@@ -4,24 +4,17 @@ import KemForm from './Form'
 import KemPageCard from './PageCard'
 import Vue from "vue";
 
-const components = [
+const libComponents = {
     KemButton,
-
-
-]
-
-const install = function(Vue) {
-    if (install.installed) return
-    components.map(component => Vue.component(component.name, component))
+    KemTable,
+    KemForm,
+    KemPageCard,
 }
 
-if (typeof window !== 'undefined' && window.Vue) {
-    install(window.Vue)
-}
+Object.keys(libComponents).forEach(item=>{
+    Vue.component(item,libComponents[item])
+})
 
-export default {
-    install,
-    KemButton,
+export default libComponents
 
-}
 

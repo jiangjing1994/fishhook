@@ -53,7 +53,7 @@ export default {
 };
 </script>
 <style lang="scss">
-@import "~@/styles/element-variables.scss";
+//@import "~@/styles/element-variables.scss";
 .page-card__body{
   .content__body{
     // height: calc(100vh - 150px);
@@ -63,7 +63,7 @@ export default {
     position: relative
   }
   .block-color__cell--left{
-    background-color: $--color-primary;
+    //background-color: $--color-primary;
     width: 10px;
     height: 10px;
     margin-right: 5px
