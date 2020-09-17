@@ -1,4 +1,4 @@
-import KemButton from './Button'
+import KemButton from './Button/index'
 
 
 const components = [

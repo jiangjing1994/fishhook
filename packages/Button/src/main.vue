@@ -1,7 +1,7 @@
 <script lang="jsx">
 import { throttle ,get} from 'lodash'
 export default {
-  name: 'Button',
+  name: 'KemButton',
   components: {},
   props: {
     type: {
@@ -40,7 +40,7 @@ export default {
     }
   },
 
-  render(h,context){
+  render(){
     const { type } = this
 
     const baseButton = ()=>{
