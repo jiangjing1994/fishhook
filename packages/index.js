@@ -1,8 +1,10 @@
 import KemButton from './Button/index'
+import KemForm from './Form/index'
 
 
 const components = [
     KemButton,
+    KemForm,
 
 ];
 
@@ -17,5 +19,6 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 export default {
     install,
-    KemButton
+    KemButton,
+    KemForm,
 };

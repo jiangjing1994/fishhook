@@ -1,19 +1,34 @@
 <template>
     <el-form
             ref="form"
+            class="form_body--card"
+            style="position: relative"
             v-bind="computedConfig"
             :rules="rules"
             :model="data"
     >
-        <el-row :gutter="20">
+        <div v-if="readOnly" class="mask"/>
+        <div v-if="readOnly" style="text-align: right;padding: 10px">
+            <el-tag type="danger">
+                只读
+            </el-tag>
+        </div>
+        <el-row>
             <el-col
                     v-for="(item, index) in computedItems"
                     :key="getItemKey(item, index)"
                     :md="item.md"
                     :sm="item.sm"
-                    :span="item.span || 8"
+                    :span="item.span || 12"
             >
+                <div
+                        v-if="item.type === 'group'"
+                        class="form-group__header"
+                >
+                    {{ item.label }}
+                </div>
                 <el-form-item
+                        v-else
                         :label="item.label + ':'"
                         :prop="item.prop"
                 >
@@ -27,11 +42,6 @@
                             :name="item.slot"
                             v-bind="{ item }"
                     >
-
-<!--
-                        <render-content2 :column="item"  :data="data" :render="item.componentRender" :index="index"></render-content2>
--->
-
                         <component
                                 :is="item.component"
                                 v-if="item.component !== 'Text'"
@@ -50,14 +60,30 @@
 </template>
 <script lang="jsx">
 const defaultConfig = {
-    labelWidth: '80px',
-    size:'small',
+    labelWidth: '120px'
 }
-
-
- // element UI 组件
-const alias = {
-    label: {
+// 表单字段格式化
+const RenderContent = {
+    props: {
+        render: Function,
+        formatter: Function, // 格式化数据
+        data: Object,
+        prop: String
+    },
+    render (h) {
+        if (this.render) {
+            return this.render(h, this.data)
+        }
+        let value = this.data[this.prop]
+        if (this.formatter) {
+            value = this.formatter(value, this.data)
+        }
+        return <span>{value}</span>
+    }
+}
+// element UI 组件
+let defaultaAlias = {
+    LabelText: {
         component: 'render-content',
         props: {}
     },
@@ -78,6 +104,15 @@ const alias = {
 
     DatePicker: {
         component: 'DatePicker',
+        props: {}
+    },
+
+    SelectTree: {
+        component: 'SelectTree',
+        props: {}
+    },
+    SelectTreeServe: {
+        component: 'SelectTreeServe',
         props: {}
     },
 
@@ -102,30 +137,16 @@ const alias = {
     },
 
 
-
-
-
-
-
-    input: {
-        component: 'el-input',
+    Number: {
+        component: 'el-input-number',
         props: {}
     },
-    textarea: {
-        component: 'el-input',
-        props: {
-            type: 'textarea'
-        }
-    },
-    radio: {
+
+    Radio: {
         component: 'el-radio',
         props: {}
     },
 
-    select: {
-        component: 'el-select',
-        props: {}
-    },
     datePicker: {
         component: 'el-date-picker',
         props: {
@@ -138,49 +159,9 @@ const alias = {
 }
 
 export default {
-    name:'FormCard',
+    name:'KemForm',
     components: {
-        RenderContent:{
-            props: {
-                render: Function,
-                data: Object,
-                prop: String,
-                formatter: Function, // 格式化数据
-
-            },
-            render (v) {
-
-                if (this.render) {
-                    return this.render(h, this.data)
-                }
-                let value = this.data[this.prop]
-
-                return <span>{value}</span>
-            }
-        },
-        RenderContent2:{
-            functional: true,
-            props: {
-                row: Object,
-                data: Object,
-                render: Function,
-                index: Number,
-                column: {
-                    type: Object,
-                    default: null
-                }
-            },
-            render: (h, ctx) => {
-                const params = {
-                    row: ctx.props.row,
-                    index: ctx.props.index,
-                    value:ctx.props.data[ctx.props.column.prop]
-                   // value:ctx.props.column.data[ctx.props.column.prop]
-                }
-                if (ctx.props.column) params.column = ctx.props.column
-                return ctx.props.render(h, params)
-            }
-        },
+        RenderContent
     },
 
     props: {
@@ -196,8 +177,19 @@ export default {
         },
         // eslint-disable-next-line vue/require-default-prop
         formItems: Array,
+        group: Array,
         // eslint-disable-next-line vue/require-default-prop
         data: Object,
+        readOnly:{
+            type:Boolean,
+            default:false
+        },
+        alias:{
+            type: Object,
+            default: ()=>{
+                return{}
+            }
+        }
     },
     computed: {
         computedConfig () {
@@ -208,16 +200,18 @@ export default {
         },
         computedItems () {
             const itemResult = []
+
+            let alias = {...defaultaAlias,...this.alias}
+
             for (const item of this.formItems) {
                 // 剩余参数语法允许我们将一个不定数量的参数表示为一个数组。theArgs
-                let { component = 'input', isShow, prop, props, ...theArgs } = item
-                if (typeof isShow === 'function' && !isShow(this.data)) {
+                let { component = 'Input', showIf, prop, props, ...theArgs } = item
+                if (typeof showIf === 'function' && !showIf(this.data)) {
                     continue
                 }
                 if (typeof props === 'function') {
                     props = props(this.data)
                 }
-
                 if (component === 'label') {
                     props = {
                         ...props,
@@ -225,16 +219,13 @@ export default {
                         prop
                     }
                 }
-                // if (alias[component]) {
-                //     props = {
-                //         ...alias[component].props,
-                //         ...props
-                //     }
-                //     component = alias[component].component
-                // }
-
-
-
+                if (alias[component]) {
+                    props = {
+                        ...alias[component].props,
+                        ...props
+                    }
+                    component = alias[component].component
+                }
                 itemResult.push({
                     component,
                     prop,
@@ -284,4 +275,27 @@ export default {
     }
 }
 </script>
+<style lang="scss">
+.form_body--card{
+    .mask{
+        z-index: 2;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        //cursor: not-allowed;
+    }
+    .form-group__header{
+        width: 100%;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        height: 40px;
+        line-height: 40px;
+        box-sizing: border-box;
+        border-bottom: 1px solid #eee;
+    }
+}
+
+
+</style>
 
