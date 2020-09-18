@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <KemButton :select-button-group="selectButtonGroup" @clickButtonItem='clickButtonItem' type="operate.del" />
+    <KemButton :select-button-group="selectButtonGroup" @clickButtonItem='clickButtonItem' type="operate.del" >sdsds</KemButton>
     <KemButton type="operate.del" />
     <KemButton type="operate.del">
       删除你个鬼东西

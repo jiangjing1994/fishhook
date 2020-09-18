@@ -103,7 +103,7 @@ export default {
 
 
             return(
-                <el-dropdown  v-on:command={handleCommand}>
+                <el-dropdown size={this.size}  v-on:command={handleCommand}>
                     <div style="padding: 0 8px">
                         { button }
                     </div>
@@ -142,6 +142,7 @@ export default {
 
             return(
                 <el-button
+                    style="padding:4px 10px"
                     size="mini"
                     type={get(specialButtonConfig,type).type}
                     icon={get(specialButtonConfig,type).icon}
