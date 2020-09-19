@@ -1,9 +1,11 @@
 import KemButton from './Button/index'
+import KemSvgIcon from './SvgIcon/index'
 import KemForm from './Form/index'
 
 
 const components = [
     KemButton,
+    KemSvgIcon,
     KemForm,
 
 ];
@@ -20,5 +22,6 @@ if (typeof window !== 'undefined' && window.Vue) {
 export default {
     install,
     KemButton,
+    KemSvgIcon,
     KemForm,
 };

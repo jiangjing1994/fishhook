@@ -17,6 +17,12 @@ export default {
             type: [Array,Boolean],
             default: false
         },
+        // 自定义按钮配置
+        customButtonConfig: {
+            type: [Object,Boolean],
+            default: false
+        },
+
     },
     computed:{
         evet(){
@@ -135,7 +141,18 @@ export default {
                         text:'新增',
                         icon:"el-icon-plus"
                     },
-                }
+                    download:{
+                        type:'primary',
+                        text:'下载',
+                        icon:"el-icon-download"
+                    },
+                    refresh:{
+                        type:'success',
+                        text:'下载',
+                        icon:"el-icon-refresh"
+                    },
+                },
+                custom:this.customButtonConfig ? this.customButtonConfig :{}
             }
 
 
