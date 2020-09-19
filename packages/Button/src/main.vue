@@ -27,7 +27,6 @@ export default {
     computed:{
         evet(){
             if (this.$listeners.click) {
-                console.log(this.$attrs)
                 // eslint-disable-next-line vue/no-side-effects-in-computed-properties
                 this.$listeners.click = this.throttle("click");
             }
