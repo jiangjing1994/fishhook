@@ -1,6 +1,6 @@
 {
   "name": "kemomimi",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -9,7 +9,7 @@
     "lib": "vue-cli-service build --target lib --name kemomimi --dest lib packages/index.js"
 
   },
-  "main": "packages/index.js",
+  "main": "lib/kemomimi.umd.js",
   "dependencies": {
     "axios": "^0.19.2",
     "pug": "^2.0.3",
