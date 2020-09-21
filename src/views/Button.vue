@@ -10,6 +10,7 @@
     <KemButton type="danger">danger按钮</KemButton>
     <KemButton type="default">default按钮</KemButton>
     <KemButton :select-button-group="selectButtonGroup" @clickButtonItem='clickButtonItem'>下拉按钮</KemButton>
+    <KemTable></KemTable>
   </div>
 </template>
 <script >

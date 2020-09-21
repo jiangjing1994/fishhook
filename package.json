@@ -1,6 +1,6 @@
 {
   "name": "kemomimi",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -11,6 +11,7 @@
   },
   "main": "packages/index.js",
   "dependencies": {
+    "@smallwei/avue": "^2.6.2",
     "axios": "^0.19.2",
     "pug": "^2.0.3",
     "pug-html-loader": "^1.1.5",
