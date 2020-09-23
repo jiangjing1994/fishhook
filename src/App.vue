@@ -1,19 +1,40 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">
-        Home
-      </router-link> |
-      <router-link to="/Button">
-        About
-      </router-link>|
-      <router-link to="/FormCard">
-        FormCard
-      </router-link>|
+      <router-link to="/">Home</router-link>
+      <router-link  v-for="(item,key) in routes" :to="item.path" :key="key">
+        {{item.text}}
+      </router-link>
     </div>
     <router-view />
   </div>
 </template>
+<script >
+import pages from './views/demo/pages' // 页面文件目录
+
+export default {
+  data() {
+    return {
+      routes : []
+    }
+  },
+  mounted() {
+
+    Object.keys(pages).forEach(item=>{
+
+      this.routes.push({
+
+        path: `/${pages[item].name}`,
+        text: pages[item].name,
+
+
+      })
+
+    });
+  }
+
+}
+</script>
 
 <style lang="scss">
 #app {

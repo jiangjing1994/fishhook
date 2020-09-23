@@ -1,6 +1,7 @@
 import KemButton from './Button/index'
 import KemSvgIcon from './SvgIcon/index'
 import KemForm from './Form/index'
+import KemDialog from './Dialog'
 import KemTable from './Table/index'
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
@@ -11,6 +12,7 @@ const components = [
     KemButton,
     KemSvgIcon,
     KemForm,
+    KemDialog,
     KemTable,
 
 
@@ -32,5 +34,6 @@ export default {
     KemButton,
     KemSvgIcon,
     KemForm,
+    KemDialog,
     KemTable,
 };
