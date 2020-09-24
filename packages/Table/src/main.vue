@@ -160,7 +160,14 @@ export default {
         isShowHeader:{
             type:Boolean,
             default:true
-        }
+        },
+        // eslint-disable-next-line vue/require-default-prop
+        request:{
+            type:Function,
+        },
+        result:{
+            type:Function,
+        },
     },
 
     data() {
@@ -275,11 +282,14 @@ export default {
             const defaultParams = this.defaultParams
             const { currentPage , pageSize } = this.page
             const { order , prop } = this.sort
+
             const url = this.url
 
             if(url){
 
                 this.loading = true
+
+                const request = this.request
 
                 const res = await request({
                     url,
@@ -294,13 +304,13 @@ export default {
                     }
                 })
 
-                let data = await result(res,false)
+                let data = res
 
-                const { resultChange } = this
+                const  result  = this.result
 
-                if(resultChange){
+                if(result){
 
-                    data  = resultChange(data)
+                    data  = result(res)
 
                 }
 
