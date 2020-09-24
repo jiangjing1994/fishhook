@@ -55,7 +55,12 @@
 
 <script>
 import { cloneDeep } from 'lodash'
-
+const defaultPage = {
+    pageSizes: [5, 10, 20, 50],
+    currentPage: 1,
+    total: 0,
+    pageSize: 20
+};
 export default {
     name: 'KemTable',
     props: {
@@ -161,12 +166,26 @@ export default {
             type:Boolean,
             default:true
         },
+        /**
+         * 默认参数
+         */
+        defaultParams: {
+            type: Object,
+            default:()=>{
+                return{
+
+                }
+            }
+        },
         // eslint-disable-next-line vue/require-default-prop
         request:{
             type:Function,
         },
         result:{
             type:Function,
+        },
+        url:{
+            type:String,
         },
     },
 
@@ -176,7 +195,7 @@ export default {
             // 分页器
             page: {
                 //总条数,如果为0的话不显示分页
-                total:0
+                total:1
             },
             obj:{},
             sort: {},
@@ -279,8 +298,11 @@ export default {
 
         async getListData(params={}){
 
+
             const defaultParams = this.defaultParams
+
             const { currentPage , pageSize } = this.page
+
             const { order , prop } = this.sort
 
             const url = this.url
@@ -310,11 +332,13 @@ export default {
 
                 if(result){
 
-                    data  = result(res)
+                    data  = await result(res)
 
                 }
 
                 this.loading=false
+
+                this.page.total =  res.page_size
 
                 this.crudData = data
             }else {
@@ -326,6 +350,8 @@ export default {
          * 表格渲染
          */
         renderTable(){
+            this.resetPage()
+
             this.getListData()
 
         },
@@ -333,11 +359,13 @@ export default {
          * 重置分页器分页器
          */
         resetPage(){
+
             this.page = {
-                currentPage: 1,
+                ...cloneDeep(defaultPage),
                 ...cloneDeep(this.pageOption)
+
             }
-            //this.sort = {}
+
         },
 
         /**
