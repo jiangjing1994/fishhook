@@ -21,8 +21,6 @@ Object.keys(pages).forEach(item=>{
 
 });
 
-console.log(444)
-console.log(routes)
 
 Vue.use(VueRouter);
 
