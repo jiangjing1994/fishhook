@@ -16,15 +16,21 @@
                 @row-click="rowClick"
                 @cell-click="cellClick"
         >
+            <render-content
+                    slot-scope="scope"
+
+                    :render="scope"
+                    :data="scope"
+            />
+
             <template slot="menuLeft">
                 <slot name="menuLeft" />
             </template>
+
             <template slot="menuRight">
                 <slot name="menuRight" />
-
                 <KemButton
                         v-if="menuPermissionAdd"
-
                         @click="clickMenuButton({type:'add'})"
                 >新增</KemButton>
             </template>
@@ -49,20 +55,52 @@
                         :scope="scope"
                 />
             </template>
+
+
         </avue-crud>
     </div>
 </template>
 
-<script>
+<script lang="jsx">
+
 import { cloneDeep } from 'lodash'
+
 const defaultPage = {
     pageSizes: [5, 10, 20, 50],
     currentPage: 1,
     total: 0,
     pageSize: 20
 };
+
+// 表格字段格式化
+const RenderContent = {
+    props: {
+        render: Function,
+        formatter: Function, // 格式化数据
+        data: Object,
+        prop: String
+    },
+    render (h) {
+
+        console.log(this.data)
+
+        debugger
+        if (this.render) {
+            return this.render(h, this.data)
+        }
+        let value = this.data[this.prop]
+        if (this.formatter) {
+            value = this.formatter(value, this.data)
+        }
+        return <span>{value}</span>
+    }
+}
+
 export default {
     name: 'KemTable',
+    components:{
+        RenderContent
+    },
     props: {
 
         readOnly:{
@@ -177,6 +215,23 @@ export default {
                 }
             }
         },
+        /**
+         * 参数转义
+         */
+        defaultProps: {
+            type: Object,
+            default:()=>{
+                return{
+                    currentPage: 'pageNo',
+                    pageSize: 'pageSize',
+                    order: 'order',
+                    prop: 'prop',
+                    total: 'page_size',
+
+                }
+            }
+        },
+
         // eslint-disable-next-line vue/require-default-prop
         request:{
             type:Function,
@@ -229,7 +284,7 @@ export default {
             if (this.isShowPage){
                 option.page = true
             }
-            const header = !!(this.$slots.menuLeft || this.$slots.menuRight);
+            const header = !!(this.$slots.menuLeft || this.$slots.menuRight)||this.menuPermissionAdd;
 
             const menu = !!(this.$slots.menu )||this.menuPermissionDel ||this.menuPermissionEdit
 
@@ -305,25 +360,19 @@ export default {
 
             const { order , prop } = this.sort
 
-            const url = this.url
+            const request = this.request
 
-            if(url){
+            if(request){
 
                 this.loading = true
 
-                const request = this.request
-
                 const res = await request({
-                    url,
-                    method: 'get',
-                    params:{
-                        pageNo:currentPage,
-                        pageSize,
-                        order,
-                        prop,
-                        ...defaultParams,
-                        ...params
-                    }
+                    [this.defaultProps['currentPage']] :currentPage,
+                    [this.defaultProps['pageSize']] :pageSize,
+                    [this.defaultProps['order']] :order,
+                    [this.defaultProps['prop']] :prop,
+                    ...defaultParams,
+                    ...params
                 })
 
                 let data = res
@@ -338,7 +387,7 @@ export default {
 
                 this.loading=false
 
-                this.page.total =  res.page_size
+                this.page.total =  res[this.defaultProps['total']]
 
                 this.crudData = data
             }else {
