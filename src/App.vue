@@ -1,9 +1,15 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link>
-      <router-link  v-for="(item,key) in routes" :to="item.path" :key="key">
-        {{item.text}}
+      <router-link to="/">
+        Home
+      </router-link>
+      <router-link
+        v-for="(item,key) in routes"
+        :key="key"
+        :to="item.path"
+      >
+        {{ item.text }}
       </router-link>
     </div>
     <router-view />

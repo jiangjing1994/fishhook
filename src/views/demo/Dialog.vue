@@ -1,27 +1,41 @@
 <template>
-    <div>
-        <KemButton @click="dw">点我</KemButton>
-        <KemButton @click="dw2">点我2</KemButton>
-        <KemButton @click="dw3">点我3</KemButton>
-        <KemDialog :visible.sync="visible" @save="save">
-            <template slot="header">默认</template>
-            盼望着，盼望着，东风来了，春天的脚步近了。
-        </KemDialog>
+  <div>
+    <KemButton @click="dw">
+      点我
+    </KemButton>
+    <KemButton @click="dw2">
+      点我2
+    </KemButton>
+    <KemButton @click="dw3">
+      点我3
+    </KemButton>
+    <KemDialog
+      :visible.sync="visible"
+      @save="save"
+    >
+      <template slot="header">
+        默认
+      </template>
+      盼望着，盼望着，东风来了，春天的脚步近了。
+    </KemDialog>
 
-        <KemDialog :visible.sync="visible2">
-            <template slot="header">自定义footer</template>
-            盼望着，盼望着，东风来了，春天的脚步近了。
-            <template slot="footer">
-                <KemButton type="operate.add" />
-            </template>
-        </KemDialog>
+    <KemDialog :visible.sync="visible2">
+      <template slot="header">
+        自定义footer
+      </template>
+      盼望着，盼望着，东风来了，春天的脚步近了。
+      <template slot="footer">
+        <KemButton type="operate.add" />
+      </template>
+    </KemDialog>
 
-        <KemDialog :visible.sync="visible3">
-            <template slot="header">无保存按钮</template>
-            盼望着，盼望着，东风来了，春天的脚步近了。
-        </KemDialog>
-
-    </div>
+    <KemDialog :visible.sync="visible3">
+      <template slot="header">
+        无保存按钮
+      </template>
+      盼望着，盼望着，东风来了，春天的脚步近了。
+    </KemDialog>
+  </div>
 </template>
 
 <script>

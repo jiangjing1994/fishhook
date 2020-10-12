@@ -1,15 +1,17 @@
 <template>
-    <KemTable :tableData="data" :column="column" :menuOption='menuOption' :menuButton="menuButton" @rowClick="rowClick" @clickMenuButton="clickMenuButton">
-        <template slot="menuLeft">
-
-        </template>
-        <template slot="menuRight">
-            sas
-        </template>
-
-
-    </KemTable>
-
+  <KemTable
+    :table-data="data"
+    :column="column"
+    :menu-option="menuOption"
+    :menu-button="menuButton"
+    @rowClick="rowClick"
+    @clickMenuButton="clickMenuButton"
+  >
+    <template slot="menuLeft" />
+    <template slot="menuRight">
+      sas
+    </template>
+  </KemTable>
 </template>
 
 <script>
