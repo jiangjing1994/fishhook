@@ -17,5 +17,8 @@ module.exports = {
   rules: {
     'no-console':onlyProductionError,
     'no-debugger': onlyProductionError,
+    'vue/singleline-html-element-content-newline': 'off',
+    'vue/multiline-html-element-content-newline': 'off',
+    'vue/html-self-closing': 'off',
   }
 }

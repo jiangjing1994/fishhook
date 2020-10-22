@@ -1,15 +1,15 @@
 <template>
   <div class="about">
-    <KemButton type="operate.del" />
+    <KemButton type="operate.del"></KemButton>
     <KemButton type="operate.add">
       自定义文本按钮
     </KemButton>
-    <KemButton type="operate.add" />
-    <KemButton type="operate.edit" />
+    <KemButton type="operate.add"></KemButton>
+    <KemButton type="operate.edit"></KemButton>
     <KemButton
       type="custom.date"
       :custom-button-config="customButtonConfig"
-    />
+    ></KemButton>
     <KemButton>primary按钮</KemButton>
     <KemButton type="danger">
       danger按钮
@@ -23,7 +23,7 @@
     >
       下拉按钮
     </KemButton>
-    <KemTable />
+    <KemTable></KemTable>
   </div>
 </template>
 <script >

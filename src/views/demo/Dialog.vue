@@ -25,7 +25,7 @@
       </template>
       盼望着，盼望着，东风来了，春天的脚步近了。
       <template slot="footer">
-        <KemButton type="operate.add" />
+        <KemButton type="operate.add"></KemButton>
       </template>
     </KemDialog>
 

@@ -7,7 +7,7 @@
     @rowClick="rowClick"
     @clickMenuButton="clickMenuButton"
   >
-    <template slot="menuLeft" />
+    <template slot="menuLeft"></template>
     <template slot="menuRight">
       sas
     </template>
