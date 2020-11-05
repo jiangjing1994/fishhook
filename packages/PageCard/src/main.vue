@@ -35,7 +35,7 @@
 
 <script>
 export default {
-  name: 'PageCard',
+  name: 'KemPageCard',
   props: {
     header:{
       type:String,

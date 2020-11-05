@@ -4,6 +4,7 @@ import KemForm from './Form/index'
 import KemDialog from './Dialog'
 import KemLabelText from './LabelText'
 import KemTable from './Table/index'
+import KemPageCard from './PageCard/index'
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import Avue from '@smallwei/avue';
@@ -16,6 +17,7 @@ const components = [
     KemDialog,
     KemTable,
     KemLabelText,
+    KemPageCard,
 
 
 ];
@@ -31,6 +33,8 @@ if (typeof window !== 'undefined' && window.Vue) {
     install(window.Vue);
 }
 
+
+
 export default {
     install,
     KemButton,
@@ -39,4 +43,5 @@ export default {
     KemDialog,
     KemTable,
     KemLabelText,
+    KemPageCard,
 };
