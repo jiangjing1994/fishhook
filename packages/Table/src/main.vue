@@ -1,31 +1,32 @@
 <template>
   <div class="kem-table__body">
     <avue-crud
-      ref="crud"
-      v-model="obj"
-      :data="crudData"
-      :option="computedOption"
-      :page="page"
-      :table-loading="loading"
-      :search-solt="true"
-      :row-style="rowStyle"
-      @size-change="sizeChange"
-      @current-change="currentChange"
-      @sort-change="sortChange"
-      @row-update="rowUpdate"
-      @row-click="rowClick"
-      @cell-click="cellClick"
+            ref="crud"
+            v-model="obj"
+            :data="crudData"
+            :option="computedOption"
+            :page="page"
+            :table-loading="loading"
+            :search-solt="true"
+            :row-style="rowStyle"
+            @size-change="sizeChange"
+            @current-change="currentChange"
+            @sort-change="sortChange"
+            @row-update="rowUpdate"
+            @row-click="rowClick"
+            @cell-click="cellClick"
+            @expand-change="expandChanges"
     >
 
       <template
-        v-for="(item,key) in column"
-        :slot="item.prop"
-        slot-scope="scope">
+              v-for="(item,key) in column"
+              :slot="item.prop"
+              slot-scope="scope">
         <render-content
-          :key="key"
-          :render="item.render"
-          :scope="scope"
-          :column="item"
+                :key="key"
+                :render="item.render"
+                :scope="scope"
+                :column="item"
         ></render-content>
       </template>
 
@@ -38,10 +39,17 @@
         <KemButton v-if="menuPermissionAdd" @click="clickMenuButton({type:'add'})">新增</KemButton>
       </template>
 
+      <template v-if="!loading" slot="expand" slot-scope="scope">
+        <slot
+                name="expand"
+                :scope="scope"
+        />
+      </template>
+
       <template v-if="!loading" slot="menu" slot-scope="scope">
         <KemButton v-if="menuPermissionEdit"
-                type="operate.edit"
-                @click="clickMenuButton({row:scope.row,type:'edit'})"
+                   type="operate.edit"
+                   @click="clickMenuButton({row:scope.row,type:'edit'})"
         ></KemButton>
         <KemButton
                 v-if="menuPermissionDel"
@@ -63,7 +71,6 @@
 <script lang="jsx">
 
 import { cloneDeep } from 'lodash'
-import create from '../../../src/utils/create'
 
 const defaultPage = {
   pageSizes: [5, 10, 20, 50],
@@ -100,431 +107,457 @@ const RenderContent = {
   }
 }
 
-export default create({
-        name: 'Table',
-        components:{
-            RenderContent
-        },
-        props: {
-
-            readOnly:{
-                type:Boolean,
-                default:false
-            },
-
-            tableData: {
-                type: Array,
-                default:()=>{
-                    return []
-                }
-            },
-
-            column: {
-                type: Array,
-                default:()=>{
-                    return []
-                }
-            },
-
-
-            /**
-             * sizie尺寸
-             * medium| small| mini
-             */
-            size:{
-                type: String,
-                default:'small'
-            },
-
-            /**
-             * 字体位置
-             * medium| small| mini
-             */
-            align:{
-                type: String,
-                default:'center'
-            },
-
-            /**
-             * 分页器
-             */
-            pageOption: {
-                type: Object,
-                default:()=>{
-                    return{
-                        pageSizes: [5, 10, 20, 50],
-                        pageSize: 20
-                    }
-                }
-            },
-            /**
-             * 操作栏宽度
-             * width| small| mini
-             */
-            menuWidth: {
-                type:Number,
-                default:200
-            },
-            menuButton:{
-                type:Array,
-                default:()=>{
-                    return[]
-                }
-            },
-            /**
-             * 是否显示分页器
-             */
-            isShowPage:{
-                type:Boolean,
-                default:true
-            },
-
-            /**
-             * 是否显示边框
-             */
-            isShowBorder:{
-                type:Boolean,
-                default:true
-            },
-
-            /**
-             * 是否显示斑马线
-             */
-            isShowStripe:{
-                type:Boolean,
-                default:true
-            },
-            /**
-             * 是否显示索引
-             */
-            isShowIndex:{
-                type:Boolean,
-                default:true
-            },
-            /**
-             * 是否显示表头
-             */
-            isShowHeader:{
-                type:Boolean,
-                default:true
-            },
-            /**
-             * 默认参数
-             */
-            defaultParams: {
-                type: Object,
-                default:()=>{
-                    return{
-
-                    }
-                }
-            },
-            /**
-             * 参数转义
-             */
-            defaultProps: {
-                type: Object,
-                default:()=>{
-                    return{
-                        currentPage: 'pageNo',
-                        pageSize: 'pageSize',
-                        order: 'order',
-                        prop: 'prop',
-                        total: 'page_size',
-
-                    }
-                }
-            },
-
-            // eslint-disable-next-line vue/require-default-prop
-            request:{
-                type:Function,
-            },
-            // eslint-disable-next-line vue/require-default-prop
-            result:{
-                type:Function,
-            },
-            // eslint-disable-next-line vue/require-default-prop
-            url:{
-                type:String,
-            },
-        },
-
-        data() {
-            return {
-                crudData:[],
-                // 分页器
-                page: {
-                    //总条数,如果为0的话不显示分页
-                    total:1
-                },
-                obj:{},
-                sort: {},
-                loading:false,
-
-            }
-        },
-
-        computed: {
-            computedOption(){
-                let option = {
-                    indexLabel:'序号',
-
-                    page:false,
-                    delBtn:false,
-                    addBtn:false,
-                    editBtn:false,
-                    refreshBtn:false,
-                    columnBtn:false,
-
-                    index:this.isShowIndex,
-                    showHeader:this.isShowHeader,
-                    size:this.size,
-                    align:this.align,
-                    menuAlign:this.align,
-                    border:this.isShowBorder,
-                    stripe:this.isShowStripe,
-                    menuWidth:this.menuWidth,
-                }
-
-                if (this.isShowPage){
-                    option.page = true
-                }
-                const header = !!(this.$slots.menuLeft || this.$slots.menuRight)||this.menuPermissionAdd;
-
-                const menu = !!(this.$slots.menu )||this.menuPermissionDel ||this.menuPermissionEdit
-
-                return{
-                    ...option,
-                    header,
-                    menu,
-                    column:this.column
-                }
-            },
-
-
-            menuPermissionDel() {
-                return  this.menuPermission(['delBtn','allBtn'])
-            },
-            menuPermissionAdd() {
-                return  this.menuPermission(['addBtn','allBtn'])
-
-            },
-            menuPermissionEdit() {
-                return  this.menuPermission(['editBtn','allBtn'])
-            },
-        },
-
-
-
-        watch: {
-            data:{
-                handler() {
-                    this.getListData()
-                },
-                deep: true
-            },
-            defaultParams: {
-                handler() {
-                    this.resetPage()
-                    this.getListData()
-                },
-                deep: true
-            },
-            column: {
-                handler() {
-
-                    this.renderTable()
-                },
-                deep: true
-            },
-        },
-
-        created() {
-
-            this.renderTable()
-        },
-        methods: {
-            /**
-             * 判断权限
-             */
-            menuPermission(value){
-
-                const menuButton = this.menuButton
-
-                return value.some(r=> menuButton.includes(r)>0)
-
-
-            },
-
-            async getListData(params={}){
-
-
-                const defaultParams = this.defaultParams
-
-                const { currentPage , pageSize } = this.page
-
-                const { order , prop } = this.sort
-
-                const request = this.request
-
-                if(request){
-
-                    this.loading = true
-
-                    const res = await request({
-                        [this.defaultProps['currentPage']] :currentPage,
-                        [this.defaultProps['pageSize']] :pageSize,
-                        [this.defaultProps['order']] :order,
-                        [this.defaultProps['prop']] :prop,
-                        ...defaultParams,
-                        ...params
-                    })
-
-                    let data = res
-
-                    const  result  = this.result
-
-                    if(result){
-
-                        data  = await result(res)
-
-                    }
-
-                    this.loading=false
-
-                    this.page.total =  res[this.defaultProps['total']]
-
-                    this.crudData = data
-                }else {
-                    this.crudData = this.tableData
-                }
-
-            },
-            /**
-             * 表格渲染
-             */
-            renderTable(){
-                this.resetPage()
-
-                this.getListData()
-
-            },
-            /**
-             * 重置分页器分页器
-             */
-            resetPage(){
-
-                this.page = {
-                    ...cloneDeep(defaultPage),
-                    ...cloneDeep(this.pageOption)
-
-                }
-
-            },
-
-            /**
-             * 分页器每页条数改变
-             */
-            sizeChange(val) {
-
-                this.page.currentPage = 1
-                this.page.pageSize = val
-                this.getListData()
-            },
-
-            /**
-             * 当前页数改变
-             */
-            currentChange(val) {
-                this.page.currentPage = val
-                this.getListData()
-            },
-
-            /**
-             * 排序
-             */
-            sortChange(val) {
-                const { order,prop } = val
-                this.sort.order = order
-                this.sort.prop = prop
-                this.getListData()
-            },
-
-
-
-            // 表格增加一行
-            rowCellAdd(row){
-                this.$refs.crud.rowCellAdd(row);
-            },
-
-            // 当行内编辑点击保存时
-            rowUpdate(form,index,done,loading){
-                loading()
-                done()
-                this.$emit('rowUpdate',this.crudData,{form,index,done,loading})
-            },
-
-            // 当某个单元格被点击时会触发该事件
-            cellClick(	row, column, cell, event){
-                this.$emit('cellClick',{
-                    row, column, cell, event
-                })
-            },
-
-            // 当某一行被点击时会触发该事件
-            rowClick(row,event,column){
-                this.$emit('rowClick',{
-                    row, column, event
-                })
-
-            },
-
-            // 单元格样式
-            rowStyle({rowIndex}){
-
-                const basestyles ={
-                    padding :'8px 12px',
-                    height:'45px',
-                    lineHeight :'45px'
-                }
-                if(rowIndex%2===0){
-                    return {
-                        ...basestyles,
-                        backgroundColor:'#ffffff',
-
-                    }
-                }else {
-                    return {
-                        ...basestyles,
-                        backgroundColor:'#F8FAFB',
-                    }
-                }
-            },
-
-            // 点击操作栏的删除按钮
-            clickMenuButton(value){
-
-                const {type} = value
-                if(type ==='del'){
-                    this.$confirm('此操作将永久删除该条记录, 是否继续?', '删除', {
-                        confirmButtonText: '确定',
-                        cancelButtonText: '取消',
-                        type: 'warning'
-                    }).then(() => {
-                        this.$emit('clickMenuButton',{...value})
-                    })
-                }else {
-                    this.$emit('clickMenuButton',{...value})
-                }
-
-            },
+export default {
+  name: 'KemTable',
+  components:{
+    RenderContent
+  },
+  props: {
+
+    readOnly:{
+      type:Boolean,
+      default:false
+    },
+
+
+    tableData: {
+      type: Array,
+      default:()=>{
+        return []
+      }
+    },
+
+    column: {
+      type: Array,
+      default:()=>{
+        return []
+      }
+    },
+
+
+    /**
+     * sizie尺寸
+     * medium| small| mini
+     */
+    size:{
+      type: String,
+      default:'small'
+    },
+
+    /**
+     * 字体位置
+     * medium| small| mini
+     */
+    align:{
+      type: String,
+      default:'center'
+    },
+
+    /**
+     * 行展开
+     */
+    expand:{
+      type:Boolean,
+      default:false
+    },
+
+    /**
+     * 分页器
+     */
+    pageOption: {
+      type: Object,
+      default:()=>{
+        return{
+          pageSizes: [5, 10, 20, 50],
+          pageSize: 20
+        }
+      }
+    },
+    /**
+     * 操作栏宽度
+     * width| small| mini
+     */
+    menuWidth: {
+      type:Number,
+      default:200
+    },
+    menuButton:{
+      type:Array,
+      default:()=>{
+        return[]
+      }
+    },
+    /**
+     * 是否显示分页器
+     */
+    isShowPage:{
+      type:Boolean,
+      default:true
+    },
+
+    /**
+     * 是否显示边框
+     */
+    isShowBorder:{
+      type:Boolean,
+      default:true
+    },
+
+    /**
+     * 是否显示斑马线
+     */
+    isShowStripe:{
+      type:Boolean,
+      default:true
+    },
+    /**
+     * 是否显示索引
+     */
+    isShowIndex:{
+      type:Boolean,
+      default:true
+    },
+    /**
+     * 是否显示表头
+     */
+    isShowHeader:{
+      type:Boolean,
+      default:true
+    },
+    /**
+     * 默认参数
+     */
+    defaultParams: {
+      type: Object,
+      default:()=>{
+        return{
+
+        }
+      }
+    },
+    /**
+     * 参数转义
+     */
+    defaultProps: {
+      type: Object,
+      default:()=>{
+        return{
+          currentPage: 'pageNo',
+          pageSize: 'pageSize',
+          order: 'order',
+          prop: 'prop',
+          total: 'page_size',
+
+        }
+      }
+    },
+
+    // eslint-disable-next-line vue/require-default-prop
+    request:{
+      type:Function,
+    },
+    // eslint-disable-next-line vue/require-default-prop
+    result:{
+      type:Function,
+    },
+    // eslint-disable-next-line vue/require-default-prop
+    url:{
+      type:String,
+    },
+  },
+
+  data() {
+    return {
+      crudData:[],
+      // 分页器
+      page: {
+        //总条数,如果为0的话不显示分页
+        total:1
+      },
+      obj:{},
+      sort: {},
+      loading:false,
+      expandRowKeys:[]
+
+
+    }
+  },
+
+  computed: {
+    computedOption(){
+      let option = {
+        indexLabel:'序号',
+
+        page:false,
+        delBtn:false,
+        addBtn:false,
+        editBtn:false,
+        refreshBtn:false,
+        columnBtn:false,
+
+        index:this.isShowIndex,
+        showHeader:this.isShowHeader,
+        size:this.size,
+        align:this.align,
+        menuAlign:this.align,
+        border:this.isShowBorder,
+        stripe:this.isShowStripe,
+        menuWidth:this.menuWidth,
+        rowKey:'$index',
+        expandRowKeys:this.expandRowKeys,
+        expand: this.expand,
+      }
+
+      if (this.isShowPage){
+        option.page = true
+      }
+      const header = !!(this.$slots.menuLeft || this.$slots.menuRight)||this.menuPermissionAdd;
+
+      const menu = !!(this.$slots.menu )||this.menuPermissionDel ||this.menuPermissionEdit
+
+      return{
+        ...option,
+        header,
+        menu,
+        column:this.column
+      }
+    },
+
+
+    menuPermissionDel() {
+      return  this.menuPermission(['delBtn','allBtn'])
+    },
+    menuPermissionAdd() {
+      return  this.menuPermission(['addBtn','allBtn'])
+
+    },
+    menuPermissionEdit() {
+      return  this.menuPermission(['editBtn','allBtn'])
+    },
+  },
+
+
+
+  watch: {
+    data:{
+      handler() {
+        this.getListData()
+      },
+      deep: true
+    },
+    defaultParams: {
+      handler() {
+        this.resetPage()
+        this.getListData()
+      },
+      deep: true
+    },
+    column: {
+      handler() {
+
+        this.renderTable()
+      },
+      deep: true
+    },
+  },
+
+  created() {
+
+    this.renderTable()
+  },
+  methods: {
+    /**
+     * 判断权限
+     */
+    menuPermission(value){
+
+      const menuButton = this.menuButton
+
+      return value.some(r=> menuButton.includes(r)>0)
+
+
+    },
+
+    async getListData(params={}){
+
+
+      const defaultParams = this.defaultParams
+
+      const { currentPage , pageSize } = this.page
+
+      const { order , prop } = this.sort
+
+      const request = this.request
+
+      if(request){
+
+        this.loading = true
+
+        const res = await request({
+          [this.defaultProps['currentPage']] :currentPage,
+          [this.defaultProps['pageSize']] :pageSize,
+          [this.defaultProps['order']] :order,
+          [this.defaultProps['prop']] :prop,
+          ...defaultParams,
+          ...params
+        })
+
+        let data = res
+
+        const  result  = this.result
+
+        if(result){
+
+          data  = await result(res)
 
         }
 
-    }
+        this.loading=false
 
-)
+        this.page.total =  res[this.defaultProps['total']]
+
+        this.crudData = data
+      }else {
+        this.crudData = this.tableData
+      }
+
+    },
+    /**
+     * 表格渲染
+     */
+    renderTable(){
+      this.resetPage()
+
+      this.getListData()
+
+    },
+    /**
+     * 重置分页器分页器
+     */
+    resetPage(){
+
+      this.page = {
+        ...cloneDeep(defaultPage),
+        ...cloneDeep(this.pageOption)
+
+      }
+
+    },
+
+    /**
+     * 分页器每页条数改变
+     */
+    sizeChange(val) {
+
+      this.page.currentPage = 1
+      this.page.pageSize = val
+      this.getListData()
+    },
+
+    /**
+     * 当前页数改变
+     */
+    currentChange(val) {
+      this.page.currentPage = val
+      this.getListData()
+    },
+
+    /**
+     * 排序
+     */
+    sortChange(val) {
+      const { order,prop } = val
+      this.sort.order = order
+      this.sort.prop = prop
+      this.getListData()
+    },
+    /**
+     * 列展开手风琴
+     */
+    expandChanges(row, expendList) {
+      if (expendList.length) {
+        this.expandRowKeys = []
+        if (row) {
+          this.expandRowKeys.push(row.$index)
+        }
+      } else {
+        this.expandRowKeys = []
+      }
+      this.$emit('expandChanges',{row, expendList})
+    },
+
+    // 表格增加一行
+    rowCellAdd(row){
+      this.$refs.crud.rowCellAdd(row);
+    },
+
+    // 当行内编辑点击保存时
+    rowUpdate(form,index,done,loading){
+      loading()
+      done()
+      this.$emit('rowUpdate',this.crudData,{form,index,done,loading})
+    },
+
+    // 当某个单元格被点击时会触发该事件
+    cellClick(	row, column, cell, event){
+      this.$emit('cellClick',{
+        row, column, cell, event
+      })
+    },
+
+    // 当某一行被点击时会触发该事件
+    rowClick(row,event,column){
+      this.$emit('rowClick',{
+        row, column, event
+      })
+
+    },
+
+    // 单元格样式
+    rowStyle({rowIndex}){
+
+      const basestyles ={
+        padding :'8px 12px',
+        height:'45px',
+        lineHeight :'45px'
+      }
+      if(rowIndex%2===0){
+        return {
+          ...basestyles,
+          backgroundColor:'#ffffff',
+
+        }
+      }else {
+        return {
+          ...basestyles,
+          backgroundColor:'#F8FAFB',
+        }
+      }
+    },
+
+    // 点击操作栏的删除按钮
+    clickMenuButton(value){
+
+      const {type} = value
+      if(type ==='del'){
+        this.$confirm('此操作将永久删除该条记录, 是否继续?', '删除', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$emit('clickMenuButton',{...value})
+        })
+      }else {
+        this.$emit('clickMenuButton',{...value})
+      }
+
+    },
+
+  }
+
+}
+
+
 
 </script>
 
