@@ -1,5 +1,6 @@
 <template>
   <div class="about">
+    <KemButton type="icon.del"></KemButton>
     <KemButton type="operate.del"></KemButton>
     <KemButton type="operate.add">
       自定义文本按钮

@@ -125,31 +125,18 @@ export default {
 
             const specialButtonConfig = {
                 operate:{
-                    del:{
-                        type:'danger',
-                        text:'删除',
-                        icon:"el-icon-delete"
-                    },
-                    edit:{
-                        type:'primary',
-                        text:'编辑',
-                        icon:"el-icon-edit"
-                    },
-                    add:{
-                        type:'success',
-                        text:'新增',
-                        icon:"el-icon-plus"
-                    },
-                    download:{
-                        type:'primary',
-                        text:'下载',
-                        icon:"el-icon-download"
-                    },
-                    refresh:{
-                        type:'success',
-                        text:'下载',
-                        icon:"el-icon-refresh"
-                    },
+                    del:{type:'danger', text:'删除', icon:"el-icon-delete"},
+                    edit:{type:'primary', text:'编辑', icon:"el-icon-edit"},
+                    add:{type:'success', text:'新增', icon:"el-icon-plus"},
+                    download:{type:'primary', text:'下载', icon:"el-icon-download"},
+                    refresh:{type:'success', text:'下载', icon:"el-icon-refresh"},
+                },
+                icon:{
+                    del:{type:'danger', icon:"el-icon-delete"},
+                    edit:{type:'primary', icon:"el-icon-edit"},
+                    add:{type:'success', icon:"el-icon-plus"},
+                    download:{type:'primary', icon:"el-icon-download"},
+                    refresh:{type:'success', icon:"el-icon-refresh"},
                 },
                 custom:this.customButtonConfig ? this.customButtonConfig :{}
             }

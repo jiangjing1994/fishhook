@@ -1,24 +1,15 @@
-# kemomini
+# emomini
 
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
+## Install
+```shell
+npm install kemomini
 ```
 
-### Compiles and minifies for production
-```
-yarn build
-```
+## Quick Start
+``` javascript
+import Vue from 'vue'
+import Kem from 'kemomini'
 
-### Lints and fixes files
+Vue.use(Kem)
 ```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+K
