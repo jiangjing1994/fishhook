@@ -1,10 +1,12 @@
-import KemButton from './Button/index'
-import KemSvgIcon from './SvgIcon/index'
-import KemForm from './Form/index'
+import KemButton from './Button'
+import KemSvgIcon from './SvgIcon'
+import KemForm from './Form'
+import KemSelect from './Select'
 import KemDialog from './Dialog'
 import KemLabelText from './LabelText'
-import KemTable from './Table/index'
-import KemPageCard from './PageCard/index'
+import KemTable from './Table'
+import KemPageCard from './PageCard'
+import KemInputNumber from './InputNumber'
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import Avue from '@smallwei/avue';
@@ -18,6 +20,8 @@ const components = [
     KemTable,
     KemLabelText,
     KemPageCard,
+    KemSelect,
+    KemInputNumber,
 
 
 ];
@@ -44,4 +48,6 @@ export default {
     KemTable,
     KemLabelText,
     KemPageCard,
+    KemSelect,
+    KemInputNumber,
 };

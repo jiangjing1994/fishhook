@@ -1,8 +1,4 @@
-<!--/**
-    * Created by jing on 2018-03-26
-    * File description:
-    * History:
-*/-->
+<!---->
 <template>
   <el-dialog
           class="dialog__body"
