@@ -15,7 +15,7 @@ export default {
     props: {
         placeholder: {
             type: String,
-            default: '请输入'
+            default: '请输入数字'
         },
         controlsPosition:{
             type:String,
@@ -23,12 +23,13 @@ export default {
         },
         controls:{
             type: Boolean,
-            default: false
+            default: true
         },
         //precision 的值必须是一个非负整数，并且不能小于 step 的小数位数
+        // eslint-disable-next-line vue/require-default-prop
         precision:{
             type: Number,
-            default: 2
+
         },
         step:{
             type: Number,

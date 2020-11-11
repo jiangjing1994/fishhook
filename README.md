@@ -1,4 +1,4 @@
-# emomini
+# Kemomini
 
 ## Install
 ```shell
@@ -12,4 +12,4 @@ import Kem from 'kemomini'
 
 Vue.use(Kem)
 ```
-K
+
