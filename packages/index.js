@@ -2,6 +2,7 @@ import KemButton from './Button'
 import KemSvgIcon from './SvgIcon'
 import KemForm from './Form'
 import KemSelect from './Select'
+import KemInput from './Input'
 import KemDialog from './Dialog'
 import KemLabelText from './LabelText'
 import KemTable from './Table'
@@ -21,6 +22,7 @@ const components = [
     KemLabelText,
     KemPageCard,
     KemSelect,
+    KemInput,
     KemInputNumber,
 
 
@@ -49,5 +51,6 @@ export default {
     KemLabelText,
     KemPageCard,
     KemSelect,
+    KemInput,
     KemInputNumber,
 };
