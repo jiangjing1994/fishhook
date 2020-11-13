@@ -16,7 +16,7 @@
             @row-click="rowClick"
             @cell-click="cellClick"
             @expand-change="expandChanges"
-    >
+     >
 
       <template
               v-for="(item,key) in column"
@@ -264,6 +264,10 @@ export default {
     url:{
       type:String,
     },
+    // eslint-disable-next-line vue/require-default-prop
+    tableHeight:{
+      type:Number,
+    },
   },
 
   data() {
@@ -294,7 +298,7 @@ export default {
         editBtn:false,
         refreshBtn:false,
         columnBtn:false,
-
+        height:this.tableHeight,
         index:this.isShowIndex,
         showHeader:this.isShowHeader,
         size:this.size,
@@ -563,6 +567,7 @@ export default {
 
 <style lang='scss'>
 .kem-table__body{
+  overflow: auto;
   .avue-crud{
     .el-table{
       border: 1px solid #d9ecff !important;
