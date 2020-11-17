@@ -1,18 +1,28 @@
 <template>
-<div>
+  <div>
 
-    <KemSelect v-model="multipleValue" multiple :options="options"></KemSelect>
-    <KemSelect v-model="value" :options="options"></KemSelect>
-    <KemSelect v-model="value" :options="options">
-        <template slot-scope="{scope}">
-            <span style="float: left">{{ scope.label }}</span>
-            <span style="float: right; color: #8492a6; font-size: 13px">{{ scope.value }}</span>
-        </template>
+    <KemSelect
+      v-model="multipleValue"
+      multiple
+      :options="options"
+    ></KemSelect>
+    <KemSelect
+      v-model="value"
+      :options="options"
+    ></KemSelect>
+    <KemSelect
+      v-model="value"
+      :options="options"
+    >
+      <template slot-scope="{scope}">
+        <span style="float: left">{{ scope.label }}</span>
+        <span style="float: right; color: #8492a6; font-size: 13px">{{ scope.value }}</span>
+      </template>
     </KemSelect>
-    <KemInputNumber v-model="number" ></KemInputNumber>
-    <KemInput v-model="value" ></KemInput>
+    <KemInputNumber v-model="number"></KemInputNumber>
+    <KemInput v-model="value"></KemInput>
 
-</div>
+  </div>
 </template>
 
 <script>

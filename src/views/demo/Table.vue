@@ -1,19 +1,22 @@
 <template>
   <KemTable
-          :table-data="data"
-          :column="column"
-          :expand="expand"
-          :menu-option="menuOption"
-          :menu-button="menuButton"
-          @rowClick="rowClick"
-          @clickMenuButton="clickMenuButton"
+    :table-data="data"
+    :column="column"
+    :expand="expand"
+    :menu-option="menuOption"
+    :menu-button="menuButton"
+    @rowClick="rowClick"
+    @clickMenuButton="clickMenuButton"
   >
-    <template slot="expand" slot-scope="{scope}">
-      {{scope.row}}
+    <template
+      slot="expand"
+      slot-scope="{scope}"
+    >
+      {{ scope.row }}
       <el-input v-model="scope.row.name"></el-input>
     </template>
     <template slot="menuLeft">
-      <KemInput/>
+      <KemInput />
     </template>
     <template slot="menuRight">
       <KemButton>保存</KemButton>
