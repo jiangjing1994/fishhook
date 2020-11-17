@@ -1,7 +1,6 @@
 <template>
   <div
-    class="page-card__body"
-  >
+    class="page-card__body">
     <el-card
       body-style="padding: 0"
       shadow="never"

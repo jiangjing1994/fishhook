@@ -10,6 +10,7 @@
         </template>
     </KemSelect>
     <KemInputNumber v-model="number" ></KemInputNumber>
+    <KemInput v-model="value" ></KemInput>
 
 </div>
 </template>

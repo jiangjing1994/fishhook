@@ -24,7 +24,7 @@ export default {
         },
         placeholder: {
             type: String,
-            default: '请输入'
+            default: '请选择'
         },
         filterable: {
             type: Boolean,

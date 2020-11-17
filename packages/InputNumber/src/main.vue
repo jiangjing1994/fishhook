@@ -2,11 +2,12 @@
     el-input-number(
         v-bind="$attrs"
         v-on="evet"
+        class="kem-input-number__body"
         :controls-position="controlsPosition"
         :controls='controls'
         :precision='precision'
         :step='step'
-        style='width:100%'
+        style='width:100%;'
         :placeholder="placeholder")
 </template>
 <script>
@@ -36,7 +37,7 @@ export default {
             default: 1
         },
 
-},
+    },
     computed:{
         evet(){
             return this.$listeners;
@@ -44,3 +45,10 @@ export default {
     },
 }
 </script>
+<style lang="scss">
+.kem-input-number__body.is-controls-right .el-input__inner{
+    text-align: left!important;
+
+}
+
+</style>

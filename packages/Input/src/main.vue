@@ -4,7 +4,7 @@
 </template>
 <script>
 export default {
-  name: 'Input',
+  name: 'KemInput',
   props: {
     placeholder: {
       type: String,
