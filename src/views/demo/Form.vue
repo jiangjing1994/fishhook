@@ -21,7 +21,10 @@
     </KemSelect>
     <KemInputNumber v-model="number"></KemInputNumber>
     <KemInput v-model="value"></KemInput>
-
+    <KemCheckboxGroup
+            v-model="multipleValue"
+            :options="options"
+    ></KemCheckboxGroup>
   </div>
 </template>
 

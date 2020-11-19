@@ -22,18 +22,7 @@ export default {
             type: Array,
             required:true
         },
-        placeholder: {
-            type: String,
-            default: '请选择'
-        },
-        filterable: {
-            type: Boolean,
-            default: true
-        },
-        clearable: {
-            type: Boolean,
-            default: true
-        },
+
     },
 
     computed:{
