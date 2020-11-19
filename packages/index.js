@@ -8,7 +8,8 @@ import KemLabelText from './LabelText'
 import KemTable from './Table'
 import KemPageCard from './PageCard'
 import KemInputNumber from './InputNumber'
-import ColorPicker from './ColorPicker'
+import KemCheckboxGroup from './CheckboxGroup'
+import KemColorPicker from './ColorPicker'
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import Avue from '@smallwei/avue';
@@ -25,7 +26,8 @@ const components = [
     KemSelect,
     KemInput,
     KemInputNumber,
-    ColorPicker,
+    KemCheckboxGroup,
+    KemColorPicker,
 
 
 ];
@@ -55,5 +57,6 @@ export default {
     KemSelect,
     KemInput,
     KemInputNumber,
-    ColorPicker,
+    KemCheckboxGroup,
+    KemColorPicker,
 };
