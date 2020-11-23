@@ -1,6 +1,7 @@
 <template lang="pug">
   el-input( v-bind="$attrs" v-on="evet" :placeholder="placeholder")
     slot(slot="prefix" name="prefix")
+    slot(slot="append" name="append")
 </template>
 <script>
 export default {

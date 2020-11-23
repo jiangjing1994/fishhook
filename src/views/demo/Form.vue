@@ -2,17 +2,17 @@
   <div>
 
     <KemSelect
-      v-model="multipleValue"
-      multiple
-      :options="options"
+            v-model="multipleValue"
+            multiple
+            :options="options"
     ></KemSelect>
     <KemSelect
-      v-model="value"
-      :options="options"
+            v-model="value"
+            :options="options"
     ></KemSelect>
     <KemSelect
-      v-model="value"
-      :options="options"
+            v-model="value"
+            :options="options"
     >
       <template slot-scope="{scope}">
         <span style="float: left">{{ scope.label }}</span>
@@ -25,40 +25,44 @@
             v-model="multipleValue"
             :options="options"
     ></KemCheckboxGroup>
+    <KemColorPicker v-model="color"></KemColorPicker>
+    <KemInputColor v-model="color"></KemInputColor>
+
   </div>
 </template>
 
 <script>
 export default {
-    name: "Form",
-    data() {
-        return {
-            multipleValue:[],
-            value:'',
-            number:3,
-            options: [
-                {
-                    value: 'Beijing',
-                    label: '北京'
-                }, {
-                    value: 'Shanghai',
-                    label: '上海'
-                }, {
-                    value: 'Nanjing',
-                    label: '南京'
-                }, {
-                    value: 'Chengdu',
-                    label: '成都'
-                }, {
-                    value: 'Shenzhen',
-                    label: '深圳'
-                }, {
-                    value: 'Guangzhou',
-                    label: '广州'
-                }
-            ]
+  name: "Form",
+  data() {
+    return {
+      multipleValue:[],
+      value:'',
+      color:'#000',
+      number:3,
+      options: [
+        {
+          value: 'Beijing',
+          label: '北京'
+        }, {
+          value: 'Shanghai',
+          label: '上海'
+        }, {
+          value: 'Nanjing',
+          label: '南京'
+        }, {
+          value: 'Chengdu',
+          label: '成都'
+        }, {
+          value: 'Shenzhen',
+          label: '深圳'
+        }, {
+          value: 'Guangzhou',
+          label: '广州'
         }
-    },
+      ]
+    }
+  },
 }
 </script>
 
