@@ -96,7 +96,6 @@ const RenderContent = {
       value:row[prop]
 
     }
-    console.log(row)
 
 
     if (this.render) {

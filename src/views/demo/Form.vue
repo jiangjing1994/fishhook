@@ -2,17 +2,17 @@
   <div>
 
     <KemSelect
-            v-model="multipleValue"
-            multiple
-            :options="options"
+      v-model="multipleValue"
+      multiple
+      :options="options"
     ></KemSelect>
     <KemSelect
-            v-model="value"
-            :options="options"
+      v-model="value"
+      :options="options"
     ></KemSelect>
     <KemSelect
-            v-model="value"
-            :options="options"
+      v-model="value"
+      :options="options"
     >
       <template slot-scope="{scope}">
         <span style="float: left">{{ scope.label }}</span>
@@ -22,8 +22,8 @@
     <KemInputNumber v-model="number"></KemInputNumber>
     <KemInput v-model="value"></KemInput>
     <KemCheckboxGroup
-            v-model="multipleValue"
-            :options="options"
+      v-model="multipleValue"
+      :options="options"
     ></KemCheckboxGroup>
     <KemColorPicker v-model="color"></KemColorPicker>
     <KemInputColor v-model="color"></KemInputColor>

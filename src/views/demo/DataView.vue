@@ -1,13 +1,12 @@
 <template>
-    <div style="width: 100vw;height: 100vh;background-color: red;position: fixed;left: 0;top: 0">
-        <KemDataView
-                :height="800"
-                :width="600"
-                :background-image="backgroundImage"
-
-        >
-        </KemDataView>
-    </div>
+  <div style="width: 100vw;height: 100vh;background-color: red;position: fixed;left: 0;top: 0">
+    <KemDataView
+      :height="800"
+      :width="600"
+      :background-image="backgroundImage"
+    >
+    </KemDataView>
+  </div>
 
 </template>
 

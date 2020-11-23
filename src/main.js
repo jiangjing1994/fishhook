@@ -8,7 +8,6 @@ import KemUI from "../packages";
 
 // import "../../packages/theme-default/lib/index.css";
 Vue.config.productionTip = false;
-console.log(KemUI);
 
 Vue.use(KemUI);
 Vue.config.productionTip = false;

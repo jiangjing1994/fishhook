@@ -46,7 +46,6 @@ export default {
   },
   methods: {
     clickButtonItem({value}) {
-      console.log(value)
 
     }
   },
