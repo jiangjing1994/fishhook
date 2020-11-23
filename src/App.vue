@@ -8,10 +8,13 @@
         v-for="(item,key) in routes"
         :key="key"
         :to="item.path"
+        style="margin: 0 5px"
       >
         {{ item.text }}
       </router-link>
     </div>
+    <a href="https://github.com/hellonainai/kemomimi/tree/master/src/views/demo">demo</a>
+
     <router-view></router-view>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h2>v{{ version }}</h2>
+    <h2><a href="https://github.com/hellonainai/kemomimi">v{{ version }}</a></h2>
     <img
       alt="Vue logo"
       src="../assets/logo.jpg"

@@ -1,4 +1,4 @@
-# Kemomini
+# [Kemomini](https://hellonainai.github.io/kemomimi/#/)
 
 ## Install
 ```shell
