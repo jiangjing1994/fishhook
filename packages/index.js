@@ -13,6 +13,7 @@ import KemColorPicker from './ColorPicker'
 import KemDataView from './DataView'
 import KemInputColor from './InputColor'
 import KemTimeline from './Timeline'
+import KemSwitch from './Switch'
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import Avue from '@smallwei/avue';
@@ -34,6 +35,7 @@ const components = [
     KemDataView,
     KemInputColor,
     KemTimeline,
+    KemSwitch,
 
 
 ];
@@ -68,4 +70,5 @@ export default {
     KemDataView,
     KemInputColor,
     KemTimeline,
+    KemSwitch,
 };

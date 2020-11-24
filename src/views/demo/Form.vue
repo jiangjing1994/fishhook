@@ -27,6 +27,7 @@
     ></KemCheckboxGroup>
     <KemColorPicker v-model="color"></KemColorPicker>
     <KemInputColor v-model="color"></KemInputColor>
+    <KemSwitch v-model="b"></KemSwitch>
 
   </div>
 </template>
@@ -38,6 +39,7 @@ export default {
     return {
       multipleValue:[],
       value:'',
+      b:null,
       color:'#000',
       number:3,
       options: [
