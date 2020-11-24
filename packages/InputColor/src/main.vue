@@ -93,8 +93,7 @@ export default {
       this.$emit('change', value);
     },
     initVal (value) {
-      console.log(value)
-      this.text =  value
+       this.text =  value
     }
 
 
