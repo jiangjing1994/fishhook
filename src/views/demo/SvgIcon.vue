@@ -1,5 +1,5 @@
 <template>
-    <KemSvgIcon icon-class="class"/>
+  <KemSvgIcon icon-class="class" />
 </template>
 
 <script>

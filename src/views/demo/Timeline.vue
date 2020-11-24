@@ -1,10 +1,11 @@
 <template>
-    <div>
-        <KemTimeline
-                :activities="activities"
-                :reverse="false"/>
+  <div>
+    <KemTimeline
+      :activities="activities"
+      :reverse="false"
+    />
 
-    </div>
+  </div>
 </template>
 
 <script lang="jsx">

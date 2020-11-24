@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     clickButtonItem({value}) {
-      console.log(value)
+      this.$message.success(value)
 
     }
   },
