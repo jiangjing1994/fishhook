@@ -12,6 +12,7 @@ import KemCheckboxGroup from './CheckboxGroup'
 import KemColorPicker from './ColorPicker'
 import KemDataView from './DataView'
 import KemInputColor from './InputColor'
+import KemTimeline from './Timeline'
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import Avue from '@smallwei/avue';
@@ -32,6 +33,7 @@ const components = [
     KemColorPicker,
     KemDataView,
     KemInputColor,
+    KemTimeline,
 
 
 ];
@@ -65,4 +67,5 @@ export default {
     KemColorPicker,
     KemDataView,
     KemInputColor,
+    KemTimeline,
 };
