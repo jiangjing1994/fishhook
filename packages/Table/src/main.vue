@@ -21,7 +21,8 @@
       <template
               v-for="(item,key) in column"
               :slot="item.prop"
-              slot-scope="scope">
+              slot-scope="scope"
+      >
         <render-content
                 :key="key"
                 :render="item.render"
@@ -31,11 +32,11 @@
       </template>
 
       <template slot="menuLeft">
-        <slot name="menuLeft" ></slot>
+        <slot name="menuLeft"></slot>
       </template>
 
       <template slot="menuRight">
-        <slot name="menuRight" ></slot>
+        <slot name="menuRight"></slot>
         <KemButton v-if="menuPermissionAdd" @click="clickMenuButton({type:'add'})">新增</KemButton>
       </template>
 
