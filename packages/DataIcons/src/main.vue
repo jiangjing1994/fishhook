@@ -1,11 +1,11 @@
 <template>
-    <div class="data-icons" :style="`background-color:${backgroundColor}`">
-        <el-row :span="24">
+    <div class="data-icons_body" :style="`background-color:${backgroundColor};padding: ${gutter}px;padding-bottom: 0;`">
+        <el-row :gutter="gutter">
             <template v-for="(item,index) in data">
                 <el-col :key="index"
                         :span="span"
                 >
-                    <div class="item" :style="`background-color:${itemBackgroundColor}`"
+                    <div class="item" :style="`background-color:${itemBackgroundColor};margin-bottom: ${gutter}px;`"
                          :class="[{'item--easy':discount}]"
                     >
                         <a :href="item.href?item.href:'javascript:void(0);'"
@@ -45,7 +45,7 @@ export default  {
         option: {
             type: Object,
             default: () => { }
-        }
+        },
     },
     data () {
         return {};
@@ -53,6 +53,9 @@ export default  {
     computed: {
         backgroundColor(){
             return this.option.backgroundColor || '#e5ffff'
+        },
+        gutter(){
+            return this.option.gutter || 10
         },
         itemBackgroundColor(){
             return this.option.itemBackgroundColor || '#4ffbfa'
@@ -82,16 +85,16 @@ export default  {
 }
 </script>
 <style lang="scss">
-.data-icons {
+.data-icons_body {
     background-color: #e5ffff;
-    .item {
+     .item {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 90%;
+        /*width: 90%;
         margin: 0 auto;
-        margin: 10px 15px;
-        background-color: #e5ffff;
+        margin: 10px 15px;*/
+         background-color: #e5ffff;
     }
     .item-icon {
         margin-top: 3px;

@@ -12,7 +12,6 @@ export default {
       option: {
         span: 4,
         decimals: 0,
-        // itemBackgroundColor: '#000',
         data: [
           {
             title: "今日注册",
