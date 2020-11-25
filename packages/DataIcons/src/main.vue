@@ -2,26 +2,31 @@
     <div class="data-icons" :style="`background-color:${backgroundColor}`">
         <el-row :span="24">
             <template v-for="(item,index) in data">
-                <el-col :span="span"
-                        :key="index">
+                <el-col :key="index"
+                        :span="span"
+                >
                     <div class="item" :style="`background-color:${itemBackgroundColor}`"
-                         :class="[{'item--easy':discount}]">
+                         :class="[{'item--easy':discount}]"
+                    >
                         <a :href="item.href?item.href:'javascript:void(0);'"
+                           :target="item.target"
                            @click="item.click?item.click(item):''"
-                           :target="item.target">
+                        >
                             <div class="item-icon"
-                                 :style="{color:item.color||color}">
+                                 :style="{color:item.color||color}"
+                            >
                                 <i :class="item.icon"></i>
                             </div>
                             <div class="item-info">
-                                <span :style="{color:item.titleColor||titleColor}" >{{item.title}}</span>
+                                <span :style="{color:item.titleColor||titleColor}">{{ item.title }}</span>
                                 <span>
                                    <KemCountUp :animation="animation"
                                                :decimals="decimals"
                                                :style="{color:item.color||color}"
                                                class="count"
-                                               :value="item.count"></KemCountUp>
-                                <span style="font-size: 14px"  :style="{color:item.titleColor||titleColor}"> {{item.append}}</span>
+                                               :value="item.count"
+                                   ></KemCountUp>
+                                <span style="font-size: 14px" :style="{color:item.titleColor||titleColor}"> {{ item.append }}</span>
                                 </span>
 
                             </div>
@@ -36,6 +41,12 @@
 <script>
 export default  {
     name: "KemDataIcons",
+    props: {
+        option: {
+            type: Object,
+            default: () => { }
+        }
+    },
     data () {
         return {};
     },
@@ -66,12 +77,6 @@ export default  {
         },
         discount () {
             return this.option.discount || false;
-        }
-    },
-    props: {
-        option: {
-            type: Object,
-            default: () => { }
         }
     }
 }

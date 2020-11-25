@@ -1,10 +1,6 @@
 <template>
   <div>
-    <KemTimeline
-      :activities="activities"
-      :reverse="false"
-    />
-
+    <KemTimeline :activities="activities" :reverse="false" />
   </div>
 </template>
 
@@ -50,6 +46,4 @@ export default {
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

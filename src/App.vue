@@ -5,7 +5,7 @@
         Home
       </router-link>
       <router-link
-        v-for="(item,key) in routes"
+        v-for="(item, key) in routes"
         :key="key"
         :to="item.path"
         style="margin: 0 5px"
@@ -14,38 +14,32 @@
       </router-link>
     </div>
     <div style="padding: 20px;font-size: 24px;font-weight: bold;">
-      <a href="https://github.com/hellonainai/kemomimi/tree/master/src/views/demo">demo</a>
-
+      <a
+        href="https://github.com/hellonainai/kemomimi/tree/master/src/views/demo"
+        >demo</a>
     </div>
 
     <router-view></router-view>
   </div>
 </template>
-<script >
-import pages from './views/demo/pages' // 页面文件目录
+<script>
+import pages from "./views/demo/pages"; // 页面文件目录
 
 export default {
   data() {
     return {
-      routes : []
-    }
+      routes: []
+    };
   },
   mounted() {
-
-    Object.keys(pages).forEach(item=>{
-
+    Object.keys(pages).forEach(item => {
       this.routes.push({
-
         path: `/${pages[item].name}`,
-        text: pages[item].name,
-
-
-      })
-
+        text: pages[item].name
+      });
     });
   }
-
-}
+};
 </script>
 
 <style lang="scss">
@@ -55,7 +49,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-
 }
 
 #nav {

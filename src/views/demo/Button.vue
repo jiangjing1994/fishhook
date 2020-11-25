@@ -26,32 +26,29 @@
     </KemButton>
   </div>
 </template>
-<script >
+<script>
 export default {
-  name:'Button',
+  name: "Button",
   data() {
     return {
       selectButtonGroup: [
-        { value:'11', label:'11'},
-        { value:'2', label:'2'},
-        { value:'4', label:'3'},
+        { value: "11", label: "11" },
+        { value: "2", label: "2" },
+        { value: "4", label: "3" }
       ],
-      customButtonConfig:{
-        date:{
-          type:'success',
-          text:'日期',
-          icon:"el-icon-date"
-        },
+      customButtonConfig: {
+        date: {
+          type: "success",
+          text: "日期",
+          icon: "el-icon-date"
+        }
       }
-    }
+    };
   },
   methods: {
-    clickButtonItem({value}) {
-      this.$message.success(value)
-
+    clickButtonItem({ value }) {
+      this.$message.success(value);
     }
-  },
-}
+  }
+};
 </script>
-
-

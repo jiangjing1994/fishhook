@@ -4,10 +4,8 @@
 
 <script>
 export default {
-    name: "SvgIcon"
-}
+  name: "SvgIcon"
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

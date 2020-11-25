@@ -9,10 +9,7 @@
     <KemButton @click="dw3">
       点我3
     </KemButton>
-    <KemDialog
-      :visible.sync="visible"
-      @save="save"
-    >
+    <KemDialog :visible.sync="visible" @save="save">
       <template slot="header">
         默认
       </template>
@@ -40,32 +37,29 @@
 
 <script>
 export default {
-    name: "Dialog",
-    data() {
-        return {
-            visible: false,
-            visible2: false,
-            visible3: false
-        }
+  name: "Dialog",
+  data() {
+    return {
+      visible: false,
+      visible2: false,
+      visible3: false
+    };
+  },
+  methods: {
+    dw() {
+      this.visible = !this.visible;
     },
-    methods: {
-        dw() {
-            this.visible = !this.visible
-        },
-        dw2() {
-            this.visible2 = !this.visible2
-        },
-        dw3() {
-            this.visible3 = !this.visible3
-        },
-        save(){
-            this.$message('保存')
-
-        }
+    dw2() {
+      this.visible2 = !this.visible2;
     },
-}
+    dw3() {
+      this.visible3 = !this.visible3;
+    },
+    save() {
+      this.$message("保存");
+    }
+  }
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

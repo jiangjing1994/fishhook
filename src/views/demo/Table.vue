@@ -8,10 +8,7 @@
     @rowClick="rowClick"
     @clickMenuButton="clickMenuButton"
   >
-    <template
-      slot="expand"
-      slot-scope="{scope}"
-    >
+    <template slot="expand" slot-scope="{ scope }">
       {{ scope.row }}
       <el-input v-model="scope.row.name"></el-input>
     </template>
@@ -29,39 +26,37 @@ export default {
   name: "Table",
   data() {
     return {
-      menuButton:['allBtn','addBtn','delBtn'],
-      menuOption:{
-        delBtn:true
+      menuButton: ["allBtn", "addBtn", "delBtn"],
+      menuOption: {
+        delBtn: true
       },
-      expand:true,
+      expand: true,
       data: [
-        {name:'张三', sex:'男'},
-        {name:'李四', sex:'女'},
-        {name:'王五', sex:'不详'},
+        { name: "张三", sex: "男" },
+        { name: "李四", sex: "女" },
+        { name: "王五", sex: "不详" }
       ],
-      column:[
+      column: [
         {
-          label:'姓名',
-          prop:'name'
-        }, {
-          label:'性别',
-          prop:'sex'
+          label: "姓名",
+          prop: "name"
+        },
+        {
+          label: "性别",
+          prop: "sex"
         }
       ]
-    }
+    };
   },
   methods: {
     rowClick() {
-      console.log(3232)
-
+      console.log(3232);
     },
-    clickMenuButton(value){
-      console.log(value)
+    clickMenuButton(value) {
+      console.log(value);
     }
-  },
-}
+  }
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

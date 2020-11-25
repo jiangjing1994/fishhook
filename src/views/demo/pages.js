@@ -3,16 +3,12 @@
  * File description:
  * History:
  */
-const files = require.context('.', false, /\.vue$/)
+const files = require.context(".", false, /\.vue$/);
 
-const pages = {}
-
+const pages = {};
 
 files.keys().forEach(key => {
+  pages[key.replace(/(\.\/|\.vue)/g, "")] = files(key).default;
+});
 
-    pages[key.replace(/(\.\/|\.vue)/g, '')] = files(key).default
-
-})
-
-
-export default pages
+export default pages;
