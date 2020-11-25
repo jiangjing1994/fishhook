@@ -13,7 +13,10 @@
         {{ item.text }}
       </router-link>
     </div>
-    <a href="https://github.com/hellonainai/kemomimi/tree/master/src/views/demo">demo</a>
+    <div style="padding: 20px;font-size: 24px;font-weight: bold;">
+      <a href="https://github.com/hellonainai/kemomimi/tree/master/src/views/demo">demo</a>
+
+    </div>
 
     <router-view></router-view>
   </div>
