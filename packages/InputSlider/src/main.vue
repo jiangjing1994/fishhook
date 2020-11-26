@@ -1,5 +1,5 @@
 <template lang="pug">
-    el-slider( v-bind="$attrs" v-on="evet" :showInput="showInput" :range="range" :max="max" :min="min")
+    el-slider( v-bind="$attrs" v-on="evet" :showInput="showInput" :range="range" :max="max" :min="min" style="padding:0 10px")
 
 </template>
 <script>
