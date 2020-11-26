@@ -2,13 +2,13 @@
 
 ## Install
 ```shell
-npm install kemomini
+npm install kemomimi
 ```
 
 ## Quick Start
 ``` javascript
 import Vue from 'vue'
-import Kem from 'kemomini'
+import Kem from 'kemomimi'
 
 Vue.use(Kem)
 ```
