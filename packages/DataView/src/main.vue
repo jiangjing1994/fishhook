@@ -1,6 +1,6 @@
 <template>
   <div
-    id="sugar-root"
+    class="sugar-root"
     ref="echartsWrapper"
     :style="canvasType==0?'height: auto':''"
   >
@@ -151,8 +151,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-#sugar-root{
+<style lang="scss">
+.sugar-root{
   height: 100%;
   width: 100%;
   position: relative;
