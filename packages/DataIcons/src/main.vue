@@ -94,6 +94,7 @@ export default  {
         /*width: 90%;
         margin: 0 auto;
         margin: 10px 15px;*/
+         padding-bottom: 0;
          background-color: #e5ffff;
     }
     .item-icon {
