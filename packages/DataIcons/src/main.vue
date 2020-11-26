@@ -73,10 +73,10 @@ export default  {
             return this.option.data;
         },
         color () {
-            return this.option.color || "rgb(63, 161, 255)";
+            return this.option.color || "#3FA1FF";
         },
         titleColor () {
-            return this.option.titleColor || "#333";
+            return this.option.titleColor || "#333333";
         },
         discount () {
             return this.option.discount || false;

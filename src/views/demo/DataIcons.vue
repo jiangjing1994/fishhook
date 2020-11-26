@@ -25,39 +25,27 @@ export default {
           {
             title: "今日登录",
             count: 22139,
-            href: "https://avue.top",
-            target: "_blank"
-          },
+           },
           {
             title: "今日订阅",
             count: 35623,
-            href: "https://avue.top",
-            target: "_blank"
-          },
+            },
           {
             title: "今日评论",
             count: 16826,
-            href: "https://avue.top",
-            target: "_blank"
-          },
+           },
           {
             title: "今日评论",
             count: 16826,
-            href: "https://avue.top",
-            target: "_blank"
-          },
+           },
           {
             title: "今日评论",
             count: 16826,
-            href: "https://avue.top",
-            target: "_blank"
-          },
+            },
           {
             title: "今日评论",
             count: 16826,
-            href: "https://avue.top",
-            target: "_blank"
-          }
+           }
         ]
       }
     };
