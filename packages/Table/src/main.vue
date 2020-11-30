@@ -343,7 +343,7 @@ export default {
 
 
   watch: {
-    data:{
+    tableData:{
       handler() {
         this.getListData()
       },
