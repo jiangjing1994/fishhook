@@ -122,21 +122,21 @@ export default {
         const specialButton = (type)=>{
 
 
+            const btnInfo = {
+                del:{type:'danger', text:'删除', icon:"el-icon-delete"},
+                edit:{type:'primary', text:'编辑', icon:"el-icon-edit"},
+                add:{type:'success', text:'新增', icon:"el-icon-plus"},
+                download:{type:'primary', text:'下载', icon:"el-icon-download"},
+                refresh:{type:'success', text:'刷新', icon:"el-icon-refresh"},
+                info:{type:'primary', text:'详情', icon:"el-icon-info"},
+            }
 
             const specialButtonConfig = {
                 operate:{
-                    del:{type:'danger', text:'删除', icon:"el-icon-delete"},
-                    edit:{type:'primary', text:'编辑', icon:"el-icon-edit"},
-                    add:{type:'success', text:'新增', icon:"el-icon-plus"},
-                    download:{type:'primary', text:'下载', icon:"el-icon-download"},
-                    refresh:{type:'success', text:'下载', icon:"el-icon-refresh"},
+                    ...btnInfo
                 },
                 icon:{
-                    del:{type:'danger', icon:"el-icon-delete"},
-                    edit:{type:'primary', icon:"el-icon-edit"},
-                    add:{type:'success', icon:"el-icon-plus"},
-                    download:{type:'primary', icon:"el-icon-download"},
-                    refresh:{type:'success', icon:"el-icon-refresh"},
+                    ...btnInfo
                 },
                 custom:this.customButtonConfig ? this.customButtonConfig :{}
             }

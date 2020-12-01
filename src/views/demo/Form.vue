@@ -1,65 +1,99 @@
 <template>
-  <div>
-    <KemSelect v-model="multipleValue" multiple :options="options"></KemSelect>
-    <KemSelect v-model="value" :options="options"></KemSelect>
-    <KemSelect v-model="value" :options="options">
-      <template slot-scope="{ scope }">
-        <span style="float: left">{{ scope.label }}</span>
-        <span style="float: right; color: #8492a6; font-size: 13px">{{
-          scope.value
-        }}</span>
-      </template>
-    </KemSelect>
-    <KemInputNumber v-model="number"></KemInputNumber>
-    <KemInput v-model="value"></KemInput>
-    <KemCheckboxGroup
-      v-model="multipleValue"
-      :options="options"
-    ></KemCheckboxGroup>
-    <KemColorPicker v-model="color"></KemColorPicker>
-    <KemInputColor v-model="color"></KemInputColor>
-    <KemSwitch v-model="b"></KemSwitch>
-  </div>
+    <div style="text-align: left;display: flex;justify-content: center">
+        <!--   <el-form ref="form" :model="form" label-width="80px">
+
+             <el-form-item label="活动区域">
+               <el-select v-model="form.region" placeholder="请选择活动区域">
+                 <el-option label="区域一" value="shanghai"></el-option>
+                 <el-option label="区域二" value="beijing"></el-option>
+               </el-select>
+             </el-form-item>
+             <el-form-item label="活动时间">
+               <el-col :span="11">
+                 <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+               </el-col>
+               <el-col class="line" :span="2">-</el-col>
+               <el-col :span="11">
+                 <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
+               </el-col>
+             </el-form-item>
+             <el-form-item label="即时配送">
+               <el-switch v-model="form.delivery"></el-switch>
+             </el-form-item>
+             <el-form-item label="活动性质">
+               <el-checkbox-group v-model="form.type">
+                 <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
+                 <el-checkbox label="地推活动" name="type"></el-checkbox>
+                 <el-checkbox label="线下主题活动" name="type"></el-checkbox>
+                 <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
+               </el-checkbox-group>
+             </el-form-item>
+             <el-form-item label="特殊资源">
+               <el-radio-group v-model="form.resource">
+                 <el-radio label="线上品牌商赞助"></el-radio>
+                 <el-radio label="线下场地免费"></el-radio>
+               </el-radio-group>
+             </el-form-item>
+             <el-form-item label="活动形式">
+               <el-input type="textarea" v-model="form.desc"></el-input>
+             </el-form-item>
+             <el-form-item>
+               <el-button type="primary" @click="onSubmit">立即创建</el-button>
+               <el-button>取消</el-button>
+             </el-form-item>
+           </el-form>-->
+        <KemPageCard style="width: 800px" header="Form">
+            <pre>{{form}}</pre>
+            <KemForm
+                    :form-items="formItems"
+                    :form-config="{labelPosition:'right',labelWidth:'80px'}"
+                    :data="form"
+            ></KemForm>
+        </KemPageCard>
+
+    </div>
 </template>
 
 <script>
 export default {
-  name: "Form",
-  data() {
-    return {
-      multipleValue: [],
-      value: "",
-      b: null,
-      color: "#000",
-      number: 3,
-      options: [
-        {
-          value: "Beijing",
-          label: "北京"
-        },
-        {
-          value: "Shanghai",
-          label: "上海"
-        },
-        {
-          value: "Nanjing",
-          label: "南京"
-        },
-        {
-          value: "Chengdu",
-          label: "成都"
-        },
-        {
-          value: "Shenzhen",
-          label: "深圳"
-        },
-        {
-          value: "Guangzhou",
-          label: "广州"
+    name: "Form",
+    data() {
+        return {
+            form:{
+            },
+            formItems: [
+                {label: '活动名称', prop: 'name', span:24, component: 'KemInput',},
+                {label: '活动区域', prop: 'region', span:24, component: 'KemSelect',props:{
+                        multiple:true,
+                        options:[
+                            {
+                                label:'区域一',
+                                value:'shanghai'
+                            },
+                            {
+                                label:'区域二',
+                                value:'beijing'
+                            }
+                        ]
+                    } },
+                {label: '即时配送', prop: 'delivery', span:24, component: 'KemSwitch',},
+                {label: '活动性质', prop: 'type', span:24, component: 'KemCheckboxGroup',props:{
+                        options:[
+                            {
+                                label:'美食/餐厅线上活动',
+                                value:'shanghai'
+                            },
+                            {
+                                label:'地推活动',
+                                value:'beijing'
+                            }
+                        ]
+                    } },
+
+
+            ]
         }
-      ]
-    };
-  }
+    },
 };
 </script>
 
