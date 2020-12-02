@@ -4,16 +4,17 @@ on:
     branches:
       - master
 jobs:
-  publish-npm:
-    build:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v1
-        - uses: actions/setup-node@v1
-          with:
-            node-version: 12
-        - run: npm lib
 
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm lib
+
+  publish-npm:
     needs: build
     steps:
       - uses: actions/checkout@v1
