@@ -1,5 +1,5 @@
 const onlyProductionError =
-  process.env.NODE_ENV === "production" ? "error" : "off";
+  process.env.NODE_ENV === "production" ? "off" : "off";
 module.exports = {
   root: true,
   parserOptions: {

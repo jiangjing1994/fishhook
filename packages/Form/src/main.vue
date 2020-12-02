@@ -4,10 +4,10 @@
             class="form_body--card"
             style="position: relative"
             v-bind="computedConfig"
-            :rules="rules"
+            :rules="formRules||rules"
             :model="data"
     >
-        <div v-if="readOnly" class="mask"/>
+        <div v-if="readOnly" class="mask" />
         <div v-if="readOnly" style="text-align: right;padding: 10px">
             <el-tag type="danger">
                 只读
@@ -58,7 +58,11 @@
         </el-row>
     </el-form>
 </template>
+
+
 <script lang="jsx">
+
+import { cloneDeep,debounce } from 'lodash'
 const defaultConfig = {
     labelWidth: '120px'
 }
@@ -180,6 +184,8 @@ export default {
         group: Array,
         // eslint-disable-next-line vue/require-default-prop
         data: Object,
+        // eslint-disable-next-line vue/require-default-prop
+        formRules: Object,
         readOnly:{
             type:Boolean,
             default:false
@@ -205,7 +211,7 @@ export default {
 
             for (const item of this.formItems) {
                 // 剩余参数语法允许我们将一个不定数量的参数表示为一个数组。theArgs
-                let { component = 'Input', showIf, prop, props, ...theArgs } = item
+                let { component = 'KemInput', showIf, prop, props, ...theArgs } = item
                 if (typeof showIf === 'function' && !showIf(this.data)) {
                     continue
                 }
@@ -247,17 +253,33 @@ export default {
                 return total
             }, {})
             return rules
+        },
+        computedFormData() {
+            const data = cloneDeep(this.data)
+            return JSON.stringify(data)
+        },
+        computedFormItems() {
+            const formItems = cloneDeep(this.formItems)
+            return JSON.stringify(formItems)
         }
     },
 
     watch: {
-        data:{
+        computedFormData:{
+            handler:debounce(async function(newValue,oldValue) {
+
+                this.$emit('updataFormData',JSON.parse(newValue),JSON.parse(oldValue))
+
+            },500),
+            deep: false
+        },
+
+        computedFormItems:{
             handler(newValue,oldValue) {
-
-
-                this.$emit('updataFormData',newValue,oldValue)
+                console.log(newValue)
+                console.log(oldValue)
             },
-            deep: true
+            deep: false
         },
     },
     methods: {
@@ -265,8 +287,8 @@ export default {
             return `${item.prop}-${index}`
         },
         validate () {
-            return new Promise(resolve => {
-                this.$refs.form.validate(resolve)
+             return new Promise(resolve => {
+                 this.$refs.form.validate(resolve)
             })
         },
         clearValidate (props) { // 清空校验
