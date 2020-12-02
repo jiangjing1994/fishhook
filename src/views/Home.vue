@@ -3,7 +3,7 @@
     <h2>
       <a href="https://github.com/hellonainai/kemomimi">v{{ version }}</a>
     </h2>
-    <img alt="Vue logo" src="../assets/logo.jpg" />
+    <img alt="Vue logo" src="../assets/V[CL6C_F)ETTW0K0PJ1LF11.gif" />
   </div>
 </template>
 

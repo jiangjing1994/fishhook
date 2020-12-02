@@ -9,6 +9,7 @@ import KemTable from './Table'
 import KemPageCard from './PageCard'
 import KemInputNumber from './InputNumber'
 import KemCheckboxGroup from './CheckboxGroup'
+import KemRadioboxGroup from './RadioboxGroup'
 import KemColorPicker from './ColorPicker'
 import KemDataView from './DataView'
 import KemInputColor from './InputColor'
@@ -34,6 +35,7 @@ const components = [
     KemInput,
     KemInputNumber,
     KemCheckboxGroup,
+    KemRadioboxGroup,
     KemColorPicker,
     KemDataView,
     KemInputColor,
@@ -72,6 +74,7 @@ export default {
     KemInput,
     KemInputNumber,
     KemCheckboxGroup,
+    KemRadioboxGroup,
     KemColorPicker,
     KemDataView,
     KemInputColor,
