@@ -1,6 +1,6 @@
 {
   "name": "kemomimi",
-  "version": "0.3.24-0",
+  "version": "0.3.25-0",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
