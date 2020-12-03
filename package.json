@@ -1,13 +1,12 @@
 {
   "name": "kemomimi",
-  "version": "0.3.23",
+  "version": "0.3.24-0",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "lib": "vue-cli-service build --target lib --name kemomimi --dest lib packages/index.js"
-
   },
   "main": "lib/kemomimi.umd.min.js",
   "license": "MIT",
@@ -46,5 +45,4 @@
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"
   }
-
 }
