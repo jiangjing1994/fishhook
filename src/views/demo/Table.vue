@@ -12,6 +12,9 @@
       {{ scope.row }}
       <el-input v-model="scope.row.name"></el-input>
     </template>
+    <template slot="name" slot-scope="{ scope }">
+      <el-input v-model="scope.row.name"></el-input>
+    </template>
     <template slot="menuLeft">
       <KemInput />
     </template>
@@ -32,14 +35,16 @@ export default {
       },
       expand: true,
       data: [
-        { name: "张三", sex: "男" },
+        { name: "张三", sex: "男" ,},
         { name: "李四", sex: "女" },
         { name: "王五", sex: "不详" }
       ],
       column: [
         {
           label: "姓名",
-          prop: "name"
+          prop: "name",
+          slot:true,
+
         },
         {
           label: "性别",

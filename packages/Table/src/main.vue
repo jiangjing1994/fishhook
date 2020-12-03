@@ -24,11 +24,13 @@
               slot-scope="scope"
       >
         <render-content
+                v-if="item.render"
                 :key="key"
                 :render="item.render"
                 :scope="scope"
                 :column="item"
         ></render-content>
+          <slot :name="item.prop"  :scope="scope"></slot>
       </template>
 
       <template slot="menuLeft">
