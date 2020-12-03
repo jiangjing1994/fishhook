@@ -11,8 +11,9 @@
   "main": "lib/kemomimi.umd.min.js",
   "license": "MIT",
   "files": [
+    "README.md",
+    "LICENSE",
     "lib",
-    "src",
     "packages"
   ],
   "dependencies": {
