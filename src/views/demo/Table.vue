@@ -2,25 +2,17 @@
   <KemTable
     :table-data="data"
     :column="column"
-    :expand="expand"
-    :menu-option="menuOption"
-    :menu-button="menuButton"
+
+
     @rowClick="rowClick"
     @clickMenuButton="clickMenuButton"
   >
-    <template slot="expand" slot-scope="{ scope }">
-      {{ scope.row }}
-      <el-input v-model="scope.row.name"></el-input>
-    </template>
-    <template slot="name" slot-scope="{ scope }">
-      <el-input v-model="scope.row.name"></el-input>
-    </template>
-    <template slot="menuLeft">
-      <KemInput />
-    </template>
-    <template slot="menuRight">
+
+
+     <template slot="menu">
       <KemButton>保存</KemButton>
     </template>
+
   </KemTable>
 </template>
 
@@ -43,7 +35,7 @@ export default {
         {
           label: "姓名",
           prop: "name",
-          slot:true,
+
 
         },
         {

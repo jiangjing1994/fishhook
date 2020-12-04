@@ -317,9 +317,11 @@ export default {
       if (this.isShowPage){
         option.page = true
       }
-      const header = !!(this.$slots.menuLeft || this.$slots.menuRight)||this.menuPermissionAdd;
+      const header = !!(this.$scopedSlots.menuLeft || this.$scopedSlots.menuRight)||this.menuPermissionAdd;
 
-      const menu = !!(this.$slots.menu )||this.menuPermissionDel ||this.menuPermissionEdit
+
+
+      const menu = !!(this.$scopedSlots.menu )||this.menuPermissionDel ||this.menuPermissionEdit
 
       return{
         ...option,
