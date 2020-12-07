@@ -1,16 +1,16 @@
 <template>
     <div style="text-align: left;display: flex;justify-content: center">
         <KemPageCard style="width: 800px" header="Form">
-            <pre>{{form}}</pre>
+            <pre>{{ form }}</pre>
 
             <KemForm
-                    :formItems="formItems"
-                    @updataFormData="updataFormData"
+                    ref="form"
+                    :form-items="formItems"
                     :form-config="{labelPosition:'right',labelWidth:'120px'}"
                     :data="form"
-                    :formRules="formRules"
-                    ref="form"
-                    :readOnly="readOnly"
+                    :form-rules="formRules"
+                    :read-only="readOnly"
+                    @updataFormData="updataFormData"
             >
                 <template slot="resource">
                     <el-radio-group v-model="form.resource">

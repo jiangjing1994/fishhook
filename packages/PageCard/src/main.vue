@@ -8,7 +8,7 @@
       <div
         v-if="$slots.header || header"
         slot="header"
-        style="display: flex;align-items: center;"
+        style="display: flex;align-items: center;font-size: 16px;font-weight: bold;padding: 7px;color: #333333"
       >
         <div class="block-color__cell--left"/>
         <slot name="header">
@@ -22,7 +22,7 @@
       </div>
       <div
         v-if="$slots.footer || footer"
-        style="padding: 15px 15px;border-top: 1px solid #EBEEF5;"
+        style="padding: 15px 15px;border-top: 1px solid #EBEEF5;text-align: right"
       >
         <slot name="footer">
           {{ footer }}
@@ -56,16 +56,17 @@ export default {
 .page-card__body{
   .content__body{
     // height: calc(100vh - 150px);
+    text-align: left;
     overflow-y: auto;
     padding: 15px 10px;
     min-height: 300px;
     position: relative
   }
   .block-color__cell--left{
-    //background-color: $--color-primary;
-    width: 10px;
-    height: 10px;
-    margin-right: 5px
+    background-color: #0f80ff;
+    width: 4px;
+    height: 15px;
+    margin-right: 10px
   }
   .el-card__header{
     padding:8px 8px ;

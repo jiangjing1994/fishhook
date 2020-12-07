@@ -13,7 +13,7 @@
         </KemSelect>
         <KemInputNumber v-model="number"></KemInputNumber>
         <KemInput v-model="value"></KemInput>
-        <KemRadioboxGroup v-model="value" :options="options"/>
+        <KemRadioboxGroup v-model="value" :options="options" />
 
         <KemCheckboxGroup
                 v-model="multipleValue"
