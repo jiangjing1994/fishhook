@@ -7,8 +7,9 @@ npm install kemomimi
 
 ## Quick Start
 ``` javascript
-import Vue from 'vue'
-import Kem from 'kemomimi'
+import Kemomimi from 'kemomimi'
+
+import 'kemomimi/lib/kemomimi.css'
 
 Vue.use(Kem)
 ```

@@ -73,7 +73,7 @@
 
 <script lang="jsx">
 
-import { cloneDeep } from 'lodash'
+import { cloneDeep ,debounce} from 'lodash'
 
 const defaultPage = {
   pageSizes: [5, 10, 20, 50],
@@ -355,8 +355,8 @@ export default {
     },
     defaultParams: {
       handler() {
-        this.resetPage()
-        this.getListData()
+
+        this.refreshDefaultParams()
       },
       deep: true
     },
@@ -385,6 +385,12 @@ export default {
 
 
     },
+
+      refreshDefaultParams:debounce(function() {
+          this.resetPage()
+          this.getListData()
+
+      },500),
 
     async getListData(params={}){
 

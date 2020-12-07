@@ -20,9 +20,12 @@
                 </template>
 
             </KemForm>
-            <KemButton @click="updataFormItems">切换FormItems</KemButton>
-            <KemButton @click="readOnly=!readOnly">只读</KemButton>
-            <KemButton @click="submitForm">提交</KemButton>
+            <div slot="footer">
+                <KemButton @click="updataFormItems">切换FormItems</KemButton>
+                <KemButton @click="readOnly=!readOnly">只读</KemButton>
+                <KemButton @click="submitForm">提交</KemButton>
+            </div>
+
         </KemPageCard>
 
     </div>
