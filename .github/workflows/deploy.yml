@@ -4,7 +4,7 @@ on:
     branches:
       - master
 jobs:
-  build:
+  npm-publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -18,7 +18,7 @@ jobs:
         env:
             NODE_AUTH_TOKEN: ${{secrets.NPM20200828}}
 
-  build-and-deploy:
+  github-pages-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
