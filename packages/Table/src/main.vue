@@ -262,10 +262,7 @@ export default {
     result:{
       type:Function,
     },
-    // eslint-disable-next-line vue/require-default-prop
-    url:{
-      type:String,
-    },
+
     // eslint-disable-next-line vue/require-default-prop
     tableHeight:{
       type:Number,
