@@ -1,16 +1,16 @@
-# [mimi-ui](https://hellonainai.github.io/kemomimi/#/)
+# [mimiui](https://hellonainai.github.io/kemomimi/#/)
 
 ## Install
 ```shell
-npm install mimi-ui
+npm install mimiui
 ```
 
 ## Quick Start
 ``` javascript
-import mimi from 'mimi-ui'
+import mimiui from 'mimiui'
 
-import 'mimi/lib/kemomimi.css'
+import 'mimiui/lib/mimiui.css'
 
-Vue.use(mimi)
+Vue.use(mimiui)
 ```
 
