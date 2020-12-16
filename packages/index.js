@@ -18,6 +18,7 @@ import KemSwitch from './Switch'
 import KemCountUp from './CountUp'
 import KemDataIcons from './DataIcons'
 import KemInputSlider from './InputSlider'
+import KemFormDialog from './FormDialog'
 import KemTree from './Tree'
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
@@ -46,6 +47,7 @@ const components = [
     KemDataIcons,
     KemInputSlider,
     KemTree,
+    KemFormDialog,
 
 
 ];
@@ -86,4 +88,5 @@ export default {
     KemDataIcons,
     KemInputSlider,
     KemTree,
+    KemFormDialog,
 };

@@ -10,6 +10,13 @@
                     v-bind="activity"
                     :timestamp="activity.timestamp"
             >
+                <template v-if="activity.renderDot" slot="dot">
+                    <render-dot
+                            :key="index"
+                            :render="activity.renderDot"
+                            :activity="activity"
+                    ></render-dot>
+                </template>
                 <render-content
                         :key="index"
                         :render="activity.render"
@@ -44,10 +51,31 @@ const RenderContent = {
         return <span>{content}</span>
     }
 }
+const RenderDot = {
+    props: {
+        render: Function,
+        activity: Object,
+
+    },
+    render (h) {
+        const { content } = this.activity
+        const params = {
+            activity:this.activity,
+        }
+
+        if (this.render) {
+            return this.render(h, params)
+        }
+
+        return <span>{content}</span>
+    }
+}
 export default {
     name: 'KemTimeline',
     components:{
-        RenderContent
+        RenderContent,
+        RenderDot,
+
     },
     props: {
         activities: {
