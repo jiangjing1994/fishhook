@@ -1,21 +1,19 @@
 {
-  "name": "@jiangjing94/mimi",
+  "name": "kemomimi",
   "version": "1.0.3",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "lib": "vue-cli-service build --target lib --name mimiui --dest lib packages/index.js"
+    "lib": "vue-cli-service build --target lib --name kemomimi --dest lib packages/index.js"
   },
-  "main": "lib/mimiui.umd.min.js",
+  "main": "lib/kemomimi.umd.min.js",
   "license": "MIT",
   "files": [
     "README.md",
     "LICENSE",
-    "lib/mimiui.umd.min.js",
-    "lib/mimiui.css",
-    "lib/fonts",
+    "lib",
     "packages"
   ],
   "dependencies": {
