@@ -52,11 +52,27 @@ const components = [
 
 ];
 
-const install = function(Vue) {
+const install = function(Vue,opts = {}) {
     if (install.installed) return;
-    ElementUI.install(Vue)
-    Avue.install(Vue)
+
     components.map(component => Vue.component(component.name, component));
+
+    Vue.prototype.$MIMI = {
+
+        size: opts.size || 'small',
+        tableSize: opts.tableSize || 'small',
+        formSize: opts.formSize || 'small',
+        buttonSize: opts.buttonSize || 'mini',
+        menuType: opts.menuType || 'text',
+
+    };
+    ElementUI.install(Vue,{
+        size: opts.size || 'small'
+    })
+    Avue.install(Vue,
+    {
+        size: opts.size || 'small'
+    })
 };
 
 if (typeof window !== 'undefined' && window.Vue) {

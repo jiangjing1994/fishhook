@@ -17,11 +17,18 @@
                             :activity="activity"
                     ></render-dot>
                 </template>
+                <template v-if="activity.slotDot" slot="dot">
+                    <slot :name="activity.prop" :scope="activity"></slot>
+                </template>
+
                 <render-content
                         :key="index"
                         :render="activity.render"
                         :activity="activity"
                 ></render-content>
+                 
+                <slot v-if="activity.slot" :name="activity.prop"  :scope="activity"></slot>
+
             </el-timeline-item>
         </el-timeline>
         <div v-else>
@@ -87,7 +94,7 @@ export default {
             default:true
         }
     },
- }
+}
 </script>
 
 <style scoped>

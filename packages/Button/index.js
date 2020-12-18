@@ -6,3 +6,4 @@ components.install = function(Vue) {
 };
 
 export default components;
+

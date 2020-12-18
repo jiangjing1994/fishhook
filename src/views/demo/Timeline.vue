@@ -1,6 +1,8 @@
 <template>
   <div>
-    <KemTimeline :activities="activities" :reverse="false" />
+    <KemTimeline :activities="activities" :reverse="false" >
+      <template slot="b">ddd</template>
+    </KemTimeline>
   </div>
 </template>
 
@@ -30,6 +32,8 @@ export default {
           )
         }
       }, {
+        prop:'b',
+        slot:true,
         content: '支持自定义颜色',
         timestamp: '2018-04-03 20:46',
         color: '#0bbd87'

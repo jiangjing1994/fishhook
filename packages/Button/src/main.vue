@@ -10,7 +10,7 @@ export default {
         },
         size: {
             type: String,
-            default: 'small'
+            default: 'mini'
         },
         // 下拉按钮组默认不显示
         selectButtonGroup: {
@@ -40,6 +40,10 @@ export default {
                     "padding-bottom": "0px"
                 }
             }return {}
+
+        },
+        buttonSize(){
+            return this.$MIMI.buttonSize
 
         }
     },
@@ -71,13 +75,12 @@ export default {
 
     render(){
         const { type } = this
-
         const baseButton = ()=>{
             return(
                 <el-button
                     props={this.$attrs}
                     type={this.type}
-                    size={this.size}
+                    size={this.size || this.buttonSize }
                     style={this.style}
                     on={this.evet}
                 >
@@ -108,7 +111,7 @@ export default {
 
 
             return(
-                <el-dropdown size={this.size}  v-on:command={handleCommand}>
+                <el-dropdown size={this.size || this.buttonSize }  v-on:command={handleCommand}>
                     <div style="padding: 0 8px">
                         { button }
                     </div>

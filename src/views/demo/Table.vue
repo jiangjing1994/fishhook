@@ -11,6 +11,9 @@
      <template slot="menu">
       <KemButton>保存</KemButton>
     </template>
+     <template slot="sex">
+      <KemButton>1111</KemButton>
+    </template>
 
   </KemTable>
 </template>
@@ -39,7 +42,8 @@ export default {
         },
         {
           label: "性别",
-          prop: "sex"
+          prop: "sex",
+            slot:true
         }
       ]
     };

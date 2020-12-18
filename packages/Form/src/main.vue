@@ -64,8 +64,8 @@
 
 import { cloneDeep,debounce } from 'lodash'
 const defaultConfig = {
-    labelWidth: '120px'
-}
+    labelWidth: '120px',
+ }
 // 表单字段格式化
 const RenderContent = {
     props: {
@@ -174,7 +174,8 @@ export default {
             type: Object,
             default: ()=>{
                 return{
-                    labelWidth: '120px'
+                    labelWidth: '120px',
+
 
                 }
             }
@@ -200,6 +201,7 @@ export default {
     computed: {
         computedConfig () {
             return {
+                size:this.$MIMI.formSize,
                 ...defaultConfig,
                 ...this.formConfig
             }
@@ -263,6 +265,8 @@ export default {
             return JSON.stringify(formItems)
         }
     },
+    created(){
+     },
 
     watch: {
         computedFormData:{
