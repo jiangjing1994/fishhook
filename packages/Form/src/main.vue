@@ -260,33 +260,19 @@ export default {
             const data = cloneDeep(this.data)
             return JSON.stringify(data)
         },
-        computedFormData2() {
-            const data = cloneDeep(this.data)
-            return JSON.stringify(data)
-        },
+
         computedFormItems() {
             const formItems = cloneDeep(this.formItems)
             return JSON.stringify(formItems)
         }
     },
-    created(){
-     },
 
     watch: {
+
         computedFormData:{
-            handler:debounce(async function(newValue,oldValue) {
-                console.log(274,newValue)
-
-                this.$emit('updataFormDataDebounce',JSON.parse(newValue),JSON.parse(oldValue))
-
-            },500),
-            deep: true
-        },
-        computedFormData2:{
             handler(newValue,oldValue) {
-                console.log(287,newValue)
-                this.$emit('updataFormData',JSON.parse(newValue),JSON.parse(oldValue))
 
+                this.updataFormDataDebounce({ vm: this, newValue, oldValue})
             },
             deep: false
         },
@@ -299,7 +285,14 @@ export default {
             deep: false
         },
     },
+    created(){
+     },
     methods: {
+        updataFormDataDebounce: debounce(({ vm, newValue, oldValue }) => {
+
+            vm.$emit('updataFormData',JSON.parse(newValue),JSON.parse(oldValue))
+
+        }, 500),
         getItemKey (item, index) {
             return `${item.prop}-${index}`
         },
