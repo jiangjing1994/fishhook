@@ -260,6 +260,10 @@ export default {
             const data = cloneDeep(this.data)
             return JSON.stringify(data)
         },
+        computedFormData2() {
+            const data = cloneDeep(this.data)
+            return JSON.stringify(data)
+        },
         computedFormItems() {
             const formItems = cloneDeep(this.formItems)
             return JSON.stringify(formItems)
@@ -271,10 +275,19 @@ export default {
     watch: {
         computedFormData:{
             handler:debounce(async function(newValue,oldValue) {
+                console.log(274,newValue)
 
-                this.$emit('updataFormData',JSON.parse(newValue),JSON.parse(oldValue))
+                this.$emit('updataFormDataDebounce',JSON.parse(newValue),JSON.parse(oldValue))
 
             },500),
+            deep: true
+        },
+        computedFormData2:{
+            handler(newValue,oldValue) {
+                console.log(287,newValue)
+                this.$emit('updataFormData',JSON.parse(newValue),JSON.parse(oldValue))
+
+            },
             deep: false
         },
 
