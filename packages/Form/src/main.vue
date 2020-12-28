@@ -7,12 +7,12 @@
             :rules="formRules||rules"
             :model="data"
     >
-        <div v-if="readOnly" class="mask" />
-        <div v-if="readOnly" style="text-align: right;padding: 10px">
+        <div v-if="readOnly" class="mask"></div>
+        <!--<div v-if="readOnly" style="text-align: right">
             <el-tag type="danger">
                 只读
             </el-tag>
-        </div>
+        </div>-->
         <el-row>
             <el-col
                     v-for="(item, index) in computedItems"
@@ -314,7 +314,7 @@ export default {
         position: absolute;
         width: 100%;
         height: 100%;
-        //cursor: not-allowed;
+        cursor: not-allowed;
     }
     .form-group__header{
         width: 100%;

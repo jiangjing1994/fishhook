@@ -4,6 +4,7 @@
           class="dialog__body"
           :width="width"
           :close-on-click-modal="closeOnClickModal"
+          :destroy-on-close="destroyOnClose"
           :fullscreen="fullscreen"
           v-bind="$attrs"
           v-on="$listeners"
@@ -61,7 +62,15 @@ export default {
       type: Boolean,
       default: false
     },
+    isfullscreen:{
+      type: Boolean,
+      default: false
+    },
     closeOnClickModal:{
+      type: Boolean,
+      default: false
+    },
+    destroyOnClose:{
       type: Boolean,
       default: false
     }
@@ -69,9 +78,12 @@ export default {
   data() {
     return {
       isShow: false,
-      fullscreen: false,
+     fullscreen: false,
     }
 
+  },
+  created(){
+    this.fullscreen = this.isfullscreen
   },
   methods: {
     show() {
@@ -118,8 +130,12 @@ $--color-primary:'yellow';
     text-align: left;
   }
   .dialog__body--footer{
+    width: 100%;
+    bottom: 15px;
+    right: 15px;
     padding-top: 10px;
     text-align: right;
+    position: absolute;
   }
   .lalal-color{
     background-color: $--color-primary;
