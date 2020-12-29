@@ -1,5 +1,7 @@
 <template>
   <div class="about">
+    <KemButton type="text.del"></KemButton>
+    <KemButton type="text.add"></KemButton>
     <KemButton type="icon.del"></KemButton>
     <KemButton type="operate.del"></KemButton>
     <KemButton type="operate.add">

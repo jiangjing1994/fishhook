@@ -13,7 +13,7 @@
                 只读
             </el-tag>
         </div>-->
-        <el-row>
+        <el-row v-if="!isFormGroup">
             <el-col
                     v-for="(item, index) in computedItems"
                     :key="getItemKey(item, index)"
@@ -21,14 +21,7 @@
                     :sm="item.sm"
                     :span="item.span || 12"
             >
-                <div
-                        v-if="item.type === 'group'"
-                        class="form-group__header"
-                >
-                    {{ item.label }}
-                </div>
                 <el-form-item
-                        v-else
                         :label="item.label + ':'"
                         :prop="item.prop"
                 >
@@ -56,6 +49,53 @@
                 </el-form-item>
             </el-col>
         </el-row>
+        <el-timeline v-else :reverse="false">
+            <el-timeline-item v-for="(timelineItem, key) in computedItems" :key="key">
+                <template slot="dot">
+                    <div class="icon__body">
+                        <i :class="`${timelineItem.icon || 'el-icon-paperclip'}`"></i>
+                    </div>
+                </template>
+                <div class="timeline__title">{{ timelineItem.label }}</div>
+                <el-row>
+                    <el-col
+                            v-for="(item,index) in timelineItem.formItems"
+                            :key="getItemKey(item, index)"
+                            :md="item.md"
+                            :sm="item.sm"
+                            :span="item.span || 12"
+                    >
+                        <el-form-item
+                                :label="item.label + ':'"
+                                :prop="item.prop"
+                        >
+                            <render-content
+                                    v-if="item.labelRender"
+                                    slot="label"
+                                    :render="item.labelRender"
+                                    :data="item"
+                            />
+                            <slot
+                                    :name="item.slot"
+                                    v-bind="{ item }"
+                            >
+                                <component
+                                        :is="item.component"
+                                        v-if="item.component !== 'Text'"
+                                        :ref="item.ref || `cp-${item.prop}`"
+                                        v-model="data[item.prop]"
+                                        :data="data"
+                                        v-bind="item.props"
+                                        v-on="item.listeners"
+                                />
+                                <span v-else>{{ data[item.prop] }}</span>
+                            </slot>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+            </el-timeline-item>
+        </el-timeline>
     </el-form>
 </template>
 
@@ -65,7 +105,7 @@
 import { cloneDeep,debounce } from 'lodash'
 const defaultConfig = {
     labelWidth: '120px',
- }
+}
 // 表单字段格式化
 const RenderContent = {
     props: {
@@ -182,7 +222,7 @@ export default {
         },
         // eslint-disable-next-line vue/require-default-prop
         formItems: Array,
-        group: Array,
+
         // eslint-disable-next-line vue/require-default-prop
         data: Object,
         // eslint-disable-next-line vue/require-default-prop
@@ -196,6 +236,11 @@ export default {
             default: ()=>{
                 return{}
             }
+        },
+
+        isFormGroup:{
+            type: Boolean,
+            default:false
         }
     },
     computed: {
@@ -207,41 +252,62 @@ export default {
             }
         },
         computedItems () {
-            const itemResult = []
 
             let alias = {...defaultaAlias,...this.alias}
 
-            for (const item of this.formItems) {
-                // 剩余参数语法允许我们将一个不定数量的参数表示为一个数组。theArgs
-                let { component = 'KemInput', showIf, prop, props, ...theArgs } = item
-                if (typeof showIf === 'function' && !showIf(this.data)) {
-                    continue
-                }
-                if (typeof props === 'function') {
-                    props = props(this.data)
-                }
-                if (component === 'label') {
-                    props = {
-                        ...props,
-                        data: this.data,
-                        prop
+            const initialFormItems = this.initialFormItems
+
+            const isFormGroup = this.isFormGroup
+
+            const createitemFun = (initialFormItems) =>{
+                const itemResult = []
+
+                for (const item of initialFormItems) {
+                    // 剩余参数语法允许我们将一个不定数量的参数表示为一个数组。theArgs
+                    let { component = 'KemInput', showIf, prop, props, ...theArgs } = item
+                    if (typeof showIf === 'function' && !showIf(this.data)) {
+                        continue
                     }
-                }
-                if (alias[component]) {
-                    props = {
-                        ...alias[component].props,
-                        ...props
+                    if (typeof props === 'function') {
+                        props = props(this.data)
                     }
-                    component = alias[component].component
+                    if (component === 'label') {
+                        props = {
+                            ...props,
+                            data: this.data,
+                            prop
+                        }
+                    }
+                    if (alias[component]) {
+                        props = {
+                            ...alias[component].props,
+                            ...props
+                        }
+                        component = alias[component].component
+                    }
+                    itemResult.push({
+                        component,
+                        prop,
+                        props,
+                        ...theArgs
+                    })
                 }
-                itemResult.push({
-                    component,
-                    prop,
-                    props,
-                    ...theArgs
-                })
+
+                return itemResult
             }
-            return itemResult
+
+            if(!isFormGroup){
+                return createitemFun(initialFormItems)
+            }
+            else {
+
+                for (const item of initialFormItems) {
+                    item.formItems = createitemFun(item.formItems )
+                }
+                return initialFormItems
+            }
+
+
         },
         rules () {
             let rules = this.computedItems.reduce((total, item) => {
@@ -261,9 +327,13 @@ export default {
             return JSON.stringify(data)
         },
 
+        initialFormItems(){
+            return this.formItems
+        },
+
         computedFormItems() {
-            const formItems = cloneDeep(this.formItems)
-            return JSON.stringify(formItems)
+            const initialFormItems = cloneDeep(this.initialFormItems)
+            return JSON.stringify(initialFormItems)
         }
     },
 
@@ -278,15 +348,15 @@ export default {
         },
 
         computedFormItems:{
-            handler(newValue,oldValue) {
-                console.log(newValue)
-                console.log(oldValue)
+            handler( ) {
+                //console.log(newValue)
+                // console.log(oldValue)
             },
             deep: false
         },
     },
     created(){
-     },
+    },
     methods: {
         updataFormDataDebounce: debounce(({ vm, newValue, oldValue }) => {
 
@@ -297,8 +367,8 @@ export default {
             return `${item.prop}-${index}`
         },
         validate () {
-             return new Promise(resolve => {
-                 this.$refs.form.validate(resolve)
+            return new Promise(resolve => {
+                this.$refs.form.validate(resolve)
             })
         },
         clearValidate (props) { // 清空校验
@@ -325,6 +395,28 @@ export default {
         line-height: 40px;
         box-sizing: border-box;
         border-bottom: 1px solid #eee;
+    }
+    .timeline__title{
+        text-align: left;
+        font-size: 14px;
+        color: #333333;
+        font-weight: bold;
+        padding: 5px 0;
+        margin-bottom: 5px;
+        padding-top: 12px;
+    }
+    .icon__body{
+        position: absolute;
+        width: 35px;
+        height: 35px;
+        font-size:18px;
+        font-weight: bold;
+        color: #4251eb;
+        line-height: 35px;
+        border-radius: 15px;
+        top:3px;
+        left: -12px;
+        background-color: #dff9f9
     }
 }
 

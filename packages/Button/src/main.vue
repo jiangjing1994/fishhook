@@ -130,6 +130,7 @@ export default {
                     add:{type:'success', text:'新增', icon:"el-icon-plus"},
                     download:{type:'primary', text:'下载', icon:"el-icon-download"},
                     refresh:{type:'success', text:'刷新', icon:"el-icon-refresh"},
+                    detail:{type:'success', text:'详情', icon:"el-icon-refresh"},
                     info:{type:'primary', text:'详情', icon:"el-icon-info"},
                 },
                 icon:{
@@ -138,7 +139,17 @@ export default {
                     add:{type:'success', icon:"el-icon-plus"},
                     download:{type:'primary',icon:"el-icon-download"},
                     refresh:{type:'success',icon:"el-icon-refresh"},
+                    detail:{type:'success',icon:"el-icon-refresh"},
                     info:{type:'primary',icon:"el-icon-info"},
+                },
+                text:{
+                    del:{type:'text', text:'删除', icon:"el-icon-delete"},
+                    edit:{type:'text', text:'编辑', icon:"el-icon-edit"},
+                    add:{type:'text', text:'新增', icon:"el-icon-plus"},
+                    download:{type:'text', text:'下载', icon:"el-icon-download"},
+                    refresh:{type:'text', text:'刷新', icon:"el-icon-refresh"},
+                    detail:{type:'text', text:'详情', icon:"el-icon-refresh"},
+                    info:{type:'text', text:'详情', icon:"el-icon-info"},
                 },
                 custom:this.customButtonConfig ? this.customButtonConfig :{}
             }
