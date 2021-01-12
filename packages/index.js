@@ -20,6 +20,7 @@ import KemDataIcons from './DataIcons'
 import KemInputSlider from './InputSlider'
 import KemFormDialog from './FormDialog'
 import KemTree from './Tree'
+import KemCrudDialog from './CrudDialog'
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import Avue from '@smallwei/avue';
@@ -66,6 +67,7 @@ const install = function(Vue,opts = {}) {
         menuType: opts.menuType || 'text',
 
     };
+
     ElementUI.install(Vue,{
         size: opts.size || 'small'
     })
@@ -73,6 +75,8 @@ const install = function(Vue,opts = {}) {
     {
         size: opts.size || 'small'
     })
+
+    KemCrudDialog.install(Vue)
 };
 
 if (typeof window !== 'undefined' && window.Vue) {

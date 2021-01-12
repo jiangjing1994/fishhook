@@ -9,7 +9,7 @@
           v-bind="$attrs"
           v-on="$listeners"
   >
-    <div v-if="$slots.header" slot="title">
+    <div v-if="$slots.header || $attrs.header" slot="title">
       <div class="dialog__body--header">
         <div class="color--block"></div>
         <slot name="header">{{ $attrs.header }}</slot>
@@ -134,8 +134,10 @@ $--color-primary:'yellow';
     bottom: 15px;
     right: 15px;
     padding-top: 10px;
+      padding-bottom: 15px;
     text-align: right;
     position: absolute;
+
   }
   .lalal-color{
     background-color: $--color-primary;
