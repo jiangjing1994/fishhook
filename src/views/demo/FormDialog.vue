@@ -9,8 +9,7 @@
                 :read-only="readOnly"
                 @save="save"
                 @updataFormData="updataFormData"
-
-        >
+>
             <!--            <template slot="resource">-->
             <!--                <el-radio-group v-model="form.resource">-->
             <!--                    <el-radio label="线上品牌商赞助"></el-radio>-->

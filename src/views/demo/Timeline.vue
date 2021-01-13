@@ -1,6 +1,6 @@
 <template>
   <div>
-    <KemTimeline :activities="activities" :reverse="false" >
+    <KemTimeline :activities="activities" :reverse="false">
       <template slot="b">ddd</template>
     </KemTimeline>
   </div>

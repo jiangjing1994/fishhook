@@ -2,8 +2,8 @@
   <KemTable
     :table-data="data"
     :column="column"
+    :is-show-border="false"
     @rowClick="rowClick"
-    :isShowBorder="false"
     @clickMenuButton="clickMenuButton"
   >
 
