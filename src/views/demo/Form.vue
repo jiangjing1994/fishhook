@@ -49,7 +49,7 @@ export default {
                 ]
             },
             formItems: [
-                {label: '活动名称', prop: 'name', span:24, },
+                {label: '活动名称', prop: 'name', span:24, tip:'sasa'},
                 {label: '电子邮箱', prop: 'email', span:24},
                 {label: '人员总数', prop: 'num', span:24,component: 'KemInputNumber'},
                 {label: '活动区域', prop: 'region', span:24, component: 'KemSelect',props:{

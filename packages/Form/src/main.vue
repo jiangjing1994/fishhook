@@ -22,8 +22,7 @@
                     :span="item.span || 12"
             >
                 <el-form-item
-                        :label="item.label + ':'"
-                        :prop="item.prop"
+                         :prop="item.prop"
                 >
                     <render-content
                             v-if="item.labelRender"
@@ -31,6 +30,15 @@
                             :render="item.labelRender"
                             :data="item"
                     />
+                    <span v-else slot="label">
+                       {{ item.label }}
+                        <el-tooltip effect="light" placement="bottom" v-if="item.tip">
+                            <template slot="content">
+                            {{ item.tip}}
+                            </template>
+                        <i class="el-icon el-icon-info" style="cursor: pointer"></i> :
+                        </el-tooltip>
+                    </span>
                     <slot
                             :name="item.slot"
                             v-bind="{ item }"
@@ -66,7 +74,6 @@
                             :span="item.span || 12"
                     >
                         <el-form-item
-                                :label="item.label + ':'"
                                 :prop="item.prop"
                         >
                             <render-content
@@ -75,6 +82,16 @@
                                     :render="item.labelRender"
                                     :data="item"
                             />
+                            <span v-else slot="label">
+                               {{ item.label }}
+                                <el-tooltip effect="light" placement="bottom" v-if="item.tip">
+                                    <template slot="content">
+                                    {{ item.tip}}
+                                    </template>
+                                <i class="el-icon el-icon-info" style="cursor: pointer"></i> :
+                                </el-tooltip>
+                            </span>
+
                             <slot
                                     :name="item.slot"
                                     v-bind="{ item }"
