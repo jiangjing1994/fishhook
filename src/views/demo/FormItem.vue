@@ -17,6 +17,7 @@
 
         <KemCheckboxGroup
                 v-model="multipleValue"
+                border
                 :options="options"
         ></KemCheckboxGroup>
         <KemColorPicker v-model="color"></KemColorPicker>

@@ -1,6 +1,6 @@
 <template lang="pug">
     el-checkbox-group( v-bind="$attrs" :value='v' v-on="evet"  )
-        el-checkbox(v-for="(item,index) in list " :key="index"  :label="item.value" :disabled="item.disabled") {{item.label}}
+        el-checkbox(v-for="(item,index) in list " :border='border' :key="index"  :label="item.value" :disabled="item.disabled") {{item.label}}
 
 
 
@@ -21,6 +21,10 @@ export default {
         options:{
             type: Array,
             required:true
+        },
+        border:{
+            type: Boolean,
+            default:false
         },
 
     },
