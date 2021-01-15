@@ -1,9 +1,15 @@
 <template>
-  <div class="home">
-    <h2>
-      <a href="https://github.com/hellonainai/kemomimi">v{{ version }}</a>
-    </h2>
-    <img alt="Vue logo" src="../assets/V[CL6C_F)ETTW0K0PJ1LF11.gif" />
+  <div class="home" style="background-color: #ffffff;padding: 40px;padding-top: 0">
+    <h4 style="font-size: 20px;padding: 0;margin: 0;background-color: #f3f3f3;margin-bottom:20px;;box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); ">
+      <h5>版本 v{{ version }}</h5>
+      <h5>
+        <a href="https://github.com/hellonainai/kemomimi">GitHub</a>
+      </h5>
+      <h5>
+        <a href="https://github.com/hellonainai/kemomimi/tree/master/src/views/demo">代码demo</a>
+      </h5>
+    </h4>
+    <img alt="Vue logo" src="../assets/Y3QHT]~954YQ`HF004PQJ6A.jpg" style=";box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);"/>
   </div>
 </template>
 
@@ -20,3 +26,11 @@ export default {
   created() {}
 };
 </script>
+<style>
+.home h5{
+  padding: 5px;
+  display: inline-block;
+  color: #16045f;
+
+}
+</style>
