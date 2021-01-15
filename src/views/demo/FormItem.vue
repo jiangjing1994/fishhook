@@ -2,6 +2,7 @@
     <div>
         <KemSelect v-model="multipleValue" multiple :options="options"></KemSelect>
         <KemSelect v-model="value" :options="options"></KemSelect>
+        <KemSelect v-model="value2" :request="transferRequest" :default-params="{dictType:'transfer'}" :default-props="{label:'transferName',value:'id'}"></KemSelect>
 
         <KemSelect v-model="value" :options="options">
             <template slot-scope="{ scope }">
@@ -33,6 +34,7 @@ export default {
         return {
             multipleValue: [],
             value: "",
+            value2: "",
             b: null,
             color: "#000",
             number: 3,
@@ -63,7 +65,26 @@ export default {
                 }
             ]
         };
-    }
+    },
+    methods: {
+        transferRequest() {
+            return new Promise((resolve)=>{
+
+                setTimeout(()=>{
+                    resolve([
+                        {transferName:'北京', id:'Beijing'},
+                        {transferName:'上海', id:'Shanghai'},
+                        {transferName:'南京', id:'Nanjing'},
+                        {transferName:'成都', id:'Chengdu'},
+                        {transferName:'深圳', id:'Shenzhen'},
+                        {transferName:'广州', id:'Guangzhou'},
+                    ])
+                },500)
+
+            })
+
+        }
+    },
 };
 </script>
 

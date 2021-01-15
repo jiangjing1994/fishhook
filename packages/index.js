@@ -20,6 +20,7 @@ import KemDataIcons from './DataIcons'
 import KemInputSlider from './InputSlider'
 import KemFormDialog from './FormDialog'
 import KemTree from './Tree'
+import KemSteps from './Steps'
 import KemCrudDialog from './CrudDialog'
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
@@ -48,6 +49,7 @@ const components = [
     KemDataIcons,
     KemInputSlider,
     KemTree,
+    KemSteps,
     KemFormDialog,
 
 
@@ -108,5 +110,6 @@ export default {
     KemDataIcons,
     KemInputSlider,
     KemTree,
+    KemSteps,
     KemFormDialog,
 };

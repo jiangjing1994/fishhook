@@ -433,7 +433,8 @@ export default {
         border-radius: 15px;
         top:3px;
         left: -12px;
-        background-color: #dff9f9
+        background-color: #dff9f9;
+        text-align: center;
     }
 }
 

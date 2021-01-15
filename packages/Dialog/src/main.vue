@@ -131,12 +131,8 @@ $--color-primary:'yellow';
   }
   .dialog__body--footer{
     width: 100%;
-    bottom: 15px;
-    right: 15px;
-    padding-top: 10px;
-      padding-bottom: 15px;
     text-align: right;
-    position: absolute;
+    position: relative;
 
   }
   .lalal-color{

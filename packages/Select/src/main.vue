@@ -18,9 +18,10 @@ export default {
                 }
             }
         },
+        // eslint-disable-next-line vue/require-default-prop
         options:{
             type: Array,
-            required:true
+            //required:true
         },
         placeholder: {
             type: String,
@@ -34,12 +35,27 @@ export default {
             type: Boolean,
             default: true
         },
-    },
 
+        // eslint-disable-next-line vue/require-default-prop
+        request:{
+            type:Function,
+        },
+        // eslint-disable-next-line vue/require-default-prop
+        result:{
+            type:Function,
+        },
+
+    },
+    data() {
+        return {
+            data: []
+        }
+    },
     computed:{
         list(){
             const { label, value }= this.defaultProps
-            return this.options.map(item => {
+            let options = this.isService ? this.data : this.options
+            return options.map(item => {
                 return {
                     ...item,
                     label: item[label],
@@ -50,8 +66,52 @@ export default {
         evet(){
             return this.$listeners;
         },
+        isService(){
+            return !!this.request
+        },
     },
 
+    created() {
+        if (this.isService){
+            this.getListData()
+        }
+    },
+
+    methods: {
+        async getListData(params={}){
+
+
+            const defaultParams = this.defaultParams
+
+            const request = this.request
+
+
+            if(request){
+
+                const res = await request({
+                    ...defaultParams,
+                    ...params
+                })
+
+                let data = res
+
+                const  result  = this.result
+
+                if(result){
+
+                    data  = await result(res)
+
+                }
+
+                this.data = data
+
+            }else {
+                throw new Error(`Need request !!!!!!!`)
+            }
+
+        },
+
+    },
 }
 </script>
 
