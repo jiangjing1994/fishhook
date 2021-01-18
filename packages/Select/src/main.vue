@@ -44,7 +44,15 @@ export default {
         result:{
             type:Function,
         },
+        // 默认参数
+        defaultParams: {
+            type: Object,
+            default:()=>{
+                return{
 
+                }
+            }
+        },
     },
     data() {
         return {

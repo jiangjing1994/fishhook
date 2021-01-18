@@ -1,7 +1,7 @@
 <template>
 <div>
-    {{value}}
-    <KemChooseArrayElement :form-items="formItems"  v-model="value"/>
+    {{ value }}
+    <KemChooseArrayElement v-model="value.ss" :form-items="formItems" />
 </div>
 </template>
 
@@ -10,7 +10,9 @@
     name: "ChooseArrayElement",
     data() {
         return {
-            value: [],
+            value: {
+                ss:[]
+            },
             formItems:[
                 {label: '活动名称', prop: 'name', span:24, },
                 {label: '电子邮箱', prop: 'email', span:24},
