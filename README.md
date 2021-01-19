@@ -1,4 +1,4 @@
-# [jiangjing94/mimi](https://hellonainai.github.io/kemomimi/#/)
+# [jiangjing94/mimi](https://hellonainai.github.io/mimi/#/)
 
 ## install
 ```

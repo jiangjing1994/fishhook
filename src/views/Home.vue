@@ -3,13 +3,13 @@
     <h4 style="font-size: 20px;padding: 0;margin: 0;background-color: #f3f3f3;margin-bottom:20px;;box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); ">
       <h5>版本 v{{ version }}</h5>
       <h5>
-        <a href="https://github.com/hellonainai/kemomimi">GitHub</a>
+        <a href="https://github.com/hellonainai/mimi">GitHub</a>
       </h5>
       <h5>
-        <a href="https://github.com/hellonainai/kemomimi/tree/master/src/views/demo">代码demo</a>
+        <a href="https://github.com/hellonainai/mimi/tree/master/src/views/demo">代码demo</a>
       </h5>
       <h5>
-        <a href="https://hellonainai.github.io/kemomimi/#/">预览</a>
+        <a href="https://hellonainai.github.io/mimi/#/">预览</a>
       </h5>
     </h4>
     <img alt="Vue logo" src="../assets/Y3QHT]~954YQ`HF004PQJ6A.jpg" style=";box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);"/>
