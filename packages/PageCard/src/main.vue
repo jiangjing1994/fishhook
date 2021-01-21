@@ -54,6 +54,7 @@ export default {
 <style lang="scss">
 //@import "~@/styles/element-variables.scss";
 .page-card__body{
+  margin-bottom: 20px;
   .content__body{
     // height: calc(100vh - 150px);
     text-align: left;

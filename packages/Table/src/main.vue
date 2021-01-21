@@ -50,19 +50,21 @@
             </template>
 
             <template v-if="!loading" slot="menu" slot-scope="scope">
-                <KemButton v-if="menuPermissionEdit"
-                           :type="`${menuButtonType}.edit`"
-                           @click="clickMenuButton({row:scope.row,type:'edit'})"
-                ></KemButton>
-                <KemButton
-                        v-if="menuPermissionDel"
-                        :type="`${menuButtonType}.del`"
-                        @click="clickMenuButton({row:scope.row,type:'del'})"
-                />
                 <KemButton
                         v-if="menuPermissionDetail"
                         :type="`${menuButtonType}.detail`"
                         @click="clickMenuButton({row:scope.row,type:'detail'})"
+                />
+                <KemButton v-if="menuPermissionEdit"
+                           :type="`${menuButtonType}.edit`"
+                           @click="clickMenuButton({row:scope.row,type:'edit'})"
+                ></KemButton>
+
+
+                <KemButton
+                        v-if="menuPermissionDel"
+                        :type="`${menuButtonType}.del`"
+                        @click="clickMenuButton({row:scope.row,type:'del'})"
                 />
 
                 <slot

@@ -40,7 +40,8 @@ export default {
 
             uiType:'text',
             form: {
-                prop3:'Nanjing'
+                prop3:'Nanjing',
+                prop4:'这是KemInput'
             }
         }
     },
@@ -85,6 +86,11 @@ export default {
                         defaultParams: {
                             dictType: 'transfer'
                         },
+                        uiType
+                    }
+                },
+                {
+                    label: '文字模式2', prop: 'prop4', span: 13, props: {
                         uiType
                     }
                 },

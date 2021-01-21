@@ -1,63 +1,30 @@
 <template>
-    <KemPageCard header="表格">
-         <KemTable
-                :table-data="data"
-                :column="column"
-                :is-show-border="false"
-                @rowClick="rowClick"
-                @clickMenuButton="clickMenuButton"
-        >
-            <template slot="menu">
-                <KemButton>保存</KemButton>
-            </template>
-            <template slot="sex">
-                <KemButton>1111</KemButton>
-            </template>
+    <div>
+        <KemPageCard header="简单的表格">
+            <!--简单表格静态数据纯用于展示-->
+            <SimpaleTable></SimpaleTable>
+            <template slot="footer"></template>
 
-        </KemTable>
-        <template slot="footer"></template>
+        </KemPageCard>
+        <KemPageCard header="稍微复杂一点的表格">
+            <!--稍微复杂一点的表格 数据是异步的-->
+             <BaseTable></BaseTable>
 
-    </KemPageCard>
+        </KemPageCard>
+    </div>
+
 </template>
 
 <script>
- export default {
-  name: "Table",
-     data() {
-    return {
-      menuButton: ["allBtn", "addBtn", "delBtn"],
-      menuOption: {
-        delBtn: true
-      },
-      expand: true,
-      data: [
-        { name: "张三", sex: "男" ,},
-        { name: "李四", sex: "女" },
-        { name: "王五", sex: "不详" }
-      ],
-      column: [
-        {
-          label: "姓名",
-          prop: "name",
-
-
-        },
-        {
-          label: "性别",
-          prop: "sex",
-            slot:true
-        }
-      ]
-    };
-  },
-  methods: {
-    rowClick() {
-      console.log(3232);
+import SimpaleTable from '../table/SimpaleTable'
+import BaseTable from '../table/BaseTable'
+export default {
+    name: "Table",
+    components:{
+        SimpaleTable,
+        BaseTable
     },
-    clickMenuButton(value) {
-      console.log(value);
-    }
-  }
+
 };
 </script>
 
