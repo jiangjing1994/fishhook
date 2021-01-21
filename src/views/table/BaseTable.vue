@@ -16,6 +16,7 @@ export default {
     name: "SimpaleTable",
     data() {
         return {
+            defaultParams:{},
             request:queryList,
             menuButton: ["allBtn", "addBtn", "delBtn"],
             menuOption: {
