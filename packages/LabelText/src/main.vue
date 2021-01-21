@@ -1,5 +1,7 @@
-<template lang="pug">
-    span {{value}}
+<template>
+    <span style="padding-left: 16px;font-size: 0.95em">
+        {{ value }}
+    </span>
 </template>
 <script>
 export default {

@@ -1,8 +1,11 @@
 <template lang="pug">
-    el-select( v-bind="$attrs"  v-on="evet" :placeholder="placeholder" :filterable='filterable' :clearable='clearable' style='width:100%' )
-        el-option(v-for="(item,index) in list " :key="index"  :label="item.label" :disabled="item.disabled" :value="item.value")
-            slot(:scope="item")
 
+    div
+
+        KemLabelText( v-if='uiType ==="text"' :value='label')
+        el-select( v-bind="$attrs"  v-else v-on="evet" :placeholder="placeholder" :filterable='filterable' :clearable='clearable' style='width:100%' )
+            el-option(v-for="(item,index) in list " :key="index"  :label="item.label" :disabled="item.disabled" :value="item.value")
+                slot(:scope="item")
 
 </template>
 <script>
@@ -35,6 +38,11 @@ export default {
             type: Boolean,
             default: true
         },
+        uiType:{
+            // text normal
+            type: String,
+            default: 'normal'
+        },
 
         // eslint-disable-next-line vue/require-default-prop
         request:{
@@ -56,13 +64,15 @@ export default {
     },
     data() {
         return {
-            data: []
+            data: [],
         }
     },
     computed:{
         list(){
             const { label, value }= this.defaultProps
             let options = this.isService ? this.data : this.options
+
+
             return options.map(item => {
                 return {
                     ...item,
@@ -77,6 +87,21 @@ export default {
         isService(){
             return !!this.request
         },
+        label(){
+            const list = this.list
+
+            let filterArr=list.filter( (item) =>{
+                return item.value === this.$attrs.value;
+            });
+
+            if(filterArr instanceof Array && filterArr.length>0){
+                return filterArr[0].label
+            }else {
+                return ''
+            }
+
+
+        }
     },
 
     created() {

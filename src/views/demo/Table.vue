@@ -1,27 +1,29 @@
 <template>
-  <KemTable
-    :table-data="data"
-    :column="column"
-    :is-show-border="false"
-    @rowClick="rowClick"
-    @clickMenuButton="clickMenuButton"
-  >
+    <KemPageCard header="表格">
+         <KemTable
+                :table-data="data"
+                :column="column"
+                :is-show-border="false"
+                @rowClick="rowClick"
+                @clickMenuButton="clickMenuButton"
+        >
+            <template slot="menu">
+                <KemButton>保存</KemButton>
+            </template>
+            <template slot="sex">
+                <KemButton>1111</KemButton>
+            </template>
 
+        </KemTable>
+        <template slot="footer"></template>
 
-     <template slot="menu">
-      <KemButton>保存</KemButton>
-    </template>
-     <template slot="sex">
-      <KemButton>1111</KemButton>
-    </template>
-
-  </KemTable>
+    </KemPageCard>
 </template>
 
 <script>
-export default {
+ export default {
   name: "Table",
-  data() {
+     data() {
     return {
       menuButton: ["allBtn", "addBtn", "delBtn"],
       menuOption: {
