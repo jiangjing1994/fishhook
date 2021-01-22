@@ -1,5 +1,5 @@
 <template>
-  <div id="app" >
+  <div id="app">
     <div id="nav" style="background-color: #d9ecff;margin-bottom: 25px;border-radius: 10px;box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); ">
       <router-link to="/">
         Home

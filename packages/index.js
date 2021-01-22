@@ -21,6 +21,7 @@ import KemInputSlider from './InputSlider'
 import KemFormDialog from './FormDialog'
 import KemTree from './Tree'
 import KemSteps from './Steps'
+import KemCrud from './Crud'
 import KemChooseArrayElement from './ChooseArrayElement'
 import KemCrudDialog from './CrudDialog'
 import ElementUI from "element-ui";
@@ -53,6 +54,7 @@ const components = [
     KemSteps,
     KemChooseArrayElement,
     KemFormDialog,
+    KemCrud,
 
 
 ];
@@ -115,4 +117,5 @@ export default {
     KemSteps,
     KemChooseArrayElement,
     KemFormDialog,
+    KemCrud,
 };

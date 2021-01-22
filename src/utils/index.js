@@ -129,3 +129,29 @@ export const queryList = () => {
 
     })
 }
+export const saveForm = (data) => {
+    return new Promise((resolve)=>{
+        setTimeout(()=>{
+
+            resolve({
+                data,
+                msg: "保存成功",
+
+            })
+        },500)
+
+    })
+}
+export const deleteForm = (data) => {
+    return new Promise((resolve)=>{
+        setTimeout(()=>{
+
+            resolve({
+                data,
+                msg: "删除成功",
+
+            })
+        },500)
+
+    })
+}

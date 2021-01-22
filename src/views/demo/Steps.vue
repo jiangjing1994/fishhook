@@ -1,6 +1,6 @@
-<template >
+<template>
     <div style="text-align: left">
-        <KemSteps :titleList="titleList" :active="active"></KemSteps>
+        <KemSteps :title-list="titleList" :active="active"></KemSteps>
     </div>
 </template>
 

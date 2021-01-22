@@ -12,7 +12,7 @@
         <a href="https://hellonainai.github.io/mimi/#/">预览</a>
       </h5>
     </h4>
-    <img alt="Vue logo" src="../assets/Y3QHT]~954YQ`HF004PQJ6A.jpg" style=";box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);"/>
+    <img alt="Vue logo" src="../assets/Y3QHT]~954YQ`HF004PQJ6A.jpg" style=";box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);" />
   </div>
 </template>
 
