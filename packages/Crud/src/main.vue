@@ -1,9 +1,9 @@
 <template>
-    <!--ScenceInfo 场景信息-->
-    <KemDialog v-if="visible" :visible.sync="visible" @save="save"  >
+     <KemDialog v-if="visible" :visible.sync="visible" @save="save"  >
         <template slot="header">
             {{ headerDialog }}
         </template>
+         {{form}}
         <KemForm
                 ref="form"
                 :form-config="formConfig"
@@ -14,6 +14,14 @@
                 :alias="alias"
                 :is-form-group="isFormGroup"
         >
+            <template
+                    v-for="(item) in formItems"
+
+                    :slot="item.prop"
+                     slot-scope="scope"
+            >
+                <slot v-if="item.slot" :name="item.slot"  :scope="scope"></slot>
+            </template>
         </KemForm>
     </KemDialog>
 
@@ -26,7 +34,7 @@
 export default {
     name: "KemCrud",
     // eslint-disable-next-line vue/require-prop-types
-    props:['formConfig', 'formItems', 'formRules',  'alias', 'isFormGroup',],
+    props:['formConfig', 'formItems', 'formRules',  'alias', 'isFormGroup','args'],
     data() {
         return {
             headerDialog:'',
@@ -77,6 +85,19 @@ export default {
     },
     computed: {
 
+    },
+    watch: {
+        // args 单项数据流是对 form 的补充
+        args: {
+            handler (value) {
+                console.log(value)
+                this.form={
+                    ...this.form,
+                    ...value,
+                }
+            },
+            deep:true
+         }
     },
     methods: {
 

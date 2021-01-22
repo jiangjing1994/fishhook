@@ -10,7 +10,12 @@
                 @clickMenuButton="clickMenuButton"
 
         />
-        <KemCrud ref="kemcrud" :form-items="formItems" :form-rules="formRules"></KemCrud>
+        <KemCrud ref="kemcrud" :args="args" :form-items="formItems" :form-rules="formRules">
+            <template slot="color">
+                <KemColorPicker style="position: absolute" size="mini" v-model="args.color"></KemColorPicker>
+
+            </template>
+        </KemCrud>
 
 
 
@@ -25,6 +30,7 @@ export default {
     data() {
         return {
             defaultParams:{},
+            args:{},
             request:queryList,
             menuButton: ["allBtn", "addBtn", "delBtn"],
             menuOption: {
@@ -51,6 +57,7 @@ export default {
             return [
                 {label: "业务需求编号", prop: "code",},
                 {label: "需求主题", prop: "title"},
+                {label: "选择颜色", prop: "color",slot:'color'},
                 {label: "需求类型", prop: "type"},
                 {label: "需求提交人", prop: "createUser"},
                 {label: "正式需求编号", prop: "formalCode"}
@@ -63,6 +70,7 @@ export default {
                 type: [{ required: true, message: '请输入需求类型',  },],
                 createUser: [{ required: true, message: '请输入需求提交人',  },],
                 formalCode: [{ required: true, message: '请输入正式需求编号',  },],
+                color: [{ required: true, message: '请选择颜色',  },],
             }
         }
     },

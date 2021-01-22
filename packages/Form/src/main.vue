@@ -20,6 +20,7 @@
                     :md="item.md"
                     :sm="item.sm"
                     :span="item.span || 12"
+
             >
                 <el-form-item
                          :prop="item.prop"
@@ -72,7 +73,7 @@
                             :md="item.md"
                             :sm="item.sm"
                             :span="item.span || 12"
-                    >
+                     >
                         <el-form-item
                                 :prop="item.prop"
                         >
