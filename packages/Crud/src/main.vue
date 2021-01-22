@@ -3,13 +3,12 @@
         <template slot="header">
             {{ headerDialog }}
         </template>
-         {{form}}
-        <KemForm
+         <KemForm
                 ref="form"
                 :form-config="formConfig"
                 :form-items="formItems"
                 :data="form"
-                :form-rules="formRules"
+                :form-rules="formRuleComputeds"
                 :read-only="readOnly"
                 :alias="alias"
                 :is-form-group="isFormGroup"
@@ -84,8 +83,17 @@ export default {
         }
     },
     computed: {
+        formRuleComputeds() {
+            if(this.currtenType === 'add' || this.currtenType === 'edit'){
+                return this.formRules;
+            }else {
+                return []
 
+            }
+
+        }
     },
+
     watch: {
         // args 单项数据流是对 form 的补充
         args: {
