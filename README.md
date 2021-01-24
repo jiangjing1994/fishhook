@@ -50,3 +50,33 @@ Vue.use(KemUI)
 - 仅以例子中的几个项目来说，维护点就在 6 个，工作量×6
 - 如果 收敛到一个统一的库 中，则维护点变为 2 个，仅需区分基础版本库的差别
 - 而大部分较简单的组件，基础组件库的版本不同并不会造成差异的，或是根本没有引用 element-ui 组件库的简单组件，则维护点直接能缩减到 1 个
+
+### 开发计划
+功能模块 | 当前状态/后续计划  |文档状态| 备注
+----|----|----|----
+    KemButton|已完成|无|----
+    KemSvgIcon|已完成|无|----
+    KemForm|1.表单mark属性<br/><br/>2.表单提示tip文字提示功能|无|表单元素需要封装一下子
+    KemDialog|已完成|无|----
+    KemTable|功能比较少|无|----
+    KemLabelText|已完成|无|----
+    KemPageCard|已完成|无|----
+    KemSelect|已完成|无|----
+    KemInput|已完成|无|----
+    KemInputNumber|已完成|无|----
+    KemCheckboxGroup|已完成|无|----
+    KemRadioboxGroup|已完成|无|----
+    KemColorPicker|已完成|无|----
+    KemDataView|已完成|无|----
+    KemInputColor|已完成|无|----
+    KemTimeline|已完成|无|----
+    KemSwitch|已完成|无|----
+    KemCountUp|已完成|无|----
+    KemDataIcons|需要重构|----|----
+    KemInputSlider|已完成|无|----
+    KemTree|已完成|无|----
+    KemSteps|需要重构|----|----
+    KemChooseArrayElement|已完成|无|----
+    KemFormDialog|暂时废弃|----|----
+    KemCrud|已完成|无|----
+    KemSearch|已完成|无|----
