@@ -157,6 +157,7 @@ export default {
             // eslint-disable-next-line no-unused-vars
             const   {type,form,request,done} = value
 
+            this.readOnly = false
 
             if(!type){
                 throw new Error(`Need type !!!!!!! `)
