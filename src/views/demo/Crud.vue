@@ -10,6 +10,7 @@
                 @clickMenuButton="clickMenuButton"
 
         />
+        <!--args 存在缺陷不推荐使用-->
         <KemCrud ref="kemcrud" :args="args" :form-items="formItems" :form-rules="formRules">
             <template slot="color">
                 <KemColorPicker style="position: absolute" size="mini" v-model="args.color"></KemColorPicker>

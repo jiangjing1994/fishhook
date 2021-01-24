@@ -1,5 +1,32 @@
 <template>
     <div class="kem-table__body">
+        <div v-if="headerPermission" v-loading="loading" class="header_body">
+            <div v-if="headerTopPermission" class="header__body-top">
+                <slot name="menuTop"></slot>
+
+            </div>
+            <div v-if="headerCenterPermission" class="header__body-center">
+                <div class="header__body-left">
+                    <slot name="menuLeft"></slot>
+                </div>
+                <div class="header__body-right">
+                    <slot name="menuRight"></slot>
+                    <KemButton v-if="menuPermissionAdd" @click="clickMenuButton({type:'add'})">新增</KemButton>
+                </div>
+            </div>
+            <div v-if="headerBottomPermission"  class="header__body-bottom">
+                <div v-if="headerSearchPermission" >
+                    <!--表格默认的搜索组件 -->
+                    <KemSearch v-model="searchForm" v-bind="searchProps"/>
+                </div>
+                <div>
+                    <slot name="menuBottom"></slot>
+                </div>
+            </div>
+
+        </div>
+
+
         <avue-crud
                 ref="crud"
                 v-model="obj"
@@ -30,17 +57,16 @@
                         :scope="scope"
                         :column="item"
                 ></render-content>
-                <slot :name="item.prop"  :scope="scope"></slot>
+                <slot :name="item.prop" v-if="searchProps" :scope="scope"></slot>
             </template>
 
-            <template slot="menuLeft">
-                <slot name="menuLeft"></slot>
-            </template>
-
-            <template slot="menuRight">
-                <slot name="menuRight"></slot>
-                <KemButton v-if="menuPermissionAdd" @click="clickMenuButton({type:'add'})">新增</KemButton>
-            </template>
+            <!-- <template slot="menuLeft">
+                 <slot name="menuLeft"></slot>
+             </template>
+             <template slot="menuRight">
+                 <slot name="menuRight"></slot>
+                 <KemButton v-if="menuPermissionAdd" @click="clickMenuButton({type:'add'})">新增</KemButton>
+             </template>-->
 
             <template v-if="!loading" slot="expand" slot-scope="scope">
                 <slot
@@ -283,12 +309,19 @@ export default {
             default:'text'
 
         },
-
+        /**
+         * 搜索框的传值
+         */
+        searchProps: {
+            type: [Object,Boolean],
+            default:false
+        },
 
     },
 
     data() {
         return {
+            searchForm:{},
             crudData:[],
             // 分页器
             page: {
@@ -343,6 +376,14 @@ export default {
                 column:this.column
             }
         },
+        queryParams(){
+
+
+            return{
+                ...this.defaultParams,
+                ...this.searchForm,
+            }
+        },
 
 
         menuPermissionDetail() {
@@ -360,6 +401,26 @@ export default {
         menuPermissionEdit() {
             return  this.menuPermission(['editBtn','allBtn'])
         },
+
+
+        headerTopPermission() {
+            return  !!(this.$scopedSlots.menuTop)
+        },
+        headerCenterPermission() {
+            return  !!(this.$scopedSlots.menuLeft || this.$scopedSlots.menuRight|| this.menuPermissionAdd)
+        },
+
+        headerBottomPermission() {
+            return  !!(this.$scopedSlots.menuBottom || this.headerSearchPermission)
+        },
+
+        headerSearchPermission() {
+            return  !!this.searchProps
+        },
+
+        headerPermission() {
+            return  !!( this.headerTopPermission ||this.headerCenterPermission ||this.headerBottomPermission || this.menuPermissionAdd )
+        },
     },
 
 
@@ -372,6 +433,13 @@ export default {
             deep: true
         },
         defaultParams: {
+            handler() {
+
+                this.refreshDefaultParams()
+            },
+            deep: true
+        },
+        queryParams: {
             handler() {
 
                 this.refreshDefaultParams()
@@ -413,7 +481,8 @@ export default {
         async getListData(params={}){
 
 
-            const defaultParams = this.defaultParams
+            const queryParams = this.queryParams
+
 
             const { currentPage , pageSize } = this.page
 
@@ -430,7 +499,7 @@ export default {
                     [this.defaultProps['pageSize']] :pageSize,
                     [this.defaultProps['order']] :order,
                     [this.defaultProps['prop']] :prop,
-                    ...defaultParams,
+                    ...queryParams,
                     ...params
                 })
 
@@ -597,6 +666,7 @@ export default {
 .kem-table__body{
     overflow: auto;
     .avue-crud{
+        .avue-crud__menu{display: none}
         .el-table{
             border: 1px solid #d9ecff !important;
             border-bottom: 0px solid #d9ecff !important;
@@ -646,6 +716,32 @@ export default {
                 margin: 3px 0;
             }
 
+
+        }
+    }
+    .header_body{
+        padding: 0 1%;
+        margin-bottom: 15px;
+        .header__body-top{
+            margin-bottom: 15px;
+
+        }
+        .header__body-center{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+
+            .header__body-left{
+                width: 49%;
+                text-align: left;
+            }
+            .header__body-right{
+                width: 49%;
+                text-align: right;
+            }
+        }
+        .header__body-bottom{
 
         }
     }

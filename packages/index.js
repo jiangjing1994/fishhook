@@ -23,6 +23,7 @@ import KemTree from './Tree'
 import KemSteps from './Steps'
 import KemCrud from './Crud'
 import KemChooseArrayElement from './ChooseArrayElement'
+import KemSearch from './Search'
 import KemCrudDialog from './CrudDialog'
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
@@ -55,6 +56,7 @@ const components = [
     KemChooseArrayElement,
     KemFormDialog,
     KemCrud,
+    KemSearch,
 
 
 ];
@@ -118,4 +120,5 @@ export default {
     KemChooseArrayElement,
     KemFormDialog,
     KemCrud,
+    KemSearch,
 };
