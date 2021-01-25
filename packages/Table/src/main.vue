@@ -57,7 +57,7 @@
                         :scope="scope"
                         :column="item"
                 ></render-content>
-                <slot :name="item.prop" v-if="searchProps" :scope="scope"></slot>
+                <slot :name="item.prop"  :scope="scope"></slot>
             </template>
 
             <!-- <template slot="menuLeft">
@@ -259,6 +259,8 @@ export default {
             type:Boolean,
             default:true
         },
+
+
         /**
          * 默认参数
          */
@@ -309,10 +311,27 @@ export default {
             default:'text'
 
         },
+
+        /**
+         * rowkey
+         */
+        rowkey:{
+            type:String,
+            default:'$index'
+
+        },
         /**
          * 搜索框的传值
          */
         searchProps: {
+            type: [Object,Boolean],
+            default:false
+        },
+
+        /**
+         * 树的传值
+         */
+        treeProps: {
             type: [Object,Boolean],
             default:false
         },
@@ -357,9 +376,10 @@ export default {
                 border:this.isShowBorder,
                 stripe:this.isShowStripe,
                 menuWidth:this.menuWidth,
-                rowKey:'$index',
+                rowKey:this.rowKey,
                 expandRowKeys:this.expandRowKeys,
                 expand: this.expand,
+
             }
 
             if (this.isShowPage){
@@ -402,10 +422,10 @@ export default {
             return  this.menuPermission(['editBtn','allBtn'])
         },
 
-
         headerTopPermission() {
             return  !!(this.$scopedSlots.menuTop)
         },
+
         headerCenterPermission() {
             return  !!(this.$scopedSlots.menuLeft || this.$scopedSlots.menuRight|| this.menuPermissionAdd)
         },
@@ -421,6 +441,8 @@ export default {
         headerPermission() {
             return  !!( this.headerTopPermission ||this.headerCenterPermission ||this.headerBottomPermission || this.menuPermissionAdd )
         },
+
+
     },
 
 
@@ -493,33 +515,57 @@ export default {
             if(request){
 
                 this.loading = true
+                try {
+                    const res = await request({
+                        [this.defaultProps['currentPage']] :currentPage,
+                        [this.defaultProps['pageSize']] :pageSize,
+                        [this.defaultProps['order']] :order,
+                        [this.defaultProps['prop']] :prop,
+                        ...queryParams,
+                        ...params
+                    })
 
-                const res = await request({
-                    [this.defaultProps['currentPage']] :currentPage,
-                    [this.defaultProps['pageSize']] :pageSize,
-                    [this.defaultProps['order']] :order,
-                    [this.defaultProps['prop']] :prop,
-                    ...queryParams,
-                    ...params
-                })
+                    let data = res
 
-                let data = res
+                    const  result  = this.result
 
-                const  result  = this.result
+                    if(result){
 
-                if(result){
+                        data  = await result(res)
 
-                    data  = await result(res)
+                    }
+
+                    this.loading=false
+
+                    this.page.total =  res[this.defaultProps['total']]
+
+                    this.crudData = data
+                } catch (error) {
+
+                    this.loading=false
+                    throw new Error(error)
 
                 }
 
-                this.loading=false
-
-                this.page.total =  res[this.defaultProps['total']]
-
-                this.crudData = data
             }else {
-                this.crudData = this.tableData
+                if (this.treeProps) {
+                    const loop = this.treeProps || false
+
+                    if(loop){
+
+                        this.crudData = this.getTree(this.tableData,'')
+
+
+
+                    }else {
+                        this.crudData = this.tableData
+
+                    }
+                }else {
+                    this.crudData = this.tableData
+                }
+
+
             }
 
         },
@@ -576,6 +622,8 @@ export default {
          * 列展开手风琴
          */
         expandChanges(row, expendList) {
+            if (this.treeProps) return
+
             if (expendList.length) {
                 this.expandRowKeys = []
                 if (row) {
@@ -585,6 +633,28 @@ export default {
                 this.expandRowKeys = []
             }
             this.$emit('expandChanges',{row, expendList})
+        },
+
+
+        /**
+         * 递归拼装树参数
+         */
+        getTree(treeData,pid,){
+
+            if(!this.treeProps['pid']) this.treeProps['pid'] = 'pid'
+            if(!this.treeProps['id']) this.treeProps['id'] = 'id'
+            let treeArr=[];
+            for(let i=0;i<treeData.length;i++){
+                let node=treeData[i];
+                if(node[this.treeProps['pid']] === pid ){
+                    let newNode={
+                        ...node,
+                        children:this.getTree(treeData,node[this.treeProps['id']])
+                    };
+                    treeArr.push(newNode);
+                }
+            }
+            return treeArr;
         },
 
         // 表格增加一行
