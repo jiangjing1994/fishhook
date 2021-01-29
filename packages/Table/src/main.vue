@@ -42,6 +42,7 @@
                 @row-update="rowUpdate"
                 @row-click="rowClick"
                 @cell-click="cellClick"
+                @tree-load="treeLoad"
                 @expand-change="expandChanges"
         >
 
@@ -297,6 +298,12 @@ export default {
         result:{
             type:Function,
         },
+        treeLoad:{
+            type:Function,
+            default:()=>{
+                return{}
+            }
+        },
 
         // eslint-disable-next-line vue/require-default-prop
         tableHeight:{
@@ -315,7 +322,7 @@ export default {
         /**
          * rowkey
          */
-        rowkey:{
+        rowKey:{
             type:String,
             default:'$index'
 
@@ -358,6 +365,8 @@ export default {
 
     computed: {
         computedOption(){
+
+            const lazy = this.treeProps.lazy || false
             let option = {
                 indexLabel:'序号',
 
@@ -379,6 +388,7 @@ export default {
                 rowKey:this.rowKey,
                 expandRowKeys:this.expandRowKeys,
                 expand: this.expand,
+                lazy: lazy,
 
             }
 
@@ -500,6 +510,8 @@ export default {
 
         },500),
 
+
+
         async getListData(params={}){
 
 
@@ -511,6 +523,8 @@ export default {
             const { order , prop } = this.sort
 
             const request = this.request
+
+
 
             if(request){
 
@@ -543,11 +557,13 @@ export default {
                 } catch (error) {
 
                     this.loading=false
+
                     throw new Error(error)
 
                 }
 
-            }else {
+            }
+            else {
                 if (this.treeProps) {
                     const loop = this.treeProps || false
 
@@ -561,7 +577,8 @@ export default {
                         this.crudData = this.tableData
 
                     }
-                }else {
+                }
+                else {
                     this.crudData = this.tableData
                 }
 
