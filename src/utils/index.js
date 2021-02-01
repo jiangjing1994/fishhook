@@ -120,6 +120,7 @@ export const queryTreeRoot = () => {
         setTimeout(()=>{
              resolve({
                  "msg": "success",
+
                  "obj": [{
                      "organize_id": 2,
                      "organize_name": "中国移动通信集团湖南有限公司",

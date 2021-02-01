@@ -514,76 +514,81 @@ export default {
 
         async getListData(params={}){
 
-
-            const queryParams = this.queryParams
-
-
-            const { currentPage , pageSize } = this.page
-
-            const { order , prop } = this.sort
-
-            const request = this.request
+            try {
+                const queryParams = this.queryParams
 
 
+                const { currentPage , pageSize } = this.page
 
-            if(request){
+                const { order , prop } = this.sort
 
-                this.loading = true
-                try {
-                    const res = await request({
-                        [this.defaultProps['currentPage']] :currentPage,
-                        [this.defaultProps['pageSize']] :pageSize,
-                        [this.defaultProps['order']] :order,
-                        [this.defaultProps['prop']] :prop,
-                        ...queryParams,
-                        ...params
-                    })
-
-                    let data = res
-
-                    const  result  = this.result
-
-                    if(result){
-
-                        data  = await result(res)
-
-                    }
-
-                    this.loading=false
-
-                    this.page.total =  res[this.defaultProps['total']]
-
-                    this.crudData = data
-                } catch (error) {
-
-                    this.loading=false
-
-                    throw new Error(error)
-
-                }
-
-            }
-            else {
-                if (this.treeProps) {
-                    const loop = this.treeProps || false
-
-                    if(loop){
-
-                        this.crudData = this.getTree(this.tableData,'')
+                const request = this.request
 
 
 
-                    }else {
-                        this.crudData = this.tableData
+                if(request){
+
+                    this.loading = true
+                    try {
+                        const res = await request({
+                            [this.defaultProps['currentPage']] :currentPage,
+                            [this.defaultProps['pageSize']] :pageSize,
+                            [this.defaultProps['order']] :order,
+                            [this.defaultProps['prop']] :prop,
+                            ...queryParams,
+                            ...params
+                        })
+
+                        let data = res
+
+                        const  result  = this.result
+
+                        if(result){
+
+                            data  = await result(res)
+
+                        }
+
+                        this.loading=false
+
+                        this.page.total =  res[this.defaultProps['total']]
+
+                        this.crudData = data
+                    } catch (error) {
+
+                        this.loading=false
+
+                        throw new Error(error)
 
                     }
+
                 }
                 else {
-                    this.crudData = this.tableData
+                    if (this.treeProps) {
+                        const loop = this.treeProps || false
+
+                        if(loop){
+
+                            this.crudData = this.getTree(this.tableData,'')
+
+
+
+                        }else {
+                            this.crudData = this.tableData
+
+                        }
+                    }
+                    else {
+                        this.crudData = this.tableData
+                    }
+
+
                 }
-
-
+            }catch {
+                this.crudData = []
             }
+
+
 
         },
         /**
