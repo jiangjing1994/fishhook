@@ -9,9 +9,16 @@ yarn add @jiangjing94/mimi
 ### start
 ``` 
 // main.js
-import KemUI from '@jiangjing94/mimi'
+__
+import MimiUI from '@jiangjing94/mimi'
 import '@jiangjing94/mimi/lib/mimiui.css'
-Vue.use(KemUI)
+import ElementUI from "element-ui";
+import "element-ui/lib/theme-chalk/index.css";
+import Avue from '@smallwei/avue';
+
+Vue.use(MimiUI,{ size: 'mini', zIndex: 3000 })
+Vue.use(ElementUI)
+Vue.use(Avue)
 
 ```
 

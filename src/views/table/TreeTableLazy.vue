@@ -7,7 +7,7 @@
                 :menu-width="250"
                 row-key="organize_id"
                 :tree-props="treeProps"
-                :treeLoad="treeLoad"
+                :tree-load="treeLoad"
          >
 
         </KemTable>
@@ -54,7 +54,7 @@ export default {
         },
         treeLoad(tree, treeNode, resolve){
             queryTreeElement().then(res=>{
-                 resolve( this.result(res))
+                 resolve(this.result(res))
             })
 
         },

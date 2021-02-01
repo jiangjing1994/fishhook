@@ -1,6 +1,6 @@
 <template>
     <div>
-        <KemTree :request="request" is-show-menu @clickMenus="clickMenus" @nodeClick="nodeClick"></KemTree>
+        <KemTree :request="request"  :lazy="true" is-show-menu @clickMenus="clickMenus" @nodeClick="nodeClick"></KemTree>
     </div>
 </template>
 
@@ -29,11 +29,13 @@ export default {
                 }, {
                     label: '二级 2-2',
                     children: [{
-                        label: '三级 2-2-1'
+                        label: '三级 2-2-1',
+                        leaf: true
                     }]
                 }]
             }, {
                 label: '一级 3',
+                leaf: true
 
             }],
         }

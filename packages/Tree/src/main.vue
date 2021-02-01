@@ -20,6 +20,7 @@
                 :lazy="lazy"
                 :load="loadNode"
                 @node-click="nodeClick"
+
                 v-on="evet"
         />
     </div>
@@ -80,7 +81,9 @@ export default {
                 return{
                     children: 'children',
                     label: 'label',
-                    id:'id'
+                    id:'id',
+                    isLeaf: 'isLeaf'
+
                 }
             }
         },
@@ -182,7 +185,7 @@ export default {
 
         async loadNode(node, resolve){
 
-            this.loadData({},resolve);
+            this.loadData(node,resolve);
 
         },
 
