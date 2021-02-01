@@ -138,15 +138,17 @@ export default {
             })
 
         },
-        async del(){
+        async del(form){
             const currtenDone = this.currtenDone
             const currtenRequest = this.currtenRequest
-
-            if(!currtenDone && typeof currtenDone !== 'function'){
+            if(!form){
+                throw new Error(`Need form !!!!!!! `)
+            }
+             if(!currtenDone && typeof currtenDone !== 'function'){
                 throw new Error(`Need !currtenDone && typeof currtenDone !== 'function' !!!!!!! `)
             }
 
-            const res = await currtenRequest(this.form)
+            const res = await currtenRequest(form)
 
             if (currtenDone) currtenDone(res)
 
@@ -178,7 +180,8 @@ export default {
                 })
             }
             else if (type === 'del'){
-                this.del()
+
+                this.del(form)
             }
 
 
