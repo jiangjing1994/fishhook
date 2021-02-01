@@ -61,13 +61,13 @@ Vue.use(Avue)
 ### 开发计划
 功能模块 | 当前状态/后续计划  |文档状态| 备注
 ----|----|----|----
-    KemButton|已完成|无|----
-    KemSvgIcon|已完成|无|----
-    KemForm|1.表单mark属性<br/><br/>2.表单提示tip文字提示功能|无|表单元素需要封装一下子
-    KemDialog|已完成|无|----
-    KemTable|功能比较少|无|----
-    KemLabelText|已完成|无|----
-    KemPageCard|已完成|无|----
+KemButton|已完成|无|----
+KemSvgIcon|已完成|无|----
+KemForm|1.表单mark属性<br/><br/>2.表单提示tip文字提示功能|无|表单元素需要封装一下子
+KemDialog|已完成|无|----
+KemTable|功能比较少|无|----
+KemLabelText|已完成|无|----
+KemPageCard|已完成|无|----
     KemSelect|已完成|无|----
     KemInput|已完成|无|----
     KemInputNumber|已完成|无|----
