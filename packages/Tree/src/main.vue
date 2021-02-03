@@ -211,8 +211,7 @@ export default {
 
                 if(result){
 
-                    data  = await result(res)
-
+                    data  = await result(res) || []
                 }
 
                 this.loading=false

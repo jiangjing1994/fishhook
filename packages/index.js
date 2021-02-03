@@ -24,6 +24,7 @@ import KemSteps from './Steps'
 import KemCrud from './Crud'
 import KemChooseArrayElement from './ChooseArrayElement'
 import KemSearch from './Search'
+import KemInputPassWord from './InputPassWord'
 import KemCrudDialog from './CrudDialog'
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
@@ -57,6 +58,7 @@ const components = [
     KemFormDialog,
     KemCrud,
     KemSearch,
+    KemInputPassWord,
 
 
 ];
@@ -121,4 +123,5 @@ export default {
     KemFormDialog,
     KemCrud,
     KemSearch,
+    KemInputPassWord,
 };
