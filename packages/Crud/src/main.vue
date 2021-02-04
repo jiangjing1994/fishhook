@@ -40,6 +40,7 @@ export default {
             currtenType:'当前操作类型',
             currtenDone:null,
             currtenRequest:null,
+            defaultParams:null,
             visible:false,
             readOnly:false,
             form: {},
@@ -87,7 +88,7 @@ export default {
             if(this.currtenType === 'add' || this.currtenType === 'edit'){
                 return this.formRules;
             }else {
-                return []
+                return {}
 
             }
 
@@ -126,7 +127,10 @@ export default {
             this.$refs['form'].validate().then(async valid => {
                 if (valid) {
 
-                    const res = await currtenRequest(this.form)
+                    const res = await currtenRequest({
+                        ...this.form,
+                        ...this.defaultParams
+                    })
 
                     if (currtenDone) currtenDone(res)
                     this.visible = false
@@ -148,7 +152,10 @@ export default {
                 throw new Error(`Need !currtenDone && typeof currtenDone !== 'function' !!!!!!! `)
             }
 
-            const res = await currtenRequest(form)
+            const res = await currtenRequest({
+                ...form,
+                ...this.defaultParams
+            })
 
             if (currtenDone) currtenDone(res)
 
@@ -157,7 +164,7 @@ export default {
         },
         start(value) {
             // eslint-disable-next-line no-unused-vars
-            const   {type,form,request,done} = value
+            const   {type,form,request,done,defaultParams} = value
 
             this.readOnly = false
 
@@ -170,6 +177,7 @@ export default {
             this.currtenType = type
             this.currtenDone = done
             this.currtenRequest = request
+            this.defaultParams = defaultParams || {}
 
             if(type === 'add' || type === 'edit' || type === 'detail'){
                 this.form = {}

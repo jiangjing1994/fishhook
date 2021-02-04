@@ -789,6 +789,7 @@ export const queryList = () => {
     })
 }
 export const saveForm = (data) => {
+
     return new Promise((resolve)=>{
         setTimeout(()=>{
 
@@ -802,6 +803,7 @@ export const saveForm = (data) => {
     })
 }
 export const deleteForm = (data) => {
+
     return new Promise((resolve)=>{
         setTimeout(()=>{
 

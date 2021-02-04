@@ -94,6 +94,9 @@ export default {
             }
             this.$refs['kemcrud'].start({
                 ...value,
+                defaultParams:{
+                 aaa:123
+                },
                 form:value.row,
                 request,
                 done
