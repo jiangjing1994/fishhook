@@ -2,13 +2,11 @@
     <div>
         <KemTable
                 :column="column"
-                :request="request"
-                :result="result"
                 :menu-width="250"
-                row-key="organize_id"
+                row-key="tagId"
+                :table-data="tableData"
                 :tree-props="treeProps"
-                :tree-load="treeLoad"
-         >
+        >
 
         </KemTable>
     </div>
@@ -19,7 +17,7 @@
 import {queryTreeElement, queryTreeRoot} from '@/utils/index'
 
 export default {
-    name: "TreeTableLazy",
+    name: "TreeTableLoopFalse",
     data() {
         return {
             request:queryTreeRoot,
@@ -30,6 +28,7 @@ export default {
                     name: "CRM-个人组",
                     desc: "11",
                     tagCode: "111",
+
                     children: [
                         {
                             tagId: 2,
@@ -57,16 +56,13 @@ export default {
             ],
 
             treeProps:{
-                lazy:true,
+                loop:false
             },
 
-            column:[
-                {label: "组织名称", prop: "organize_name"},
-                {label: "父节点ID", prop: "parentId",},
-                {label: "组织编码", prop: "code"},
-                {label: "组织类型", prop: "org_type"},
-                {label: "备注", prop: "notes",},
-                {label: "状态", prop: "state"}
+            column: [
+                {label: "功能菜单名称", prop: "name",width:350},
+                {label: "描述", prop: "desc",},
+                {label: "编码", prop: "tagCode"},
 
             ]
         }
@@ -86,7 +82,7 @@ export default {
         },
         treeLoad(tree, treeNode, resolve){
             queryTreeElement().then(res=>{
-                 resolve(this.result(res))
+                resolve(this.result(res))
             })
 
         },

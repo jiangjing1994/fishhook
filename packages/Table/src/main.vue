@@ -564,8 +564,9 @@ export default {
 
                 }
                 else {
+
                     if (this.treeProps) {
-                        const loop = this.treeProps || false
+                        const {loop} = this.treeProps || false
 
                         if(loop){
 
@@ -574,12 +575,15 @@ export default {
 
 
                         }else {
-                            this.crudData = this.tableData
+                             this.crudData = this.tableData
 
                         }
                     }
                     else {
                         this.crudData = this.tableData
+
+                        console.log(this.crudData)
+
                     }
 
 
