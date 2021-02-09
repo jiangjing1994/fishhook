@@ -1,5 +1,5 @@
 const onlyProductionError =
-  process.env.NODE_ENV === "production" ? "off" : "off";
+    process.env.NODE_ENV === "production" ? "off" : "off";
 module.exports = {
   root: true,
   parserOptions: {
@@ -20,6 +20,7 @@ module.exports = {
     "no-debugger": onlyProductionError,
     "vue/singleline-html-element-content-newline": "off",
     "vue/multiline-html-element-content-newline": "off",
+    " vue/html-closing-bracket-spacing": "off",
     "vue/html-self-closing": "off",
     "vue/html-indent": "off",
     "vue/max-attributes-per-line": "off"
