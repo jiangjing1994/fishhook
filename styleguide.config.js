@@ -5,7 +5,8 @@ const path = require('path')
 const { getComponentFiles } = require('./styleguide/config.js')
 const baseComponentsUrl = './packages'
 
-
+//获取当前的环境
+const isProd = process.env.NODE_ENV === 'production'
 // const componentFilesDir = () =>{
 // 	return[
 // 		'packages/Button/index.js',
@@ -33,7 +34,8 @@ module.exports = {
 	// },
 
 	progressBar: true, //打包进度条
-	// styleguidePublicPath: isProd? '/': '',
+	styleguidePublicPath: isProd? './': '',
+
 	styleguideDir: 'doc', //打包文件放置的位置
 
- }
+}
