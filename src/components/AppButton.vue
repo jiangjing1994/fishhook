@@ -26,6 +26,7 @@ export default {
 			default: 'white'
 		},
 		/** @deprecated Use color instead */
+		// eslint-disable-next-line vue/require-default-prop
 		oldColor: String
 	},
 	computed: {
