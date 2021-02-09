@@ -1,5 +1,6 @@
 <template>
     <div>
+
         <KemSelect v-model="multipleValue" multiple :options="options"></KemSelect>
         <KemSelect v-model="value" :options="options"></KemSelect>
         <KemSelect v-model="value2" :request="transferRequest" :default-params="{dictType:'transfer'}" :default-props="{label:'transferName',value:'id'}"></KemSelect>
