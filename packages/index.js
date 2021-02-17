@@ -25,8 +25,7 @@ import KemCrud from './Crud'
 import KemChooseArrayElement from './ChooseArrayElement'
 import KemSearch from './Search'
 import KemInputPassWord from './InputPassWord'
-import KemCrudDialog from './CrudDialog'
-import ElementUI from "element-ui";
+ import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import Avue from '@smallwei/avue';
 import '@smallwei/avue/lib/index.css';
@@ -86,8 +85,7 @@ const install = function(Vue,opts = {}) {
         size: opts.size || 'small'
     })
 
-    KemCrudDialog.install(Vue)
-};
+ };
 
 if (typeof window !== 'undefined' && window.Vue) {
     install(window.Vue);
