@@ -1,9 +1,6 @@
- 
- 
+- Vue component example:
 
-You can also use the Single File Component Format
-
-```vue live
+```vue
 <template>
   <div class="about">
     <KemButton type="text.del"></KemButton>

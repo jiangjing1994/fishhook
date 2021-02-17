@@ -1,6 +1,6 @@
- You can also use the Single File Component Format
+- Vue component example:
 
-```vue live
+```vue
 <template>
     <div>
         <pre>{{value}}</pre>

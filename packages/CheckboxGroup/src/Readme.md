@@ -1,6 +1,5 @@
- You can also use the Single File Component Format
-
-```vue live
+- Vue component example:
+```vue
 <template>
     <div>
         <pre>{{multipleValue}}</pre>

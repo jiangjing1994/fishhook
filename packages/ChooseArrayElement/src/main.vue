@@ -1,18 +1,18 @@
 <template>
     <div style="position: relative">
-        <KemDialog :visible.sync="visible"  :modal-append-to-body="false" @save="save" :closeOnClickModal="true">
+        <KemDialog :visible.sync="visible" :modal-append-to-body="false" :close-on-click-modal="true" @save="save">
             <template slot="header">
-                <span >
-                    {{title}}
+                <span>
+                    {{ title }}
                     <el-tooltip class="item" effect="dark" :content="content" placement="right-end">
                         <el-button type="text" icon="el-icon-info"></el-button>
                     </el-tooltip>
                 </span>
 
             </template>
-            <Condition v-model="computedvalue"  language="sql" style="width: 100%;height: 500px;margin-top: 10px" :form-items="formItems"></Condition>
+            <Condition v-model="computedvalue" language="sql" style="width: 100%;height: 500px;margin-top: 10px" :form-items="formItems"></Condition>
         </KemDialog>
-        <KemButton type="operate.edit" @click="handleButton">{{buttonText}}</KemButton>
+        <KemButton type="operate.edit" @click="handleButton">{{ buttonText }}</KemButton>
     </div>
 </template>
 <script>
@@ -27,7 +27,9 @@ export default {
     props: {
         value: {
             type: Array,
-           // default: ''
+            default:()=>{
+                return []
+            }
         },
         buttonText: {
             type: String,
