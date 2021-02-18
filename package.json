@@ -7,6 +7,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "lib": "vue-cli-service build --target lib --name mimiui --dest lib packages/index.js",
+    "new": "plop packages",
     "styleguide": "vue-cli-service styleguidist",
     "styleguide:build": "vue-cli-service styleguidist:build"
   },
@@ -46,6 +47,7 @@
     "eslint-plugin-vue": "^6.2.2",
     "prettier": "^1.19.1",
     "sass": "^1.26.5",
+    "plop": "2.3.0",
     "sass-loader": "^8.0.2",
     "vue-cli-plugin-styleguidist": "~4.35.0",
     "vue-template-compiler": "^2.6.11"

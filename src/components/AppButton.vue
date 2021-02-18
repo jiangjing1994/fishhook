@@ -29,6 +29,12 @@ export default {
 		// eslint-disable-next-line vue/require-default-prop
 		oldColor: String
 	},
+	data() {
+		return {
+			key: value
+		}
+	},
+
 	computed: {
 		styles() {
 			return {
