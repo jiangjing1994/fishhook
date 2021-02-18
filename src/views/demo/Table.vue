@@ -1,6 +1,6 @@
 <template>
     <div>
-        <KemPageCard header="非常简单的表格~">
+        <KemPageCard header="简单表格静态数据纯用于展示~">
             <!--简单表格静态数据纯用于展示-->
             <SimpaleTable></SimpaleTable>
             <template slot="footer"></template>

@@ -13,7 +13,7 @@
 <script>
 import { queryList } from '@/utils/index'
 export default {
-    name: "SimpaleTable",
+    name: "BaseTable",
     data() {
         return {
             defaultParams:{},

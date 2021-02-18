@@ -1,6 +1,6 @@
 {
   "name": "@jiangjing94/mimi",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -8,8 +8,8 @@
     "lint": "vue-cli-service lint",
     "lib": "vue-cli-service build --target lib --name mimiui --dest lib packages/index.js",
     "new": "plop packages",
-    "styleguide": "vue-cli-service styleguidist",
-    "styleguide:build": "vue-cli-service styleguidist:build"
+    "docs": "vue-cli-service styleguidist",
+    "docs:build": "vue-cli-service styleguidist:build"
   },
   "main": "lib/mimiui.umd.min.js",
   "files": [

@@ -1,6 +1,10 @@
 <script lang="jsx">
 import { throttle ,get} from 'lodash'
+/**
+ * Component is described here.
+ */
 export default {
+
     name: 'KemButton',
     components: {},
     props: {
