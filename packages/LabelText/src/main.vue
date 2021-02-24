@@ -1,5 +1,5 @@
 <template>
-    <span style="padding: 0 8px;font-size: 0.95em">
+    <span style="padding-left: 16px;font-size: 0.95em">
         {{ value }}
     </span>
 </template>
