@@ -1,6 +1,6 @@
 {
   "name": "@jiangjing94/mimi",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "private": false,
   "scripts": {
     "start": "npm-run-all --parallel start:*",
@@ -21,6 +21,7 @@
     "lib/mimiui.umd.min.js",
     "lib/mimiui.css",
     "lib/fonts",
+    "lib/img",
     "packages"
   ],
   "dependencies": {
