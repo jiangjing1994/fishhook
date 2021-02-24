@@ -30,7 +30,7 @@ import KemInputPassWord from './InputPassWord'
 import "element-ui/lib/theme-chalk/index.css";
 import Avue from '@smallwei/avue';
 import '@smallwei/avue/lib/index.css';
-import { Tree as KemViewTree} from 'view-design';
+import { Tree as KemViewTree , Alert as KemViewAlert} from 'view-design';
 import 'view-design/dist/styles/iview.css';
 
 const components = [
@@ -88,6 +88,7 @@ const install = function(Vue,opts = {}) {
         size: opts.size || 'small'
     })
     Vue.component('KemViewTree', KemViewTree);
+    Vue.component('KemViewAlert', KemViewAlert);
  };
 
 if (typeof window !== 'undefined' && window.Vue) {
