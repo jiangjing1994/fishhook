@@ -1,5 +1,3 @@
-- Vue component example:
-```vue
 <template>
 
     <KemPageCard header="多选框">
@@ -115,5 +113,3 @@ export default {
 <style scoped>
 
 </style>
-
-```

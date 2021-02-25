@@ -1,8 +1,6 @@
-- Vue component example:
-```vue
 <template>
 
-    <KemPageCard header="多选框">
+    <KemPageCard header="单选框">
         <pre>{{ form }}</pre>
         <KemForm
                 ref="form"
@@ -36,13 +34,13 @@ const transferRequest=()=> {
     })
 }
 export default {
-    name: "CheckboxGroup",
+    name: "RadioboxGroup",
     data() {
         return {
 
             uiType:'text',
             form: {
-                prop3:['Nanjing'],
+                prop3:'Nanjing',
                 prop4:'这是KemInput'
             }
         }
@@ -52,7 +50,7 @@ export default {
             const uiType = this.uiType
             return [
                 {
-                    label: '静态条件', prop: 'prop1', span: 13, component: 'KemCheckboxGroup', props: {
+                    label: '静态条件', prop: 'prop1', span: 13, component: 'KemRadioboxGroup', props: {
                         options: [
                             {
                                 label: '区域一',
@@ -66,7 +64,7 @@ export default {
                     }
                 },
                 {
-                    label: '动态条件', prop: 'prop2', span: 13, component: 'KemCheckboxGroup', props: {
+                    label: '动态条件', prop: 'prop2', span: 13, component: 'KemRadioboxGroup', props: {
                         request: transferRequest,
                         defaultProps: {
                             label: 'transferName',
@@ -79,7 +77,7 @@ export default {
                     }
                 },
                 {
-                    label: '文字模式', prop: 'prop3', span: 13, component: 'KemCheckboxGroup', props: {
+                    label: '文字模式', prop: 'prop3', span: 13, component: 'KemRadioboxGroup', props: {
                         request: transferRequest,
                         defaultProps: {
                             label: 'transferName',
@@ -115,5 +113,3 @@ export default {
 <style scoped>
 
 </style>
-
-```

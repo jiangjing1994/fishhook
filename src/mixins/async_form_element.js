@@ -1,15 +1,10 @@
-<template lang="pug">
-    div
-        KemLabelText( v-if='uiType ==="text"' :value='label')
-        el-select( v-bind="$attrs"  v-else v-on="evet" :placeholder="placeholder" :filterable='filterable' :clearable='clearable' style='width:100%' )
-            el-option(v-for="(item,index) in list " :key="index"  :label="item.label" :disabled="item.disabled" :value="item.value")
-                slot(:scope="item")
-
-</template>
-<script>
 export default {
-    name: 'KemSelect',
-     props: {
+    data() {
+        return {
+            data: [],
+        }
+    },
+    props: {
         defaultProps: {
             type: Object,
             default:()=>{
@@ -22,26 +17,14 @@ export default {
         // eslint-disable-next-line vue/require-default-prop
         options:{
             type: Array,
-            //required:true
+            // required:true
         },
-        placeholder: {
-            type: String,
-            default: '请选择'
-        },
-        filterable: {
-            type: Boolean,
-            default: true
-        },
-        clearable: {
-            type: Boolean,
-            default: true
-        },
+
         uiType:{
             // text normal
             type: String,
             default: 'normal'
         },
-
         // eslint-disable-next-line vue/require-default-prop
         request:{
             type:Function,
@@ -60,12 +43,8 @@ export default {
             }
         },
     },
-    data() {
-        return {
-            data: [],
-        }
-    },
     computed:{
+
         list(){
             const { label, value }= this.defaultProps
             let options = this.isService ? this.data : this.options
@@ -101,13 +80,11 @@ export default {
 
         }
     },
-
     created() {
         if (this.isService){
             this.getListData()
         }
     },
-
     methods: {
         async getListData(params={}){
 
@@ -142,9 +119,5 @@ export default {
         },
 
     },
+
 }
-</script>
-
-<style scoped>
-
-</style>

@@ -1,56 +1,47 @@
-<template lang="pug">
-    el-checkbox-group( v-bind="$attrs" :value='v' v-on="evet"  )
-        el-checkbox(v-for="(item,index) in list " :border='border' :key="index"  :label="item.value" :disabled="item.disabled") {{item.label}}
 
-
+<template>
+    <div class="kem-checkbox_group">
+        <el-checkbox-group v-bind="$attrs" :value='v' :disabled="isdisabled" v-on="evet" >
+            <el-checkbox v-for="(item,index) in list " :border='border' :key="index"  :label="item.value" :disabled="item.disabled">{{item.label}}</el-checkbox>
+        </el-checkbox-group>
+    </div>
 
 </template>
 <script>
+import mixins from "@/mixins/async_form_element";
 export default {
     name: 'KemCheckboxGroup',
+    mixins: [mixins],
     props: {
-        defaultProps: {
-            type: Object,
-            default:()=>{
-                return{
-                    label: 'label',
-                    value:'value'
-                }
-            }
-        },
-        options:{
-            type: Array,
-            required:true
-        },
+
         border:{
             type: Boolean,
             default:false
         },
 
-    },
 
+    },
+    data() {
+        return {
+            data: [],
+        }
+    },
     computed:{
         v(){
             return this.$attrs.value || []
         },
-        list(){
-            const { label, value }= this.defaultProps
-            return this.options.map(item => {
-                return {
-                    ...item,
-                    label: item[label],
-                    value: item[value],
-                }
-            })
+        isdisabled(){
+            return this.$attrs.isdisabled || this.uiType ==="text"
         },
-        evet(){
-            return this.$listeners;
-        },
+
     },
 
-}
+ }
 </script>
 
-<style scoped>
+<style>
+.kem-checkbox_group .el-checkbox__input.is-disabled+span.el-checkbox__label{
+    color: inherit;
+}
 
 </style>
