@@ -458,6 +458,15 @@ export default {
 
 
     watch: {
+        /**
+         * 搜索条件改变了
+         */
+        searchForm:{
+            handler(value) {
+                this.$emit('searchFormUpdata',value)
+            },
+            deep: true
+        },
         tableData:{
             handler() {
                 this.getListData()
