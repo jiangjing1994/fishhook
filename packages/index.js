@@ -25,6 +25,7 @@ import KemCrud from './Crud'
 import KemChooseArrayElement from './ChooseArrayElement'
 import KemSearch from './Search'
 import KemInputPassWord from './InputPassWord'
+import KemDatePicker from './DatePicker'
  import ElementUI from "element-ui";
 
 import "element-ui/lib/theme-chalk/index.css";
@@ -61,6 +62,7 @@ const components = [
     KemCrud,
     KemSearch,
     KemInputPassWord,
+    KemDatePicker,
 
 
 ];
@@ -126,4 +128,5 @@ export default {
     KemCrud,
     KemSearch,
     KemInputPassWord,
+    KemDatePicker,
 };
