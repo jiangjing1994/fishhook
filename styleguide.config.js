@@ -47,7 +47,8 @@ module.exports = {
 		'packages/Switch/src/main.vue',
 		'packages/Table/src/main.vue',
 		'packages/Timeline/src/main.vue',
-		'packages/Tree/src/main.vue'
+		'packages/Tree/src/main.vue',
+		'packages/DatePicker/src/main.vue'
 	]
 	,
 	version: `版本 v${config.version}`,

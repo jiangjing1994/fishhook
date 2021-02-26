@@ -30,4 +30,4 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages
           FOLDER: doc
-          BUILD_SCRIPT: npm install && npm run styleguide:build
+          BUILD_SCRIPT: npm install && npm run docs:build
