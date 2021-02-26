@@ -7,6 +7,7 @@
             :default-params="defaultParams"
             :menu-width="250"
             :search-props="searchProps"
+            @searchFormUpdata="searchFormUpdata"
             @clickMenuButton="clickMenuButton"
     />
 </template>
@@ -42,6 +43,10 @@ export default {
         };
     },
     methods: {
+        searchFormUpdata(value){
+           console.log(value)
+
+        },
         result(res){
             return res.data
 

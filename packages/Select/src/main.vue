@@ -102,6 +102,17 @@ export default {
         }
     },
 
+    watch: {
+        defaultParams: {
+            handler() {
+
+                if (this.isService){
+                    this.getListData()
+                }
+            },
+            deep: true
+        },
+    },
     created() {
         if (this.isService){
             this.getListData()
