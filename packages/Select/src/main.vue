@@ -7,6 +7,9 @@
 
 </template>
 <script>
+/**
+ * @displayName 下拉框
+ */
 export default {
     name: 'KemSelect',
      props: {

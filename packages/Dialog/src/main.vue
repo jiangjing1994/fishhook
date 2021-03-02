@@ -50,6 +50,9 @@
 </template>
 
 <script>
+/**
+ * @displayName 对话框
+ */
 export default {
   name: 'KemDialog',
 

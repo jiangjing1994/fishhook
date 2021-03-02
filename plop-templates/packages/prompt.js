@@ -66,6 +66,14 @@ module.exports = {
         data: {
           name: name,
         }
+      },
+      {
+        type: 'add',
+        path: `src/views/demo/${name}.vue`,
+        templateFile: 'plop-templates/packages/demo.hbs',
+        data: {
+          name: name,
+        }
       }
     ]
 

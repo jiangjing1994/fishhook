@@ -10,7 +10,9 @@
 </template>
 <script>
 import mixins from "@/mixins/async_form_element";
-
+/**
+ * @displayName 单选框
+ */
 export default {
     name: 'KemRadioboxGroup',
     mixins: [mixins],

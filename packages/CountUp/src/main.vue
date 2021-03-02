@@ -4,6 +4,9 @@
 
 <script>
 import CountUp from "countup.js";
+/**
+ * @displayName 计数器
+ */
  export default  {
     name: "KemCountUp",
     props: {

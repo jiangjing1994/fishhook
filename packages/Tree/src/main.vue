@@ -26,6 +26,9 @@
     </div>
 </template>
 <script type="text/jsx">
+/**
+ * @displayName 树
+ */
 export default {
     name:'KemTree',
     props: {

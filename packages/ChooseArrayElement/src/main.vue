@@ -18,6 +18,9 @@
 <script>
 
 import Condition from './Condition'
+/**
+ * @displayName 数组元素构造器
+ */
 export default {
     name: 'KemChooseArrayElement',
     components:{

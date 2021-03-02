@@ -4,6 +4,9 @@
     </span>
 </template>
 <script>
+/**
+ * @displayName 文本文字
+ */
 export default {
     name: 'KemLabelText',
 

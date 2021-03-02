@@ -7,6 +7,9 @@
 
 </template>
 <script>
+/**
+ * @displayName 输入框
+ */
 export default {
     name: 'KemInput',
     props: {

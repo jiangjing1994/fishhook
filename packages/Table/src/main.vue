@@ -142,7 +142,9 @@ const RenderContent = {
         return <el-tag>{row[prop]}</el-tag>
     }
 }
-
+/**
+ * @displayName 配置化表格
+ */
 export default {
     name: 'KemTable',
     components:{

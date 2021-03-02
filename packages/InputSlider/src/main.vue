@@ -3,6 +3,9 @@
 
 </template>
 <script>
+/**
+ * @displayName 滑块
+ */
 export default {
     name: 'KemInputSlider',
     props: {

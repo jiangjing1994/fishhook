@@ -19,6 +19,10 @@
   </KemInput>
 </template>
 <script>
+
+/**
+ * @displayName 颜色输入框
+ */
 export default {
   name: 'KemInputColor',
   props: {

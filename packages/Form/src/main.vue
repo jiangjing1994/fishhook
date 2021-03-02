@@ -13,51 +13,12 @@
                 只读
             </el-tag>
         </div>-->
-        <el-row v-if="!isFormGroup">
-            <el-col
-                    v-for="(item, index) in computedItems"
-                    :key="getItemKey(item, index)"
-                    :md="item.md"
-                    :sm="item.sm"
-                    :span="item.span || 12"
 
-            >
-                <el-form-item
-                         :prop="item.prop"
-                >
-                    <render-content
-                            v-if="item.labelRender"
-                            slot="label"
-                            :render="item.labelRender"
-                            :data="item"
-                    />
-                    <span v-else slot="label">
-                       {{ item.label }}
-                        <el-tooltip effect="light" placement="bottom" v-if="item.tip">
-                            <template slot="content">
-                            {{ item.tip}}
-                            </template>
-                        <i class="el-icon el-icon-info" style="cursor: pointer"></i> :
-                        </el-tooltip>
-                    </span>
-                    <slot
-                            :name="item.slot"
-                            v-bind="{ item }"
-                    >
-                        <component
-                                :is="item.component"
-                                v-if="item.component !== 'Text'"
-                                :ref="item.ref || `cp-${item.prop}`"
-                                v-model="data[item.prop]"
-                                :data="data"
-                                v-bind="item.props"
-                                v-on="item.listeners"
-                        />
-                        <span v-else>{{ data[item.prop] }}</span>
-                    </slot>
-                </el-form-item>
-            </el-col>
-        </el-row>
+        <FormItem
+                v-if="!isFormGroup"
+                :computed-items="computedItems"
+                :data="data"
+        ></FormItem>
         <el-timeline v-else :reverse="false">
             <el-timeline-item v-for="(timelineItem, key) in computedItems" :key="key">
                 <template slot="dot">
@@ -66,52 +27,11 @@
                     </div>
                 </template>
                 <div class="timeline__title">{{ timelineItem.label }}</div>
-                <el-row>
-                    <el-col
-                            v-for="(item,index) in timelineItem.formItems"
-                            :key="getItemKey(item, index)"
-                            :md="item.md"
-                            :sm="item.sm"
-                            :span="item.span || 12"
-                     >
-                        <el-form-item
-                                :prop="item.prop"
-                        >
-                            <render-content
-                                    v-if="item.labelRender"
-                                    slot="label"
-                                    :render="item.labelRender"
-                                    :data="item"
-                            />
-                            <span v-else slot="label">
-                               {{ item.label }}
-                                <el-tooltip effect="light" placement="bottom" v-if="item.tip">
-                                    <template slot="content">
-                                    {{ item.tip}}
-                                    </template>
-                                <i class="el-icon el-icon-info" style="cursor: pointer"></i> :
-                                </el-tooltip>
-                            </span>
+                <FormItem
 
-                            <slot
-                                    :name="item.slot"
-                                    v-bind="{ item }"
-                            >
-                                <component
-                                        :is="item.component"
-                                        v-if="item.component !== 'Text'"
-                                        :ref="item.ref || `cp-${item.prop}`"
-                                        v-model="data[item.prop]"
-                                        :data="data"
-                                        v-bind="item.props"
-                                        v-on="item.listeners"
-                                />
-                                <span v-else>{{ data[item.prop] }}</span>
-                            </slot>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-
+                        :computed-items="timelineItem.formItems"
+                        :data="data"
+                ></FormItem>
             </el-timeline-item>
         </el-timeline>
     </el-form>
@@ -124,25 +44,7 @@ import { cloneDeep,debounce } from 'lodash'
 const defaultConfig = {
     labelWidth: '120px',
 }
-// 表单字段格式化
-const RenderContent = {
-    props: {
-        render: Function,
-        formatter: Function, // 格式化数据
-        data: Object,
-        prop: String
-    },
-    render (h) {
-        if (this.render) {
-            return this.render(h, this.data)
-        }
-        let value = this.data[this.prop]
-        if (this.formatter) {
-            value = this.formatter(value, this.data)
-        }
-        return <span>{value}</span>
-    }
-}
+
 // element UI 组件
 let defaultaAlias = {
     datePicker: {
@@ -156,10 +58,14 @@ let defaultaAlias = {
     }
 }
 
+import FormItem from './FormItem'
+/**
+ * @displayName 配置化表单
+ */
 export default {
     name:'KemForm',
     components: {
-        RenderContent
+         FormItem
     },
 
     props: {

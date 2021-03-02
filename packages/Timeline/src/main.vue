@@ -26,7 +26,7 @@
                         :render="activity.render"
                         :activity="activity"
                 ></render-content>
-                 
+
                 <slot v-if="activity.slot" :name="activity.prop"  :scope="activity"></slot>
 
             </el-timeline-item>
@@ -77,6 +77,9 @@ const RenderDot = {
         return <span>{content}</span>
     }
 }
+/**
+ * @displayName 时间条
+ */
 export default {
     name: 'KemTimeline',
     components:{

@@ -2,6 +2,9 @@
     el-color-picker( v-bind="$attrs" v-on="evet" )
 </template>
 <script>
+/**
+ * @displayName 颜色选择器
+ */
 export default {
     name: 'KemColorPicker',
     props: {

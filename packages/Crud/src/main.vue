@@ -28,7 +28,9 @@
 
 <script>
 //import { addOrModifyScence } from '@/api/index'
-
+/**
+ * @displayName CRUD组件
+ */
 export default {
     name: "KemCrud",
     // args 存在缺陷不推荐使用

@@ -11,6 +11,9 @@
         :placeholder="placeholder")
 </template>
 <script>
+/**
+ * @displayName 数字输入框
+ */
 export default {
     name: 'KemInputNumber',
     props: {

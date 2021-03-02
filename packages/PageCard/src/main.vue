@@ -33,6 +33,9 @@
 </template>
 
 <script>
+/**
+ * @displayName 页面卡片
+ */
 export default {
   name: 'KemPageCard',
   props: {

@@ -5,6 +5,9 @@
 </template>
 <script>
 import { filter } from 'lodash'
+/**
+ * @displayName 步骤条
+ */
 export default {
     name: 'KemSteps',
 

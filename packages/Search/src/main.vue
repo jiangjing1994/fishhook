@@ -22,6 +22,9 @@
   </div>
 </template>
 <script>
+/**
+ * @displayName 搜索框
+ */
 export default {
   name: 'KemSearch',
   // eslint-disable-next-line vue/require-prop-types
@@ -65,7 +68,7 @@ export default {
   padding: 15px;
  // padding-bottom: 0px;
   box-sizing: border-box;
-  background-color: #dff9f9;
+  background-color: #e3fdfd;
   border-radius: 4px;
   .btn{
     text-align: right;
