@@ -143,7 +143,7 @@ const RenderContent = {
     }
 }
 /**
- * @displayName 配置化表格
+ * @displayName Table 配置化表格
  */
 export default {
     name: 'KemTable',

@@ -10,7 +10,7 @@
 <script>
 import mixins from "@/mixins/async_form_element";
 /**
- * @displayName 复选框
+ * @displayName CheckboxGroup复选框
  */
 export default {
     name: 'KemCheckboxGroup',

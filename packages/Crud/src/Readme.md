@@ -18,6 +18,10 @@
                 <KemColorPicker v-model="args.color" style="position: absolute" size="mini"></KemColorPicker>
 
             </template>
+            <template slot="append" slot-scope="{scope}">
+                
+                 append表单框后置内容 {{ scope }}
+             </template>
         </KemCrud>
 
 
@@ -58,12 +62,12 @@ export default {
     computed: {
         formItems() {
             return [
-                {label: "业务需求编号", prop: "code",},
+                {label: "需求编号", prop: "code",},
                 {label: "需求主题", prop: "title"},
                 {label: "选择颜色", prop: "color",slot:'color'},
                 {label: "需求类型", prop: "type"},
                 {label: "需求提交人", prop: "createUser"},
-                {label: "正式需求编号", prop: "formalCode"}
+                {label: "正式编号", prop: "formalCode"}
             ]
         },
         formRules() {
@@ -111,6 +115,7 @@ export default {
 </script>
 
 <style scoped></style>
+
 
 
 

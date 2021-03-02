@@ -27,7 +27,7 @@
 </template>
 <script type="text/jsx">
 /**
- * @displayName 树
+ * @displayName Tree 树
  */
 export default {
     name:'KemTree',

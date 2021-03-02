@@ -60,7 +60,7 @@ let defaultaAlias = {
 
 import FormItem from './FormItem'
 /**
- * @displayName 配置化表单
+ * @displayName Form 配置化表单
  */
 export default {
     name:'KemForm',

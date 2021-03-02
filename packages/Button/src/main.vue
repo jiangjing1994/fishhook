@@ -1,7 +1,7 @@
 <script lang="jsx">
 import { throttle ,get} from 'lodash'
 /**
- * @displayName 按钮
+ * @displayName Button 按钮
  */
 export default {
 

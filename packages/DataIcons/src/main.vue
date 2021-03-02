@@ -40,7 +40,7 @@
 
 <script>
 /**
- * @displayName 数据面板
+ * @displayName DataIcons 数据面板
  */
 export default  {
     name: "KemDataIcons",

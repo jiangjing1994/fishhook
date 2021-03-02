@@ -8,7 +8,7 @@
 </template>
 <script>
 /**
- * @displayName 输入框
+ * @displayName Input 输入框
  */
 export default {
     name: 'KemInput',

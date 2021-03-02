@@ -38,7 +38,7 @@
 <script>
 import IconDirectory from './IconDirectory'
 /**
- * @displayName icon选择器
+ * @displayName IconSelect icon选择器
  */
  export default {
   name: 'SelectSvgIcon',

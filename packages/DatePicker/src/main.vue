@@ -3,7 +3,7 @@
 </template>
 <script>
 /**
- * @displayName 日期选择器
+ * @displayName DatePicker 日期选择器
  */
 export default {
     name: 'KemDatePicker',

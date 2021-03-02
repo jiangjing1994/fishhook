@@ -23,7 +23,7 @@
 </template>
 <script>
 /**
- * @displayName 搜索框
+ * @displayName Search 搜索框
  */
 export default {
   name: 'KemSearch',

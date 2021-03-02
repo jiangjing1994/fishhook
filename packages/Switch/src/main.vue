@@ -4,7 +4,7 @@
 </template>
 <script>
 /**
- * @displayName 开关
+ * @displayName Switch 开关
  */
 export default {
     name: 'KemSwitch',

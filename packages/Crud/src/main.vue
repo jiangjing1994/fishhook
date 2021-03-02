@@ -3,6 +3,8 @@
         <template slot="header">
             {{ headerDialog }}
         </template>
+        <!-- @slot prepend表单框前置内容 -->
+        <slot name="prepend" :scope="form"></slot>
         <KemForm
                 ref="form"
                 :form-config="formConfig"
@@ -21,6 +23,9 @@
                 <slot v-if="item.slot" :name="item.slot" :scope="scope"></slot>
             </template>
         </KemForm>
+        <!-- @slot append表单框后置内容 -->
+        <slot name="append" :scope="form"></slot>
+
     </KemDialog>
 
 
@@ -29,7 +34,7 @@
 <script>
 //import { addOrModifyScence } from '@/api/index'
 /**
- * @displayName CRUD组件
+ * @displayName Crud CRUD组件
  */
 export default {
     name: "KemCrud",

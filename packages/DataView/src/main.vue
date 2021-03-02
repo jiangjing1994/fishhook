@@ -48,7 +48,7 @@
 import {debounce} from './utils'
 //import html2canvas from 'html2canvas';
 /**
- * @displayName 大屏视图模板
+ * @displayName DataView 大屏视图模板
  */
 export default {
   name: "KemDataView",

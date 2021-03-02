@@ -4,7 +4,7 @@
 </template>
 <script>
 /**
- * @displayName 滑块
+ * @displayName InputSlider 滑块
  */
 export default {
     name: 'KemInputSlider',

@@ -19,7 +19,7 @@
 
 import Condition from './Condition'
 /**
- * @displayName 数组元素构造器
+ * @displayName ChooseArrayElement 数组元素构造器
  */
 export default {
     name: 'KemChooseArrayElement',

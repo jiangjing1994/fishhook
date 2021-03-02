@@ -3,7 +3,7 @@
 </template>
 <script>
 /**
- * @displayName 颜色选择器
+ * @displayName ColorPicker 颜色选择器
  */
 export default {
     name: 'KemColorPicker',

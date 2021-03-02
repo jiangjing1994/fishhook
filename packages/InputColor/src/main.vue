@@ -21,7 +21,7 @@
 <script>
 
 /**
- * @displayName 颜色输入框
+ * @displayName InputColor 颜色输入框
  */
 export default {
   name: 'KemInputColor',

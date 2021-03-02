@@ -13,7 +13,7 @@
 </template>
 <script>
 /**
- * @displayName 密码输入框
+ * @displayName InputPassWord 密码输入框
  */
 export default {
     name: 'KemInputPassWord',

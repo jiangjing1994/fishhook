@@ -8,7 +8,7 @@
 </template>
 <script>
 /**
- * @displayName 下拉框
+ * @displayName Select下拉框
  */
 export default {
     name: 'KemSelect',

@@ -78,7 +78,7 @@ const RenderDot = {
     }
 }
 /**
- * @displayName 时间条
+ * @displayName Timeline 时间条
  */
 export default {
     name: 'KemTimeline',
