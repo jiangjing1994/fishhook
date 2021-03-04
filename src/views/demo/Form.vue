@@ -2,6 +2,23 @@
     <div style="text-align: left;display: flex;justify-content: center">
         <KemPageCard style="width: 800px;margin-right: 20px" header="Form">
             <pre>{{ form }}</pre>
+            <KemForm
+                    ref="form"
+                    :form-items="formItems"
+                    :form-config="{labelPosition:'right',labelWidth:'120px'}"
+                    :data="form"
+                    :form-rules="formRules"
+                    :read-only="readOnly"
+                     @updataFormData="updataFormData"
+            >
+                <template slot="resource">
+                    <el-radio-group v-model="form.resource">
+                        <el-radio label="线上品牌商赞助"></el-radio>
+                        <el-radio label="线下场地免费"></el-radio>
+                    </el-radio-group>
+                </template>
+
+            </KemForm>
 
              <div slot="footer">
                 <KemButton @click="updataFormItems">切换FormItems</KemButton>
@@ -15,6 +32,7 @@
         <KemPageCard style="width: 800px" header="Form">
             <pre>{{ form }}</pre>
 
+<!--
             <KemForm
                     ref="form"
                     :form-items="formItems2"
@@ -33,6 +51,7 @@
                 </template>
 
             </KemForm>
+-->
             <div slot="footer">
                 <KemButton @click="updataFormItems">切换FormItems</KemButton>
                 <KemButton @click="readOnly=!readOnly">只读</KemButton>
@@ -83,6 +102,7 @@ export default {
                     },
                     props: (data) => {
                         let options = []
+
                         if (data.region === 'shanghai'){
                             options = [
                                 {
