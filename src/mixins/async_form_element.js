@@ -85,6 +85,17 @@ export default {
             this.getListData()
         }
     },
+    watch: {
+        defaultParams: {
+            handler() {
+
+                if (this.isService){
+                    this.getListData()
+                }
+            },
+            deep: true
+        },
+    },
     methods: {
         async getListData(params={}){
 
