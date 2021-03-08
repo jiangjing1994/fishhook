@@ -279,6 +279,11 @@ export default {
         background-color: #dff9f9;
         text-align: center;
     }
+    .el-form-item__label{
+        font-weight: bold;
+        font-size: 12px;
+        padding: 0 2px 0 0;
+    }
 }
 
 
