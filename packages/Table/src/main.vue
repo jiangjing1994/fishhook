@@ -800,6 +800,11 @@ export default {
         .el-table{
             border: 1px solid #d9ecff !important;
             border-bottom: 0px solid #d9ecff !important;
+
+        }
+        .el-table--striped .el-table__body tr.el-table__row--striped td{
+            background-color: inherit;
+
         }
         width: 98%!important;
         .el-card{
