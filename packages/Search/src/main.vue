@@ -68,7 +68,7 @@ export default {
   padding: 15px;
  // padding-bottom: 0px;
   box-sizing: border-box;
-  background-color: #e3fdfd;
+  background-color: #f7f7f7;
   border-radius: 4px;
   .btn{
     text-align: right;
@@ -81,7 +81,7 @@ export default {
       margin: 5px 0;
       cursor: pointer;
       &:hover{
-        color: #0f80ff;
+        color: #eaeced;
       }
     }
   }

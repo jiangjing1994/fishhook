@@ -37,7 +37,7 @@ module.exports = {
 		'packages/InputColor/src/main.vue',
 		'packages/InputNumber/src/main.vue',
 		'packages/InputPassWord/src/main.vue',
- 		'packages/LabelText/src/main.vue',
+		'packages/LabelText/src/main.vue',
 		'packages/PageCard/src/main.vue',
 		'packages/RadioboxGroup/src/main.vue',
 		'packages/Search/src/main.vue',

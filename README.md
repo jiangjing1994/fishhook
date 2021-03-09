@@ -1,4 +1,4 @@
-# [jiangjing94/mimi](https://hellonainai.github.io/mimi/#/)
+# [jiangjing94/mimi](https://jiangjing1994.github.io/mimi/)
 
 ## 快速开始
 ### install

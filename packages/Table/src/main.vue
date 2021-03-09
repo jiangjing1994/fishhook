@@ -14,10 +14,10 @@
                     <KemButton v-if="menuPermissionAdd" @click="clickMenuButton({type:'add'})">新增</KemButton>
                 </div>
             </div>
-            <div v-if="headerBottomPermission"  class="header__body-bottom">
-                <div v-if="headerSearchPermission" >
+            <div v-if="headerBottomPermission" class="header__body-bottom">
+                <div v-if="headerSearchPermission">
                     <!--表格默认的搜索组件 -->
-                    <KemSearch v-model="searchForm" v-bind="searchProps"/>
+                    <KemSearch v-model="searchForm" v-bind="searchProps" />
                 </div>
                 <div>
                     <slot name="menuBottom"></slot>
@@ -35,7 +35,7 @@
                 :page="page"
                 :table-loading="loading"
                 :search-solt="true"
-                :row-style="rowStyle"
+                :row-style="methodsRowStyle"
                 @size-change="sizeChange"
                 @current-change="currentChange"
                 @sort-change="sortChange"
@@ -58,7 +58,7 @@
                         :scope="scope"
                         :column="item"
                 ></render-content>
-                <slot :name="item.prop"  :scope="scope"></slot>
+                <slot :name="item.prop" :scope="scope"></slot>
             </template>
 
             <!-- <template slot="menuLeft">
@@ -291,15 +291,22 @@ export default {
                 }
             }
         },
+        /**
+         * 异步方法
+         */
+        // eslint-disable-next-line vue/require-default-prop
+        request:Function,
+        /**
+         * 结果处理
+         */
+        // eslint-disable-next-line vue/require-default-prop
+         result:Function,
+        /**
+         * 行样式
+         */
+        // eslint-disable-next-line vue/require-default-prop
+        rowStyle:Function,
 
-        // eslint-disable-next-line vue/require-default-prop
-        request:{
-            type:Function,
-        },
-        // eslint-disable-next-line vue/require-default-prop
-        result:{
-            type:Function,
-        },
         treeLoad:{
             type:Function,
             default:()=>{
@@ -318,6 +325,15 @@ export default {
         menuButtonType:{
             type:String,
             default:'text'
+
+        },
+
+        /**
+         * 单元格超出隐藏
+         */
+        columnOverHidden:{
+            type:Boolean,
+            default:true
 
         },
 
@@ -401,11 +417,24 @@ export default {
 
             const menu = !!(this.$scopedSlots.menu )|| this.menuPermissionDel || this.menuPermissionEdit || this.menuPermissionDetail
 
+            const column = this.column.map((item)=>{
+
+                if(this.columnOverHidden){
+                    item = {
+                        overHidden:true,
+                        ...item
+                    }
+                }
+                return  item
+            })
+
+
+
             return{
                 ...option,
                 header,
                 menu,
-                column:this.column
+                column
             }
         },
         queryParams(){
@@ -722,25 +751,19 @@ export default {
         },
 
         // 单元格样式
-        rowStyle({rowIndex}){
+        methodsRowStyle({rowIndex,row} ){
+            const basestyles = ({rowIndex})=>{
+                if(rowIndex%2===0){
 
-            const basestyles ={
-                padding :'8px 12px',
-                height:'45px',
-                lineHeight :'45px'
-            }
-            if(rowIndex%2===0){
-                return {
-                    ...basestyles,
-                    backgroundColor:'#ffffff',
-
-                }
-            }else {
-                return {
-                    ...basestyles,
-                    backgroundColor:'#F8FAFB',
+                    return {
+                        backgroundColor:'#f7f7f7',
+                    }
                 }
             }
+            const rowStyle = this.rowStyle || basestyles
+
+            return rowStyle({rowIndex,row})
+
         },
 
         // 点击操作栏的删除按钮

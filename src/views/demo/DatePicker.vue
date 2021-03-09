@@ -1,6 +1,6 @@
 <template>
     <div>
-        <pre>{{value}}</pre>
+        <pre>{{ value }}</pre>
         <KemDatePicker v-model="value"></KemDatePicker>
     </div>
 
