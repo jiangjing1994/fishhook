@@ -1,5 +1,6 @@
 <template>
     <el-form
+            v-if="reload"
             ref="form"
             class="form_body--card"
             style="position: relative"
@@ -15,25 +16,23 @@
         </div>-->
 
         <FormItem
-                v-if="!isFormGroup"
                 :computed-items="computedItems"
                 :data="data"
         ></FormItem>
-        <el-timeline v-else :reverse="false">
-            <el-timeline-item v-for="(timelineItem, key) in computedItems" :key="key">
-                <template slot="dot">
-                    <div class="icon__body">
-                        <i :class="`${timelineItem.icon || 'el-icon-paperclip'}`"></i>
-                    </div>
-                </template>
-                <div class="timeline__title">{{ timelineItem.label }}</div>
-                <FormItem
-
-                        :computed-items="timelineItem.formItems"
-                        :data="data"
-                ></FormItem>
-            </el-timeline-item>
-        </el-timeline>
+<!--        <el-timeline v-else :reverse="false">-->
+<!--            <el-timeline-item v-for="(timelineItem, key) in computedItems" :key="key">-->
+<!--                <template slot="dot">-->
+<!--                    <div class="icon__body">-->
+<!--                        <i :class="`${timelineItem.icon || 'el-icon-paperclip'}`"></i>-->
+<!--                    </div>-->
+<!--                </template>-->
+<!--                <div class="timeline__title">{{ timelineItem.label }}</div>-->
+<!--                <FormItem-->
+<!--                        :computed-items="timelineItem.formItems"-->
+<!--                        :data="data"-->
+<!--                ></FormItem>-->
+<!--            </el-timeline-item>-->
+<!--        </el-timeline>-->
     </el-form>
 </template>
 
@@ -65,7 +64,7 @@ import FormItem from './FormItem'
 export default {
     name:'KemForm',
     components: {
-         FormItem
+        FormItem
     },
 
     props: {
@@ -103,6 +102,12 @@ export default {
             default:false
         }
     },
+    data() {
+        return {
+            computedItems: [],
+            reload: false
+        }
+    },
     computed: {
         computedConfig () {
             return {
@@ -110,64 +115,6 @@ export default {
                 ...defaultConfig,
                 ...this.formConfig
             }
-        },
-        computedItems () {
-
-            let alias = {...defaultaAlias,...this.alias}
-
-            const initialFormItems = this.initialFormItems
-
-            const isFormGroup = this.isFormGroup
-
-            const createitemFun = (initialFormItems) =>{
-                const itemResult = []
-
-                for (const item of initialFormItems) {
-                    // 剩余参数语法允许我们将一个不定数量的参数表示为一个数组。theArgs
-                    let { component = 'KemInput', showIf, prop, props, ...theArgs } = item
-                    if (typeof showIf === 'function' && !showIf(this.data)) {
-                        continue
-                    }
-                    if (typeof props === 'function') {
-                        props = props(this.data)
-                    }
-                    if (component === 'label') {
-                        props = {
-                            ...props,
-                            data: this.data,
-                            prop
-                        }
-                    }
-                    if (alias[component]) {
-                        props = {
-                            ...alias[component].props,
-                            ...props
-                        }
-                        component = alias[component].component
-                    }
-                    itemResult.push({
-                        component,
-                        prop,
-                        props,
-                        ...theArgs
-                    })
-                }
-
-                return itemResult
-            }
-
-            if(!isFormGroup){
-                return createitemFun(initialFormItems)
-            }
-            else {
-
-                for (const item of initialFormItems) {
-                    item.formItems = createitemFun(item.formItems )
-                }
-                return initialFormItems
-            }
-
-
         },
         rules () {
             let rules = this.computedItems.reduce((total, item) => {
@@ -188,7 +135,22 @@ export default {
         },
 
         initialFormItems(){
-            return this.formItems
+            const isFormGroup = this.isFormGroup
+            if(!isFormGroup){
+                return  this.formItems
+            }
+            else {
+                let  newFormItems = []
+                for (let item of this.formItems) {
+                    newFormItems.push({
+                        ...item,
+                        isFormGroup:true
+                    })
+                    newFormItems = [...newFormItems,...item.formItems]
+                }
+                return newFormItems
+             }
+
         },
 
         computedFormItems() {
@@ -198,6 +160,14 @@ export default {
     },
 
     watch: {
+
+        data:{
+            handler() {
+                this.getComputedItems()
+            },
+            deep: true,
+            immediate:false
+        },
 
         computedFormData:{
             handler(newValue,oldValue) {
@@ -216,8 +186,74 @@ export default {
         },
     },
     created(){
+        this.getComputedItems()
     },
     methods: {
+        getComputedItems(){
+
+            this.reload = false
+            const getci = () =>{
+                let alias = {...defaultaAlias,...this.alias}
+
+                const initialFormItems = this.initialFormItems
+
+
+                const createitemFun = (initialFormItems) =>{
+                    const itemResult = []
+
+                    for (const item of initialFormItems) {
+                        // 剩余参数语法允许我们将一个不定数量的参数表示为一个数组。theArgs
+                        let { component = 'KemInput', showIf, prop, props, ...theArgs } = item
+
+                        let isShow = true
+                        if (typeof showIf === 'function' && !showIf(this.data)) {
+                             isShow = false
+                            continue
+                        }
+                        if (typeof props === 'function') {
+                            props = props(this.data)
+                        }
+                        if (component === 'label') {
+                            props = {
+                                ...props,
+                                data: this.data,
+                                prop
+                            }
+                        }
+                        if (alias[component]) {
+                            props = {
+                                ...alias[component].props,
+                                ...props
+                            }
+                            component = alias[component].component
+                        }
+                        itemResult.push({
+                            component,
+                            prop,
+                            isShow,
+                            showIf,
+                            props,
+                            ...theArgs
+                        })
+                    }
+
+                    return itemResult
+                }
+
+
+                return createitemFun(initialFormItems)
+                // eslint-disable-next-line no-unreachable
+
+            }
+
+
+            this.computedItems = getci()
+
+
+
+            this.reload = true
+
+        },
         updataFormDataDebounce: debounce(({ vm, newValue, oldValue }) => {
 
             vm.$emit('updataFormData',JSON.parse(newValue),JSON.parse(oldValue))
@@ -256,29 +292,8 @@ export default {
         box-sizing: border-box;
         border-bottom: 1px solid #eee;
     }
-    .timeline__title{
-        text-align: left;
-        font-size: 14px;
-        color: #333333;
-        font-weight: bold;
-        padding: 5px 0;
-        margin-bottom: 5px;
-        padding-top: 12px;
-    }
-    .icon__body{
-        position: absolute;
-        width: 35px;
-        height: 35px;
-        font-size:18px;
-        font-weight: bold;
-        color: #4251eb;
-        line-height: 35px;
-        border-radius: 15px;
-        top:3px;
-        left: -12px;
-        background-color: #dff9f9;
-        text-align: center;
-    }
+
+
     .el-form-item__label{
         font-weight: bold;
         font-size: 12px;

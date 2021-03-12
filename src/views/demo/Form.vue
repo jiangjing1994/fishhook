@@ -32,7 +32,6 @@
         <KemPageCard style="width: 800px" header="Form">
             <pre>{{ form }}</pre>
 
-<!--
             <KemForm
                     ref="form"
                     :form-items="formItems2"
@@ -51,7 +50,6 @@
                 </template>
 
             </KemForm>
--->
             <div slot="footer">
                 <KemButton @click="updataFormItems">切换FormItems</KemButton>
                 <KemButton @click="readOnly=!readOnly">只读</KemButton>
@@ -98,7 +96,8 @@ export default {
                     } },
                 {label: '二级区域', prop: 'region2', span:24, component: 'KemSelect',
                     showIf: (data) => {
-                        return !!data.region
+
+                        return !data.region
                     },
                     props: (data) => {
                         let options = []
@@ -141,7 +140,8 @@ export default {
 
                     label:'表单组1',
                     formItems:[
-                        {label: '活动名称', prop: 'name', span:24, tip:'afsdfdfsdfsd',tipType:'alert'},
+                       /* {label: '活动名称', prop: 'name', span:24, tip:'afsdfdfsdfsd',tipType:'alert'},*/
+                        {label: '活动名称', prop: 'name', span:24, },
                         {label: '电子邮箱', prop: 'email', span:24},
                         {label: '人员总数', prop: 'num', span:24,component: 'KemInputNumber'},
                         {label: '活动区域', prop: 'region', span:24, component: 'KemSelect',props:{
@@ -164,8 +164,7 @@ export default {
                     formItems:[
                         {label: '二级区域', prop: 'region2', span:24, component: 'KemSelect',
                             showIf: (data) => {
-                            console.log('e33')
-                                return !data.region
+                                 return !data.region
                             },
                             props: (data) => {
                                 let options = []
@@ -237,4 +236,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
