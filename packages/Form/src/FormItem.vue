@@ -55,12 +55,12 @@
 
             </template>
             <template v-else>
-                <div class="title_body">
-                    <div class="icon__body">
+                <div class="fib-title_body">
+                    <div class="fib-icon__body">
                         <i :class="`${item.icon || 'el-icon-paperclip'}`"></i>
 
                     </div>
-                    <div class="label__body">{{ item.label }}</div>
+                    <div class="fib-label__body">{{ item.label }}</div>
                 </div>
 
 
@@ -130,7 +130,7 @@ export default {
         position: absolute;
         height: 100%;
         width: 1px;
-        border-left: 1px #dddddd solid;
+        border-left: 2px #eeeeee solid;
         left: 20px;
         margin-top: 5px;
 
@@ -139,29 +139,28 @@ export default {
     .isformgrouptitle{
         padding-left: 30px;
     }
-    .title_body{
-        height: 35px;
-        line-height: 35px;
+    .fib-title_body{
+        height: 32px;
+        line-height: 32px;
         padding-left: 5px;
         margin-bottom: 10px;
       //  background-image: linear-gradient(to right, #e3f5ff, #ffffff);
         border-radius: 5px;
         position: relative;
-        .icon__body{
+        .fib-icon__body{
             position: absolute;
             z-index: 10;
-            width: 28px;
-            height: 28px;
-            line-height: 28px;
-            margin-top: 3px;
-            font-size:16px;
+            width: 32px;
+            height: 32px;
+            line-height: 32px;
+             font-size:16px;
             font-weight: bold;
             color: #4251eb;
             border-radius: 15px;
             background-color: #e3f5ff;
             text-align: center;
         }
-        .label__body{
+        .fib-label__body{
             position: absolute;
             font-size:14px;
             font-weight: bold;
