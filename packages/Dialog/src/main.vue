@@ -6,6 +6,7 @@
           :close-on-click-modal="closeOnClickModal"
           :destroy-on-close="destroyOnClose"
           :fullscreen="fullscreen"
+          :modal="modal"
           v-bind="$attrs"
           v-on="$listeners"
   >
@@ -76,6 +77,10 @@ export default {
     destroyOnClose:{
       type: Boolean,
       default: false
+    },
+    modal:{
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -105,6 +110,10 @@ export default {
 $--color-primary:'yellow';
 
 .dialog__body{
+  .el-dialog{
+      border-radius: 4px;
+
+  }
   .dialog__body--header{
     // background-color: red;
 

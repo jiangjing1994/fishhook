@@ -5,7 +5,7 @@
             <KemForm
                     ref="form"
                     :form-items="formItems"
-                    :form-config="{labelPosition:'right',labelWidth:'120px'}"
+                    :form-config="{labelPosition:'left',labelWidth:'100px'}"
                     :data="form"
                     :form-rules="formRules"
                     :read-only="readOnly"
@@ -35,7 +35,7 @@
             <KemForm
                     ref="form"
                     :form-items="formItems2"
-                    :form-config="{labelPosition:'right',labelWidth:'120px'}"
+                    :form-config="{labelPosition:'right'}"
                     :data="form"
                     :form-rules="formRules"
                     :read-only="readOnly"
@@ -141,8 +141,8 @@ export default {
                     label:'表单组1',
                     formItems:[
                        /* {label: '活动名称', prop: 'name', span:24, tip:'afsdfdfsdfsd',tipType:'alert'},*/
-                        {label: '活动名称', prop: 'name', span:24, },
-                        {label: '电子邮箱', prop: 'email', span:24},
+                        {label: '活动名称', prop: 'name', span:13, },
+                        {label: '电子邮箱', prop: 'email', span:13},
                         {label: '人员总数', prop: 'num', span:24,component: 'KemInputNumber'},
                         {label: '活动区域', prop: 'region', span:24, component: 'KemSelect',props:{
                                 options:[

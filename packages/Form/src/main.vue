@@ -18,6 +18,7 @@
         <FormItem
                 :computed-items="computedItems"
                 :data="data"
+                :is-form-group="isFormGroup"
         ></FormItem>
 <!--        <el-timeline v-else :reverse="false">-->
 <!--            <el-timeline-item v-for="(timelineItem, key) in computedItems" :key="key">-->
@@ -41,7 +42,7 @@
 
 import { cloneDeep,debounce } from 'lodash'
 const defaultConfig = {
-    labelWidth: '120px',
+    labelWidth: '100px',
 }
 
 // element UI 组件
