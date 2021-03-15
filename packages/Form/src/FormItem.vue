@@ -67,7 +67,7 @@
             </template>
 
         </el-col>
-        <div class="line-vertical"></div>
+        <div v-if="isFormGroup" class="line-vertical"></div>
     </el-row>
 </template>
 
