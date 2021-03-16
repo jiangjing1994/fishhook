@@ -13,15 +13,12 @@ __
 import MimiUI from '@jiangjing94/mimi'
 import '@jiangjing94/mimi/lib/mimiui.css'
 import ElementUI from "element-ui";
-import "element-ui/lib/theme-chalk/index.css";
-import Avue from '@smallwei/avue';
-
+ 
 Vue.use(MimiUI,{ size: 'mini', zIndex: 3000 })
 Vue.use(ElementUI)
-Vue.use(Avue)
-
+ 
 ```
-
+> Vue.use() 顺序不要变
 ## 其他
 ### 仓库说明
  - 本库高度封装，牺牲一定的体验性，为的是提高开发效率(为了上班摸鱼)，提倡代码配置化。

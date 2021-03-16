@@ -20,20 +20,20 @@
                 :data="data"
                 :is-form-group="isFormGroup"
         ></FormItem>
-<!--        <el-timeline v-else :reverse="false">-->
-<!--            <el-timeline-item v-for="(timelineItem, key) in computedItems" :key="key">-->
-<!--                <template slot="dot">-->
-<!--                    <div class="icon__body">-->
-<!--                        <i :class="`${timelineItem.icon || 'el-icon-paperclip'}`"></i>-->
-<!--                    </div>-->
-<!--                </template>-->
-<!--                <div class="timeline__title">{{ timelineItem.label }}</div>-->
-<!--                <FormItem-->
-<!--                        :computed-items="timelineItem.formItems"-->
-<!--                        :data="data"-->
-<!--                ></FormItem>-->
-<!--            </el-timeline-item>-->
-<!--        </el-timeline>-->
+        <!--        <el-timeline v-else :reverse="false">-->
+        <!--            <el-timeline-item v-for="(timelineItem, key) in computedItems" :key="key">-->
+        <!--                <template slot="dot">-->
+        <!--                    <div class="icon__body">-->
+        <!--                        <i :class="`${timelineItem.icon || 'el-icon-paperclip'}`"></i>-->
+        <!--                    </div>-->
+        <!--                </template>-->
+        <!--                <div class="timeline__title">{{ timelineItem.label }}</div>-->
+        <!--                <FormItem-->
+        <!--                        :computed-items="timelineItem.formItems"-->
+        <!--                        :data="data"-->
+        <!--                ></FormItem>-->
+        <!--            </el-timeline-item>-->
+        <!--        </el-timeline>-->
     </el-form>
 </template>
 
@@ -81,7 +81,7 @@ export default {
             }
         },
         // eslint-disable-next-line vue/require-default-prop
-        formItems: Array,
+        formItems: [Array ,Function],
 
         // eslint-disable-next-line vue/require-default-prop
         data: Object,
@@ -137,12 +137,21 @@ export default {
 
         initialFormItems(){
             const isFormGroup = this.isFormGroup
+
+            let formItems = this.formItems
+
+            if (typeof formItems === 'function') {
+
+                formItems = formItems(this.data)
+            }
+
             if(!isFormGroup){
-                return  this.formItems
+
+                return  formItems
             }
             else {
                 let  newFormItems = []
-                for (let item of this.formItems) {
+                for (let item of formItems) {
                     newFormItems.push({
                         ...item,
                         isFormGroup:true
@@ -150,7 +159,7 @@ export default {
                     newFormItems = [...newFormItems,...item.formItems]
                 }
                 return newFormItems
-             }
+            }
 
         },
 
@@ -208,7 +217,7 @@ export default {
 
                         let isShow = true
                         if (typeof showIf === 'function' && !showIf(this.data)) {
-                             isShow = false
+                            isShow = false
                             continue
                         }
                         if (typeof props === 'function') {

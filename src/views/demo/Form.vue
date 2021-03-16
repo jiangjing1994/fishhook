@@ -4,12 +4,12 @@
             <pre>{{ form }}</pre>
             <KemForm
                     ref="form"
-                    :form-items="formItems"
-                    :form-config="{labelPosition:'left',labelWidth:'100px'}"
+                    :form-items="formItems3"
+                    :form-config="{labelPosition:'right',}"
                     :data="form"
                     :form-rules="formRules"
                     :read-only="readOnly"
-                     @updataFormData="updataFormData"
+                    @updataFormData="updataFormData"
             >
                 <template slot="resource">
                     <el-radio-group v-model="form.resource">
@@ -20,7 +20,7 @@
 
             </KemForm>
 
-             <div slot="footer">
+            <div slot="footer">
                 <KemButton @click="updataFormItems">切换FormItems</KemButton>
                 <KemButton @click="readOnly=!readOnly">只读</KemButton>
                 <KemButton @click="submitForm">提交</KemButton>
@@ -135,76 +135,146 @@ export default {
                     } },
                 {label: '特殊资源', prop: 'resource', slot: 'resource', span:24},
             ],
-            formItems2: [
-                {
+            formItems2: (data)=>{
+                return [
+                    {
 
-                    label:'表单组1',
-                    formItems:[
-                       /* {label: '活动名称', prop: 'name', span:24, tip:'afsdfdfsdfsd',tipType:'alert'},*/
-                        {label: '活动名称', prop: 'name', span:13, },
-                        {label: '电子邮箱', prop: 'email', span:13},
-                        {label: '人员总数', prop: 'num', span:24,component: 'KemInputNumber'},
-                        {label: '活动区域', prop: 'region', span:24, component: 'KemSelect',props:{
-                                options:[
-                                    {
-                                        label:'区域一',
-                                        value:'shanghai'
-                                    },
-                                    {
-                                        label:'区域二',
-                                        value:'beijing'
-                                    }
-                                ]
-                            } },
-                    ]
-                },
-                {
-
-                    label:'表单组2',
-                    formItems:[
-                        {label: '二级区域', prop: 'region2', span:24, component: 'KemSelect',
-                            showIf: (data) => {
-                                 return !data.region
-                            },
-                            props: (data) => {
-                                let options = []
-                                if (data.region === 'shanghai'){
-                                    options = [
+                        label:'表单组1',
+                        formItems:[
+                            /* {label: '活动名称', prop: 'name', span:24, tip:'afsdfdfsdfsd',tipType:'alert'},*/
+                            {label: '活动名称', prop: 'name', span:13, },
+                            {label: '电子邮箱', prop: 'email', span:13},
+                            {label: '人员总数', prop: 'num', span:24,component: 'KemInputNumber'},
+                            {label: '活动区域', prop: 'region', span:24, component: 'KemSelect',props:{
+                                    options:[
                                         {
-                                            label:'shanghai_0001',
-                                            value:'shanghai_0001'
+                                            label:'区域一',
+                                            value:'shanghai'
                                         },
                                         {
-                                            label:'shanghai_0002',
-                                            value:'shanghai_0002'
-                                        },
+                                            label:'区域二',
+                                            value:'beijing'
+                                        }
                                     ]
-                                }
-                                return {
-                                    multiple:true,
-                                    options
-                                }
+                                } },
+                        ]
+                    },
+                    {
+
+                        label:'表单组2',
+                        formItems:[
+                            {label: '二级区域', prop: 'region2', span:24, component: 'KemSelect',
+                                showIf: (data) => {
+                                    return !data.region
+                                },
+                                props: (data) => {
+                                    let options = []
+                                    if (data.region === 'shanghai'){
+                                        options = [
+                                            {
+                                                label:'shanghai_0001',
+                                                value:'shanghai_0001'
+                                            },
+                                            {
+                                                label:'shanghai_0002',
+                                                value:'shanghai_0002'
+                                            },
+                                        ]
+                                    }
+                                    return {
+                                        multiple:true,
+                                        options
+                                    }
+                                },
                             },
+                            {label: '即时配送', prop: 'delivery', span:24, component: 'KemSwitch',},
+                            {label: '活动性质', prop: 'type', span:24, component: 'KemCheckboxGroup',props:{
+                                    options:[
+                                        {
+                                            label:'美食/餐厅线上活动',
+                                            value:'shanghai'
+                                        },
+                                        {
+                                            label:'地推活动',
+                                            value:'beijing'
+                                        }
+                                    ]
+                                } },
+                            {label: '特殊资源', prop: 'resource', slot: 'resource', span:24},
+                        ]
+                    },
+                    {
+                        label:'表单组3',
+                        formItems:[
+                            {label: data.name, prop: 'resource', slot: 'resource', span:24}
+                        ]
+                    },
+
+
+                ]
+            }
+           ,
+            formItems3: (data)=>{
+                return [
+                    {label: '活动名称', prop: 'name', span:24, tip:data.name},
+                    {label: '电子邮箱', prop: 'email', span:24},
+                    {label: '人员总数', prop: 'num', span:24,component: 'KemInputNumber'},
+                    {label: '活动区域', prop: 'region', span:24, component: 'KemSelect',props:{
+                            options:[
+                                {
+                                    label:'区域一',
+                                    value:'shanghai'
+                                },
+                                {
+                                    label:'区域二',
+                                    value:'beijing'
+                                }
+                            ]
+                        } },
+                    {label: '二级区域', prop: 'region2', span:24, component: 'KemSelect',
+                        showIf: (data) => {
+
+                            return !data.region
                         },
-                        {label: '即时配送', prop: 'delivery', span:24, component: 'KemSwitch',},
-                        {label: '活动性质', prop: 'type', span:24, component: 'KemCheckboxGroup',props:{
-                                options:[
+                        props: (data) => {
+                            let options = []
+
+                            if (data.region === 'shanghai'){
+                                options = [
                                     {
-                                        label:'美食/餐厅线上活动',
-                                        value:'shanghai'
+                                        label:'shanghai_0001',
+                                        value:'shanghai_0001'
                                     },
                                     {
-                                        label:'地推活动',
-                                        value:'beijing'
-                                    }
+                                        label:'shanghai_0002',
+                                        value:'shanghai_0002'
+                                    },
                                 ]
-                            } },
-                        {label: '特殊资源', prop: 'resource', slot: 'resource', span:24},
-                    ]
-                },
+                            }
+                            return {
+                                multiple:true,
+                                options
+                            }
+                        },
+                    },
+                    {label: '即时配送', prop: 'delivery', span:24, component: 'KemSwitch',},
+                    {label: '活动性质', prop: 'type', span:24, component: 'KemCheckboxGroup',props:{
+                            options:[
+                                {
+                                    label:'美食/餐厅线上活动',
+                                    value:'shanghai'
+                                },
+                                {
+                                    label:'地推活动',
+                                    value:'beijing'
+                                }
+                            ]
+                        } },
+                    {label: '特殊资源', prop: 'resource', slot: 'resource', span:24},
+                ]
+            }
+            ,
 
-
-            ]
         }
     },
     methods: {
