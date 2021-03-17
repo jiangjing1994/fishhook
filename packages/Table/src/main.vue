@@ -784,6 +784,15 @@ export default {
 
         },
 
+
+        // 代码调用懒加载
+        loadOrToggle(row){
+
+
+             this.$refs.crud.$refs.table.store.loadOrToggle(row)
+
+        }
+
     }
 
 }

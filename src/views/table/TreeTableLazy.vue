@@ -1,6 +1,8 @@
 <template>
     <div>
+        <KemButton @click="loadOrToggle">手动展开</KemButton>
         <KemTable
+                ref="tree"
                 :column="column"
                 :request="request"
                 :result="result"
@@ -85,9 +87,14 @@ export default {
             })
         },
         treeLoad(tree, treeNode, resolve){
-            queryTreeElement().then(res=>{
+             queryTreeElement().then(res=>{
                  resolve(this.result(res))
             })
+
+        },
+        loadOrToggle( ){
+            this.$refs.tree.loadOrToggle({organize_id:2})
+
 
         },
     },
