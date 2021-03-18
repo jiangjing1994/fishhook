@@ -142,6 +142,23 @@ const RenderContent = {
         return <el-tag>{row[prop]}</el-tag>
     }
 }
+
+const getRowIdentity = (row, rowKey) => {
+    if (!row) throw new Error('row is required when get row identity');
+    if (typeof rowKey === 'string') {
+        if (rowKey.indexOf('.') < 0) {
+            return row[rowKey];
+        }
+        let key = rowKey.split('.');
+        let current = row;
+        for (let i = 0; i < key.length; i++) {
+            current = current[key[i]];
+        }
+        return current;
+    } else if (typeof rowKey === 'function') {
+        return rowKey.call(null, row);
+    }
+};
 /**
  * @displayName Table 配置化表格
  */
@@ -300,7 +317,7 @@ export default {
          * 结果处理
          */
         // eslint-disable-next-line vue/require-default-prop
-         result:Function,
+        result:Function,
         /**
          * 行样式
          */
@@ -615,7 +632,7 @@ export default {
 
 
                         }else {
-                             this.crudData = this.tableData
+                            this.crudData = this.tableData
 
                         }
                     }
@@ -785,13 +802,24 @@ export default {
         },
 
 
-        // 代码调用懒加载
-        loadOrToggle(row){
+        // 手动渲染
+        loadNode(row){
+            const table =  this.$refs.crud.$refs.table.store
+            const {states,loadData,toggleTreeExpansion} =  table
 
 
-             this.$refs.crud.$refs.table.store.loadOrToggle(row)
+            const {  treeData, rowKey,lazy } = states;
+            const id = getRowIdentity(row, rowKey);
+            const data = treeData[id];
+            data.loaded = false
 
-        }
+            if (lazy && data && 'loaded' in data && !data.loaded) {
+                loadData(row, id, data);
+            } else {
+                toggleTreeExpansion(row);
+            }
+        },
+
 
     }
 

@@ -115,6 +115,7 @@ export const mockList = () => {
         }]
 };
 export const queryTreeRoot = () => {
+    console.log(222)
 
 
      return new Promise((resolve)=>{
@@ -153,6 +154,7 @@ export const queryTreeRoot = () => {
     })
 }
 export const queryTreeElement = () => {
+    console.log(1111)
 
      return new Promise((resolve)=>{
         setTimeout(()=>{

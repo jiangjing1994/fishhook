@@ -1,6 +1,7 @@
 <template>
     <div>
         <KemButton @click="loadOrToggle">手动展开</KemButton>
+        <KemButton @click="refreshData">手动渲染</KemButton>
         <KemTable
                 ref="tree"
                 :column="column"
@@ -87,6 +88,10 @@ export default {
             })
         },
         treeLoad(tree, treeNode, resolve){
+            this.tree = tree;
+            this.treeNode = treeNode;
+            this.resolve = resolve;
+            console.log(tree, treeNode,)
              queryTreeElement().then(res=>{
                  resolve(this.result(res))
             })
@@ -94,6 +99,15 @@ export default {
         },
         loadOrToggle( ){
             this.$refs.tree.loadOrToggle({organize_id:2})
+
+
+        },
+        refreshData(){
+            //手动调用加载数据方法
+            this.treeLoad(this.tree,this.treeNode,this.reslove);
+        },
+        loadData(){
+            this.$refs.tree.loadData({organize_id:2})
 
 
         },
