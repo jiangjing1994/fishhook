@@ -12,6 +12,9 @@
         <KemButton @click="dw4">
             点我4
         </KemButton>
+        <KemButton @click="dw5">
+            点我5
+        </KemButton>
         <KemDialog :visible.sync="visible" @save="save">
             <template slot="header">
                 默认
@@ -41,10 +44,17 @@
             </template>
             盼望着，盼望着，东风来了，春天的脚步近了。
         </KemDialog>
+        <KemDialog :visible.sync="visible5" :element="element">
+            <template slot="header">
+                element
+            </template>
+            盼望着，盼望着，东风来了，春天的脚步近了。
+        </KemDialog>
     </div>
 </template>
 
 <script>
+import Table from '../demo/Table'
 export default {
     name: "Dialog",
     data() {
@@ -52,7 +62,9 @@ export default {
             visible: false,
             visible2: false,
             visible3: false,
-            visible4: false
+            visible4: false,
+            visible5: false,
+            element:Table
         };
     },
     methods: {
@@ -67,6 +79,9 @@ export default {
         },
         dw4() {
             this.visible4 = !this.visible4;
+        },
+        dw5() {
+            this.visible5 = !this.visible5;
         },
         save() {
             this.$message("保存");

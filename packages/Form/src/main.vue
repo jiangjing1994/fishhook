@@ -16,24 +16,14 @@
         </div>-->
 
         <FormItem
+                ref="formItem"
+                v-bind="$attrs"
                 :computed-items="computedItems"
-                :data="data"
                 :is-form-group="isFormGroup"
+                v-on="$listeners"
+                :data="data"
         ></FormItem>
-        <!--        <el-timeline v-else :reverse="false">-->
-        <!--            <el-timeline-item v-for="(timelineItem, key) in computedItems" :key="key">-->
-        <!--                <template slot="dot">-->
-        <!--                    <div class="icon__body">-->
-        <!--                        <i :class="`${timelineItem.icon || 'el-icon-paperclip'}`"></i>-->
-        <!--                    </div>-->
-        <!--                </template>-->
-        <!--                <div class="timeline__title">{{ timelineItem.label }}</div>-->
-        <!--                <FormItem-->
-        <!--                        :computed-items="timelineItem.formItems"-->
-        <!--                        :data="data"-->
-        <!--                ></FormItem>-->
-        <!--            </el-timeline-item>-->
-        <!--        </el-timeline>-->
+
     </el-form>
 </template>
 
@@ -279,6 +269,9 @@ export default {
         },
         clearValidate (props) { // 清空校验
             this.$refs.form.clearValidate(props)
+        },
+        formItemElement(){
+          return this.$refs.formItem.$refs['component'][0]
         }
     }
 }

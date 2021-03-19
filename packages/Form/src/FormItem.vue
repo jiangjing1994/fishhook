@@ -58,11 +58,20 @@
                 <div class="fib-title_body">
                     <div class="fib-icon__body">
                         <i :class="`${item.icon || 'el-icon-paperclip'}`"></i>
-
                     </div>
                     <div class="fib-label__body">{{ item.label }}</div>
                 </div>
 
+                <div class="fib-element_body">
+                    <component
+                            :is="item.element"
+                            ref="component"
+                            :computed-items="computedItems"
+                            :data="data"
+                            v-bind="$attrs"
+                            v-on="$listeners"
+                    />
+                </div>
 
             </template>
 
@@ -119,6 +128,17 @@ export default {
         getItemSpan (item) {
             return item.span || (item.isFormGroup ? 24 : 12)
         },
+        start(params) {
+
+            this.$nextTick(() => {
+                if (this.$refs["component"].start) {
+                    this.$refs["component"].start(params);
+                }
+            });
+        },
+        end() {
+            this.$emit("end");
+        },
     },
 }
 </script>
@@ -144,7 +164,7 @@ export default {
         line-height: 32px;
         padding-left: 5px;
         margin-bottom: 10px;
-      //  background-image: linear-gradient(to right, #e3f5ff, #ffffff);
+        //  background-image: linear-gradient(to right, #e3f5ff, #ffffff);
         border-radius: 5px;
         position: relative;
         .fib-icon__body{
@@ -153,7 +173,7 @@ export default {
             width: 32px;
             height: 32px;
             line-height: 32px;
-             font-size:16px;
+            font-size:16px;
             font-weight: bold;
             color: #4251eb;
             border-radius: 15px;
@@ -166,6 +186,11 @@ export default {
             font-weight: bold;
             left: 40px;
         }
+    }
+    .fib-element_body{
+        padding-left: 30px;
+        margin-bottom: 10px;
+        position: relative;
     }
 
 }

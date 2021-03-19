@@ -32,8 +32,9 @@
         <KemPageCard style="width: 800px" header="Form">
             <pre>{{ form }}</pre>
 
+            <KemButton @click="test">aaa</KemButton>
             <KemForm
-                    ref="form"
+                    ref="form2"
                     :form-items="formItems2"
                     :form-config="{labelPosition:'right'}"
                     :data="form"
@@ -41,6 +42,7 @@
                     :read-only="readOnly"
                     is-form-group
                     @updataFormData="updataFormData"
+                    @clickDel="clickDel"
             >
                 <template slot="resource">
                     <el-radio-group v-model="form.resource">
@@ -62,6 +64,8 @@
 </template>
 
 <script>
+
+import Button from './Button'
 export default {
     name: "Form",
     data() {
@@ -136,13 +140,19 @@ export default {
                 {label: '特殊资源', prop: 'resource', slot: 'resource', span:24},
             ],
             formItems2: (data)=>{
+                let FI3 = data.region==='beijing'? [{
+                        label:'表单组4',
+                        formItems:[
+                            {label: data.name, prop: 'resource', slot: 'resource', span:24}
+                        ]
+                    }]:[]
                 return [
                     {
 
                         label:'表单组1',
                         formItems:[
                             /* {label: '活动名称', prop: 'name', span:24, tip:'afsdfdfsdfsd',tipType:'alert'},*/
-                            {label: '活动名称', prop: 'name', span:13, },
+                            {label: '活动名称', prop: 'name', span:24, tip:data.region},
                             {label: '电子邮箱', prop: 'email', span:13},
                             {label: '人员总数', prop: 'num', span:24,component: 'KemInputNumber'},
                             {label: '活动区域', prop: 'region', span:24, component: 'KemSelect',props:{
@@ -202,14 +212,14 @@ export default {
                                 } },
                             {label: '特殊资源', prop: 'resource', slot: 'resource', span:24},
                         ]
-                    },
-                    {
-                        label:'表单组3',
-                        formItems:[
-                            {label: data.name, prop: 'resource', slot: 'resource', span:24}
-                        ]
-                    },
+                    },{
 
+                        label:'表单组3',
+                        formItems:[],
+                        element:Button
+
+                    },
+                    ...FI3
 
                 ]
             }
@@ -299,6 +309,13 @@ export default {
             this.formItems = [
                 {label: '活动名称', prop: 'name', span:24,},
             ]
+        },
+        test(){
+            console.log( this.$refs.form2.formItemElement())
+            this.$refs.form2.formItemElement().clickButtonItem({value:'aaa'})
+        },
+        clickDel(v){
+            console.log(v)
         }
 
     },

@@ -154,7 +154,6 @@ export const queryTreeRoot = () => {
     })
 }
 export const queryTreeElement = () => {
-    console.log(1111)
 
      return new Promise((resolve)=>{
         setTimeout(()=>{

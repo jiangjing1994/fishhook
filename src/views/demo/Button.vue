@@ -1,11 +1,11 @@
 <template>
   <div class="about">
-    <KemButton type="text.del"></KemButton>
+    <KemButton type="text.del" @click="clickDel"></KemButton>
     <KemButton type="text.add"></KemButton>
     <KemButton type="icon.del"></KemButton>
     <KemButton type="operate.del"></KemButton>
     <KemButton type="operate.add">
-      自定义文本按钮
+      自定义
     </KemButton>
     <KemButton type="operate.add"></KemButton>
     <KemButton type="operate.edit"></KemButton>
@@ -31,6 +31,7 @@
 <script>
 export default {
   name: "Button",
+
   data() {
     return {
       selectButtonGroup: [
@@ -50,6 +51,9 @@ export default {
   methods: {
     clickButtonItem({ value }) {
       this.$message.success(value);
+    },
+    clickDel() {
+      this.$emit('clickDel',123)
     }
   }
 };

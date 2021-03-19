@@ -16,14 +16,21 @@
         <slot name="header">{{ $attrs.header }}</slot>
         <div class="dialog__menu--screen">
           <i class="el-dialog__close el-icon-full-screen"
-             @click="handleFullScreen"></i>
+             @click="handleFullScreen"
+          ></i>
         </div>
       </div>
     </div>
-    <div  class="dialog__body--content">
+    <div class="dialog__body--content">
       <slot />
+      <component
+              :is="element"
+              ref="component"
+              v-bind="$attrs"
+              v-on="$listeners"
+       />
     </div>
-    <div  class="dialog__body--footer">
+    <div class="dialog__body--footer">
       <div v-if="$slots.footer">
         <div slot="footer">
           <slot name="footer" />
@@ -41,7 +48,8 @@
           </KemButton>
           <KemButton
                   type="default"
-                  @click="$emit('update:visible', false)">
+                  @click="$emit('update:visible', false)"
+          >
             取 消
           </KemButton>
         </div>
@@ -81,12 +89,21 @@ export default {
     modal:{
       type: Boolean,
       default: false
+    },
+    // eslint-disable-next-line vue/require-default-prop,vue/require-prop-types
+    element:{},
+
+    elementProps:{
+      type:Object,
+      default: ()=>{
+        return{}
+      }
     }
   },
   data() {
     return {
       isShow: false,
-     fullscreen: false,
+      fullscreen: false,
     }
 
   },
@@ -103,6 +120,23 @@ export default {
     handleFullScreen () {
       this.fullscreen = !this.fullscreen;
     },
+
+    start(params) {
+
+      this.show();
+      this.$nextTick(() => {
+        if (this.$refs["component"].start) {
+          this.$refs["component"].start(params);
+        }
+      });
+    },
+
+    end() {
+      this.close();
+      this.$emit("end");
+    },
+
+
   }
 }
 </script>
@@ -111,7 +145,7 @@ $--color-primary:'yellow';
 
 .dialog__body{
   .el-dialog{
-      border-radius: 4px;
+    border-radius: 4px;
 
   }
   .dialog__body--header{
