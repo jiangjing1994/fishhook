@@ -4,7 +4,7 @@
             <pre>{{ form }}</pre>
             <KemForm
                     ref="form"
-                    :form-items="formItems3"
+                    :form-items="formItems"
                     :form-config="{labelPosition:'right',}"
                     :data="form"
                     :form-rules="formRules"

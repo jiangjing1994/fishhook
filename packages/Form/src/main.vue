@@ -177,12 +177,11 @@ export default {
             deep: false
         },
 
-        computedFormItems:{
+        formItems:{
             handler( ) {
-                //console.log(newValue)
-                // console.log(oldValue)
+                this.getComputedItems()
             },
-            deep: false
+            deep: true
         },
     },
     created(){
@@ -190,6 +189,8 @@ export default {
     },
     methods: {
         getComputedItems(){
+            console.log(44444444)
+
 
             this.reload = false
             const getci = () =>{
