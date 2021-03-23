@@ -27,6 +27,7 @@ export default {
     data() {
         return {
             data: [],
+            dataType:'Array'
         }
     },
     computed:{

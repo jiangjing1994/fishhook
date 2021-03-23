@@ -64,7 +64,7 @@ export default {
                     }
                 },
                 {
-                    label: '动态条件', prop: 'prop2', span: 13, component: 'KemSelect', props: {
+                    label: '动态条件', prop: 'prop2', span: 13, component: 'KemCheckboxGroup', props: {
                         request: transferRequest,
                         defaultProps: {
                             label: 'transferName',

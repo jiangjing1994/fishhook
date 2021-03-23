@@ -12,7 +12,7 @@
  */
 export default {
     name: 'KemSelect',
-     props: {
+    props: {
         defaultProps: {
             type: Object,
             default:()=>{
@@ -38,6 +38,12 @@ export default {
         clearable: {
             type: Boolean,
             default: true
+        },
+
+        // 自动选择第一个值request模式下生效
+        autoSelect: {
+            type: Boolean,
+            default: false
         },
         uiType:{
             // text normal
@@ -148,6 +154,14 @@ export default {
                 }
 
                 this.data = data
+
+                if (this.autoSelect && data instanceof Array && data.length > 0){
+
+                    this.$attrs.value = data[0][this.defaultProps['value']]
+
+                    this.$emit('input',this.$attrs.value)
+                }
+
 
             }else {
                 throw new Error(`Need request !!!!!!!`)

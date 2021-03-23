@@ -42,6 +42,11 @@ export default {
                 }
             }
         },
+        // 自动选择第一个值request模式下生效
+        autoSelect: {
+            type: Boolean,
+            default: false
+        },
     },
     computed:{
 
@@ -122,6 +127,18 @@ export default {
                 }
 
                 this.data = data
+
+                if (this.autoSelect && data instanceof Array && data.length > 0){
+                    let value = data[0][this.defaultProps['value']]
+
+                    if (this.dataType === 'Array'){
+                        value = [value]
+                    }
+
+                    this.$attrs.value = value
+                    this.$emit('input',value)
+
+                }
 
             }else {
                 throw new Error(`Need request !!!!!!!`)
