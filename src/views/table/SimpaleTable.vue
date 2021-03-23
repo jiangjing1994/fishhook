@@ -1,16 +1,19 @@
 <template>
-    <KemTable
-            :table-data="data"
-            :column="column"
-            @rowClick="rowClick"
-            @clickMenuButton="clickMenuButton"
-    >
+    <div>
+        <KemTable
+                :table-data="data"
+                :column="column"
+                @rowClick="rowClick"
+                @clickMenuButton="clickMenuButton"
+        >
 
-        <template slot="sex" slot-scope="{scope}">
-            <KemButton type="text">{{ scope.row.sex }}</KemButton>
-        </template>
+            <template slot="type" slot-scope="{scope}">
+                <KemButton type="text">{{ scope.row.type }}</KemButton>
+            </template>
 
-    </KemTable>
+        </KemTable>
+
+    </div>
 
 </template>
 
@@ -26,9 +29,9 @@ export default {
             expand: true,
             data:[],
             column: [
-                {label: "业务需求编号", prop: "code",},
+                {label: "业务需求编号", prop: "code",component:'KemInput'},
                 {label: "需求主题", prop: "title"},
-                {label: "需求类型", prop: "type"},
+                {label: "需求类型", prop: "type",slot:true},
                 {label: "需求提交人", prop: "createUser"},
                 {label: "需求提交时间", prop: "createTime",},
                 {label: "正式需求编号", prop: "formalCode"}

@@ -20,8 +20,8 @@
                 v-bind="$attrs"
                 :computed-items="computedItems"
                 :is-form-group="isFormGroup"
-                v-on="$listeners"
                 :data="data"
+                v-on="$listeners"
         ></FormItem>
 
     </el-form>
@@ -189,8 +189,6 @@ export default {
     },
     methods: {
         getComputedItems(){
-            console.log(44444444)
-
 
             this.reload = false
             const getci = () =>{

@@ -47,10 +47,11 @@
         >
 
             <template
-                    v-for="(item,key) in column"
+                    v-for="(item,key) in computedOption.column"
                     :slot="item.prop"
                     slot-scope="scope"
             >
+                <!--开发中-->
                 <render-content
                         v-if="item.render"
                         :key="key"
@@ -58,7 +59,23 @@
                         :scope="scope"
                         :column="item"
                 ></render-content>
-                <slot :name="item.prop" :scope="scope"></slot>
+
+
+                <component
+
+                        :is="item.component"
+                        v-if="item.component !== 'Text'"
+                        :key="key"
+                        :ref="item.ref || `cp-${scope.row.$index}-${item.prop}`"
+                        v-model="crudData[scope.row.$index][item.prop]"
+                        :data="crudData[scope.row.$index]"
+                        v-bind="item.props"
+                        v-on="item.listeners"
+                />
+
+                <span v-if="!item.nativeSlot && !item.component" :key="key">{{ scope.row[item.prop] }}</span>
+
+                <slot v-else :name="item.prop" :scope="scope"></slot>
             </template>
 
             <!-- <template slot="menuLeft">
@@ -442,6 +459,8 @@ export default {
                         ...item
                     }
                 }
+                item.nativeSlot = !!item.slot
+                item.slot = true
                 return  item
             })
 
@@ -545,7 +564,6 @@ export default {
     },
 
     created() {
-
         this.renderTable()
     },
     methods: {
