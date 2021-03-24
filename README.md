@@ -1,6 +1,7 @@
 # [jiangjing94/mimi](https://jiangjing1994.github.io/mimi/)
 
 ## 快速开始
+> 前人挖坑后人埋，看你埋得过来不过来。
 ### install
 ```
 yarn add @jiangjing94/mimi
