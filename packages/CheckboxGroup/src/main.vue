@@ -22,6 +22,23 @@ export default {
             default:false
         },
 
+        multiple: {
+            type: Boolean,
+            default: true
+        },
+
+        // 数据类型 array string
+        valueDataType:{
+            type: String,
+            default:'array'
+        },
+
+        // 分隔符
+        separator:{
+            type: String,
+            default:','
+        },
+
 
     },
     data() {
@@ -32,7 +49,17 @@ export default {
     },
     computed:{
         v(){
-            return this.$attrs.value || []
+            let value = []
+
+            if(!this.$attrs.value){
+                return  []
+            }
+            if (this.valueDataType === 'array'){
+                value = this.$attrs.value
+            }else if (this.valueDataType === 'string') {
+                value = this.$attrs.value.split(this.separator)
+            }
+            return value || []
         },
         isdisabled(){
             return this.$attrs.isdisabled || this.uiType ==="text"

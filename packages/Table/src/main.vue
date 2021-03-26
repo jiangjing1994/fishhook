@@ -64,7 +64,7 @@
                 <component
 
                         :is="item.component"
-                        v-if="item.component !== 'Text'"
+                        v-if="item.component"
                         :key="key"
                         :ref="item.ref || `cp-${scope.row.$index}-${item.prop}`"
                         v-model="crudData[scope.row.$index][item.prop]"

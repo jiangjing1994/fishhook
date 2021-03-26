@@ -41,7 +41,8 @@ export default {
             uiType:'text',
             form: {
                 prop3:'Nanjing',
-                prop4:'这是KemInput'
+                prop4:'这是KemInput',
+                prop6:'shanghai'
             }
         }
     },
@@ -64,7 +65,7 @@ export default {
                     }
                 },
                 {
-                    label: '动态条件', prop: 'prop2', span: 13, component: 'KemCheckboxGroup', props: {
+                    label: '动态条件', prop: 'prop2', span: 13, component: 'KemSelect', props: {
                         request: transferRequest,
                         defaultProps: {
                             label: 'transferName',
@@ -94,7 +95,41 @@ export default {
                         uiType
                     }
                 },
-             ]
+                {
+                    label: '多选', prop: 'prop5', span: 13, component: 'KemSelect', props: {
+                        multiple:true,
+                        options: [
+                            {
+                                label: '区域一',
+                                value: 'shanghai'
+                            },
+                            {
+                                label: '区域二',
+                                value: 'beijing'
+                            }
+                        ]
+                    }
+                },
+                {
+                    label: '多选2', prop: 'prop6', span: 13, component: 'KemSelect', props: {
+                         valueDataType:'string',
+                        multiple:true,
+
+                        options: [
+                            {
+                                label: '区域一',
+                                value: 'shanghai'
+                            },
+                            {
+                                label: '区域二',
+                                value: 'beijing'
+                            }
+                        ]
+                    }
+                },
+
+
+            ]
         }
     },
     methods: {

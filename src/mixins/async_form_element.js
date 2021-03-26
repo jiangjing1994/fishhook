@@ -47,6 +47,7 @@ export default {
             type: Boolean,
             default: false
         },
+
     },
     computed:{
 
@@ -64,8 +65,28 @@ export default {
             })
         },
         evet(){
+            if (this.$listeners.input) {
+                 this.$listeners.input = (value)=>{
+                     console.log(value)
+
+                     if(!this.multiple){
+
+                         this.$emit('input',value)
+
+                     }else {
+                         if (this.valueDataType === 'string' && this.separator){
+                             this.$emit('input',value.join(this.separator))
+                         }else {
+                             this.$emit('input',value)
+                         }
+                     }
+
+
+                }
+            }
             return this.$listeners;
         },
+
         isService(){
             return !!this.request
         },
