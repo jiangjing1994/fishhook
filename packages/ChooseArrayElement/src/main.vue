@@ -29,14 +29,19 @@ export default {
 
     props: {
         value: {
-            type: Array,
+            type: [Array,String],
             default:()=>{
                 return []
             }
         },
+        // 数据类型 array string
+        valueDataType:{
+            type: String,
+            default:'array'
+        },
         buttonText: {
             type: String,
-            default: '编辑'
+            default: '详细信息'
         },
         content: {
             type: String,
@@ -44,7 +49,7 @@ export default {
         },
         title: {
             type: String,
-            default: '代码编辑器'
+            default: '详细信息'
         },
         formItems: {
             type: Array,
@@ -64,10 +69,24 @@ export default {
 
         computedvalue: {
             get () {
-                return this.value
+                if (this.valueDataType === 'string'){
+                    console.log(this.value)
+                    if(!this.value) return []
+                    return JSON.parse(this.value)
+
+                }else {
+                    return this.value
+                }
+
             },
             set (v) {
-                this.$emit('input', v)
+                if (this.valueDataType === 'string'){
+                    if(!v) return ''
+                    this.$emit('input', JSON.stringify(v))
+
+                }else{
+                    this.$emit('input', v)
+                }
             }
         },
 

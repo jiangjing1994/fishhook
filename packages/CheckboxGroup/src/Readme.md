@@ -2,7 +2,7 @@
 ```vue
 <template>
 
-    <KemPageCard header="多选框">
+    <KemPageCard header="复选框">
         <pre>{{ form }}</pre>
         <KemForm
                 ref="form"
@@ -43,7 +43,8 @@ export default {
             uiType:'text',
             form: {
                 prop3:['Nanjing'],
-                prop4:'这是KemInput'
+                prop4:'这是KemInput',
+                prop5:'beijing'
             }
         }
     },
@@ -96,6 +97,26 @@ export default {
                         uiType
                     }
                 },
+                {
+                    label: '字符串类型', prop: 'prop5', span: 13, component: 'KemCheckboxGroup', props: {
+                        valueDataType:'string',
+                        options: [
+                            {
+                                label: '区域一',
+                                value: 'shanghai'
+                            },
+                            {
+                                label: '区域二',
+                                value: 'beijing'
+                            },
+                            {
+                                label: '区域三',
+                                value: 'nanjing'
+                            }
+                        ]
+                    }
+                },
+
             ]
         }
     },

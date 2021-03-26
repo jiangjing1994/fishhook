@@ -1,6 +1,6 @@
 <template>
 
-    <KemPageCard header="多选框">
+    <KemPageCard header="复选框">
         <pre>{{ form }}</pre>
         <KemForm
                 ref="form"
