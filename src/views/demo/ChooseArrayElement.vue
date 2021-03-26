@@ -1,7 +1,7 @@
 <template>
 <div style="text-align: left">
     <pre>{{ value }}</pre>
-<!--    <KemChooseArrayElement v-model="value.a" :form-items="formItems" />-->
+    <KemChooseArrayElement v-model="value.a" :form-items="formItems" button-text="自定义"/>
     <KemChooseArrayElement v-model="value.b" value-data-type="string" :form-items="formItems" />
 </div>
 </template>
@@ -12,7 +12,7 @@
     data() {
         return {
             value: {
-                b:''
+
             },
             formItems:[
                 {label: '活动名称', prop: 'name', span:24, },

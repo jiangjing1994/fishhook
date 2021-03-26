@@ -4,7 +4,7 @@
             <template slot="header">
                 <span>
                     {{ title }}
-                    <el-tooltip class="item" effect="dark" :content="content" placement="right-end">
+                    <el-tooltip v-if="content" class="item" effect="dark" :content="content" placement="right-end">
                         <el-button type="text" icon="el-icon-info"></el-button>
                     </el-tooltip>
                 </span>
@@ -69,9 +69,9 @@ export default {
 
         computedvalue: {
             get () {
+
                 if (this.valueDataType === 'string'){
-                    console.log(this.value)
-                    if(!this.value) return []
+                     if((!this.value) || (this.value instanceof Array && this.value.length === 0) ) return []
                     return JSON.parse(this.value)
 
                 }else {
@@ -80,8 +80,13 @@ export default {
 
             },
             set (v) {
+
                 if (this.valueDataType === 'string'){
-                    if(!v) return ''
+
+                    if(!v) {
+                        this.$emit('input', '')
+                        return
+                    }
                     this.$emit('input', JSON.stringify(v))
 
                 }else{
