@@ -1,6 +1,6 @@
 {
   "name": "@jiangjing94/mimi",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "private": false,
   "scripts": {
     "start": "npm-run-all --parallel start:*",

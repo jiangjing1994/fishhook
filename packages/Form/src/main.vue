@@ -9,20 +9,94 @@
             :model="data"
     >
         <div v-if="readOnly" class="mask"></div>
-        <!--<div v-if="readOnly" style="text-align: right">
-            <el-tag type="danger">
-                只读
-            </el-tag>
-        </div>-->
 
-        <FormItem
-                ref="formItem"
-                v-bind="$attrs"
-                :computed-items="computedItems"
-                :is-form-group="isFormGroup"
-                :data="data"
-                v-on="$listeners"
-        ></FormItem>
+        <el-row class="fomr_item_body">
+            <el-col
+                    v-for="(item, index) in computedItems"
+                    :key="getItemKey(item, index)"
+                    :md="item.md"
+                    :sm="item.sm"
+                    :span="getItemSpan(item)"
+            >
+                <template v-if="!item.isFormGroup">
+                    <div :class="isFormGroup?'isformgrouptitle':''">
+                        <div v-if="item.tip && item.tipType === 'alert'" style="padding: 0 0 0 10px;margin-bottom: 5px">
+                            <el-alert
+                                    :title=" item.tip"
+                                    style="padding: 5px 6px"
+                                    type="info"
+                                    show-icon
+                                    :closable="false"
+                            >
+                            </el-alert>
+                        </div>
+                        <el-form-item
+                                :prop="item.prop"
+                        >
+                            <render-content
+                                    v-if="item.labelRender"
+                                    slot="label"
+                                    :render="item.labelRender"
+                                    :data="item"
+                            />
+                            <span v-else slot="label">
+                       {{ item.label }}
+                        <el-tooltip v-if="item.tip && item.tipType !== 'alert'" effect="dark" placement="bottom">
+                            <template slot="content"><pre>{{ item.tip }}</pre></template>
+                        <i class="el-icon el-icon-info" style="cursor: pointer"></i> :
+                        </el-tooltip>：
+                    </span>
+                            <slot
+                                    :name="item.slot"
+                                    v-bind="{ item }"
+                            >
+                                <component
+                                        :is="item.component"
+                                        v-if="item.component !== 'Text'"
+                                        :ref="item.ref || `cp-${item.prop}`"
+                                        v-model="data[item.prop]"
+                                        :data="data"
+                                        v-bind="item.props"
+                                        v-on="item.listeners"
+                                />
+                                <span v-else>{{ data[item.prop] }}</span>
+                            </slot>
+                        </el-form-item>
+                    </div>
+
+                </template>
+                <template v-else>
+                    <div class="fib-title_body">
+                        <div class="fib-icon__body">
+                            <i :class="`${item.icon || 'el-icon-paperclip'}`"></i>
+                        </div>
+                        <div class="fib-label__body">{{ item.label }}</div>
+                    </div>
+
+                    <div class="fib-element_body">
+                        <component
+                                :is="item.element"
+                                ref="component"
+                                :computed-items="computedItems"
+                                :data="data"
+                                v-bind="$attrs"
+                                v-on="$listeners"
+                        />
+                    </div>
+
+                </template>
+
+            </el-col>
+            <div v-if="isFormGroup" class="line-vertical"></div>
+        </el-row>
+        <!--        <FormItem-->
+        <!--                ref="formItem"-->
+        <!--                v-bind="$attrs"-->
+        <!--                :computed-items="computedItems"-->
+        <!--                :is-form-group="isFormGroup"-->
+        <!--                :data="data"-->
+        <!--                v-on="$listeners"-->
+        <!--        ></FormItem>-->
 
     </el-form>
 </template>
@@ -55,8 +129,28 @@ import FormItem from './FormItem'
 export default {
     name:'KemForm',
     components: {
-        FormItem
+        FormItem,
+        RenderContent:{
+            props: {
+                render: Function,
+                formatter: Function, // 格式化数据
+                data: Object,
+                prop: String
+            },
+            render (h) {
+                if (this.render) {
+                    return this.render(h, this.data)
+                }
+                let value = this.data[this.prop]
+                if (this.formatter) {
+                    value = this.formatter(value, this.data)
+                }
+                return <span>{value}</span>
+            }
+        }
     },
+
+
 
     props: {
         // eslint-disable-next-line vue/require-default-prop
@@ -258,9 +352,6 @@ export default {
             vm.$emit('updataFormData',JSON.parse(newValue),JSON.parse(oldValue))
 
         }, 500),
-        getItemKey (item, index) {
-            return `${item.prop}-${index}`
-        },
         validate () {
             return new Promise(resolve => {
                 this.$refs.form.validate(resolve)
@@ -270,8 +361,25 @@ export default {
             this.$refs.form.clearValidate(props)
         },
         formItemElement(){
-          return this.$refs.formItem.$refs['component'][0]
-        }
+            return this.$refs.formItem.$refs['component'][0]
+        },
+        getItemKey (item, index) {
+            return `${item.prop}-${index}`
+        },
+        getItemSpan (item) {
+            return item.span || (item.isFormGroup ? 24 : 12)
+        },
+        start(params) {
+
+            this.$nextTick(() => {
+                if (this.$refs["component"].start) {
+                    this.$refs["component"].start(params);
+                }
+            });
+        },
+        end() {
+            this.$emit("end");
+        },
     }
 }
 </script>
