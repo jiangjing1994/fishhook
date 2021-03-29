@@ -1,12 +1,17 @@
 ## 快速开始
 > 🐑前人挖坑后人埋，看你埋得过来不过来。🐔
+
+- [😅 github](https://github.com/jiangjing1994/mimi/)
+- [😐 文档](https://jiangjing1994.github.io/mimi//)
+- [😊 npm](https://www.npmjs.com/package/@jiangjing94/mimi//)
+
 ### install
-``` json
+``` shell
 yarn add @jiangjing94/mimi
 ```
 
 ### start
-``` json
+``` javascript
 // main.js
 __
 import MimiUI from '@jiangjing94/mimi'
@@ -17,7 +22,7 @@ Vue.use(MimiUI,{ size: 'mini', zIndex: 3000 })
 Vue.use(ElementUI)
  
 ```
-> Vue.use() 顺序不要变
+> Vue.use() 顺序不要变 😶
 ## 其他
 ### 仓库说明
  - 本库高度封装，牺牲一定的体验性，为的是提高开发效率(为了上班摸鱼)，提倡代码配置化。
@@ -43,4 +48,3 @@ Vue.use(ElementUI)
 - 有必要的文档，或通过单元测试描述了足够完整的功能。
 - 最好也提供可运行的例子。
 
-### [github 地址](https://jiangjing1994.github.io/mimi/)
