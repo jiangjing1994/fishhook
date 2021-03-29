@@ -31,6 +31,7 @@
                             </el-alert>
                         </div>
                         <el-form-item
+                                v-if="labelType ==='nomal'"
                                 :prop="item.prop"
                         >
                             <render-content
@@ -62,6 +63,25 @@
                                 <span v-else>{{ data[item.prop] }}</span>
                             </slot>
                         </el-form-item>
+                         <div v-else style="margin-bottom: 14px;padding-right: 20px">
+                             <slot
+                                     :name="item.slot"
+                                     v-bind="{ item }"
+                             >
+                                 <component
+                                         :is="item.component"
+                                         v-if="item.component !== 'Text'"
+                                         :ref="item.ref || `cp-${item.prop}`"
+                                         v-model="data[item.prop]"
+                                         :data="data"
+                                         :placeholder="item.label"
+                                         v-bind="item.props"
+                                         v-on="item.listeners"
+                                 />
+                                 <span v-else>{{ data[item.prop] }}</span>
+                             </slot>
+
+                        </div>
                     </div>
 
                 </template>
@@ -185,6 +205,15 @@ export default {
         isFormGroup:{
             type: Boolean,
             default:false
+        },
+
+        /**
+         * label 类型
+         *  @values default, none,
+         */
+        labelType:{
+            type: String,
+            default:'default'
         }
     },
     data() {

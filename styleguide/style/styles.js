@@ -3,7 +3,7 @@ const  stylesObj = {
 
     Logo: {
         logo: {
-            color: '#542eff',
+           // color: '#542eff',
             fontWeight: 'bold',
             fontSize: 20
         }
