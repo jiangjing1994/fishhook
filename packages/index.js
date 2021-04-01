@@ -27,7 +27,9 @@ import KemSearch from './Search'
 import KemInputPassWord from './InputPassWord'
 import KemDatePicker from './DatePicker'
 import ElementUI from "element-ui";
-import "./theme/index.css";
+//import "./theme/index.css";
+import "element-ui/lib/theme-chalk/index.css";
+
 import Avue from '@smallwei/avue';
 import '@smallwei/avue/lib/index.css';
 import { Tree as KemViewTree , Alert as KemViewAlert} from 'view-design';
