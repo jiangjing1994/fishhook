@@ -31,7 +31,7 @@
                             </el-alert>
                         </div>
                         <el-form-item
-                                v-if="labelType ==='nomal'"
+                                v-if="labelType ==='default'"
                                 :prop="item.prop"
                         >
                             <render-content
