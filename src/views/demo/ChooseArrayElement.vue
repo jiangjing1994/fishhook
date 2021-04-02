@@ -2,7 +2,7 @@
 <div style="text-align: left">
     <pre>{{ value }}</pre>
     <KemChooseArrayElement v-model="value.a" :form-items="formItems" button-text="自定义"/>
-    <KemChooseArrayElement v-model="value.b" value-data-type="string" :form-items="formItems" />
+    <KemChooseArrayElement v-model="value.b" value-data-type="string"  ui-type="inline" :form-items="formItems" />
 </div>
 </template>
 
@@ -16,9 +16,19 @@
             },
             formItems:[
                 {label: '活动名称', prop: 'name', span:24, },
-                {label: '电子邮箱', prop: 'email', span:24},
-                {label: '人员总数', prop: 'num', span:24,component: 'KemInputNumber'},
-            ]
+                {label: '电子邮箱', prop: 'email', span:24, component: 'KemCheckboxGroup', props: {
+                        options: [
+                            {
+                                label: '区域一',
+                                value: 'shanghai'
+                            },
+                            {
+                                label: '区域二',
+                                value: 'beijing'
+                            }
+                        ]
+                    }},
+             ]
         }
     },
 }

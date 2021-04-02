@@ -17,11 +17,11 @@
             </el-col>-->
         <el-col :span="1">
           <div class="num">
-            {{index +1}}
+            {{ index +1 }}
 
           </div>
         </el-col>
-        <el-col :span="20">
+        <el-col :span="19">
           <KemForm
                   :data="domain"
                   :form-items="formItems"

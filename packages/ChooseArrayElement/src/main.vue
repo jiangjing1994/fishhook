@@ -1,7 +1,8 @@
 <template>
     <div style="position: relative">
-        <KemDialog :visible.sync="visible" :modal-append-to-body="false" :close-on-click-modal="true" @save="save">
-            <template slot="header">
+        <template v-if="uiType==='default'">
+            <KemDialog :visible.sync="visible" :modal-append-to-body="false" :close-on-click-modal="true" @save="save">
+                <template slot="header">
                 <span>
                     {{ title }}
                     <el-tooltip v-if="content" class="item" effect="dark" :content="content" placement="right-end">
@@ -9,10 +10,17 @@
                     </el-tooltip>
                 </span>
 
-            </template>
-            <Condition v-model="computedvalue" language="sql" style="width: 100%;height: 500px;margin-top: 10px" :form-items="formItems"></Condition>
-        </KemDialog>
-        <KemButton type="operate.edit" @click="handleButton">{{ buttonText }}</KemButton>
+                </template>
+                <Condition v-model="computedvalue" language="sql" style="width: 100%;height: 500px;margin-top: 10px" :form-items="formItems"></Condition>
+            </KemDialog>
+            <KemButton type="operate.edit" @click="handleButton">{{ buttonText }}</KemButton>
+        </template>
+        <template v-else>
+            <Condition v-model="computedvalue" style="padding: 10px;background-color: #f8f8f8" :form-items="formItems"></Condition>
+
+        </template>
+
+
     </div>
 </template>
 <script>
@@ -38,6 +46,11 @@ export default {
         valueDataType:{
             type: String,
             default:'array'
+        },
+        // 显示类型 inline default
+        uiType:{
+            type: String,
+            default:'default'
         },
         buttonText: {
             type: String,

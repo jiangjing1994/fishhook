@@ -17,7 +17,8 @@
 </template>
 
 <script>
-const transferRequest=()=> {
+const transferRequest=(va)=> {
+    console.log(va)
     return new Promise((resolve) => {
 
         setTimeout(() => {

@@ -86,6 +86,27 @@ export default {
                 {label: '活动名称', prop: 'name', span:24, tip:'sasa'},
                 {label: '电子邮箱', prop: 'email', span:24},
                 {label: '人员总数', prop: 'num', span:24,component: 'KemInputNumber'},
+                {label: 'lalalal', prop: 'sasas', span:24,component: 'KemChooseArrayElement',
+                    props:{
+                        uiType:'inline',
+
+                        formItems:[
+                            {label: '活动名称', prop: 'name', span:24, },
+                            {label: '电子邮箱', prop: 'email', span:24, component: 'KemCheckboxGroup', props: {
+                                    options: [
+                                        {
+                                            label: '区域一',
+                                            value: 'shanghai'
+                                        },
+                                        {
+                                            label: '区域二',
+                                            value: 'beijing'
+                                        }
+                                    ]
+                                }},
+                        ]
+                    }
+                },
                 {label: '活动区域', prop: 'region', span:24, component: 'KemSelect',props:{
                         options:[
                             {
