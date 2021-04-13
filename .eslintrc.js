@@ -20,9 +20,10 @@ module.exports = {
     "no-debugger": onlyProductionError,
     "vue/singleline-html-element-content-newline": "off",
     "vue/multiline-html-element-content-newline": "off",
-    " vue/html-closing-bracket-spacing": "off",
+    "vue/html-closing-bracket-spacing": "off",
     "vue/html-self-closing": "off",
     "vue/html-indent": "off",
+    "vue/require-default-prop": "off",
     "vue/max-attributes-per-line": "off"
   }
 };

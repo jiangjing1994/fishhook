@@ -4,7 +4,7 @@
             el-step(:title="item.title" v-for="(item,key) in titleListComputed" :key="key" :description="active < key+1 ? '正在进行'+item.title: item.title+'已完成'" )
 </template>
 <script>
-import { filter } from 'lodash'
+import { filter } from '../../utils'
 /**
  * @displayName Steps 步骤条
  */

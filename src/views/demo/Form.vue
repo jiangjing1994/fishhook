@@ -5,8 +5,7 @@
             <KemForm
                     ref="form"
                     :form-items="formItems"
-                    :form-config="{labelPosition:'right',}"
-                    :data="form"
+                     :data="form"
                     :form-rules="formRules"
                     :read-only="readOnly"
                     @updataFormData="updataFormData"
@@ -36,8 +35,7 @@
             <KemForm
                     ref="form2"
                     :form-items="formItems2"
-                    :form-config="{labelPosition:'right'}"
-                    :data="form"
+                     :data="form"
                     :form-rules="formRules"
                     :read-only="readOnly"
                     is-form-group

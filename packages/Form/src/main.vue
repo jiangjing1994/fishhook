@@ -63,23 +63,23 @@
                                 <span v-else>{{ data[item.prop] }}</span>
                             </slot>
                         </el-form-item>
-                         <div v-else style="margin-bottom: 14px;padding-right: 20px">
-                             <slot
-                                     :name="item.slot"
-                                     v-bind="{ item }"
-                             >
-                                 <component
-                                         :is="item.component"
-                                         v-if="item.component !== 'Text'"
-                                         :ref="item.ref || `cp-${item.prop}`"
-                                         v-model="data[item.prop]"
-                                         :data="data"
-                                         :placeholder="item.label"
-                                         v-bind="item.props"
-                                         v-on="item.listeners"
-                                 />
-                                 <span v-else>{{ data[item.prop] }}</span>
-                             </slot>
+                        <div v-else style="margin-bottom: 14px;padding-right: 20px">
+                            <slot
+                                    :name="item.slot"
+                                    v-bind="{ item }"
+                            >
+                                <component
+                                        :is="item.component"
+                                        v-if="item.component !== 'Text'"
+                                        :ref="item.ref || `cp-${item.prop}`"
+                                        v-model="data[item.prop]"
+                                        :data="data"
+                                        :placeholder="item.label"
+                                        v-bind="item.props"
+                                        v-on="item.listeners"
+                                />
+                                <span v-else>{{ data[item.prop] }}</span>
+                            </slot>
 
                         </div>
                     </div>
@@ -124,10 +124,8 @@
 
 <script lang="jsx">
 
-import { cloneDeep,debounce } from 'lodash'
-const defaultConfig = {
-    labelWidth: '100px',
-}
+import { cloneDeep,debounce } from '../../utils'
+
 
 // element UI 组件
 let defaultaAlias = {
@@ -173,35 +171,46 @@ export default {
 
 
     props: {
-        // eslint-disable-next-line vue/require-default-prop
-        formConfig: {
-            type: Object,
-            default: ()=>{
-                return{
-                    labelWidth: '120px',
+        /**
+         * 自定义表单配置
+         */
+        formConfig: Object,
 
-
-                }
-            }
-        },
-        // eslint-disable-next-line vue/require-default-prop
+        /**
+         * 表单项
+         */
         formItems: [Array ,Function],
 
-        // eslint-disable-next-line vue/require-default-prop
+        /**
+         * 表单值
+         */
         data: Object,
-        // eslint-disable-next-line vue/require-default-prop
+
+        /**
+         * 校验规则
+         */
         formRules: Object,
+
+        /**
+         * 是否只读
+         */
         readOnly:{
             type:Boolean,
             default:false
         },
+
+        /**
+         * 扩展属性
+         */
         alias:{
             type: Object,
             default: ()=>{
                 return{}
             }
         },
-
+        /**
+         * 表单组
+         */
         isFormGroup:{
             type: Boolean,
             default:false
@@ -225,8 +234,7 @@ export default {
     computed: {
         computedConfig () {
             return {
-                size:this.$MIMI.formSize,
-                ...defaultConfig,
+                ...this.$MIMI.Form.defaultConfig,
                 ...this.formConfig
             }
         },

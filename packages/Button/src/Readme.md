@@ -1,4 +1,4 @@
-- Vue component example:
+- 演示示例:
 
 ```vue
 <template>
@@ -33,8 +33,7 @@
 </template>
 <script>
 export default {
-  name: "Button",
-  data() {
+   data() {
     return {
       selectButtonGroup: [
         { value: "11", label: "11" },

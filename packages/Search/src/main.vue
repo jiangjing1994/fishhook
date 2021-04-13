@@ -1,14 +1,14 @@
 <template>
   <div class="search__body">
     <div class="btn">
-      <KemButton type="success" @click="showIf = !showIf"> {{ !showIf?'展开':'隐藏' }}</KemButton>
+      <KemButton  @click="showIf = !showIf"> {{ !showIf?'展开':'隐藏' }}</KemButton>
       <KemButton type="danger" @click="clear"> 清空</KemButton>
 
     </div>
     <KemForm
             v-if="showIf"
             ref="form"
-            style="margin-top: 10px"
+            style="margin-top: 8px"
             :form-config="formConfig"
             :form-items="formItems"
             :data="form"
@@ -16,6 +16,7 @@
             :read-only="readOnly"
             :alias="alias"
             :is-form-group="isFormGroup"
+            :label-type="labelType"
     >
     </KemForm>
 
@@ -28,7 +29,7 @@
 export default {
   name: 'KemSearch',
   // eslint-disable-next-line vue/require-prop-types
-  props:['formConfig', 'formItems', 'formRules',  'alias', 'isFormGroup','readOnly','value'],
+  props:['formConfig', 'formItems', 'formRules',  'alias', 'isFormGroup','readOnly','value','labelType'],
   data() {
     return {
       showIf:true,

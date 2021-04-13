@@ -9,7 +9,12 @@ import KemUI from "../packages";
 // import "../../packages/theme-default/lib/index.css";
 Vue.config.productionTip = false;
 
-Vue.use(KemUI);
+Vue.use(KemUI,{
+  size:'mini',
+  Button:{
+    size:'mini'
+  }
+});
 Vue.config.productionTip = false;
 
 new Vue({

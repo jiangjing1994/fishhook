@@ -1,5 +1,5 @@
 <script lang="jsx">
-import { throttle ,get} from 'lodash'
+import { throttle ,get} from '../../utils'
 /**
  * @displayName Button 按钮
  */
@@ -8,24 +8,36 @@ export default {
     name: 'KemButton',
     components: {},
     props: {
-        type: {
-            type: String,
-            default: 'primary'
-        },
-        size: {
-            type: String,
-            default: 'mini'
-        },
-        // 下拉按钮组默认不显示
+        /**
+         * 类型
+         * @values primary ,success, warning , danger , info , text
+         */
+        type: String,
+
+        /**
+         * 尺寸
+         * @values medium , small , mini
+         */
+        size: String,
+
+        /**
+         * 需要节流的毫秒数
+         */
+        wait: Number,
+
+        /**
+         * 自定义按钮配置
+         */
+        customButtonConfig:[Object,Boolean],
+
+        /**
+         * 下拉按钮组默认不显示
+         */
         selectButtonGroup: {
             type: [Array,Boolean],
             default: false
         },
-        // 自定义按钮配置
-        customButtonConfig: {
-            type: [Object,Boolean],
-            default: false
-        },
+
 
     },
     computed:{
@@ -47,9 +59,22 @@ export default {
 
         },
         buttonSize(){
-            return this.$MIMI.buttonSize
+            return this.size || this.$MIMI.Button.size
 
-        }
+        },
+        buttonType(){
+            return this.type || this.$MIMI.Button.type
+
+        },
+        buttonCustomButtonConfig(){
+            return this.customButtonConfig || this.$MIMI.Button.customButtonConfig
+
+        },
+        buttonWait(){
+            return this.wait || this.$MIMI.Button.wait
+
+        },
+
     },
     created(){
         if(this.$listeners.click){
@@ -67,7 +92,7 @@ export default {
             return throttle(
                 (...args)=>{
                     this.$emit(method, ...args);
-                }, this.$attrs.wait || 1000, { //[wait=0] (number): 需要节流的毫秒数。
+                }, this.buttonWait, { //[wait=0] (number): 需要节流的毫秒数。
                     // [options.leading=true] (boolean): 指定调用在节流开始前，默认true。
                     // [options.trailing=true] (boolean): 指定调用在节流结束后，默认true。
                     leading: true,
@@ -78,13 +103,13 @@ export default {
     },
 
     render(){
-        const { type } = this
+        const type = this.buttonType
         const baseButton = ()=>{
             return(
                 <el-button
                     props={this.$attrs}
-                    type={this.type}
-                    size={this.size || this.buttonSize }
+                    type={type}
+                    size={this.buttonSize }
                     style={this.style}
                     on={this.evet}
                 >
@@ -115,7 +140,7 @@ export default {
 
 
             return(
-                <el-dropdown size={this.size || this.buttonSize }  v-on:command={handleCommand}>
+                <el-dropdown size={this.buttonSize }  v-on:command={handleCommand}>
                     <div style="padding: 0 8px">
                         { button }
                     </div>
@@ -155,7 +180,7 @@ export default {
                     detail:{type:'text', text:'详情', icon:"el-icon-refresh"},
                     info:{type:'text', text:'详情', icon:"el-icon-info"},
                 },
-                custom:this.customButtonConfig ? this.customButtonConfig :{}
+                custom:this.buttonCustomButtonConfig ? this.buttonCustomButtonConfig :{}
             }
 
 

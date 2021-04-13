@@ -26,6 +26,7 @@ import KemChooseArrayElement from './ChooseArrayElement'
 import KemSearch from './Search'
 import KemInputPassWord from './InputPassWord'
 import KemDatePicker from './DatePicker'
+import KemSuperFlow from './SuperFlow'
 import ElementUI from "element-ui";
 //import "./theme/index.css";
 import "element-ui/lib/theme-chalk/index.css";
@@ -64,6 +65,7 @@ const components = [
     KemSearch,
     KemInputPassWord,
     KemDatePicker,
+    KemSuperFlow,
 
 
 ];
@@ -73,22 +75,43 @@ const install = function(Vue,opts = {}) {
 
     components.map(component => Vue.component(component.name, component));
 
+    const size = opts.size || 'mini'
     Vue.prototype.$MIMI = {
 
-        size: opts.size || 'small',
+        size,
         tableSize: opts.tableSize || 'small',
-        formSize: opts.formSize || 'small',
-        buttonSize: opts.buttonSize || 'mini',
+         buttonSize: opts.buttonSize || 'mini',
         menuType: opts.menuType || 'text',
+        Button:{
+            size:opts.Button?.size || size,
+            type:opts.Button?.type || 'primary',
+            wait:opts.Button?.wait || 1000,
+            customButtonConfig:opts.Button?.customButtonConfig || false,
+        },
+        Table:{
+            size:opts['Table']?.size || size,
+            type:opts['Table']?.type || 'primary',
+            customButtonConfig:opts['Table']?.customButtonConfig || false,
+        },
+        Form:{
+            defaultConfig:{
+                labelWidth: '120px',
+                labelPosition: 'right',
+                size,
+                ...opts['Form']?.defaultConfig
+            }
+
+        }
+
 
     };
 
     ElementUI.install(Vue,{
-        size: opts.size || 'small'
+        size: opts.size
     })
     Avue.install(Vue,
     {
-        size: opts.size || 'small'
+        size: opts.size
     })
     Vue.component('KemViewTree', KemViewTree);
     Vue.component('KemViewAlert', KemViewAlert);
@@ -130,4 +153,5 @@ export default {
     KemSearch,
     KemInputPassWord,
     KemDatePicker,
+    KemSuperFlow,
 };

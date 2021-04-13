@@ -53,7 +53,7 @@ export default {
       this.$message.success(value);
     },
     clickDel() {
-      this.$emit('clickDel',123)
+      this.$message.success('123');
     }
   }
 };
