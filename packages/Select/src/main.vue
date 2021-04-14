@@ -10,7 +10,7 @@
 /**
  * @displayName Select下拉框
  */
-import mixins from "@/mixins/async_form_element";
+import mixins from "../../mixins/async_form_element";
 export default {
     name: 'KemSelect',
     mixins: [mixins],

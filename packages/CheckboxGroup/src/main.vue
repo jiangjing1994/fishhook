@@ -8,7 +8,7 @@
 
 </template>
 <script>
-import mixins from "@/mixins/async_form_element";
+import mixins from "../../mixins/async_form_element";
 /**
  * @displayName CheckboxGroup复选框
  */

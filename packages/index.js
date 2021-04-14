@@ -80,7 +80,7 @@ const install = function(Vue,opts = {}) {
 
         size,
         tableSize: opts.tableSize || 'small',
-         buttonSize: opts.buttonSize || 'mini',
+        buttonSize: opts.buttonSize || 'mini',
         menuType: opts.menuType || 'text',
         Button:{
             size:opts.Button?.size || size,
@@ -91,7 +91,6 @@ const install = function(Vue,opts = {}) {
         Table:{
             size:opts['Table']?.size || size,
             type:opts['Table']?.type || 'primary',
-            customButtonConfig:opts['Table']?.customButtonConfig || false,
         },
         Form:{
             defaultConfig:{
@@ -110,12 +109,12 @@ const install = function(Vue,opts = {}) {
         size: opts.size
     })
     Avue.install(Vue,
-    {
-        size: opts.size
-    })
+      {
+          size: opts.size
+      })
     Vue.component('KemViewTree', KemViewTree);
     Vue.component('KemViewAlert', KemViewAlert);
- };
+};
 
 if (typeof window !== 'undefined' && window.Vue) {
     install(window.Vue);

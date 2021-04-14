@@ -9,15 +9,17 @@
     @mouseenter="nodeMouseenter"
     @mouseleave="nodeMouseleave"
     @mouseup="nodeMouseup"
-    @contextmenu.prevent.stop="nodeContextmenu">
-    <slot :node='node' :meta="node.meta"></slot>
+    @contextmenu.prevent.stop="nodeContextmenu"
+>
+    <slot :node="node" :meta="node.meta"></slot>
     <div
       v-for="(dir, key) in direction"
       v-show="output && lineDrop"
       :key="key"
       :class="`node-side node-side-${key}`"
       @contextmenu.stop.prevent
-      @mousedown.left.prevent.stop="evt => sideMousedown(evt, dir)">
+      @mousedown.left.prevent.stop="evt => sideMousedown(evt, dir)"
+>
     </div>
   </div>
 </template>

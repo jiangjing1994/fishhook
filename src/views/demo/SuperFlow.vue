@@ -10,7 +10,8 @@
                 :origin="origin"
                 :enter-intercept="enterIntercept"
                 :output-intercept="outputIntercept"
-                :link-desc="linkDesc">
+                :link-desc="linkDesc"
+        >
             <template v-slot:node="{node}">
                 <!--        <div :class="`flow-node flow-node-${meta.prop}`">-->
                 <!--          <header>-->
@@ -41,6 +42,76 @@ const drawerType = {
 	node: 0,
 	link: 1
 }
+let getArr = (array)=>{
+	return [].concat(...array.map(item => [].concat(item,...getArr(item.children))))
+}
+let getChildrenSum = (treeData,id)=>{
+	let result = []
+	treeData.map(item=>{
+		if (item.pid === id) {
+			result.push(item);
+			result = [...result,...getChildrenSum(treeData,item.id)]
+		}
+	})
+	return result
+}
+let getTree = (treeData, parent) => {
+	const pid = parent.id || null
+	let arr =[]
+
+	let treeArr = [];
+	for (let i = 0; i < treeData.length; i++) {
+		let node = treeData[i];
+
+
+		if (node["pid"] === pid && node["id"]) {
+			const parentCoordinate = parent.coordinate || [10,10]
+			const parentCoordinateX = parentCoordinate[0]
+			const parentCoordinateY = parentCoordinate[1]
+			let sumChildren = getChildrenSum(treeData,node["id"])
+			sumChildren= sumChildren.length
+			let coordinate =[]
+
+			if(!pid){
+				coordinate =  node.coordinate
+			}else {
+
+				arr.push(node)
+
+				// eslint-disable-next-line no-inner-declarations
+				function contains(arr, obj) {
+					var i = arr.length;
+					while (i--) {
+						if (arr[i] === obj) {
+							return i;
+						}
+					}
+					return false;
+				}
+
+
+				coordinate = [parentCoordinateX + 400, parentCoordinateY + +100+(sumChildren||0)*100 +contains(arr,node) *100 ]}
+
+			let newNode = {
+				children: getTree(treeData, node),
+				id: node.id,
+				width: 350,
+				height: 50,
+				pid,
+				parentCoordinate,
+				coordinate,
+				sumChildren,
+				meta: {
+					'prop': 'condition',
+					'name': '开始节点ss'
+				},
+			};
+			treeArr.push(newNode);
+
+		}
+	}
+	return treeArr;
+};
 
 export default {
 	name:'SuperFlow',
@@ -97,8 +168,7 @@ export default {
 							return !!graph.nodeList.find(node => node.meta.prop === 'start')
 						},
 						selected: (graph, coordinate) => {
-							console.log(graph)
-							console.log(coordinate)
+
 							const start = graph.nodeList.find(node => node.meta.prop === 'start')
 							if (!start) {
 								graph.addNode({
@@ -371,7 +441,7 @@ export default {
 	methods: {
 		addNode(node){
 
-			const {  id,coordinate,_height,_width} = node
+			const {  id,_height,_width} = node
 
 			this.$refs['superFlow'].addNode(
 				{
@@ -379,10 +449,7 @@ export default {
 					width: _width,
 					pid:id,
 					height: _height,
-					coordinate: [
-						coordinate[0] + _width + 150,
-						coordinate[1]
-					],
+					coordinate: [10,10],
 					meta: {
 						prop: 'condition',
 						name: '开始节sas点'
@@ -392,9 +459,13 @@ export default {
 
 			const newLineList = []
 			const nodeList =  this.$refs['superFlow'].getNodeList()
-			console.log(nodeList)
 			this.$refs['superFlow'].initLink(newLineList)
 
+			const a = getTree(nodeList,{id:''})
+
+
+			const newNodeList = getArr(a)
+			this.$refs['superFlow'].initNode(newNodeList)
 
 			// graph.addNode({
 			// 	width: _width,

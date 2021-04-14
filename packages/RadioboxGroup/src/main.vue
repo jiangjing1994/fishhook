@@ -9,7 +9,7 @@
 
 </template>
 <script>
-import mixins from "@/mixins/async_form_element";
+import mixins from "../../mixins/async_form_element";
 /**
  * @displayName RadioboxGroup 单选框
  */

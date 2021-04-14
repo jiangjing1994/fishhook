@@ -5,6 +5,9 @@ export default {
         }
     },
     props: {
+        /**
+         * 字段映射默认label value
+         */
         defaultProps: {
             type: Object,
             default:()=>{
@@ -14,26 +17,41 @@ export default {
                 }
             }
         },
-        // eslint-disable-next-line vue/require-default-prop
+
+        /**
+         * 选项列表
+         */
         options:{
             type: Array,
-            // required:true
         },
 
+        /**
+         * ui类型
+         * @values normal , text
+         */
         uiType:{
-            // text normal
             type: String,
             default: 'normal'
         },
-        // eslint-disable-next-line vue/require-default-prop
+
+        /**
+         * 异步方法 Promise Function
+         */
         request:{
             type:Function,
         },
-        // eslint-disable-next-line vue/require-default-prop
+
+        /**
+         * 结果处理 Function
+         */
         result:{
             type:Function,
         },
-        // 默认参数
+
+
+        /**
+         * 默认参数 用于request 入参
+         */
         defaultParams: {
             type: Object,
             default:()=>{
@@ -42,11 +60,22 @@ export default {
                 }
             }
         },
-        // 自动选择第一个值request模式下生效
+
+        /**
+         * 自动选择第一个值request下生效
+         */
         autoSelect: {
             type: Boolean,
             default: false
         },
+
+        /**
+         * 重置options
+         */
+        resetOptions:{
+            type: Boolean,
+            default: false
+        }
 
     },
     computed:{
@@ -66,20 +95,20 @@ export default {
         },
         evet(){
             if (this.$listeners.input) {
-                 this.$listeners.input = (value)=>{
-                     console.log(value)
+                this.$listeners.input = (value)=>{
+                    console.log(value)
 
-                     if(!this.multiple){
+                    if(!this.multiple){
 
-                         this.$emit('input',value)
+                        this.$emit('input',value)
 
-                     }else {
-                         if (this.valueDataType === 'string' && this.separator){
-                             this.$emit('input',value.join(this.separator))
-                         }else {
-                             this.$emit('input',value)
-                         }
-                     }
+                    }else {
+                        if (this.valueDataType === 'string' && this.separator){
+                            this.$emit('input',value.join(this.separator))
+                        }else {
+                            this.$emit('input',value)
+                        }
+                    }
 
 
                 }
