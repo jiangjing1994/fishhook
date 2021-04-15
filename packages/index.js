@@ -27,12 +27,16 @@ import KemSearch from './Search'
 import KemInputPassWord from './InputPassWord'
 import KemDatePicker from './DatePicker'
 import KemSuperFlow from './SuperFlow'
+import KemTransfer from './Transfer'
+import KemTag from './Tag'
+import KemTagGroup from './TagGroup'
 import ElementUI from "element-ui";
-//import "./theme/index.css";
+
 import "element-ui/lib/theme-chalk/index.css";
 
 import Avue from '@smallwei/avue';
 import '@smallwei/avue/lib/index.css';
+import "./theme/index.css";
 import { Tree as KemViewTree , Alert as KemViewAlert} from 'view-design';
 import 'view-design/dist/styles/iview.css';
 
@@ -66,6 +70,9 @@ const components = [
     KemInputPassWord,
     KemDatePicker,
     KemSuperFlow,
+    KemTransfer,
+    KemTag,
+    KemTagGroup,
 
 
 ];
@@ -105,6 +112,11 @@ const install = function(Vue,opts = {}) {
                 size,
                 ...opts['Form']?.defaultConfig
             }
+
+        },
+        Tag:{
+            size:opts.Tag?.size || size,
+
 
         }
 
@@ -159,4 +171,7 @@ export default {
     KemInputPassWord,
     KemDatePicker,
     KemSuperFlow,
+    KemTransfer,
+    KemTag,
+    KemTagGroup,
 };

@@ -24,6 +24,7 @@ module.exports = {
     "vue/html-self-closing": "off",
     "vue/html-indent": "off",
     "vue/require-default-prop": "off",
+    "vue/require-prop-types": "off",
     "vue/max-attributes-per-line": "off",
     "vue/no-template-shadow": "off"
   }

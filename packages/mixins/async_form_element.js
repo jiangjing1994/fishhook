@@ -84,7 +84,6 @@ export default {
             const { label, value }= this.defaultProps
             let options = this.isService ? this.data : this.options
 
-
             return options.map(item => {
                 return {
                     ...item,
