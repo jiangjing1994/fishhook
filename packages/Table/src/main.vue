@@ -208,20 +208,18 @@ export default {
 
 		/**
 		 * sizie尺寸
-		 * medium| small| mini
+		 * @values medium| small| mini
 		 */
 		size:{
 			type: String,
-			default:'small'
 		},
 
 		/**
-		 * 字体位置
-		 * medium| small| mini
+		 * 列跟菜单对齐方式 支持$MIMI
+		 * @values center| left| right
 		 */
 		align:{
 			type: String,
-			default:'center'
 		},
 
 		/**
@@ -245,12 +243,11 @@ export default {
 			}
 		},
 		/**
-		 * 操作栏宽度
-		 * width| small| mini
+		 * 操作栏宽度 支持$MIMI
+		 * @values width| small| mini
 		 */
 		menuWidth: {
 			type:Number,
-			default:200
 		},
 		menuButton:{
 			type:Array,
@@ -267,7 +264,7 @@ export default {
 		},
 
 		/**
-		 * 是否显示边框
+		 * 是否显示边框 支持$MIMI
 		 */
 		isShowBorder:{
 			type:Boolean,
@@ -275,21 +272,19 @@ export default {
 		},
 
 		/**
-		 * 是否显示斑马线
+		 * 是否显示斑马线 支持$MIMI
 		 */
 		isShowStripe:{
 			type:Boolean,
-			default:true
 		},
 		/**
-		 * 是否显示索引
+		 * 是否显示索引 支持$MIMI
 		 */
 		isShowIndex:{
 			type:Boolean,
-			default:true
 		},
 		/**
-		 * 是否显示表头
+		 * 是否显示表头 支持$MIMI
 		 */
 		isShowHeader:{
 			type:Boolean,
@@ -327,17 +322,16 @@ export default {
 		/**
 		 * 异步方法
 		 */
-		// eslint-disable-next-line vue/require-default-prop
 		request:Function,
+
 		/**
 		 * 结果处理
 		 */
-		// eslint-disable-next-line vue/require-default-prop
 		result:Function,
+
 		/**
 		 * 行样式
 		 */
-		// eslint-disable-next-line vue/require-default-prop
 		rowStyle:Function,
 
 		treeLoad:{
@@ -346,10 +340,18 @@ export default {
 				return{}
 			}
 		},
-
-		// eslint-disable-next-line vue/require-default-prop
+		/**
+		 * 表格高度
+		 */
 		tableHeight:{
 			type:Number,
+		},
+
+		/**
+		 * 索引显示文字
+		 */
+		indexLabel:{
+			type:String,
 		},
 
 		/**
@@ -415,11 +417,44 @@ export default {
 	},
 
 	computed: {
+		tableIsShowIndex(){
+			return this.isShowIndex || this.$MIMI.Table.isShowIndex
+
+		},
+		tableIndexLabel(){
+			return this.indexLabel || this.$MIMI.Table.indexLabel
+
+		},
+		tableIsShowHeader(){
+			return this.isShowHeader || this.$MIMI.Table.isShowHeader
+
+		},
+		tableSize(){
+			return this.size || this.$MIMI.Table.size
+
+		},
+		tableIsShowStripe(){
+			return this.isShowStripe || this.$MIMI.Table.isShowStripe
+
+		},
+		tableIsShowBorder(){
+			return this.isShowBorder || this.$MIMI.Table.isShowBorder
+
+		},
+		tableMenuWidth(){
+			return this.menuWidth || this.$MIMI.Table.menuWidth
+
+		},
+		tableIsAlign(){
+			return this.align || this.$MIMI.Table.align
+
+		},
 		computedOption(){
 
 			const lazy = this.treeProps.lazy || false
 			let option = {
-				indexLabel:'序号',
+				indexLabel:this.tableIndexLabel,
+				index:this.tableIsShowIndex,
 
 				page:false,
 				delBtn:false,
@@ -428,13 +463,12 @@ export default {
 				refreshBtn:false,
 				columnBtn:false,
 				height:this.tableHeight,
-				index:this.isShowIndex,
-				showHeader:this.isShowHeader,
-				size:this.size,
-				align:this.align,
-				menuAlign:this.align,
-				border:this.isShowBorder,
-				stripe:this.isShowStripe,
+				showHeader:this.tableIsShowHeader,
+				size:this.tableSize,
+				align:this.tableIsAlign,
+				menuAlign:this.tableIsAlign,
+				border:this.tableIsShowBorder,
+				stripe:this.tableIsShowStripe,
 				menuWidth:this.menuWidth,
 				rowKey:this.rowKey,
 				expandRowKeys:this.expandRowKeys,
@@ -524,11 +558,13 @@ export default {
 
 
 	watch: {
-		/**
-		 * 搜索条件改变了
-		 */
+
 		searchForm:{
 			handler(value) {
+				/** 搜索条件改变
+				 * @event searchFormUpdata
+				 * @type {Event}
+				 */
 				this.$emit('searchFormUpdata',value)
 			},
 			deep: true
@@ -732,6 +768,10 @@ export default {
 			} else {
 				this.expandRowKeys = []
 			}
+			/** 手风琴展开
+			 * @event expandChanges
+			 * @type {Event}
+			 */
 			this.$emit('expandChanges',{row, expendList})
 		},
 
@@ -769,8 +809,11 @@ export default {
 			this.$emit('rowUpdate',this.crudData,{form,index,done,loading})
 		},
 
-		// 当某个单元格被点击时会触发该事件
 		cellClick(	row, column, cell, event){
+			/** 单元格被点击
+			 * @event cellClick
+			 * @type {Event}
+			 */
 			this.$emit('cellClick',{
 				row, column, cell, event
 			})
@@ -778,6 +821,10 @@ export default {
 
 		// 当某一行被点击时会触发该事件
 		rowClick(row,event,column){
+			/** 某一行被点击
+			 * @event rowClick
+			 * @type {Event}
+			 */
 			this.$emit('rowClick',{
 				row, column, event
 			})
@@ -813,6 +860,11 @@ export default {
 					this.$emit('clickMenuButton',{...value})
 				})
 			}else {
+
+				/** 点击菜单按钮
+				 * @event clickMenuButton
+				 * @type {Event}
+				 */
 				this.$emit('clickMenuButton',{...value})
 			}
 

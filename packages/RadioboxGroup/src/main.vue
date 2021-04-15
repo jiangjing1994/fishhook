@@ -14,13 +14,18 @@ import mixins from "../../mixins/async_form_element";
  * @displayName RadioboxGroup 单选框
  */
 export default {
-    name: 'KemRadioboxGroup',
-    mixins: [mixins],
-    computed:{
-        isdisabled(){
-            return this.$attrs.isdisabled || this.uiType ==="text"
-        },
-    },
+	name: 'KemRadioboxGroup',
+	mixins: [mixins],
+	data() {
+		return {
+			valueDataType: 'string'
+		}
+	},
+	computed:{
+		isdisabled(){
+			return this.$attrs.isdisabled || this.uiType ==="text"
+		},
+	},
 
 }
 </script>

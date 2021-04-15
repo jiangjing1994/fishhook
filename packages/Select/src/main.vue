@@ -12,64 +12,69 @@
  */
 import mixins from "../../mixins/async_form_element";
 export default {
-    name: 'KemSelect',
-    mixins: [mixins],
-    props: {
-        placeholder: {
-            type: String,
-            default: '请选择'
-        },
-        clearable: {
-            type: Boolean,
-            default: true
-        },
-        filterable: {
-            type: Boolean,
-            default: true
-        },
-        multiple: {
-            type: Boolean,
-            default: false
-        },
-        // 数据类型 array string
-        valueDataType:{
-            type: String,
-            default:'array'
-        },
+	name: 'KemSelect',
+	mixins: [mixins],
+	props: {
+		placeholder: {
+			type: String,
+			default: '请选择'
+		},
+		clearable: {
+			type: Boolean,
+			default: true
+		},
+		filterable: {
+			type: Boolean,
+			default: true
+		},
+		multiple: {
+			type: Boolean,
+			default: false
+		},
 
-        // 分隔符
-        separator:{
-            type: String,
-            default:','
-        },
+		/**
+		 * label 数据类型
+		 *  @values array, string,
+		 */
+		valueDataType:{
+			type: String,
+			default:'array'
+		},
 
-    },
-    data() {
-        return {
-            data: [],
-        }
-    },
-    computed: {
-        v(){
-            let value = ''
-            if(!this.$attrs.value){
-                return  ''
-            }
-            if(this.multiple){
-                if (this.valueDataType === 'array'){
-                    value = this.$attrs.value
-                }else if (this.valueDataType === 'string') {
-                    value = this.$attrs.value.split(this.separator)
-                }
+		// 分隔符
+		separator:{
+			type: String,
+			default:','
+		},
 
-                 return value || ''
-            }
-            else {
-                return  this.$attrs.value
-            }
+	},
+	data() {
+		return {
+			data: [],
+		}
+	},
+	computed: {
+		v(){
+			let value = ''
+			if(!this.$attrs.value){
+				return  ''
+			}
+			if(this.multiple){
+				if (this.valueDataType === 'array'){
+					value = this.$attrs.value
+				}else if (this.valueDataType === 'string') {
+					value = this.$attrs.value.split(this.separator)
+				}
 
-        },
-    },
+				return value || ''
+			}
+			else {
+				return  this.$attrs.value
+			}
+
+		},
+	},
+
 
 }
 </script>

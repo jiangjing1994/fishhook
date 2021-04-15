@@ -1,4 +1,4 @@
-import { debounce,throttle ,get,cloneDeep,filter } from 'lodash'
+import { debounce,throttle ,get,cloneDeep,filter ,isEqual} from 'lodash'
 
 export function uuid(before = '', after = '') {
   const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('')
@@ -40,4 +40,4 @@ export function arrayReplace(arr1, arr2) {
 }
 
 
-export { debounce,throttle ,get,cloneDeep,filter }
+export { debounce,throttle ,get,cloneDeep,filter,isEqual }

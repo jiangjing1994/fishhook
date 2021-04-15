@@ -70,9 +70,9 @@ export default {
         },
 
         /**
-         * 重置options
+         * options改变是否把value清零
          */
-        resetOptions:{
+        valueClear:{
             type: Boolean,
             default: false
         }
@@ -96,7 +96,6 @@ export default {
         evet(){
             if (this.$listeners.input) {
                 this.$listeners.input = (value)=>{
-                    console.log(value)
 
                     if(!this.multiple){
 
@@ -143,13 +142,19 @@ export default {
     watch: {
         defaultParams: {
             handler() {
-
                 if (this.isService){
+                    if (this.valueClear){
+
+                        this.$attrs.value = null
+                        this.$emit('input',null)
+                    }
                     this.getListData()
                 }
+
             },
             deep: true
         },
+
     },
     methods: {
         async getListData(params={}){

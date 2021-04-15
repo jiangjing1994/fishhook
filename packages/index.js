@@ -79,7 +79,6 @@ const install = function(Vue,opts = {}) {
     Vue.prototype.$MIMI = {
 
         size,
-        tableSize: opts.tableSize || 'small',
         buttonSize: opts.buttonSize || 'mini',
         menuType: opts.menuType || 'text',
         Button:{
@@ -91,6 +90,13 @@ const install = function(Vue,opts = {}) {
         Table:{
             size:opts['Table']?.size || size,
             type:opts['Table']?.type || 'primary',
+            isShowIndex:opts['Table']?.isShowIndex || true,
+            isShowHeader:opts['Table']?.isShowHeader || true,
+            isShowStripe:opts['Table']?.isShowStripe || true,
+            isShowBorder:opts['Table']?.isShowBorder || true,
+            indexLabel:opts['Table']?.indexLabel || '序号',
+            align:opts['Table']?.align || 'center',
+            menuWidth:opts['Table']?.menuWidth || 200,
         },
         Form:{
             defaultConfig:{
