@@ -1,9 +1,6 @@
 <template>
   <div class="div">
-    <div
-            v-for="(domain,index) in domains"
-            :key="index"
-    >
+    <div v-for="(domain, index) in domains" :key="index">
       <el-row :gutter="15" style="margin-bottom: 15px">
         <!--    <el-col :span="7">
                <KemSelect v-model="domain.fieldName" :default-props="{label:'label',value:'prop'}" :options="options" size="small" placeholder="请输入字段名"></KemSelect>
@@ -17,24 +14,29 @@
             </el-col>-->
         <el-col :span="1">
           <div class="num">
-            {{ index +1 }}
-
+            {{ index + 1 }}
           </div>
         </el-col>
         <el-col :span="19">
-          <KemForm
-                  :data="domain"
-                  :form-items="formItems"
-          ></KemForm>
+          <KemForm :data="domain" :form-items="formItems"></KemForm>
         </el-col>
         <el-col v-if="!readOnly" :span="3">
-          <el-button type="text" icon="el-icon-plus" size="small" @click="addField()" />
-          <el-button :disabled="domains.length===1" type="text" icon="el-icon-delete" size="small" @click="removeField(domain)" />
+          <el-button
+            type="text"
+            icon="el-icon-plus"
+            size="small"
+            @click="addField()"
+          />
+          <el-button
+            :disabled="domains.length === 1"
+            type="text"
+            icon="el-icon-delete"
+            size="small"
+            @click="removeField(domain)"
+          />
         </el-col>
       </el-row>
-
     </div>
-
   </div>
 </template>
 
@@ -115,6 +117,4 @@ export default {
   left: 40px;
   top: 5px;
 }
-
-
 </style>

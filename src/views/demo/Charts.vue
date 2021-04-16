@@ -1,32 +1,28 @@
- <template>
-    <div></div>
+<template>
+  <div></div>
 </template>
 
- <script>
+<script>
 export default {
-    name: 'KemCharts',
-    props: {
-        /** 选择器类型
-         * @values date, datetime, time
-         */
-        pkgType: {
-            type: String,
-            default: 'echarts'
-        },
+  name: 'KemCharts',
+  props: {
+    /** 选择器类型
+     * @values date, datetime, time
+     */
+    pkgType: {
+      type: String,
+      default: 'echarts',
     },
-    data() {
-        return {
-            value: ''
-        }
-    },
-    methods: {
-        name() {
-
-        }
-    },
+  },
+  data() {
+    return {
+      value: '',
+    }
+  },
+  methods: {
+    name() {},
+  },
 }
 </script>
 
- <style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

@@ -19,7 +19,6 @@
             :label-type="labelType"
     >
     </KemForm>
-
   </div>
 </template>
 <script>

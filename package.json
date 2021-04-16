@@ -9,6 +9,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "lint:prettier": "prettier --write --loglevel warn \"src/**/*.{js,json,tsx,css,less,scss,vue,html,md}\"",
     "lib": "vue-cli-service build --target lib --name mimiui --dest lib packages/index.js",
     "new": "plop packages",
     "docs": "vue-cli-service styleguidist",
@@ -24,6 +25,17 @@
     "lib/img",
     "packages"
   ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,css,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
   "dependencies": {
     "@smallwei/avue": "2.6.2",
     "axios": "0.19.2",
@@ -51,10 +63,12 @@
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-vue": "^6.2.2",
-    "prettier": "^1.19.1",
-    "sass": "^1.26.5",
+    "husky": "^6.0.0",
+    "lint-staged": "^10.5.4",
     "npm-run-all": "^4.1.5",
     "plop": "2.3.0",
+    "prettier": "^2.2.1",
+    "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
     "vue-cli-plugin-styleguidist": "~4.35.0",
     "vue-template-compiler": "2.6.11"

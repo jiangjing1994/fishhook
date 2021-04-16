@@ -1,18 +1,17 @@
 <template>
     <div class="kem-transfer-panel">
         <div >
-<!--            <el-checkbox-->
-<!--                    v-model="allChecked"-->
-<!--                    :indeterminate="isIndeterminate"-->
-<!--                    @change="handleAllCheckedChange"-->
-<!--            >-->
+            <!--            <el-checkbox-->
+            <!--                    v-model="allChecked"-->
+            <!--                    :indeterminate="isIndeterminate"-->
+            <!--                    @change="handleAllCheckedChange"-->
+            <!--            >-->
 
-<!--                <span>{{ checkedSummary }}</span>-->
-<!--            </el-checkbox>-->
+            <!--                <span>{{ checkedSummary }}</span>-->
+            <!--            </el-checkbox>-->
             <KemInput
                     v-if="filterable"
                     v-model="query"
-                     size="small"
                     style="margin-bottom: 10px"
                     :placeholder="placeholder"
                     @mouseenter.native="inputHover = true"
@@ -24,29 +23,10 @@
                 ></i>
             </KemInput>
 
-
-            <!--                        <el-checkbox-group-->
-            <!--                                v-show="!hasNoMatch && data.length > 0"-->
-            <!--                                v-model="checked"-->
-            <!--                                :class="{ 'is-filterable': filterable }"-->
-            <!--                                class="el-transfer-panel__list"-->
-            <!--                        >-->
-            <!--                            <el-checkbox-->
-            <!--                                    v-for="item in filteredData"-->
-            <!--                                    :key="item[keyProp]"-->
-            <!--                                    class="el-transfer-panel__item"-->
-            <!--                                    :label="item[keyProp]"-->
-            <!--                                    :disabled="item[disabledProp]"-->
-            <!--                            >-->
-            <!--                                <option-content :option="item"></option-content>-->
-            <!--                            </el-checkbox>-->
-            <!--                        </el-checkbox-group>-->
-
-
             <KemTagGroup
                     v-show="!hasNoMatch && data.length > 0"
                     v-model="checked"
-                     :options="filteredData"
+                    :options="filteredData"
                     :default-props="{
                     label:labelProp,
                     value:keyProp}"
@@ -234,14 +214,16 @@ export default {
 	},
 
 	methods: {
+		filter(value){
+			this.query = value
+
+		},
 		clickTag(value) {
 			this.checked.push(value.value)
 			this.$emit('clickTag')
 
 		},
 		updateAllChecked() {
-			console.log('ssasa')
-
 			const checkableDataKeys = this.checkableData.map(item => item[this.keyProp]);
 			this.allChecked = checkableDataKeys.length > 0 &&
 				checkableDataKeys.every(item => this.checked.indexOf(item) > -1);

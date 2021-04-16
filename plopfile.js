@@ -1,7 +1,5 @@
-  const packagesGenerator = require('./plop-templates/packages/prompt')
+const packagesGenerator = require('./plop-templates/packages/prompt')
 
-module.exports = function(plop) {
-
-   plop.setGenerator('packages', packagesGenerator)
-
+module.exports = function (plop) {
+  plop.setGenerator('packages', packagesGenerator)
 }

@@ -14,7 +14,7 @@ export default {
 		size: String,
 		effect: {
 			type: String,
-			default: 'light',
+			default: 'dark',
 			validator(val) {
 				return ['dark', 'light', 'plain'].indexOf(val) !== -1;
 			}
