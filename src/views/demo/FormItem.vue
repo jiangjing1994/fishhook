@@ -44,7 +44,8 @@ export default {
       number: 3,
       options: [
         {
-          value: 'Beijing', label: '北京',
+          value: 'Beijing',
+          label: '北京',
         },
         {
           value: 'Shanghai',
@@ -71,13 +72,9 @@ export default {
   },
   computed: {
     defaultParams() {
-
-      return {
-        dictType:
-        this.dictType }
+      return { dictType: this.dictType }
     },
   },
-
   methods: {
     updataTransferRequest() {
       this.dictType = this.dictType === 'asasas' ? 'transfer' : 'asasas'
@@ -86,8 +83,7 @@ export default {
       let data = []
       if (dictType === 'transfer') {
         data = [
-          { transferName: '北京',
-            id: 'Beijing' },
+          { transferName: '北京', id: 'Beijing' },
           { transferName: '上海', id: 'Shanghai' },
           { transferName: '南京', id: 'Nanjing' },
           { transferName: '成都', id: 'Chengdu' },
@@ -106,8 +102,6 @@ export default {
       }
       return new Promise((resolve) => {
         setTimeout(() => {
-
-
           resolve(data)
         }, 500)
       })
