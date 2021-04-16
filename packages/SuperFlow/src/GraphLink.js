@@ -1,15 +1,7 @@
+import { vector } from './utils'
+import { uuid } from '../../utils'
 
-import {
-  vector
-} from './utils'
-import {
-  uuid,
-} from '../../utils'
-
-import {
-  direction,
-  directionVector
-} from './types'
+import { direction, directionVector } from './types'
 
 export default class GraphLink {
   static distance = 15
@@ -84,23 +76,18 @@ export default class GraphLink {
     if (this.end) return
 
     const relative = this.start.relative(
-      vector(offset)
-        .minus(this.graph.origin)
-        .minus(this.start.coordinate)
-        .end
+      vector(offset).minus(this.graph.origin).minus(this.start.coordinate).end
     )
 
-    this.endDirection = vector(relative.direction)
-      .multiply(-1)
-      .end
+    this.endDirection = vector(relative.direction).multiply(-1).end
   }
 
   get pathPointList() {
-    const pointList = this.coordinateList()
-      , xList = []
-      , yList = []
+    const pointList = this.coordinateList(),
+      xList = [],
+      yList = []
 
-    pointList.forEach(item => {
+    pointList.forEach((item) => {
       xList.push(item[0])
       yList.push(item[1])
     })
@@ -112,21 +99,17 @@ export default class GraphLink {
       minX: Math.min(...xList),
       maxX: Math.max(...xList),
       minY: Math.min(...yList),
-      maxY: Math.max(...yList)
+      maxY: Math.max(...yList),
     }
   }
 
   startCoordinate() {
-    return vector(this.start.position)
-      .add(this.startAt)
-      .end
+    return vector(this.start.position).add(this.startAt).end
   }
 
   endCoordinate() {
     if (this.end) {
-      return vector(this.end.position)
-        .add(this.endAt)
-        .end
+      return vector(this.end.position).add(this.endAt).end
     } else {
       return this.movePosition
     }
@@ -140,74 +123,42 @@ export default class GraphLink {
     let exitDirection = this.endDirection
 
     // 路径起点
-    const startPoint = vector(entryDirection)
-      .multiply(GraphLink.distance)
-      .add(entryPoint)
-      .end
+    const startPoint = vector(entryDirection).multiply(GraphLink.distance).add(entryPoint).end
 
     // 路径终点
-    const endPoint = vector(exitDirection)
-      .multiply(GraphLink.distance)
-      .add(exitPoint)
-      .end
+    const endPoint = vector(exitDirection).multiply(GraphLink.distance).add(exitPoint).end
 
     // 入口方向取反
-    exitDirection = vector(exitDirection)
-      .multiply(-1)
-      .end
+    exitDirection = vector(exitDirection).multiply(-1).end
 
     // 终点 - 起点  垂直 水平向量
     const pathHorizontalVec = [endPoint[0] - startPoint[0], 0]
     const pathVerticalVec = [0, endPoint[1] - startPoint[1]]
 
-    const startDirection = this.pathDirection(
-      pathVerticalVec,
-      pathHorizontalVec,
-      entryDirection
-    )
-    const endDirection = this.pathDirection(
-      pathVerticalVec,
-      pathHorizontalVec,
-      exitDirection
-    )
+    const startDirection = this.pathDirection(pathVerticalVec, pathHorizontalVec, entryDirection)
+    const endDirection = this.pathDirection(pathVerticalVec, pathHorizontalVec, exitDirection)
 
-    const splitNum = vector(startDirection)
-      .dotProduct(endDirection)
-      .end > 0 ? 2 : 1
+    const splitNum = vector(startDirection).dotProduct(endDirection).end > 0 ? 2 : 1
 
-    const pathMiddle = endDirection === pathHorizontalVec
-      ? pathVerticalVec
-      : pathHorizontalVec
+    const pathMiddle = endDirection === pathHorizontalVec ? pathVerticalVec : pathHorizontalVec
 
     let points = []
 
     points.push(entryPoint, startPoint)
 
     if (splitNum === 1) {
+      const point1 = vector(startPoint).add(startDirection).end
 
-      const point1 = vector(startPoint)
-        .add(startDirection)
-        .end
-
-      const point2 = vector(point1)
-        .add(endDirection)
-        .end
+      const point2 = vector(point1).add(endDirection).end
       points.push(point1, point2)
-
     } else {
-      const point1 = vector(startDirection)
-        .multiply(turnRatio)
-        .add(startPoint)
-        .end
+      const point1 = vector(startDirection).multiply(turnRatio).add(startPoint).end
 
-      const point2 = vector(point1)
-        .add(pathMiddle)
-        .end
+      const point2 = vector(point1).add(pathMiddle).end
 
       const point3 = vector(endDirection)
         .multiply(1 - turnRatio)
-        .add(point2)
-        .end
+        .add(point2).end
 
       points.push(point1, point2, point3)
     }
@@ -218,26 +169,14 @@ export default class GraphLink {
   }
 
   pathDirection(vertical, horizontal, direction) {
-    if (
-      vector(horizontal)
-        .parallel(direction)
-        .end
-    ) {
-      if (
-        vector(horizontal)
-          .dotProduct(direction)
-          .end > 0
-      ) {
+    if (vector(horizontal).parallel(direction).end) {
+      if (vector(horizontal).dotProduct(direction).end > 0) {
         return horizontal
       } else {
         return vertical
       }
     } else {
-      if (
-        vector(vertical)
-          .dotProduct(direction)
-          .end > 0
-      ) {
+      if (vector(vertical).dotProduct(direction).end > 0) {
         return vertical
       } else {
         return horizontal
@@ -246,21 +185,15 @@ export default class GraphLink {
   }
 
   isPointInLink(position, pathPointList) {
-    const {
-      pointList,
-      minX,
-      minY,
-      maxX,
-      maxY
-    } = pathPointList || this.pathPointList
+    const { pointList, minX, minY, maxX, maxY } = pathPointList || this.pathPointList
 
     const n = 5
 
     if (
-      position[0] < minX - n
-      || position[0] > maxX + n
-      || position[1] < minY - n
-      || position[1] > maxY + n
+      position[0] < minX - n ||
+      position[0] > maxX + n ||
+      position[1] < minY - n ||
+      position[1] > maxY + n
     ) {
       return false
     }
@@ -294,7 +227,7 @@ export default class GraphLink {
       endId: this.end.id,
       startAt: this.startAt,
       endAt: this.endAt,
-      meta: this.meta
+      meta: this.meta,
     }
   }
 }

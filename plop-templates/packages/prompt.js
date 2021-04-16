@@ -7,7 +7,7 @@ module.exports = {
       type: 'input',
       name: 'name',
       message: 'component name please',
-      validate: notEmpty('name')
+      validate: notEmpty('name'),
     },
     /*{
       type: 'checkbox',
@@ -37,7 +37,7 @@ module.exports = {
       }
     }*/
   ],
-  actions: data => {
+  actions: (data) => {
     const name = '{{properCase name}}'
     const actions = [
       {
@@ -49,7 +49,7 @@ module.exports = {
           // template: data.blocks.includes('template'),
           // script: data.blocks.includes('script'),
           // style: data.blocks.includes('style')
-        }
+        },
       },
       {
         type: 'add',
@@ -57,7 +57,7 @@ module.exports = {
         templateFile: 'plop-templates/packages/Readme.hbs',
         data: {
           name: name,
-        }
+        },
       },
       {
         type: 'add',
@@ -65,7 +65,7 @@ module.exports = {
         templateFile: 'plop-templates/packages/index.hbs',
         data: {
           name: name,
-        }
+        },
       },
       {
         type: 'add',
@@ -73,10 +73,10 @@ module.exports = {
         templateFile: 'plop-templates/packages/demo.hbs',
         data: {
           name: name,
-        }
-      }
+        },
+      },
     ]
 
     return actions
-  }
+  },
 }

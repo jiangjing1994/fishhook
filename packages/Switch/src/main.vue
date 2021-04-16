@@ -7,13 +7,12 @@
  * @displayName Switch 开关
  */
 export default {
-    name: 'KemSwitch',
+  name: 'KemSwitch',
 
-    computed:{
-        evet(){
-            return this.$listeners;
-        },
+  computed: {
+    evet() {
+      return this.$listeners
     },
+  },
 }
 </script>
-

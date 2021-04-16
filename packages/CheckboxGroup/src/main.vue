@@ -1,12 +1,6 @@
-
 <template>
   <div class="kem-checkbox_group">
-    <el-checkbox-group
-      v-bind="$attrs"
-      :value="v"
-      :disabled="isdisabled"
-      v-on="evet"
-    >
+    <el-checkbox-group v-bind="$attrs" :value="v" :disabled="isdisabled" v-on="evet">
       <el-checkbox
         v-for="(item, index) in list"
         :border="border"
@@ -19,12 +13,12 @@
   </div>
 </template>
 <script>
-import mixins from "../../mixins/async_form_element";
+import mixins from '../../mixins/async_form_element'
 /**
  * @displayName CheckboxGroup复选框
  */
 export default {
-  name: "KemCheckboxGroup",
+  name: 'KemCheckboxGroup',
   mixins: [mixins],
   props: {
     border: {
@@ -40,40 +34,40 @@ export default {
     // 数据类型 array string
     valueDataType: {
       type: String,
-      default: "array",
+      default: 'array',
     },
 
     // 分隔符
     separator: {
       type: String,
-      default: ",",
+      default: ',',
     },
   },
   data() {
     return {
       data: [],
-      dataType: "Array",
-    };
+      dataType: 'Array',
+    }
   },
   computed: {
     v() {
-      let value = [];
+      let value = []
 
       if (!this.$attrs.value) {
-        return [];
+        return []
       }
-      if (this.valueDataType === "array") {
-        value = this.$attrs.value;
-      } else if (this.valueDataType === "string") {
-        value = this.$attrs.value.split(this.separator);
+      if (this.valueDataType === 'array') {
+        value = this.$attrs.value
+      } else if (this.valueDataType === 'string') {
+        value = this.$attrs.value.split(this.separator)
       }
-      return value || [];
+      return value || []
     },
     isdisabled() {
-      return this.$attrs.isdisabled || this.uiType === "text";
+      return this.$attrs.isdisabled || this.uiType === 'text'
     },
   },
-};
+}
 </script>
 
 <style>

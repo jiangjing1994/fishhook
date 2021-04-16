@@ -1,32 +1,29 @@
 <template>
-    <span style="padding: 0 8px;font-size: 0.95em">
-        {{ value }}
-    </span>
+  <span style="padding: 0 8px; font-size: 0.95em">
+    {{ value }}
+  </span>
 </template>
 <script>
 /**
  * @displayName LabelText 文本文字
  */
 export default {
-    name: 'KemLabelText',
+  name: 'KemLabelText',
 
-    props: {
-        value: {
-            type: String,
-            default: ''
-        }
+  props: {
+    value: {
+      type: String,
+      default: '',
     },
-    watch: {
-        value(newValue) {
-            this.$emit('input', newValue)
-        }
+  },
+  watch: {
+    value(newValue) {
+      this.$emit('input', newValue)
     },
+  },
 
-    methods: {
-    },
+  methods: {},
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

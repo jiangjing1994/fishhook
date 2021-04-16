@@ -7,14 +7,11 @@
       trigger="click"
       @show="$refs['iconSelect'].reset()"
     >
-      <IconDirectory
-        ref="iconSelect"
-        @selected="selected"
-      />
+      <IconDirectory ref="iconSelect" @selected="selected" />
       <KemInput
         slot="reference"
         v-model="iconvalue"
-        style="width: 250px;"
+        style="width: 250px"
         placeholder="点击选择图标"
         readonly
       >
@@ -23,13 +20,9 @@
           slot="prefix"
           :icon-class="iconvalue"
           class="el-input__icon"
-          style="height: 32px;width: 16px;"
+          style="height: 32px; width: 16px"
         />
-        <i
-          v-else
-          slot="prefix"
-          class="el-icon-search el-input__icon"
-        />
+        <i v-else slot="prefix" class="el-icon-search el-input__icon" />
       </KemInput>
     </el-popover>
   </div>
@@ -40,20 +33,20 @@ import IconDirectory from './IconDirectory'
 /**
  * @displayName IconSelect icon选择器
  */
- export default {
+export default {
   name: 'SelectSvgIcon',
-  components:{
+  components: {
     IconDirectory,
-   },
+  },
   props: {
     value: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   data() {
     return {
-      iconvalue: ''
+      iconvalue: '',
     }
   },
   // watch: {
@@ -61,18 +54,16 @@ import IconDirectory from './IconDirectory'
   //     this.$emit('input',newValue)
   //   }
   // },
-  created(){
+  created() {
     this.iconvalue = this.value
   },
   methods: {
     selected(value) {
       this.iconvalue = value
-      this.$emit('input',value)
-    }
-  }
+      this.$emit('input', value)
+    },
+  },
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

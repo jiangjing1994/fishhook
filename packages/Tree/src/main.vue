@@ -1,29 +1,29 @@
 <template>
-    <div >
-        <KemInput v-model="filterText" style="margin-bottom: 20px">
-            <KemButton v-if="isShowMenu"
-                       slot="append"
-                       icon="el-icon-plus"
-                       @click="onClickNode({},'add')"
-            ></KemButton>
-        </KemInput>
-        <el-tree
-                ref="tree"
-                style="overflow: hidden; height: 100%"
-                v-bind="$attrs"
-                :data="treeData"
-                :props="defaultProps"
-                node-key="id"
-                :expand-on-click-node="false"
-                :filter-node-method="filterNodeMethod"
-                :render-content="renderContent"
-                :lazy="lazy"
-                :load="loadNode"
-                @node-click="nodeClick"
-
-                v-on="evet"
-        />
-    </div>
+  <div>
+    <KemInput v-model="filterText" style="margin-bottom: 20px">
+      <KemButton
+        v-if="isShowMenu"
+        slot="append"
+        icon="el-icon-plus"
+        @click="onClickNode({}, 'add')"
+      ></KemButton>
+    </KemInput>
+    <el-tree
+      ref="tree"
+      style="overflow: hidden; height: 100%"
+      v-bind="$attrs"
+      :data="treeData"
+      :props="defaultProps"
+      node-key="id"
+      :expand-on-click-node="false"
+      :filter-node-method="filterNodeMethod"
+      :render-content="renderContent"
+      :lazy="lazy"
+      :load="loadNode"
+      @node-click="nodeClick"
+      v-on="evet"
+    />
+  </div>
 </template>
 <script type="text/jsx">
 /**
@@ -294,33 +294,32 @@ export default {
 </script>
 
 <style lang="scss">
-
 .custom-tree-node {
-    position: relative;
-    font-size: 12px;
-    display: block;
-    width: 100%;
+  position: relative;
+  font-size: 12px;
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: 26px;
+  .text-ellipsis {
+    position: absolute;
+    width: calc(100% - 40px);
     height: 100%;
-    line-height: 26px;
-    .text-ellipsis{
-        position: absolute;
-        width: calc(100% - 40px);
-        height: 100%;
-        overflow: hidden;
-        left: 0;
-        top: 0;
-        z-index: 10;
-        text-align: left;
-    }
-    .button__boody{
-        position: absolute;
-        width: 20px;
-        height: 100%;
-        right: 0px;
-        padding: 0 10px;
-        top: 0;
-        background-color: #fff;
-        z-index: 20;
-    }
+    overflow: hidden;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    text-align: left;
+  }
+  .button__boody {
+    position: absolute;
+    width: 20px;
+    height: 100%;
+    right: 0px;
+    padding: 0 10px;
+    top: 0;
+    background-color: #fff;
+    z-index: 20;
+  }
 }
 </style>

@@ -30,148 +30,137 @@ import KemSuperFlow from './SuperFlow'
 import KemTransfer from './Transfer'
 import KemTag from './Tag'
 import KemTagGroup from './TagGroup'
-import ElementUI from "element-ui";
+import ElementUI from 'element-ui'
 
-import "element-ui/lib/theme-chalk/index.css";
+import 'element-ui/lib/theme-chalk/index.css'
 
-import Avue from '@smallwei/avue';
-import '@smallwei/avue/lib/index.css';
-import "./theme/index.css";
-import { Tree as KemViewTree , Alert as KemViewAlert} from 'view-design';
-import 'view-design/dist/styles/iview.css';
+import Avue from '@smallwei/avue'
+import '@smallwei/avue/lib/index.css'
+import './theme/index.css'
+import { Tree as KemViewTree, Alert as KemViewAlert } from 'view-design'
+import 'view-design/dist/styles/iview.css'
 
 const components = [
-    KemButton,
-    KemSvgIcon,
-    KemForm,
-    KemDialog,
-    KemTable,
-    KemLabelText,
-    KemPageCard,
-    KemSelect,
-    KemInput,
-    KemInputNumber,
-    KemCheckboxGroup,
-    KemRadioboxGroup,
-    KemColorPicker,
-    KemDataView,
-    KemInputColor,
-    KemTimeline,
-    KemSwitch,
-    KemCountUp,
-    KemDataIcons,
-    KemInputSlider,
-    KemTree,
-    KemSteps,
-    KemChooseArrayElement,
-    KemFormDialog,
-    KemCrud,
-    KemSearch,
-    KemInputPassWord,
-    KemDatePicker,
-    KemSuperFlow,
-    KemTransfer,
-    KemTag,
-    KemTagGroup,
+  KemButton,
+  KemSvgIcon,
+  KemForm,
+  KemDialog,
+  KemTable,
+  KemLabelText,
+  KemPageCard,
+  KemSelect,
+  KemInput,
+  KemInputNumber,
+  KemCheckboxGroup,
+  KemRadioboxGroup,
+  KemColorPicker,
+  KemDataView,
+  KemInputColor,
+  KemTimeline,
+  KemSwitch,
+  KemCountUp,
+  KemDataIcons,
+  KemInputSlider,
+  KemTree,
+  KemSteps,
+  KemChooseArrayElement,
+  KemFormDialog,
+  KemCrud,
+  KemSearch,
+  KemInputPassWord,
+  KemDatePicker,
+  KemSuperFlow,
+  KemTransfer,
+  KemTag,
+  KemTagGroup,
+]
 
+const install = function (Vue, opts = {}) {
+  if (install.installed) return
 
-];
+  components.map((component) => Vue.component(component.name, component))
 
-const install = function(Vue,opts = {}) {
-    if (install.installed) return;
-
-    components.map(component => Vue.component(component.name, component));
-
-    const size = opts.size || 'mini'
-    Vue.prototype.$MIMI = {
-
+  const size = opts.size || 'mini'
+  Vue.prototype.$MIMI = {
+    size,
+    buttonSize: opts.buttonSize || 'mini',
+    menuType: opts.menuType || 'text',
+    Button: {
+      size: opts.Button?.size || size,
+      type: opts.Button?.type || 'primary',
+      wait: opts.Button?.wait || 1000,
+      customButtonConfig: opts.Button?.customButtonConfig || false,
+    },
+    Table: {
+      size: opts['Table']?.size || size,
+      type: opts['Table']?.type || 'primary',
+      isShowIndex: opts['Table']?.isShowIndex || true,
+      isShowHeader: opts['Table']?.isShowHeader || true,
+      isShowStripe: opts['Table']?.isShowStripe || true,
+      isShowBorder: opts['Table']?.isShowBorder || true,
+      indexLabel: opts['Table']?.indexLabel || '序号',
+      align: opts['Table']?.align || 'center',
+      menuWidth: opts['Table']?.menuWidth || 200,
+    },
+    Form: {
+      defaultConfig: {
+        labelWidth: '120px',
+        labelPosition: 'right',
         size,
-        buttonSize: opts.buttonSize || 'mini',
-        menuType: opts.menuType || 'text',
-        Button:{
-            size:opts.Button?.size || size,
-            type:opts.Button?.type || 'primary',
-            wait:opts.Button?.wait || 1000,
-            customButtonConfig:opts.Button?.customButtonConfig || false,
-        },
-        Table:{
-            size:opts['Table']?.size || size,
-            type:opts['Table']?.type || 'primary',
-            isShowIndex:opts['Table']?.isShowIndex || true,
-            isShowHeader:opts['Table']?.isShowHeader || true,
-            isShowStripe:opts['Table']?.isShowStripe || true,
-            isShowBorder:opts['Table']?.isShowBorder || true,
-            indexLabel:opts['Table']?.indexLabel || '序号',
-            align:opts['Table']?.align || 'center',
-            menuWidth:opts['Table']?.menuWidth || 200,
-        },
-        Form:{
-            defaultConfig:{
-                labelWidth: '120px',
-                labelPosition: 'right',
-                size,
-                ...opts['Form']?.defaultConfig
-            }
+        ...opts['Form']?.defaultConfig,
+      },
+    },
+    Tag: {
+      size: opts.Tag?.size || size,
+    },
+  }
 
-        },
-        Tag:{
-            size:opts.Tag?.size || size,
-
-
-        }
-
-
-    };
-
-    ElementUI.install(Vue,{
-        size: opts.size
-    })
-    Avue.install(Vue,
-      {
-          size: opts.size
-      })
-    Vue.component('KemViewTree', KemViewTree);
-    Vue.component('KemViewAlert', KemViewAlert);
-};
-
-if (typeof window !== 'undefined' && window.Vue) {
-    install(window.Vue);
+  ElementUI.install(Vue, {
+    size: opts.size,
+  })
+  Avue.install(Vue, {
+    size: opts.size,
+  })
+  Vue.component('KemViewTree', KemViewTree)
+  Vue.component('KemViewAlert', KemViewAlert)
 }
 
-
+if (typeof window !== 'undefined' && window.Vue) {
+  install(window.Vue)
+}
 
 export default {
-    install,
-    KemButton,
-    KemSvgIcon,
-    KemForm,
-    KemDialog,
-    KemTable,
-    KemLabelText,
-    KemPageCard,
-    KemSelect,
-    KemInput,
-    KemInputNumber,
-    KemCheckboxGroup,
-    KemRadioboxGroup,
-    KemColorPicker,
-    KemDataView,
-    KemInputColor,
-    KemTimeline,
-    KemSwitch,
-    KemCountUp,
-    KemDataIcons,
-    KemInputSlider,
-    KemTree,
-    KemSteps,
-    KemChooseArrayElement,
-    KemFormDialog,
-    KemCrud,
-    KemSearch,
-    KemInputPassWord,
-    KemDatePicker,
-    KemSuperFlow,
-    KemTransfer,
-    KemTag,
-    KemTagGroup,
-};
+  install,
+  KemButton,
+  KemSvgIcon,
+  KemForm,
+  KemDialog,
+  KemTable,
+  KemLabelText,
+  KemPageCard,
+  KemSelect,
+  KemInput,
+  KemInputNumber,
+  KemCheckboxGroup,
+  KemRadioboxGroup,
+  KemColorPicker,
+  KemDataView,
+  KemInputColor,
+  KemTimeline,
+  KemSwitch,
+  KemCountUp,
+  KemDataIcons,
+  KemInputSlider,
+  KemTree,
+  KemSteps,
+  KemChooseArrayElement,
+  KemFormDialog,
+  KemCrud,
+  KemSearch,
+  KemInputPassWord,
+  KemDatePicker,
+  KemSuperFlow,
+  KemTransfer,
+  KemTag,
+  KemTagGroup,
+}

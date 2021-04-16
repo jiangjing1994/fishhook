@@ -1,34 +1,27 @@
 <!---->
 <template>
   <el-dialog
-          class="dialog__body"
-          :width="width"
-          :close-on-click-modal="closeOnClickModal"
-          :destroy-on-close="destroyOnClose"
-          :fullscreen="fullscreen"
-          :modal="modal"
-          v-bind="$attrs"
-          v-on="$listeners"
+    class="dialog__body"
+    :width="width"
+    :close-on-click-modal="closeOnClickModal"
+    :destroy-on-close="destroyOnClose"
+    :fullscreen="fullscreen"
+    :modal="modal"
+    v-bind="$attrs"
+    v-on="$listeners"
   >
     <div v-if="$slots.header || $attrs.header" slot="title">
       <div class="dialog__body--header">
         <div class="color--block"></div>
         <slot name="header">{{ $attrs.header }}</slot>
         <div class="dialog__menu--screen">
-          <i class="el-dialog__close el-icon-full-screen"
-             @click="handleFullScreen"
-          ></i>
+          <i class="el-dialog__close el-icon-full-screen" @click="handleFullScreen"></i>
         </div>
       </div>
     </div>
     <div class="dialog__body--content">
       <slot />
-      <component
-              :is="element"
-              ref="component"
-              v-bind="$attrs"
-              v-on="$listeners"
-       />
+      <component :is="element" ref="component" v-bind="$attrs" v-on="$listeners" />
     </div>
     <div class="dialog__body--footer">
       <div v-if="$slots.footer">
@@ -39,19 +32,14 @@
       <div v-else>
         <div slot="footer">
           <KemButton
-                  v-if="!!$listeners.save"
-                  type="primary"
-                  :loading="footerButton"
-                  @click="$emit('save')"
+            v-if="!!$listeners.save"
+            type="primary"
+            :loading="footerButton"
+            @click="$emit('save')"
           >
             确 认
           </KemButton>
-          <KemButton
-                  type="default"
-                  @click="$emit('update:visible', false)"
-          >
-            取 消
-          </KemButton>
+          <KemButton type="default" @click="$emit('update:visible', false)"> 取 消 </KemButton>
         </div>
       </div>
     </div>
@@ -68,46 +56,45 @@ export default {
   props: {
     width: {
       type: String,
-      default: '65vw'
+      default: '65vw',
     },
-    footerButton:{
+    footerButton: {
       type: Boolean,
-      default: false
+      default: false,
     },
-    isfullscreen:{
+    isfullscreen: {
       type: Boolean,
-      default: false
+      default: false,
     },
-    closeOnClickModal:{
+    closeOnClickModal: {
       type: Boolean,
-      default: false
+      default: false,
     },
-    destroyOnClose:{
+    destroyOnClose: {
       type: Boolean,
-      default: false
+      default: false,
     },
-    modal:{
+    modal: {
       type: Boolean,
-      default: false
+      default: false,
     },
     // eslint-disable-next-line vue/require-default-prop,vue/require-prop-types
-    element:{},
+    element: {},
 
-    elementProps:{
-      type:Object,
-      default: ()=>{
-        return{}
-      }
-    }
+    elementProps: {
+      type: Object,
+      default: () => {
+        return {}
+      },
+    },
   },
   data() {
     return {
       isShow: false,
       fullscreen: false,
     }
-
   },
-  created(){
+  created() {
     this.fullscreen = this.isfullscreen
   },
   methods: {
@@ -117,88 +104,76 @@ export default {
     close() {
       this.$emit('update:visible', false)
     },
-    handleFullScreen () {
-      this.fullscreen = !this.fullscreen;
+    handleFullScreen() {
+      this.fullscreen = !this.fullscreen
     },
 
     start(params) {
-
-      this.show();
+      this.show()
       this.$nextTick(() => {
-        if (this.$refs["component"].start) {
-          this.$refs["component"].start(params);
+        if (this.$refs['component'].start) {
+          this.$refs['component'].start(params)
         }
-      });
+      })
     },
 
     end() {
-      this.close();
-      this.$emit("end");
+      this.close()
+      this.$emit('end')
     },
-
-
-  }
+  },
 }
 </script>
 <style lang="scss">
-$--color-primary:'yellow';
+$--color-primary: 'yellow';
 
-.dialog__body{
-  .el-dialog{
+.dialog__body {
+  .el-dialog {
     border-radius: 4px;
-
   }
-  .dialog__body--header{
+  .dialog__body--header {
     // background-color: red;
 
     position: relative;
     text-align: left;
     color: #333333;
     padding-bottom: 5px;
-    .color--block{
+    .color--block {
       background-color: #0f80ff;
       margin-right: 5px;
       width: 12px;
       height: 12px;
       display: inline-block;
-
     }
-    .dialog__menu--screen{
+    .dialog__menu--screen {
       position: absolute;
       right: 25px;
       top: 0px;
-      color:#909399;
-      font-size:14px;
+      color: #909399;
+      font-size: 14px;
       cursor: pointer;
     }
   }
-  .dialog__body--content{
+  .dialog__body--content {
     text-align: left;
   }
-  .dialog__body--footer{
+  .dialog__body--footer {
     width: 100%;
     text-align: right;
     position: relative;
-
   }
-  .lalal-color{
+  .lalal-color {
     background-color: $--color-primary;
   }
-  .el-dialog__body{
+  .el-dialog__body {
     padding: 15px;
   }
-  .el-dialog__header{
+  .el-dialog__header {
     padding: 15px;
     padding-bottom: 10px;
   }
-  .el-dialog__headerbtn{
+  .el-dialog__headerbtn {
     top: 15px;
   }
-
 }
-
-
 </style>
-
-
-

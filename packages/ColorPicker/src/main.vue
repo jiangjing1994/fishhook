@@ -6,17 +6,17 @@
  * @displayName ColorPicker 颜色选择器
  */
 export default {
-    name: 'KemColorPicker',
-    props: {
-        placeholder: {
-            type: String,
-            default: '请输入'
-        },
+  name: 'KemColorPicker',
+  props: {
+    placeholder: {
+      type: String,
+      default: '请输入',
     },
-    computed:{
-        evet(){
-            return this.$listeners;
-        },
+  },
+  computed: {
+    evet() {
+      return this.$listeners
     },
+  },
 }
 </script>

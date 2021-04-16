@@ -2,11 +2,11 @@
 
 ```vue
 <template>
-    <div></div>
+  <div></div>
 </template>
 <script>
 export default {
-    name: "Transfer",
-};
+  name: 'Transfer',
+}
 </script>
 ```

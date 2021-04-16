@@ -5,10 +5,9 @@
  */
 
 import Vue from 'vue'
-import KemUI from "../packages";
+import KemUI from '../packages'
 
-Vue.use(KemUI);
+Vue.use(KemUI)
 
 // 引入utils
 // import "./../../assets/js/utils.js";
-

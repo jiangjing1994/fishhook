@@ -1,10 +1,10 @@
 <script lang="jsx">
-import { throttle, get } from "../../utils";
+import { throttle, get } from '../../utils'
 /**
  * @displayName Button 按钮
  */
 export default {
-  name: "KemButton",
+  name: 'KemButton',
   components: {},
   props: {
     /**
@@ -49,35 +49,35 @@ export default {
     evet() {
       if (this.$listeners.click) {
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        this.$listeners.click = this.throttle("click");
+        this.$listeners.click = this.throttle('click')
       }
-      return this.$listeners;
+      return this.$listeners
     },
     style() {
-      if (this.$props.type === "text") {
+      if (this.$props.type === 'text') {
         return {
-          "padding-top": "0px",
-          "padding-bottom": "0px",
-        };
+          'padding-top': '0px',
+          'padding-bottom': '0px',
+        }
       }
-      return {};
+      return {}
     },
     buttonSize() {
-      return this.size || this.$MIMI.Button.size;
+      return this.size || this.$MIMI.Button.size
     },
     buttonType() {
-      return this.type || this.$MIMI.Button.type;
+      return this.type || this.$MIMI.Button.type
     },
     buttonCustomButtonConfig() {
-      return this.customButtonConfig || this.$MIMI.Button.customButtonConfig;
+      return this.customButtonConfig || this.$MIMI.Button.customButtonConfig
     },
     buttonWait() {
-      return this.wait || this.$MIMI.Button.wait;
+      return this.wait || this.$MIMI.Button.wait
     },
   },
   created() {
     if (this.$listeners.click) {
-      this.$listeners.click = () => {};
+      this.$listeners.click = () => {}
     }
   },
 
@@ -89,7 +89,7 @@ export default {
     throttle(method) {
       return throttle(
         (...args) => {
-          this.$emit(method, ...args);
+          this.$emit(method, ...args)
         },
         this.buttonWait,
         {
@@ -99,12 +99,12 @@ export default {
           leading: true,
           trailing: false,
         }
-      );
+      )
     },
   },
 
   render() {
-    const type = this.buttonType;
+    const type = this.buttonType
 
     const baseButton = () => {
       return (
@@ -117,8 +117,8 @@ export default {
         >
           {this.$slots.default}
         </el-button>
-      );
-    };
+      )
+    }
 
     const tipbutton = (button) => {
       return (
@@ -130,69 +130,63 @@ export default {
         >
           {button}
         </el-tooltip>
-      );
-    };
+      )
+    }
 
     const selectButtonGroup = (button) => {
-      const options = this.selectButtonGroup;
+      const options = this.selectButtonGroup
 
       const dropdownItem = () => {
-        let eles = [];
+        let eles = []
         options.map((item) => {
-          eles.push(
-            <el-dropdown-item command={item.value}>
-              {item.label}
-            </el-dropdown-item>
-          );
-        });
-        return eles;
-      };
+          eles.push(<el-dropdown-item command={item.value}>{item.label}</el-dropdown-item>)
+        })
+        return eles
+      }
 
       const handleCommand = (value) => {
-        this.$emit("clickButtonItem", { value });
-      };
+        this.$emit('clickButtonItem', { value })
+      }
 
       return (
         <el-dropdown size={this.buttonSize} v-on:command={handleCommand}>
           <div style="padding: 0 8px">{button}</div>
           <el-dropdown-menu slot="dropdown">{dropdownItem}</el-dropdown-menu>
         </el-dropdown>
-      );
-    };
+      )
+    }
 
     const specialButton = (type) => {
       const specialButtonConfig = {
         operate: {
-          del: { type: "danger", text: "删除", icon: "el-icon-delete" },
-          edit: { type: "primary", text: "编辑", icon: "el-icon-edit" },
-          add: { type: "success", text: "新增", icon: "el-icon-plus" },
-          download: { type: "primary", text: "下载", icon: "el-icon-download" },
-          refresh: { type: "success", text: "刷新", icon: "el-icon-refresh" },
-          detail: { type: "success", text: "详情", icon: "el-icon-refresh" },
-          info: { type: "primary", text: "详情", icon: "el-icon-info" },
+          del: { type: 'danger', text: '删除', icon: 'el-icon-delete' },
+          edit: { type: 'primary', text: '编辑', icon: 'el-icon-edit' },
+          add: { type: 'success', text: '新增', icon: 'el-icon-plus' },
+          download: { type: 'primary', text: '下载', icon: 'el-icon-download' },
+          refresh: { type: 'success', text: '刷新', icon: 'el-icon-refresh' },
+          detail: { type: 'success', text: '详情', icon: 'el-icon-refresh' },
+          info: { type: 'primary', text: '详情', icon: 'el-icon-info' },
         },
         icon: {
-          del: { type: "danger", icon: "el-icon-delete" },
-          edit: { type: "primary", icon: "el-icon-edit" },
-          add: { type: "success", icon: "el-icon-plus" },
-          download: { type: "primary", icon: "el-icon-download" },
-          refresh: { type: "success", icon: "el-icon-refresh" },
-          detail: { type: "success", icon: "el-icon-refresh" },
-          info: { type: "primary", icon: "el-icon-info" },
+          del: { type: 'danger', icon: 'el-icon-delete' },
+          edit: { type: 'primary', icon: 'el-icon-edit' },
+          add: { type: 'success', icon: 'el-icon-plus' },
+          download: { type: 'primary', icon: 'el-icon-download' },
+          refresh: { type: 'success', icon: 'el-icon-refresh' },
+          detail: { type: 'success', icon: 'el-icon-refresh' },
+          info: { type: 'primary', icon: 'el-icon-info' },
         },
         text: {
-          del: { type: "text", text: "删除", icon: "el-icon-delete" },
-          edit: { type: "text", text: "编辑", icon: "el-icon-edit" },
-          add: { type: "text", text: "新增", icon: "el-icon-plus" },
-          download: { type: "text", text: "下载", icon: "el-icon-download" },
-          refresh: { type: "text", text: "刷新", icon: "el-icon-refresh" },
-          detail: { type: "text", text: "详情", icon: "el-icon-refresh" },
-          info: { type: "text", text: "详情", icon: "el-icon-info" },
+          del: { type: 'text', text: '删除', icon: 'el-icon-delete' },
+          edit: { type: 'text', text: '编辑', icon: 'el-icon-edit' },
+          add: { type: 'text', text: '新增', icon: 'el-icon-plus' },
+          download: { type: 'text', text: '下载', icon: 'el-icon-download' },
+          refresh: { type: 'text', text: '刷新', icon: 'el-icon-refresh' },
+          detail: { type: 'text', text: '详情', icon: 'el-icon-refresh' },
+          info: { type: 'text', text: '详情', icon: 'el-icon-info' },
         },
-        custom: this.buttonCustomButtonConfig
-          ? this.buttonCustomButtonConfig
-          : {},
-      };
+        custom: this.buttonCustomButtonConfig ? this.buttonCustomButtonConfig : {},
+      }
 
       return (
         <el-button
@@ -205,19 +199,18 @@ export default {
         >
           {this.$slots.default || get(specialButtonConfig, type).text}
         </el-button>
-      );
-    };
-    const btn =
-      type.indexOf(".") !== -1 ? specialButton(type) : baseButton(type);
+      )
+    }
+    const btn = type.indexOf('.') !== -1 ? specialButton(type) : baseButton(type)
     if (this.selectButtonGroup) {
-      return selectButtonGroup(btn);
+      return selectButtonGroup(btn)
     } else {
       if (this.tip) {
-        return tipbutton(btn);
+        return tipbutton(btn)
       } else {
-        return btn;
+        return btn
       }
     }
   },
-};
+}
 </script>

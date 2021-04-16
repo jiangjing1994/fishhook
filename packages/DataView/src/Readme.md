@@ -1,29 +1,24 @@
 - Vue component example:
+
 ```vue
 <template>
- 
-  <div
-    style="width: 100%;height: 800px;background-color: red "
-  >
-    <KemDataView :height="800" :width="600" :background-image="backgroundImage">
-    </KemDataView>
+  <div style="width: 100%;height: 800px;background-color: red ">
+    <KemDataView :height="800" :width="600" :background-image="backgroundImage"> </KemDataView>
   </div>
- 
 </template>
 
 <script>
-import backgroundImage from "@/assets/logo.jpg";
+import backgroundImage from '@/assets/logo.jpg'
 
 export default {
-  name: "DataView",
+  name: 'DataView',
   data() {
     return {
-      backgroundImage
-    };
-  }
-};
+      backgroundImage,
+    }
+  },
+}
 </script>
 
 <style scoped></style>
-
 ```
