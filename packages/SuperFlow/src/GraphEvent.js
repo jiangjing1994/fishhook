@@ -33,11 +33,11 @@ export default class GraphEvent {
     if (breakOff) {
       stack.some((fun, idx) => {
         const result = fun.call(this, event)
-        if(result) stack.unshift(...stack.splice(idx, 1))
+        if (result) stack.unshift(...stack.splice(idx, 1))
         return result
       })
     } else {
-      stack.forEach(fun => fun.call(this, event))
+      stack.forEach((fun) => fun.call(this, event))
     }
   }
 }

@@ -9,50 +9,45 @@ import { filter } from '../../utils'
  * @displayName Steps 步骤条
  */
 export default {
-    name: 'KemSteps',
+  name: 'KemSteps',
 
-    props: {
-        titleList: {
-            type: Array,
-            default: ()=>{
-                return [
-
-                ]
-            }
-        },
-        active: {
-            type: Number,
-            default: 0
-        },
-        space: {
-            type: Number,
-            default: 180
-        },
-        direction: {
-            type: String,
-            default: 'horizontal'
-        }
+  props: {
+    titleList: {
+      type: Array,
+      default: () => {
+        return []
+      },
     },
-
-    data() {
-        return {}
+    active: {
+      type: Number,
+      default: 0,
     },
+    space: {
+      type: Number,
+      default: 180,
+    },
+    direction: {
+      type: String,
+      default: 'horizontal',
+    },
+  },
 
-    computed: {
-        titleListComputed() {
+  data() {
+    return {}
+  },
 
-            return filter(this.titleList,o =>{
-                return !o.hidden;
-            });
-
-        }
-    }
-
+  computed: {
+    titleListComputed() {
+      return filter(this.titleList, (o) => {
+        return !o.hidden
+      })
+    },
+  },
 }
 </script>
 
 <style scoped>
-.steps_body{
-    padding: 0 30px;
+.steps_body {
+  padding: 0 30px;
 }
 </style>

@@ -1,38 +1,18 @@
-
-
-
 export function getOffset(evt, target = null) {
-  const {
-    clientX,
-    clientY,
-    currentTarget
-  } = evt
+  const { clientX, clientY, currentTarget } = evt
 
   const current = target || currentTarget
 
-  const {
-    left,
-    top
-  } = current.getBoundingClientRect()
+  const { left, top } = current.getBoundingClientRect()
 
   return [clientX - left, clientY - top]
 }
 
+export function isIntersect({ clientX, clientY }, target) {
+  const { top, right, bottom, left } = target.getBoundingClientRect()
 
-export function isIntersect({clientX, clientY}, target) {
-  const {
-    top,
-    right,
-    bottom,
-    left
-  } = target.getBoundingClientRect()
-
-  return top < clientY
-    && right > clientX
-    && bottom > clientY
-    && left < clientX
+  return top < clientY && right > clientX && bottom > clientY && left < clientX
 }
-
 
 // 向量相加
 export function addVector(vectorA, vectorB) {
@@ -75,7 +55,7 @@ export function equals(vector, target) {
 
 // 向量夹角
 export function angle(vector) {
-  return Math.round(180 / Math.PI * Math.atan2(vector[1], vector[0])) + 180
+  return Math.round((180 / Math.PI) * Math.atan2(vector[1], vector[0])) + 180
 }
 
 // 判断向量是否平行
@@ -105,27 +85,26 @@ export function vector(result) {
     unitVector,
     equals,
     angle,
-    parallel
+    parallel,
   }
   const proxyHandler = {}
 
-  Object.keys(handler).forEach(key => {
+  Object.keys(handler).forEach((key) => {
     Object.defineProperty(proxyHandler, key, {
       get() {
         return function (val) {
           result = handler[key](result, val)
           return proxyHandler
         }
-      }
+      },
     })
   })
 
   Object.defineProperty(proxyHandler, 'end', {
     get() {
       return result
-    }
+    },
   })
 
   return proxyHandler
 }
-

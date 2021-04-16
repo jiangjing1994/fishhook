@@ -1,40 +1,42 @@
 <template>
-
-    <div class="kem-radio_group">
-        <el-radio-group v-bind="$attrs"  :disabled="isdisabled" v-on="evet">
-            <el-radio v-for="(item,index) in list " :key="index" :label="item.value" :disabled="item.disabled">{{ item.label }}</el-radio>
-        </el-radio-group>
-    </div>
-
-
+  <div class="kem-radio_group">
+    <el-radio-group v-bind="$attrs" :disabled="isdisabled" v-on="evet">
+      <el-radio
+        v-for="(item, index) in list"
+        :key="index"
+        :label="item.value"
+        :disabled="item.disabled"
+        >{{ item.label }}</el-radio
+      >
+    </el-radio-group>
+  </div>
 </template>
 <script>
-import mixins from "../../mixins/async_form_element";
+import mixins from '../../mixins/async_form_element'
 /**
  * @displayName RadioboxGroup 单选框
  */
 export default {
-	name: 'KemRadioboxGroup',
-	mixins: [mixins],
-	data() {
-		return {
-			valueDataType: 'string'
-		}
-	},
-	computed:{
-		isdisabled(){
-			return this.$attrs.isdisabled || this.uiType ==="text"
-		},
-	},
-
+  name: 'KemRadioboxGroup',
+  mixins: [mixins],
+  data() {
+    return {
+      valueDataType: 'string',
+    }
+  },
+  computed: {
+    isdisabled() {
+      return this.$attrs.isdisabled || this.uiType === 'text'
+    },
+  },
 }
 </script>
 
-<style  >
-.kem-radio_group .el-radio{
-    margin: 9px;
+<style>
+.kem-radio_group .el-radio {
+  margin: 9px;
 }
-.kem-radio_group .el-radio__input.is-disabled+span.el-radio__label{
-    color: inherit;
+.kem-radio_group .el-radio__input.is-disabled + span.el-radio__label {
+  color: inherit;
 }
 </style>

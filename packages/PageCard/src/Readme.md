@@ -1,12 +1,12 @@
 - Vue component example:
+
 ```vue
 <template>
-    <KemPageCard>
-          <div slot="header">
-             轮回镜
-          </div>
-         
-          <pre>花开花落借一缕芬芳
+  <KemPageCard>
+    <div slot="header">轮回镜</div>
+
+    <pre>
+花开花落借一缕芬芳
 
 人面桃花羞春光
 
@@ -35,20 +35,19 @@
 谁蹙眉，看轮回镜中青鸾散
 
 染泪光回眸这一生为爱癫狂
-          </pre>
-          <div slot="footer">
-              <KemButton>提交</KemButton>
-          </div>
-      </KemPageCard>
+          </pre
+    >
+    <div slot="footer">
+      <KemButton>提交</KemButton>
+    </div>
+  </KemPageCard>
 </template>
 
 <script>
 export default {
-    name: "PageCard",
-   
-};
+  name: 'PageCard',
+}
 </script>
 
 <style scoped></style>
-
 ```

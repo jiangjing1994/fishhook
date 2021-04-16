@@ -1,237 +1,227 @@
 <template>
-    <div class="">
-        <KemInput
-                v-model="query"
-                style="margin-bottom: 10px"
-                @mouseenter.native="inputHover = true"
-                @mouseleave.native="inputHover = false"
-        >
-            <i slot="prefix"
-               :class="['el-input__icon', 'el-icon-' + inputIcon]"
-               @click="clearQuery"
-            ></i>
-        </KemInput>
-        <transfer-panel
-                ref="leftPanel"
-                v-bind="$props"
-                :data="sourceData"
-                :default-checked="leftDefaultChecked"
-                :placeholder="filterPlaceholder || t('el.transfer.filterPlaceholder')"
-                @checked-change="onSourceCheckedChange"
-                @clickTag="addToRight"
-        >
-        </transfer-panel>
-        <transfer-panel
-                ref="rightPanel"
-                v-bind="$props"
-                :data="targetData"
-                :default-checked="rightDefaultChecked"
-                :placeholder="filterPlaceholder || t('el.transfer.filterPlaceholder')"
-                @checked-change="onTargetCheckedChange"
-                @clickTag="addToLeft"
-
-        >
-        </transfer-panel>
-    </div>
-
+  <div class="">
+    <KemInput
+      v-model="query"
+      style="margin-bottom: 10px"
+      @mouseenter.native="inputHover = true"
+      @mouseleave.native="inputHover = false"
+    >
+      <i slot="prefix" :class="['el-input__icon', 'el-icon-' + inputIcon]" @click="clearQuery"></i>
+    </KemInput>
+    <transfer-panel
+      ref="leftPanel"
+      v-bind="$props"
+      :data="sourceData"
+      :default-checked="leftDefaultChecked"
+      :placeholder="filterPlaceholder || t('el.transfer.filterPlaceholder')"
+      @checked-change="onSourceCheckedChange"
+      @clickTag="addToRight"
+    >
+    </transfer-panel>
+    <transfer-panel
+      ref="rightPanel"
+      v-bind="$props"
+      :data="targetData"
+      :default-checked="rightDefaultChecked"
+      :placeholder="filterPlaceholder || t('el.transfer.filterPlaceholder')"
+      @checked-change="onTargetCheckedChange"
+      @clickTag="addToLeft"
+    >
+    </transfer-panel>
+  </div>
 </template>
 
 <script>
-    /**
-     * @displayName KemTransfer 穿梭框
-     */
-    import Emitter from 'element-ui/src/mixins/emitter';
-    import Locale from 'element-ui/src/mixins/locale';
-    import TransferPanel from './TransferPanel.vue';
-    import Migrating from 'element-ui/src/mixins/migrating';
+/**
+ * @displayName KemTransfer 穿梭框
+ */
+import Emitter from 'element-ui/src/mixins/emitter'
+import Locale from 'element-ui/src/mixins/locale'
+import TransferPanel from './TransferPanel.vue'
+import Migrating from 'element-ui/src/mixins/migrating'
 
-    export default {
-        name: 'KemTransfer',
+export default {
+  name: 'KemTransfer',
 
-        components: {
-            TransferPanel,
-        },
+  components: {
+    TransferPanel,
+  },
 
-        mixins: [Emitter, Locale, Migrating],
+  mixins: [Emitter, Locale, Migrating],
 
-        props: {
-            data: {
-                type: Array,
-                default() {
-                    return [];
-                }
-            },
-            titles: {
-                type: Array,
-                default() {
-                    return [];
-                }
-            },
-            buttonTexts: {
-                type: Array,
-                default() {
-                    return [];
-                }
-            },
-            filterPlaceholder: {
-                type: String,
-                default: ''
-            },
-            filterMethod: Function,
-            leftDefaultChecked: {
-                type: Array,
-                default() {
-                    return [];
-                }
-            },
-            rightDefaultChecked: {
-                type: Array,
-                default() {
-                    return [];
-                }
-            },
-            renderContent: Function,
-            value: {
-                type: Array,
-                default() {
-                    return [];
-                }
-            },
-            format: {
-                type: Object,
-                default() {
-                    return {};
-                }
-            },
-            filterable: Boolean,
-            props: {
-                type: Object,
-                default() {
-                    return {
-                        label: 'label',
-                        key: 'key',
-                        disabled: 'disabled'
-                    };
-                }
-            },
-            targetOrder: {
-                type: String,
-                default: 'original'
-            }
-        },
-
-        data() {
-            return {
-                query:'',
-
-                leftChecked: [],
-                rightChecked: []
-            };
-        },
-
-        computed: {
-            inputIcon() {
-                return this.query.length > 0 && this.inputHover
-                        ? 'circle-close'
-                        : 'search';
-            },
-            dataObj() {
-                const key = this.props.key;
-                return this.data.reduce((o, cur) => (o[cur[key]] = cur) && o, {});
-            },
-
-            sourceData() {
-                return this.data.filter(item => this.value.indexOf(item[this.props.key]) === -1);
-            },
-
-            targetData() {
-                if (this.targetOrder === 'original') {
-                    return this.data.filter(item => this.value.indexOf(item[this.props.key]) > -1);
-                } else {
-                    return this.value.reduce((arr, cur) => {
-                        const val = this.dataObj[cur];
-                        if (val) {
-                            arr.push(val);
-                        }
-                        return arr;
-                    }, []);
-                }
-            },
-
-            hasButtonTexts() {
-                return this.buttonTexts.length === 2;
-            }
-        },
-
-        watch: {
-            value(val) {
-                this.dispatch('ElFormItem', 'el.form.change', val);
-            }
-        },
-
-        methods: {
-            getMigratingConfig() {
-                return {
-                    props: {
-                        'footer-format': 'footer-format is renamed to format.'
-                    }
-                };
-            },
-
-            onSourceCheckedChange(val, movedKeys) {
-                this.leftChecked = val;
-                if (movedKeys === undefined) return;
-                this.$emit('left-check-change', val, movedKeys);
-            },
-
-            onTargetCheckedChange(val, movedKeys) {
-                this.rightChecked = val;
-                if (movedKeys === undefined) return;
-                this.$emit('right-check-change', val, movedKeys);
-            },
-
-            addToLeft() {
-                let currentValue = this.value.slice();
-                this.rightChecked.forEach(item => {
-                    const index = currentValue.indexOf(item);
-                    if (index > -1) {
-                        currentValue.splice(index, 1);
-                    }
-                });
-                this.$emit('input', currentValue);
-                this.$emit('change', currentValue, 'left', this.rightChecked);
-            },
-
-            addToRight() {
-                let currentValue = this.value.slice();
-                const itemsToBeMoved = [];
-                const key = this.props.key;
-                this.data.forEach(item => {
-                    const itemKey = item[key];
-                    if (
-                            this.leftChecked.indexOf(itemKey) > -1 &&
-                            this.value.indexOf(itemKey) === -1
-                    ) {
-                        itemsToBeMoved.push(itemKey);
-                    }
-                });
-                currentValue = this.targetOrder === 'unshift'
-                        ? itemsToBeMoved.concat(currentValue)
-                        : currentValue.concat(itemsToBeMoved);
-                this.$emit('input', currentValue);
-                this.$emit('change', currentValue, 'right', this.leftChecked);
-            },
-
-            clearQuery(which) {
-                if (which === 'left') {
-                    this.$refs.leftPanel.query = '';
-                } else if (which === 'right') {
-                    this.$refs.rightPanel.query = '';
-                }
-            }
+  props: {
+    data: {
+      type: Array,
+      default() {
+        return []
+      },
+    },
+    titles: {
+      type: Array,
+      default() {
+        return []
+      },
+    },
+    buttonTexts: {
+      type: Array,
+      default() {
+        return []
+      },
+    },
+    filterPlaceholder: {
+      type: String,
+      default: '',
+    },
+    filterMethod: Function,
+    leftDefaultChecked: {
+      type: Array,
+      default() {
+        return []
+      },
+    },
+    rightDefaultChecked: {
+      type: Array,
+      default() {
+        return []
+      },
+    },
+    renderContent: Function,
+    value: {
+      type: Array,
+      default() {
+        return []
+      },
+    },
+    format: {
+      type: Object,
+      default() {
+        return {}
+      },
+    },
+    filterable: Boolean,
+    props: {
+      type: Object,
+      default() {
+        return {
+          label: 'label',
+          key: 'key',
+          disabled: 'disabled',
         }
-    };</script>
+      },
+    },
+    targetOrder: {
+      type: String,
+      default: 'original',
+    },
+  },
 
-<style lang="scss" scoped>
+  data() {
+    return {
+      query: '',
 
-</style>
+      leftChecked: [],
+      rightChecked: [],
+    }
+  },
+
+  computed: {
+    inputIcon() {
+      return this.query.length > 0 && this.inputHover ? 'circle-close' : 'search'
+    },
+    dataObj() {
+      const key = this.props.key
+      return this.data.reduce((o, cur) => (o[cur[key]] = cur) && o, {})
+    },
+
+    sourceData() {
+      return this.data.filter((item) => this.value.indexOf(item[this.props.key]) === -1)
+    },
+
+    targetData() {
+      if (this.targetOrder === 'original') {
+        return this.data.filter((item) => this.value.indexOf(item[this.props.key]) > -1)
+      } else {
+        return this.value.reduce((arr, cur) => {
+          const val = this.dataObj[cur]
+          if (val) {
+            arr.push(val)
+          }
+          return arr
+        }, [])
+      }
+    },
+
+    hasButtonTexts() {
+      return this.buttonTexts.length === 2
+    },
+  },
+
+  watch: {
+    value(val) {
+      this.dispatch('ElFormItem', 'el.form.change', val)
+    },
+  },
+
+  methods: {
+    getMigratingConfig() {
+      return {
+        props: {
+          'footer-format': 'footer-format is renamed to format.',
+        },
+      }
+    },
+
+    onSourceCheckedChange(val, movedKeys) {
+      this.leftChecked = val
+      if (movedKeys === undefined) return
+      this.$emit('left-check-change', val, movedKeys)
+    },
+
+    onTargetCheckedChange(val, movedKeys) {
+      this.rightChecked = val
+      if (movedKeys === undefined) return
+      this.$emit('right-check-change', val, movedKeys)
+    },
+
+    addToLeft() {
+      let currentValue = this.value.slice()
+      this.rightChecked.forEach((item) => {
+        const index = currentValue.indexOf(item)
+        if (index > -1) {
+          currentValue.splice(index, 1)
+        }
+      })
+      this.$emit('input', currentValue)
+      this.$emit('change', currentValue, 'left', this.rightChecked)
+    },
+
+    addToRight() {
+      let currentValue = this.value.slice()
+      const itemsToBeMoved = []
+      const key = this.props.key
+      this.data.forEach((item) => {
+        const itemKey = item[key]
+        if (this.leftChecked.indexOf(itemKey) > -1 && this.value.indexOf(itemKey) === -1) {
+          itemsToBeMoved.push(itemKey)
+        }
+      })
+      currentValue =
+        this.targetOrder === 'unshift'
+          ? itemsToBeMoved.concat(currentValue)
+          : currentValue.concat(itemsToBeMoved)
+      this.$emit('input', currentValue)
+      this.$emit('change', currentValue, 'right', this.leftChecked)
+    },
+
+    clearQuery(which) {
+      if (which === 'left') {
+        this.$refs.leftPanel.query = ''
+      } else if (which === 'right') {
+        this.$refs.rightPanel.query = ''
+      }
+    },
+  },
+}
+</script>
+
+<style lang="scss" scoped></style>

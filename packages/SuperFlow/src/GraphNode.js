@@ -1,11 +1,7 @@
+import { uuid } from '../../utils'
+import { vector } from './utils'
 
-import {uuid} from '../../utils'
-import {vector} from './utils'
-
-import {
-  direction,
-  directionVector
-} from './types'
+import { direction, directionVector } from './types'
 
 export default class GraphNode {
   constructor(props, graph) {
@@ -15,7 +11,7 @@ export default class GraphNode {
       height = 100,
       coordinate = [0, 0],
       meta = null,
-      pid = null
+      pid = null,
     } = props
 
     this.key = uuid('node')
@@ -31,27 +27,19 @@ export default class GraphNode {
   }
 
   get position() {
-    return vector(this.coordinate)
-      .add(this.graph.origin)
-      .end
+    return vector(this.coordinate).add(this.graph.origin).end
   }
 
   set position(position) {
-    this.coordinate = vector(position)
-      .minus(this.graph.origin)
-      .end
+    this.coordinate = vector(position).minus(this.graph.origin).end
   }
 
   get center() {
-    return vector(this.coordinate)
-      .add([this.width / 2, this.height / 2])
-      .end
+    return vector(this.coordinate).add([this.width / 2, this.height / 2]).end
   }
 
   set center(position) {
-    this.coordinate = vector(position)
-      .minus([this.width / 2, this.height / 2])
-      .end
+    this.coordinate = vector(position).minus([this.width / 2, this.height / 2]).end
   }
 
   get width() {
@@ -75,53 +63,27 @@ export default class GraphNode {
   }
 
   angle() {
-    const
-      w = this.width / 2
-      , h = this.height / 2
-      , center = [0, 0]
+    const w = this.width / 2,
+      h = this.height / 2,
+      center = [0, 0]
 
-    const topLeft = vector(center)
-      .minus([w, h])
-      .angle()
-      .end
+    const topLeft = vector(center).minus([w, h]).angle().end
 
-    const topRight = vector(center)
-      .add([w, 0])
-      .minus([0, h])
-      .angle()
-      .end
+    const topRight = vector(center).add([w, 0]).minus([0, h]).angle().end
 
-    const bottomRight = vector(center)
-      .add([w, h])
-      .angle()
-      .end
+    const bottomRight = vector(center).add([w, h]).angle().end
 
-    const bottomLeft = vector(center)
-      .add([0, h])
-      .minus([w, 0])
-      .angle()
-      .end
+    const bottomLeft = vector(center).add([0, h]).minus([w, 0]).angle().end
 
-    this.angleList = [
-      topLeft,
-      topRight,
-      bottomRight,
-      bottomLeft
-    ]
+    this.angleList = [topLeft, topRight, bottomRight, bottomLeft]
   }
 
   relative(offset) {
     const angle = vector(offset)
       .minus([this.width / 2, this.height / 2])
-      .angle()
-      .end
+      .angle().end
     const angleList = this.angleList
-    const directionList = [
-      direction.top,
-      direction.right,
-      direction.bottom,
-      direction.left
-    ]
+    const directionList = [direction.top, direction.right, direction.bottom, direction.left]
 
     let dir = direction.left
 
@@ -134,7 +96,7 @@ export default class GraphNode {
 
     return {
       position: this.fixOffset(offset, dir),
-      direction: directionVector[dir]
+      direction: directionVector[dir],
     }
   }
 
@@ -171,7 +133,7 @@ export default class GraphNode {
       width: this.width,
       height: this.height,
       coordinate: [...this.coordinate],
-      meta: this.meta
+      meta: this.meta,
     }
   }
 }

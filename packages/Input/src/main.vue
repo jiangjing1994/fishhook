@@ -11,26 +11,25 @@
  * @displayName Input 输入框
  */
 export default {
-    name: 'KemInput',
-    props: {
-        placeholder: {
-            type: String,
-            default: '请输入'
-        },
-        uiType:{
-            // text normal
-            type: String,
-            default: 'normal'
-        },
+  name: 'KemInput',
+  props: {
+    placeholder: {
+      type: String,
+      default: '请输入',
     },
-    computed:{
-        evet(){
-            return this.$listeners;
-        },
-        label(){
-            return this.$attrs.value;
-        },
+    uiType: {
+      // text normal
+      type: String,
+      default: 'normal',
     },
+  },
+  computed: {
+    evet() {
+      return this.$listeners
+    },
+    label() {
+      return this.$attrs.value
+    },
+  },
 }
 </script>
-

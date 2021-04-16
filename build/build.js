@@ -1,13 +1,13 @@
-const merge = require('webpack-merge');
-const webpack = require('webpack');
-const ProgressBarPlugin = require('progress-bar-webpack-plugin');
-const alias = require('./alias');
-let config = require('./config');
+const merge = require('webpack-merge')
+const webpack = require('webpack')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const alias = require('./alias')
+let config = require('./config')
 
 module.exports = merge(config, {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
-    alias: alias
+    alias: alias,
   },
   module: {
     rules: [
@@ -15,21 +15,21 @@ module.exports = merge(config, {
         test: /\.(jsx?|babel|es6)$/,
         include: process.cwd(),
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
       },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          preserveWhitespace: false
-        }
-      }
-    ]
+          preserveWhitespace: false,
+        },
+      },
+    ],
   },
   plugins: [
     new ProgressBarPlugin(),
     new webpack.LoaderOptionsPlugin({
-      minimize: true
-    })
-  ]
-});
+      minimize: true,
+    }),
+  ],
+})

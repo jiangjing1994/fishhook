@@ -21,12 +21,7 @@
           <KemForm :data="domain" :form-items="formItems"></KemForm>
         </el-col>
         <el-col v-if="!readOnly" :span="3">
-          <el-button
-            type="text"
-            icon="el-icon-plus"
-            size="small"
-            @click="addField()"
-          />
+          <el-button type="text" icon="el-icon-plus" size="small" @click="addField()" />
           <el-button
             :disabled="domains.length === 1"
             type="text"
@@ -41,9 +36,8 @@
 </template>
 
 <script lang="jsx">
-
 export default {
-  name:'Condition',
+  name: 'Condition',
   props: {
     // eslint-disable-next-line vue/require-default-prop
     value: {
@@ -55,40 +49,38 @@ export default {
     },
     options: {
       type: Array,
-      default:()=>{
+      default: () => {
         return []
-      }
+      },
     },
     formItems: {
       type: Array,
-      required:true
+      required: true,
     },
   },
   data() {
     return {
-      domains:[]
-    };
+      domains: [],
+    }
   },
   watch: {
-    value:{
+    value: {
       handler(value) {
-        if(value instanceof Array && value.length === 0){
-
-          this.domains= [{}]
-        }else {
-          this.domains = value;
+        if (value instanceof Array && value.length === 0) {
+          this.domains = [{}]
+        } else {
+          this.domains = value
         }
       },
       deep: true,
-      immediate:true
+      immediate: true,
     },
-    domains:{
+    domains: {
       handler(value) {
-        this.$emit('input',value)
+        this.$emit('input', value)
       },
-      deep: true
+      deep: true,
     },
-
   },
   methods: {
     removeField(item) {
@@ -98,10 +90,11 @@ export default {
       }
     },
     addField() {
-      this.domains.push({});
-    }
-  }
-}</script>
+      this.domains.push({})
+    },
+  },
+}
+</script>
 
 <style scoped>
 .num {

@@ -1,5 +1,5 @@
-exports.notEmpty = name => {
-  return v => {
+exports.notEmpty = (name) => {
+  return (v) => {
     if (!v || v.trim === '') {
       return `${name} is required`
     } else {
