@@ -1,8 +1,10 @@
 {
-  "name": "@jiangjing94/mimi",
-  "version": "1.2.8",
-  "private": false,
+  "name": "sfbajfs",
+  "private": true,
+  "version": "0.0.0-development",
   "scripts": {
+    "bootstrap": "yarn gen:version",
+    "gen:version": "node build/gen-version.js",
     "start": "npm-run-all --parallel start:*",
     "start:main": "yarn serve || npm run serve",
     "start:docs": "yarn docs || npm run docs",
