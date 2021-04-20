@@ -123,7 +123,6 @@ export default {
       rightChecked: [],
     }
   },
-
   computed: {
     inputIcon() {
       return this.query.length > 0 && this.inputHover ? 'circle-close' : 'search'
@@ -157,6 +156,11 @@ export default {
   },
 
   watch: {
+    query(val) {
+      this.$refs.leftPanel.query = val
+      this.$refs.rightPanel.query = val
+
+    },
     value(val) {
       this.dispatch('ElFormItem', 'el.form.change', val)
     },
@@ -213,12 +217,9 @@ export default {
       this.$emit('change', currentValue, 'right', this.leftChecked)
     },
 
-    clearQuery(which) {
-      if (which === 'left') {
-        this.$refs.leftPanel.query = ''
-      } else if (which === 'right') {
-        this.$refs.rightPanel.query = ''
-      }
+    clearQuery() {
+      this.$refs.leftPanel.query = ''
+      this.$refs.rightPanel.query = ''
     },
   },
 }

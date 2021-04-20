@@ -3,7 +3,9 @@
     <KemPageCard header="简单表格静态数据纯用于展示~">
       <!--简单表格静态数据纯用于展示-->
       <SimpaleTable></SimpaleTable>
-      <template slot="footer"></template>
+    </KemPageCard>
+    <KemPageCard header="多选表格">
+      <SelectionTable></SelectionTable>
     </KemPageCard>
     <KemPageCard header="稍微复杂一丢丢的表格">
       <!--稍微复杂一点的表格 数据是异步的-->
@@ -25,6 +27,7 @@ import SimpaleTable from '../table/SimpaleTable'
 import BaseTable from '../table/BaseTable'
 import MenuTable from '../table/MenuTable'
 import SerachTable from '../table/SerachTable'
+import SelectionTable from '../table/SelectionTable'
 export default {
   name: 'Table',
   components: {
@@ -32,6 +35,7 @@ export default {
     BaseTable,
     MenuTable,
     SerachTable,
+    SelectionTable,
   },
 }
 </script>

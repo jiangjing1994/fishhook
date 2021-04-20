@@ -98,16 +98,21 @@ const install = function (Vue, opts = {}) {
       isShowHeader: opts['Table']?.isShowHeader || true,
       isShowStripe: opts['Table']?.isShowStripe || true,
       isShowBorder: opts['Table']?.isShowBorder || true,
+      selection: opts['Table']?.selection || false,
       indexLabel: opts['Table']?.indexLabel || '序号',
       align: opts['Table']?.align || 'center',
       menuWidth: opts['Table']?.menuWidth || 200,
+      pageOption: opts['Table']?.pageOption || {
+        pageSizes: [5, 10, 20, 50],
+        pageSize: 20,
+      },
     },
     Form: {
-      defaultConfig: {
+      formConfig: {
         labelWidth: '120px',
         labelPosition: 'right',
         size,
-        ...opts['Form']?.defaultConfig,
+        ...opts['Form']?.formConfig,
       },
     },
     Tag: {

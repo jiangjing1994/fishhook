@@ -224,7 +224,7 @@ export default {
   computed: {
     computedConfig() {
       return {
-        ...this.$MIMI.Form.defaultConfig,
+        ...this.$MIMI.Form.formConfig,
         ...this.formConfig,
       }
     },

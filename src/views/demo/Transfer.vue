@@ -1,6 +1,6 @@
 <template>
   <div style="text-align: left">
-    <KemTransfer v-model="value" :data="data" filterable></KemTransfer>
+    <KemTransfer v-model="value" :data="data"></KemTransfer>
     <el-transfer v-model="value" :data="data"></el-transfer>
   </div>
 </template>

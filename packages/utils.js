@@ -38,5 +38,13 @@ export function isObject(val) {
 export function arrayReplace(arr1, arr2) {
   arr1.splice(0, arr1.length, ...arr2)
 }
+/**
+ * 是否存在指定变量
+ * 传入参数d为null、undefined、""时,会报false,
+ * 有赋值时，包括0，false 报true;
+ */
 
+export function isExitsVariable(d) {
+  return !!d || d === 0 || d === false
+}
 export { debounce, throttle, get, cloneDeep, filter, isEqual }

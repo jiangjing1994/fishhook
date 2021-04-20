@@ -9,8 +9,6 @@ let getComponentFiles = function (path) {
   let filesDir = [] //存储文件夹
   let files = fs.readdirSync(path) //获取当前component的下的文件夹
   files.forEach((file) => {
-    console.log(file)
-
     let currBaseDir = path + '/' + file //获取当前文件目录的地址
     // let fileStat = fs.statSync(currBaseDir);  //获取当前文件/目录的属性
     // if(fileStat.isDirectory()){//如果是文件夹，则是我们需要遍历的文件夹
@@ -27,7 +25,6 @@ let getComponentFiles = function (path) {
     let chPath = currBaseDir + '/index.js'
     filesDir.push(chPath)
   })
-  console.log(filesDir)
   return filesDir
 }
 

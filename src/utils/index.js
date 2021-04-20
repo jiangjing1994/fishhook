@@ -1,123 +1,49 @@
-/**
- * Created by jiang on 2021/1/21
- * File description:
- * History:
- */
-export const mockList = () => {
-  return [
-    {
-      code: 'CWB-FSC-2021-01-055',
-      formalCode: null,
-      title: 'dddd',
-      system: 'CRM/BOSS系统',
-      type: '非市场口需求',
-      createUser: '王小二(财务)',
-      createTime: '2021-01-19 16:35:38',
-      dealTime: null,
-      formalId: null,
-      processInstanceId: '1788016',
-    },
-    {
-      code: 'CWB-FSC-2021-01-054',
-      formalCode: null,
-      title: 'ccccc',
-      system: 'CRM/BOSS系统',
-      type: '非市场口需求',
-      createUser: '王小二(财务)',
-      createTime: '2021-01-18 14:31:16',
-      dealTime: null,
-      formalId: null,
-      processInstanceId: '1787919',
-    },
-    {
-      code: 'CWB-FSC-2021-01-053',
-      formalCode: 'BOSS-FSC-2021-01-030-xx_liulei',
-      title: 'bbbbbbbbbb',
-      system: 'CRM/BOSS系统',
-      type: '非市场口需求',
-      createUser: '王小二(财务)',
-      createTime: '2021-01-18 11:44:11',
-      dealTime: null,
-      formalId: '753648',
-      processInstanceId: '1787731',
-    },
-    {
-      code: 'CWB-FSC-2021-01-053',
-      formalCode: 'BOSS-FSC-2021-01-029-xx_liulei',
-      title: 'bbbbbbbbbb',
-      system: 'CRM/BOSS系统',
-      type: '非市场口需求',
-      createUser: '王小二(财务)',
-      createTime: '2021-01-18 11:44:11',
-      dealTime: null,
-      formalId: '753647',
-      processInstanceId: '1787731',
-    },
-    {
-      code: 'CWB-FSC-2021-01-053',
-      formalCode: 'BOSS-FSC-2021-01-029-xx_liulei',
-      title: 'bbbbbbbbbb',
-      system: 'CRM/BOSS系统',
-      type: '非市场口需求',
-      createUser: '王小二(财务)',
-      createTime: '2021-01-18 11:44:11',
-      dealTime: null,
-      formalId: '753647',
-      processInstanceId: '1787731',
-    },
-    {
-      code: 'CWB-FSC-2021-01-050',
-      formalCode: null,
-      title: '非市场口测试流程',
-      system: 'CRM/BOSS系统',
-      type: '非市场口需求',
-      createUser: '王小二(财务)',
-      createTime: '2021-01-18 09:33:19',
-      dealTime: null,
-      formalId: null,
-      processInstanceId: '1787522',
-    },
-    {
-      code: 'CWB-FSC-2021-01-049',
-      formalCode: null,
-      title: '测试01151726',
-      system: 'CRM/BOSS系统',
-      type: '非市场口需求',
-      createUser: '王小二(财务)',
-      createTime: '2021-01-15 17:26:00',
-      dealTime: null,
-      formalId: null,
-      processInstanceId: '1786591',
-    },
-    {
-      code: 'PTST-KS-2021-01-048',
-      formalCode: 'BOSS-KS-2021-01-027-xx_liuyun',
-      title: 'gzw第二次测试',
-      system: 'CRM/BOSS系统',
-      type: '快速响应需求',
-      createUser: '谭昕',
-      createTime: '2021-01-15 16:50:38',
-      dealTime: null,
-      formalId: '753644',
-      processInstanceId: '1786498',
-    },
-    {
-      code: 'SCJY-KS-2021-01-046',
-      formalCode: null,
-      title: '校园共享巴士',
-      system: 'CRM/BOSS系统',
-      type: '快速响应需求',
-      createUser: '谭曦',
-      createTime: '2021-01-15 10:09:55',
-      dealTime: null,
-      formalId: null,
-      processInstanceId: '1786318',
-    },
-  ]
+import Mock from 'mockjs'
+
+export const mockList = ({ count = 20 }) => {
+  const List = []
+
+  const baseContent =
+    '<p>I am testing data, I am testing data.</p><p><img src="https://wpimg.wallstcn.com/4c69009c-0fd4-4153-b112-6cb53d1cf943"></p>'
+  const image_uri = 'https://wpimg.wallstcn.com/e4558086-631c-425c-9430-56ffb46e70b3'
+
+  for (let i = 0; i < count; i++) {
+    List.push(
+      Mock.mock({
+        id: '@increment',
+        timestamp: +Mock.Random.date('T'),
+        author: '@first',
+        reviewer: '@first',
+        title: '@title(5, 10)',
+        content_short: 'mock data',
+        content: baseContent,
+        forecast: '@float(0, 100, 2, 2)',
+        importance: '@integer(1, 3)',
+        'type|1': ['CN', 'US', 'JP', 'EU'],
+        'status|1': ['published', 'draft', 'deleted'],
+        display_time: '@datetime',
+
+        comment_disabled: true,
+        pageviews: '@integer(300, 5000)',
+        image_uri,
+        platforms: ['a-platform'],
+
+        code: '@increment',
+        formalCode: '@increment',
+
+        system: '@title(5, 10)',
+        //type: '非市场口需求',
+        createUser: '@first',
+        createTime: '@datetime',
+        dealTime: null,
+        formalId: null,
+        processInstanceId: '@increment',
+      })
+    )
+  }
+  return List
 }
 export const queryTreeRoot = () => {
-  console.log(222)
-
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({
@@ -822,10 +748,10 @@ export const queryTreeElement = () => {
     }, 500)
   })
 }
-export const queryList = () => {
+export const queryList = (params = {}) => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      const data = mockList()
+      const data = mockList(params)
       resolve({
         data,
         msg: '查询成功',
@@ -833,7 +759,7 @@ export const queryList = () => {
         page_size: data.length,
         status: 1,
       })
-    }, 500)
+    }, 200)
   })
 }
 export const saveForm = (data) => {

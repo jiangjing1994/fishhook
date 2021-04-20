@@ -77,9 +77,6 @@ export default {
   methods: {
     select(subItem) {
       if (subItem.disable) return
-      console.log('asasas')
-
-      console.log(this.source)
 
       this.$emit('update:visible', false)
       subItem.selected(false, vector(this.position).minus(this.graph.origin).end)

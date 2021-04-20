@@ -9,8 +9,7 @@
 </template>
 
 <script>
-const transferRequest = (va) => {
-  console.log(va)
+const transferRequest = () => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve([

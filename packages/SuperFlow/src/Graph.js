@@ -95,7 +95,6 @@ class Graph extends GraphEvent {
       currentLink.startAt = newLink.startAt
       currentLink.endAt = newLink.endAt
     } else if (newLink.start && newLink.end) {
-      console.log('阿萨飒飒')
       this.linkList.push(newLink)
     }
 
