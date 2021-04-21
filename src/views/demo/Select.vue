@@ -45,6 +45,7 @@ export default {
           span: 13,
           component: 'KemSelect',
           props: {
+            autoSelect: true,
             options: [
               {
                 label: '区域一',

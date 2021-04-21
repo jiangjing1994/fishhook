@@ -124,6 +124,10 @@ export default {
   created() {
     if (this.isService) {
       this.getListData()
+    } else {
+      // 非reques模式 自动赋初始值
+      let data = this.options
+      this.initialValue(data)
     }
   },
   watch: {
@@ -161,19 +165,21 @@ export default {
         }
 
         this.data = data
-
-        if (this.autoSelect && data instanceof Array && data.length > 0) {
-          let value = data[0][this.defaultProps['value']]
-
-          if (this.dataType === 'Array') {
-            value = [value]
-          }
-
-          this.$attrs.value = value
-          this.$emit('input', value)
-        }
+        this.initialValue(data)
       } else {
         throw new Error(`Need request !!!!!!!`)
+      }
+    },
+    initialValue(data) {
+      if (this.autoSelect && data instanceof Array && data.length > 0) {
+        let value = data[0][this.defaultProps['value']]
+
+        if (this.dataType === 'Array') {
+          value = [value]
+        }
+
+        this.$attrs.value = value
+        this.$emit('input', value)
       }
     },
   },
