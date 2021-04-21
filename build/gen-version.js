@@ -10,7 +10,7 @@ if (tagVer) {
 console.log(version)
 
 fs.writeFileSync(
-  path.resolve(__dirname, '../packages/element-plus/version.ts'),
+  path.resolve(__dirname, '../packages/version.ts'),
   `export const version = '${version}'
 `
 )
