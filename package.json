@@ -15,7 +15,9 @@
     "lib": "vue-cli-service build --target lib --name mimiui --dest lib packages/index.js",
     "new": "plop packages",
     "docs": "vue-cli-service styleguidist",
-    "docs:build": "vue-cli-service styleguidist:build"
+    "docs:build": "vue-cli-service styleguidist:build",
+    "fast-build": "sh ./scripts/build.sh"
+
   },
   "main": "lib/mimiui.umd.min.js",
   "files": [
