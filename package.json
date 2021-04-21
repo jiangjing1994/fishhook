@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0-development",
   "scripts": {
-    "bootstrap": "yarn gen:version",
+    "bootstrap": "yarn --frozen-lockfile && yarn gen:version",
     "gen:version": "node build/gen-version.js",
     "start": "npm-run-all --parallel start:*",
     "start:main": "yarn serve || npm run serve",
