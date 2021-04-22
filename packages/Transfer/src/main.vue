@@ -1,33 +1,45 @@
 <template>
-  <div class="">
-    <KemInput
-      v-model="query"
-      style="margin-bottom: 10px"
-      @mouseenter.native="inputHover = true"
-      @mouseleave.native="inputHover = false"
-    >
-      <i slot="prefix" :class="['el-input__icon', 'el-icon-' + inputIcon]" @click="clearQuery"></i>
-    </KemInput>
-    <transfer-panel
-      ref="leftPanel"
-      v-bind="$props"
-      :data="sourceData"
-      :default-checked="leftDefaultChecked"
-      :placeholder="filterPlaceholder || t('el.transfer.filterPlaceholder')"
-      @checked-change="onSourceCheckedChange"
-      @clickTag="addToRight"
-    >
-    </transfer-panel>
-    <transfer-panel
-      ref="rightPanel"
-      v-bind="$props"
-      :data="targetData"
-      :default-checked="rightDefaultChecked"
-      :placeholder="filterPlaceholder || t('el.transfer.filterPlaceholder')"
-      @checked-change="onTargetCheckedChange"
-      @clickTag="addToLeft"
-    >
-    </transfer-panel>
+  <div class="kem-transfer_body" :style="transferStyle">
+
+    <div class="filter_body">
+      <KemInput
+          v-model="query"
+          style="margin-bottom: 10px"
+          @mouseenter.native="inputHover = true"
+          @mouseleave.native="inputHover = false"
+      >
+        <i slot="prefix" :class="['el-input__icon', 'el-icon-' + inputIcon]" @click="clearQuery"></i>
+      </KemInput>
+    </div>
+    <div class="conten_body" >
+      <transfer-panel
+          ref="rightPanel"
+          v-bind="$props"
+          :data="targetData"
+          :default-checked="rightDefaultChecked"
+          :placeholder="filterPlaceholder || t('el.transfer.filterPlaceholder')"
+          :render-content="renderContent"
+          :panel-config="selectedPanel"
+          @checked-change="onTargetCheckedChange"
+          @clickTag="addToLeft"
+      >
+      </transfer-panel>
+
+      <transfer-panel
+          ref="leftPanel"
+          v-bind="$props"
+          :data="sourceData"
+          :panel-config="notSelectedPanel"
+          :default-checked="leftDefaultChecked"
+          :placeholder="filterPlaceholder || t('el.transfer.filterPlaceholder')"
+          :render-content="renderContent"
+
+          @checked-change="onSourceCheckedChange"
+          @clickTag="addToRight"
+      >
+      </transfer-panel>
+    </div>
+
   </div>
 </template>
 
@@ -50,6 +62,50 @@ export default {
   mixins: [Emitter, Locale, Migrating],
 
   props: {
+    /** 穿梭框高度
+     * @values 100%, 300px,
+     */
+    height:{
+      type:[String,Number],
+      default:'100%'
+    },
+
+    /** 面板配置左
+     * @param {string} label 标签名
+     * @param {boolean} count 是否显示计数
+     * @param {boolean} countStyle 基数区域样式
+     * @param {boolean} labelStyle 标签区域样式
+     */
+    selectedPanel:{
+      type:Object,
+      default:()=>{
+        return{
+          label: '已选字段',
+          count:true,
+          countStyle:{},
+          labelStyle:{},
+
+        }
+      }
+    },
+    /** 面板配置左
+     * @param {string} label 标签名
+     * @param {boolean} count 是否显示计数
+     * @param {boolean} countStyle 基数区域样式
+     * @param {boolean} labelStyle 标签区域样式
+     */
+    notSelectedPanel:{
+      type:Object,
+      default:()=>{
+        return{
+          label: '可选字段',
+          count:true,
+          countStyle:{},
+          labelStyle:{},
+
+        }
+      }
+    },
     data: {
       type: Array,
       default() {
@@ -124,9 +180,16 @@ export default {
     }
   },
   computed: {
+    transferStyle() {
+      return{
+        height: '500px'
+      }
+    },
+
     inputIcon() {
       return this.query.length > 0 && this.inputHover ? 'circle-close' : 'search'
     },
+
     dataObj() {
       const key = this.props.key
       return this.data.reduce((o, cur) => (o[cur[key]] = cur) && o, {})
@@ -210,9 +273,9 @@ export default {
         }
       })
       currentValue =
-        this.targetOrder === 'unshift'
-          ? itemsToBeMoved.concat(currentValue)
-          : currentValue.concat(itemsToBeMoved)
+          this.targetOrder === 'unshift'
+              ? itemsToBeMoved.concat(currentValue)
+              : currentValue.concat(itemsToBeMoved)
       this.$emit('input', currentValue)
       this.$emit('change', currentValue, 'right', this.leftChecked)
     },
@@ -225,4 +288,23 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+.kem-transfer_body{
+  position: relative;
+  .filter_body{
+    position: absolute;
+    width: 100%;
+    background-color: #ffffff;
+    z-index: 1;
+   }
+  .conten_body{
+    overflow: auto;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding-top: 40px;
+
+  }
+}
+
+</style>

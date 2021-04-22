@@ -1,18 +1,29 @@
 <template>
   <div class="kem-tag_group">
-    <KemTag
-      v-for="(item, index) in list"
-      :key="index"
-      style="margin-right: 8px"
-      :label="item.value"
-      :disabled="item.disabled"
+
+    <div
+        v-for="(item, index) in list"
+        :key="index"
     >
-      {{ item.label }}
-      <div class="kem-tag__btn" @click="click(item)">
-        <slot />
-        <i v-if="!$slots.default" class="el-icon-error"></i>
+      <KemTag
+          v-if="!renderContent"
+          :label="item.value"
+          :disabled="item.disabled"
+          style="margin-right: 8px"
+      >
+        {{ item.label }}
+        <div class="kem-tag__btn" @click="click(item)">
+          <i  class="el-icon-error"></i>
+        </div>
+      </KemTag>
+      <div style="display: flex;justify-content: space-between;align-items: center">
+        <option-content :option="item"></option-content>
+        <!--        <div class="kem-tag__btn" @click="click(item)">-->
+        <!--          <i class="el-icon-error"></i>-->
+        <!--        </div>-->
       </div>
-    </KemTag>
+
+    </div>
   </div>
 </template>
 <script>
@@ -22,14 +33,40 @@ import mixins from '../../mixins/async_form_element'
  */
 export default {
   name: 'KemTagGroup',
+  components:{
+    OptionContent: {
+      props: {
+        option: Object,
+        click: Function
+      },
+      render(h) {
+        const getParent = vm => {
+          if (vm.$options.componentName === 'ElTransferPanel') {
+            return vm;
+          } else if (vm.$parent) {
+            return getParent(vm.$parent);
+          } else {
+            return vm;
+          }
+        };
+        const panel = getParent(this);
+         return panel.renderContent(h, this.option,this.$parent.click)
+
+      }
+    }
+
+  },
   mixins: [mixins],
-  props: {},
+  props: {
+    renderContent:Function
+  },
   data() {
     return {}
   },
 
   methods: {
     click(value) {
+      console.log('uuuuuu')
       this.$emit('click', value)
     },
   },
