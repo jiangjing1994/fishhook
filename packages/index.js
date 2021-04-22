@@ -39,6 +39,7 @@ import '@smallwei/avue/lib/index.css'
 import './theme/index.css'
 import { Tree as KemViewTree, Alert as KemViewAlert } from 'view-design'
 import 'view-design/dist/styles/iview.css'
+import { UTable, UTableColumn,  } from 'umy-table'
 
 const components = [
   KemButton,
@@ -73,6 +74,9 @@ const components = [
   KemTransfer,
   KemTag,
   KemTagGroup,
+  UTable,
+  UTableColumn,
+
 ]
 
 const install = function (Vue, opts = {}) {
@@ -168,4 +172,7 @@ export default {
   KemTransfer,
   KemTag,
   KemTagGroup,
+  UTable,
+  UTableColumn,
+
 }
