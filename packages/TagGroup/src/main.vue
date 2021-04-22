@@ -17,7 +17,7 @@
         </div>
       </KemTag>
       <div style="display: flex;justify-content: space-between;align-items: center">
-        <option-content :option="item"></option-content>
+        <option-content :option="item" :selected="selected"></option-content>
         <!--        <div class="kem-tag__btn" @click="click(item)">-->
         <!--          <i class="el-icon-error"></i>-->
         <!--        </div>-->
@@ -37,6 +37,7 @@ export default {
     OptionContent: {
       props: {
         option: Object,
+        selected: Boolean,
         click: Function
       },
       render(h) {
@@ -50,6 +51,7 @@ export default {
           }
         };
         const panel = getParent(this);
+        this.option['selected'] = this.selected
          return panel.renderContent(h, this.option,this.$parent.click)
 
       }
@@ -58,7 +60,8 @@ export default {
   },
   mixins: [mixins],
   props: {
-    renderContent:Function
+    renderContent:Function,
+    selected:Boolean
   },
   data() {
     return {}
@@ -66,7 +69,6 @@ export default {
 
   methods: {
     click(value) {
-      console.log('uuuuuu')
       this.$emit('click', value)
     },
   },

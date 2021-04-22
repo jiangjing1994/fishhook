@@ -34,6 +34,7 @@
           <KemTagGroup
               v-show="!hasNoMatch && data.length > 0"
               v-model="checked"
+              :selected="selected"
               :options="filteredData"
               :default-props="{
                 label: labelProp,
@@ -98,6 +99,7 @@ export default {
     placeholder: String,
     title: String,
     filterable: Boolean,
+    selected: Boolean,
     format: Object,
     filterMethod: Function,
     defaultChecked: Array,

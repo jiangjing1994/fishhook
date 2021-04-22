@@ -16,6 +16,7 @@
           ref="rightPanel"
           v-bind="$props"
           :data="targetData"
+          :selected="true"
           :default-checked="rightDefaultChecked"
           :placeholder="filterPlaceholder || t('el.transfer.filterPlaceholder')"
           :render-content="renderContent"
@@ -29,6 +30,8 @@
           ref="leftPanel"
           v-bind="$props"
           :data="sourceData"
+          :selected="false"
+
           :panel-config="notSelectedPanel"
           :default-checked="leftDefaultChecked"
           :placeholder="filterPlaceholder || t('el.transfer.filterPlaceholder')"
@@ -296,7 +299,7 @@ export default {
     width: 100%;
     background-color: #ffffff;
     z-index: 1;
-   }
+  }
   .conten_body{
     overflow: auto;
     position: absolute;
