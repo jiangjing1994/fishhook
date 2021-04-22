@@ -1,5 +1,5 @@
 <template>
-  <div style="text-align: left">
+  <div style="text-align: left;height: 400px">
     <pre>{{ value }}</pre>
     <KemTransfer
         v-model="value"

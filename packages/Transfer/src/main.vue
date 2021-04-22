@@ -185,7 +185,7 @@ export default {
   computed: {
     transferStyle() {
       return{
-        height: '500px'
+        height: this.height
       }
     },
 
