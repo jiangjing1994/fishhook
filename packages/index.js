@@ -30,16 +30,16 @@ import KemSuperFlow from './SuperFlow'
 import KemTransfer from './Transfer'
 import KemTag from './Tag'
 import KemTagGroup from './TagGroup'
+import Umytable from 'umy-table'
+import 'umy-table/lib/theme-chalk/index.css';// 引入样式
 import ElementUI from 'element-ui'
-
-import 'element-ui/lib/theme-chalk/index.css'
-
 import Avue from '@smallwei/avue'
 import '@smallwei/avue/lib/index.css'
+import 'element-ui/lib/theme-chalk/index.css'
 import './theme/index.css'
 import { Tree as KemViewTree, Alert as KemViewAlert } from 'view-design'
 import 'view-design/dist/styles/iview.css'
-import { UTable, UTableColumn,  } from 'umy-table'
+
 
 const components = [
   KemButton,
@@ -74,8 +74,6 @@ const components = [
   KemTransfer,
   KemTag,
   KemTagGroup,
-  UTable,
-  UTableColumn,
 
 ]
 
@@ -130,6 +128,7 @@ const install = function (Vue, opts = {}) {
   Avue.install(Vue, {
     size: opts.size,
   })
+  Umytable.install(Vue)
   Vue.component('KemViewTree', KemViewTree)
   Vue.component('KemViewAlert', KemViewAlert)
 }
@@ -172,7 +171,6 @@ export default {
   KemTransfer,
   KemTag,
   KemTagGroup,
-  UTable,
-  UTableColumn,
+
 
 }

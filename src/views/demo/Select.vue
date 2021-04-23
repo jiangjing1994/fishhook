@@ -54,6 +54,9 @@ export default {
               {
                 label: '区域二',
                 value: 'beijing',
+              }, {
+                label: '区域san',
+                value: 'beijingss',
               },
             ],
           },
