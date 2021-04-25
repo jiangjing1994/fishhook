@@ -1,5 +1,6 @@
 <template>
   <div class="about">
+    <KemButton type="none" style="color: red" tip="ssss" @click="clickDel">123</KemButton>
     <KemButton type="text.del" @click="clickDel"></KemButton>
     <KemButton type="text.add"></KemButton>
     <KemButton type="icon.del"></KemButton>

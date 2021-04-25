@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <p>
       <el-button @click="$refs.plTable.toggleRowExpand(tableData[1])">切换第二行展开</el-button>
       <el-button @click="$refs.plTable.setRowExpand([tableData[2], tableData[3]], true)">设置第三、四行展开</el-button>
@@ -7,6 +7,7 @@
       <el-button @click="$refs.plTable.clearRowExpand()">关闭所有行展开</el-button>
     </p>
     <ux-grid ref="plTable"
+             class="avue-crud"
              border
              height="500"
              :data="tableData"
