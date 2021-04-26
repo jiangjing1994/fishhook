@@ -1,7 +1,7 @@
 <!---->
 <template>
   <el-dialog
-    class="dialog__body"
+    class="dialog__body kem-dialog__body"
     :width="width"
     :close-on-click-modal="closeOnClickModal"
     :destroy-on-close="destroyOnClose"
@@ -127,7 +127,7 @@ export default {
 <style lang="scss">
 $--color-primary: 'yellow';
 
-.dialog__body {
+.kem-dialog__body {
   .el-dialog {
     border-radius: 4px;
   }

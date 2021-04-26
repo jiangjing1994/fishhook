@@ -120,6 +120,9 @@ const install = function (Vue, opts = {}) {
     Tag: {
       size: opts.Tag?.size || size,
     },
+    // Dialog: {
+    //   size: opts.width?.size || size,
+    // },
   }
 
   ElementUI.install(Vue, {

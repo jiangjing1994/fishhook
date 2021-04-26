@@ -266,6 +266,12 @@
         type: Boolean,
       },
       /**
+       * 合并选项 支持option下的所有属性及props没有暴露的属性 支持$MIMI方式
+       */
+      mergeOption: {
+        type: Object,
+      },
+      /**
        * 是否开启多选 支持$MIMI
        */
       selection:{
@@ -421,12 +427,15 @@
       tableSelection() {
         return this.selection
       },
+      tableMergeOption() {
+        return this.mergeOption || this.$MIMI.Table.mergeOption
+      },
       computedOption() {
         const lazy = this.treeProps.lazy || false
         let option = {
+          ...this.tableMergeOption,
           indexLabel: this.tableIndexLabel,
           index: this.tableIsShowIndex,
-
           page: false,
           delBtn: false,
           addBtn: false,
@@ -446,6 +455,7 @@
           expandRowKeys: this.expandRowKeys,
           expand: this.expand,
           lazy: lazy,
+
         }
 
         if (this.isShowPage) {
