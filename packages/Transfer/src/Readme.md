@@ -1,4 +1,4 @@
-- Vue component example:
+- Example:
 
 ```vue
 <template>

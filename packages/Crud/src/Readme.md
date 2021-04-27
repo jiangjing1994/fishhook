@@ -1,4 +1,4 @@
-- Vue component example:: 一个有趣的 crud 功能模块
+- example:: 一个有趣的 crud 功能模块
 
 ```vue
 <template>

@@ -1,7 +1,7 @@
 <template lang="pug">
     div
         KemLabelText( v-if='uiType ==="text"' :value='label')
-        el-select( v-bind="$attrs" :value='v'  v-else v-on="evet" :multiple='multiple' :placeholder="placeholder" :filterable='filterable' :clearable='clearable' style='width:100%' )
+        el-select( v-bind="$attrs" :value='v'  v-else v-on="evet" :multiple='multiple' :placeholder="placeholder" :filterable='filterable' :clearable='clearable' :style='`width:${width}`' )
             el-option(v-for="(item,index) in list " :key="index"  :label="item.label" :disabled="item.disabled" :value="item.value")
                 slot(:scope="item")
 
@@ -45,6 +45,11 @@ export default {
     separator: {
       type: String,
       default: ',',
+    },
+
+    width: {
+      type: String,
+      default: '100%',
     },
   },
   data() {

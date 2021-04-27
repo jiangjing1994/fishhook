@@ -1,4 +1,4 @@
-- Vue component example: 一个神奇的 form
+- Example: 一个神奇的 form
 
 ```vue
 <template>

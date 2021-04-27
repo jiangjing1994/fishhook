@@ -1,4 +1,4 @@
-- Vue component example: 简单表格静态数据纯用于展示
+- Example: 简单表格静态数据纯用于展示
 
 ```vue
 <template>
@@ -53,7 +53,7 @@ export default {
 <style scoped></style>
 ```
 
-- Vue component example: 稍微复杂一丢丢的表格
+- Example: 稍微复杂一丢丢的表格
 
 ```vue
 <template>
@@ -108,7 +108,7 @@ export default {
 <style scoped></style>
 ```
 
-- Vue component example: 各种 menu~expand~花里胡哨版
+- Example: 各种 menu~expand~花里胡哨版
 
 ```vue
 <template>
@@ -210,7 +210,7 @@ export default {
 </style>
 ```
 
-- Vue component example: 我有一个带搜索框的大表哥
+- Example: 我有一个带搜索框的大表哥
 
 ```vue
 <template>
