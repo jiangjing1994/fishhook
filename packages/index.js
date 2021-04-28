@@ -108,6 +108,13 @@ const install = function (Vue, opts = {}) {
         pageSizes: [5, 10, 20, 50],
         pageSize: 20,
       },
+      defaultProps: opts['Table']?.defaultProps || {
+        currentPage: 'pageNo',
+        pageSize: 'pageSize',
+        order: 'order',
+        prop: 'prop',
+        total: 'page_size',
+      },
     },
     Form: {
       formConfig: {

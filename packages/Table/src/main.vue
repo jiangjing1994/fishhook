@@ -299,18 +299,7 @@
       /**
        * 参数转义
        */
-      defaultProps: {
-        type: Object,
-        default: () => {
-          return {
-            currentPage: 'pageNo',
-            pageSize: 'pageSize',
-            order: 'order',
-            prop: 'prop',
-            total: 'page_size',
-          }
-        },
-      },
+      defaultProps: Object,
       /**
        * 异步方法
        */
@@ -429,6 +418,9 @@
       },
       tablePageOption() {
         return this.pageOption || this.$MIMI.Table.pageOption
+      },
+      tableDefaultProps() {
+        return this.defaultProps || this.$MIMI.Table.defaultProps
       },
       tableSelection() {
         return this.selection
@@ -616,10 +608,10 @@
             this.loading = true
             try {
               const res = await request({
-                [this.defaultProps['currentPage']]: currentPage,
-                [this.defaultProps['pageSize']]: pageSize,
-                [this.defaultProps['order']]: order,
-                [this.defaultProps['prop']]: prop,
+                [this.tableDefaultProps['currentPage']]: currentPage,
+                [this.tableDefaultProps['pageSize']]: pageSize,
+                [this.tableDefaultProps['order']]: order,
+                [this.tableDefaultProps['prop']]: prop,
                 ...queryParams,
                 ...params,
               })
@@ -634,7 +626,7 @@
 
               this.loading = false
 
-              this.page.total = res[this.defaultProps['total']]
+              this.page.total = res[this.tableDefaultProps['total']]
 
               this.crudData = data
             } catch (error) {
