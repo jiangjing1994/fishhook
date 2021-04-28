@@ -6,6 +6,25 @@
         ref="form"
         :form-items="formItems"
         :data="form"
+        :row-gutter="10"
+        :form-rules="formRules"
+        :form-config="{
+          labelPositon:'right'
+        }"
+        :read-only="readOnly"
+        @updataFormData="updataFormData"
+      >
+        <template slot="resource">
+          <el-radio-group v-model="form.resource">
+            <el-radio label="线上品牌商赞助"></el-radio>
+            <el-radio label="线下场地免费"></el-radio>
+          </el-radio-group>
+        </template>
+      </KemForm>
+      <KemForm
+        ref="form"
+        :form-items="formItems"
+        :data="form"
         :form-rules="formRules"
         :read-only="readOnly"
         @updataFormData="updataFormData"
@@ -71,9 +90,9 @@ export default {
         ],
       },
       formItems: [
-        { label: '活动名称', prop: 'name', span: 24, tip: 'sasa' },
-        { label: '电子邮箱', prop: 'email', span: 24 },
-        { label: '人员总数', prop: 'num', span: 24, component: 'KemInputNumber' },
+        { label: '活动名称', prop: 'name', span: 8, tip: 'sasa' },
+        { label: '电子邮箱', prop: 'email', span: 8 },
+        { label: '人员总数', prop: 'num', span: 8, component: 'KemInputNumber' },
         {
           label: 'lalalal',
           prop: 'sasas',

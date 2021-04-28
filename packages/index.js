@@ -116,6 +116,8 @@ const install = function (Vue, opts = {}) {
         size,
         ...opts['Form']?.formConfig,
       },
+      rowGutter: opts['Form']?.rowGutter || 0,
+
     },
     Tag: {
       size: opts.Tag?.size || size,

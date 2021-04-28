@@ -10,7 +10,7 @@
   >
     <div v-if="readOnly" class="mask"></div>
 
-    <el-row class="fomr_item_body">
+    <el-row class="fomr_item_body" :gutter="computedRowGutter">
       <el-col
         v-for="(item, index) in computedItems"
         :key="getItemKey(item, index)"
@@ -162,9 +162,14 @@ export default {
 
   props: {
     /**
-     * 自定义表单配置
+     * 自定义表单配置 $MIMI
      */
     formConfig: Object,
+
+    /**
+     * 表单行Gutter $MIMI
+     */
+    rowGutter: Number,
 
     /**
      * 表单项
@@ -227,6 +232,9 @@ export default {
         ...this.$MIMI.Form.formConfig,
         ...this.formConfig,
       }
+    },
+    computedRowGutter() {
+      return this.rowGutter || this.$MIMI.Form.rowGutter
     },
     rules() {
       let rules = this.computedItems.reduce((total, item) => {
