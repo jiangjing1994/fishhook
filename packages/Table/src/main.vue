@@ -300,6 +300,11 @@
        * 参数转义
        */
       defaultProps: Object,
+
+      /**
+       * 分页参数转义
+       */
+      orderProps: Object,
       /**
        * 异步方法
        */
@@ -421,6 +426,9 @@
       },
       tableDefaultProps() {
         return this.defaultProps || this.$MIMI.Table.defaultProps
+      },
+      tableOrderProps() {
+        return this.orderProps || this.$MIMI.Table.orderProps
       },
       tableSelection() {
         return this.selection
@@ -610,7 +618,7 @@
               const res = await request({
                 [this.tableDefaultProps['currentPage']]: currentPage,
                 [this.tableDefaultProps['pageSize']]: pageSize,
-                [this.tableDefaultProps['order']]: order,
+                [this.tableDefaultProps['order']]: this.tableOrderProps[order],
                 [this.tableDefaultProps['prop']]: prop,
                 ...queryParams,
                 ...params,

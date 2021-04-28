@@ -115,6 +115,11 @@ const install = function (Vue, opts = {}) {
         prop: 'prop',
         total: 'page_size',
       },
+      orderProps: opts['Table']?.orderProps || {
+        ascending: 'ascending',
+        descending: 'descending',
+
+      },
     },
     Form: {
       formConfig: {
