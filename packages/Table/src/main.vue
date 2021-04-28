@@ -11,9 +11,7 @@
         </div>
         <div class="header__body-right">
           <slot name="menuRight"></slot>
-          <KemButton v-if="menuPermissionAdd" @click="clickMenuButton({ type: 'add' })"
-          >新增</KemButton
-          >
+          <KemButton v-if="menuPermissionAdd" @click="clickMenuButton({ type: 'add' })">新增</KemButton>
         </div>
       </div>
       <div v-if="headerBottomPermission" class="header__body-bottom">
@@ -45,8 +43,7 @@
             @tree-load="treeLoad"
             @expand-change="expandChanges"
             @selection-change="selectionChange"
-
-    >
+>
       <template v-for="(item, key) in computedOption.column" :slot="item.prop" slot-scope="scope">
         <!--开发中-->
         <render-content
@@ -290,6 +287,15 @@
           return {}
         },
       },
+
+      /**
+       * 表格是否根据queryParams变化自动 刷新数据 默认 true
+       */
+      autoRefresh  : {
+        type:Boolean,
+        default: true
+      },
+
       /**
        * 参数转义
        */
@@ -557,13 +563,16 @@
       },
       defaultParams: {
         handler() {
-          this.refreshDefaultParams()
+          // this.refreshDefaultParams()
         },
         deep: true,
       },
       queryParams: {
         handler() {
-          this.refreshDefaultParams()
+          if (this.autoRefresh){
+            this.refreshDefaultParams()
+
+          }
         },
         deep: true,
       },
