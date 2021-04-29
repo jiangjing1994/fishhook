@@ -109,7 +109,7 @@
 </template>
 
 <script lang="jsx">
-  import { cloneDeep, debounce } from '../../utils'
+  import { cloneDeep, debounce,get } from '../../utils'
   const defaultPage = {
     pageSizes: [5, 10, 20, 50],
     currentPage: 1,
@@ -624,7 +624,8 @@
                 ...params,
               })
 
-              let data = res
+              // let data = res
+              let data = get(res, this.tableDefaultProps['data'])
 
               const result = this.result
 
@@ -634,8 +635,8 @@
 
               this.loading = false
 
-              this.page.total = res[this.tableDefaultProps['total']]
-
+             // this.page.total = res[this.tableDefaultProps['total']]
+              this.page.total =  get(res, this.tableDefaultProps['total'])
               this.crudData = data
             } catch (error) {
               this.loading = false

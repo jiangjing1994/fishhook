@@ -114,6 +114,7 @@ const install = function (Vue, opts = {}) {
         order: 'order',
         prop: 'prop',
         total: 'page_size',
+        data: 'data',
       },
       orderProps: opts['Table']?.orderProps || {
         ascending: 'ascending',
