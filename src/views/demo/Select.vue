@@ -1,6 +1,15 @@
 <template>
   <KemPageCard header="下拉Select">
     <pre>{{ form }}</pre>
+    <KemSelect
+      v-model="form"
+      value-key="prop2"
+      :request="transferRequest"
+      :default-props="{
+        label: 'transferName',
+         value: 'id',
+    }"
+/>
     <KemForm ref="form" :form-items="formItems" :data="form"> </KemForm>
     <template slot="footer">
       <KemButton @click="dianwo">切换uiType</KemButton>
@@ -28,6 +37,7 @@ export default {
   data() {
     return {
       uiType: 'text',
+      value: '123',
       form: {
         prop3: 'Nanjing',
         prop4: '这是KemInput',
@@ -146,6 +156,7 @@ export default {
     },
   },
   methods: {
+    transferRequest,
     dianwo() {
       if (this.uiType === '') {
         this.uiType = 'text'

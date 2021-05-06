@@ -30,6 +30,7 @@ import KemSuperFlow from './SuperFlow'
 import KemTransfer from './Transfer'
 import KemTag from './Tag'
 import KemTagGroup from './TagGroup'
+import KemRangePicker from './RangePicker'
 import Umytable from 'umy-table'
 import 'umy-table/lib/theme-chalk/index.css';// 引入样式
 import ElementUI from 'element-ui'
@@ -74,6 +75,7 @@ const components = [
   KemTransfer,
   KemTag,
   KemTagGroup,
+  KemRangePicker,
 
 ]
 
@@ -83,6 +85,13 @@ const install = function (Vue, opts = {}) {
   components.map((component) => Vue.component(component.name, component))
 
   const size = opts.size || 'mini'
+  const basestyles = ({ rowIndex }) => {
+    if (rowIndex % 2 === 0) {
+      return {
+        backgroundColor: '#f7f7f7',
+      }
+    }
+  }
   Vue.prototype.$MIMI = {
     size,
     buttonSize: opts.buttonSize || 'mini',
@@ -104,6 +113,7 @@ const install = function (Vue, opts = {}) {
       indexLabel: opts['Table']?.indexLabel || '序号',
       align: opts['Table']?.align || 'center',
       menuWidth: opts['Table']?.menuWidth || 200,
+      rowStyle: opts['Table']?.rowStyle || basestyles,
       pageOption: opts['Table']?.pageOption || {
         pageSizes: [5, 10, 20, 50],
         pageSize: 20,
@@ -189,6 +199,7 @@ export default {
   KemTransfer,
   KemTag,
   KemTagGroup,
+  KemRangePicker,
 
 
 }

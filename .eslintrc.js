@@ -26,5 +26,6 @@ module.exports = {
     'vue/require-prop-types': 'off',
     'vue/max-attributes-per-line': 'off',
     'vue/no-template-shadow': 'off',
+    'vue/no-unused-vars': 'off',
   },
 }

@@ -316,7 +316,7 @@
       result: Function,
 
       /**
-       * 行样式
+       * 行样式 $Mimi
        */
       rowStyle: Function,
 
@@ -803,14 +803,9 @@
 
       // 单元格样式
       methodsRowStyle({ rowIndex, row }) {
-        const basestyles = ({ rowIndex }) => {
-          if (rowIndex % 2 === 0) {
-            return {
-              backgroundColor: '#f7f7f7',
-            }
-          }
-        }
-        const rowStyle = this.rowStyle || basestyles
+
+       // const rowStyle = this.rowStyle || basestyles
+        const rowStyle = this.rowStyle || this.$MIMI.rowStyle
 
         return rowStyle({ rowIndex, row })
       },
