@@ -23,12 +23,15 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@master
+      - name: install and build 🔧 # this example project is built using npm and outputs the result to the 'build' folder. replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
+        run: |
+          npm install
+          npm run docs:build
 
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.1
+      - name: deploy 🚀
+        uses: jamesives/github-pages-deploy-action@4.1.0
+        with:
+          branch: gh-pages # the branch the action should deploy to.
+          folder: doc # the folder the action should deploy.
+          token: ${{ secrets.ACCESS_TOKEN }}
 
-        env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: doc
-          BUILD_SCRIPT: npm install && npm run docs:build
