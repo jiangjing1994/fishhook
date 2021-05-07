@@ -1,3 +1,4 @@
+import { get } from '../utils'
 export default {
   data() {
     return {
@@ -79,11 +80,21 @@ export default {
       const { label, value } = this.defaultProps
       let options = this.isService ? this.data : this.options
 
+      if (!label || !value){
+        return options.map((item) => {
+          return {
+            label:item,
+            value:item,
+          }
+        })
+
+      }
+
       return options.map((item) => {
         return {
           ...item,
-          label: item[label],
-          value: item[value],
+          label:get(item,label),
+          value:get(item,value),
         }
       })
     },

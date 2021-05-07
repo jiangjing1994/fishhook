@@ -1,15 +1,7 @@
 <template>
   <KemPageCard header="下拉Select">
     <pre>{{ form }}</pre>
-    <KemSelect
-      v-model="form"
-      value-key="prop2"
-      :request="transferRequest"
-      :default-props="{
-        label: 'transferName',
-         value: 'id',
-    }"
-/>
+
     <KemForm ref="form" :form-items="formItems" :data="form"> </KemForm>
     <template slot="footer">
       <KemButton @click="dianwo">切换uiType</KemButton>
@@ -29,6 +21,13 @@ const transferRequest = () => {
         { transferName: '动态数据5', id: 'Shenzhen' },
         { transferName: '动态数据6', id: 'Guangzhou' },
       ])
+    }, 500)
+  })
+}
+const transferRequest2 = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(['动态数据1','动态数据2','动态数据3','动态数据4',])
     }, 500)
   })
 }
@@ -82,6 +81,19 @@ export default {
               label: 'transferName',
               value: 'id',
             },
+            defaultParams: {
+              dictType: 'transfer',
+            },
+          },
+        },
+        {
+          label: '动态条件2',
+          prop: 'prop2',
+          span: 13,
+          component: 'KemSelect',
+          props: {
+            request: transferRequest2,
+            defaultProps: {},
             defaultParams: {
               dictType: 'transfer',
             },
