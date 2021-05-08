@@ -14,10 +14,7 @@ Vue.use(KemUI, {
   Button: {
     size: 'mini',
   },
-  Table: {
-    //selection: true,
-  },
-})
+ })
 Vue.config.productionTip = false
 
 new Vue({

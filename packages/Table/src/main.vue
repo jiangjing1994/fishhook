@@ -805,7 +805,7 @@
       methodsRowStyle({ rowIndex, row }) {
 
        // const rowStyle = this.rowStyle || basestyles
-        const rowStyle = this.rowStyle || this.$MIMI.rowStyle
+        const rowStyle = this.rowStyle || this.$MIMI.Table.rowStyle
 
         return rowStyle({ rowIndex, row })
       },
