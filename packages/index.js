@@ -130,6 +130,7 @@ const install = function (Vue, opts = {}) {
         descending: 'descending',
 
       },
+      mergeOption: opts['Table']?.mergeOption || {},
     },
     Form: {
       formConfig: {

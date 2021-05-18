@@ -16,6 +16,14 @@ Vue.use(KemUI, {
   Button: {
     size: 'mini',
   },
+  Table:{
+    align: "left",
+
+    indexLabel: "序 号",
+    mergeOption: {
+      indexWidth: 100,
+     },
+  }
  })
 Vue.use(Umytable)
 Vue.config.productionTip = false

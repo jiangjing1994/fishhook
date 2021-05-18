@@ -265,9 +265,7 @@
       /**
        * 合并选项 支持option下的所有属性及props没有暴露的属性 支持$MIMI方式
        */
-      mergeOption: {
-        type: Object,
-      },
+      mergeOption:Object,
       /**
        * 是否开启多选 支持$MIMI
        */
@@ -436,6 +434,7 @@
       tableMergeOption() {
         return this.mergeOption || this.$MIMI.Table.mergeOption
       },
+
       computedOption() {
         const lazy = this.treeProps.lazy || false
         let option = {
@@ -867,7 +866,7 @@
       .el-table--striped .el-table__body tr.el-table__row--striped td {
         background-color: inherit;
       }
-      width: 98% !important;
+      width: 100% !important;
       .el-card {
         // border: 0;
         .el-card__body {
@@ -895,7 +894,7 @@
       }
     }
     .header_body {
-      padding: 0 1%;
+      padding: 0 0;
       margin-bottom: 15px;
       .header__body-top {
         margin-bottom: 15px;
@@ -907,11 +906,11 @@
         margin-bottom: 15px;
 
         .header__body-left {
-          width: 49%;
+          width: 49.5%;
           text-align: left;
         }
         .header__body-right {
-          width: 49%;
+          width: 49.5%;
           text-align: right;
         }
       }
