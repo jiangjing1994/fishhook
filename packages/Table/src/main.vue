@@ -28,7 +28,9 @@
     <avue-crud
             ref="crud"
             v-model="obj"
-            :data="crudData"
+            v-loadmore="handelLoadmore"
+            :data-size="tableData.length"
+            :data="filteredData"
             :option="computedOption"
             :page.sync="page"
             :table-loading="loading"
@@ -109,8 +111,9 @@
 </template>
 
 <script lang="jsx">
-  import { cloneDeep, debounce,get } from '../../utils'
-  const defaultPage = {
+import {cloneDeep, debounce, get} from '../../utils'
+
+const defaultPage = {
     pageSizes: [5, 10, 20, 50],
     currentPage: 1,
     total: 0,
@@ -162,6 +165,62 @@
    */
   export default {
     name: 'KemTable',
+    directives:{
+      loadmore:{
+        componentUpdated: function (el, binding, vnode, oldVnode) {
+          // 设置默认溢出显示数量
+          var spillDataNum = 20;
+
+
+          // 设置隐藏函数
+          var timeout = false;
+          let setRowDisableNone = function (topNum, showRowNum, binding) {
+            if (timeout) {
+              clearTimeout(timeout);
+            }
+            timeout = setTimeout(() => {
+              binding.value.call(null, topNum, topNum + showRowNum + spillDataNum);
+            });
+          };
+          setTimeout(() => {
+            const dataSize = vnode.data.attrs['data-size'];
+            const oldDataSize = oldVnode.data.attrs['data-size'];
+            if (dataSize === oldDataSize) return;
+            const selectWrap = el.querySelector('.el-table__body-wrapper');
+            const selectTbody = selectWrap.querySelector('table tbody');
+            const selectRow = selectWrap.querySelector('table tr');
+            if (!selectRow) {
+              return;
+            }
+            const rowHeight = selectRow.clientHeight;
+            let showRowNum = Math.round(selectWrap.clientHeight / rowHeight);
+
+            const createElementTR = document.createElement('tr');
+            let createElementTRHeight = (dataSize - showRowNum - spillDataNum) * rowHeight;
+            createElementTR.setAttribute('style', `height: ${createElementTRHeight}px;`);
+            selectTbody.append(createElementTR);
+
+            // 监听滚动后事件
+            selectWrap.addEventListener('scroll', function () {
+              let topPx = this.scrollTop - spillDataNum * rowHeight;
+              let topNum = Math.round(topPx / rowHeight);
+              let minTopNum = dataSize - spillDataNum - showRowNum;
+              if (topNum > minTopNum) {
+                topNum = minTopNum;
+              }
+              if (topNum < 0) {
+                topNum = 0;
+                topPx = 0;
+              }
+              selectTbody.setAttribute('style', `transform: translateY(${topPx}px)`);
+              createElementTR.setAttribute('style', `height: ${createElementTRHeight - topPx > 0 ? createElementTRHeight - topPx : 0}px;`);
+              setRowDisableNone(topNum, showRowNum, binding);
+            })
+          });
+        }
+      }
+    },
+
     components: {
       RenderContent,
     },
@@ -376,6 +435,14 @@
         type: [Object, Boolean],
         default: false,
       },
+
+      /**
+       * 大数模式
+       */
+      bigData: {
+        type: Boolean,
+        default: false,
+      },
     },
 
     data() {
@@ -391,11 +458,31 @@
         sort: {},
         loading: false,
         expandRowKeys: [],
+        currentStartIndex: 0,
+        currentEndIndex: 20
       }
     },
 
     computed: {
+
+      filteredData() {
+        if (this.bigData){
+          return this.tableData.filter((item, index) => {
+            if (index < this.currentStartIndex) {
+              return false;
+            } else return index <= this.currentEndIndex;
+          })
+        }else {
+          return  this.crudData
+        }
+
+
+      },
+
       tableIsShowIndex() {
+        if (this.bigData){
+          return false
+        }
         return this.isShowIndex || this.$MIMI.Table.isShowIndex
       },
       tableIndexLabel() {
@@ -460,6 +547,7 @@
           expandRowKeys: this.expandRowKeys,
           expand: this.expand,
           lazy: lazy,
+          selectionFixed:false,
 
         }
 
@@ -850,6 +938,12 @@
         } else {
           toggleTreeExpansion(row)
         }
+      },
+
+      handelLoadmore(currentStartIndex, currentEndIndex) {
+        this.currentStartIndex = currentStartIndex;
+        this.currentEndIndex = currentEndIndex;
+        this.$emit('handelLoadmore',currentStartIndex , currentEndIndex)
       },
     },
   }

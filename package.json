@@ -1,6 +1,6 @@
 {
   "name": "@jiangjing94/mimi",
-  "version": "1.2.24",
+  "version": "1.2.25",
   "private": false,
   "scripts": {
     "bootstrap": "yarn --frozen-lockfile && yarn gen:version",
@@ -40,7 +40,7 @@
     ]
   },
   "dependencies": {
-    "@smallwei/avue": "2.6.3",
+    "@smallwei/avue": "2.6.7",
     "axios": "0.19.2",
     "core-js": "3.6.5",
     "countup.js": "1.9.3",

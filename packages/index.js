@@ -31,7 +31,6 @@ import KemTransfer from './Transfer'
 import KemTag from './Tag'
 import KemTagGroup from './TagGroup'
 import KemRangePicker from './RangePicker'
-import 'umy-table/lib/theme-chalk/index.css';// 引入样式
 import ElementUI from 'element-ui'
 import Avue from '@smallwei/avue'
 import '@smallwei/avue/lib/index.css'
