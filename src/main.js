@@ -23,6 +23,11 @@ Vue.use(KemUI, {
     mergeOption: {
       indexWidth: 100,
      },
+    pageOption: {
+      pageSizes: [5, 10, 20, 50],
+      pageSize: 10,
+      layout: "total,pager,prev, next",
+    },
   }
  })
 Vue.use(Umytable)

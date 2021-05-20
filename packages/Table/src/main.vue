@@ -30,7 +30,7 @@
             v-model="obj"
             :data="crudData"
             :option="computedOption"
-            :page="page"
+            :page.sync="page"
             :table-loading="loading"
             :search-solt="true"
             :row-style="methodsRowStyle"
@@ -765,6 +765,12 @@
       // 表格增加一行
       rowCellAdd(row) {
         this.$refs.crud.rowCellAdd(row)
+      },
+
+      // 表格增加一行
+      columnInit(row) {
+        this.$refs.crud.rowCellAdd(row)
+        this.$refs.crud.columnInit();
       },
 
       // 当行内编辑点击保存时
