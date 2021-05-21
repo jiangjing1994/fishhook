@@ -144,9 +144,11 @@ const install = function (Vue, opts = {}) {
     Tag: {
       size: opts.Tag?.size || size,
     },
-    // Dialog: {
-    //   size: opts.width?.size || size,
-    // },
+
+    // 输入组件
+    Input:{
+      clearable: opts['Input']?.clearable || true,
+    }
   }
 
   ElementUI.install(Vue, {

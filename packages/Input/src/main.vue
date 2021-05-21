@@ -2,7 +2,7 @@
 <template>
     <div>
       <KemLabelText v-if="uiType ==='text'" :value="label"></KemLabelText>
-      <el-input v-else v-bind="$attrs" :placeholder="placeholder" v-on="evet">
+      <el-input v-else v-bind="$attrs" :placeholder="placeholder" :clearable="inputClearable" v-on="evet">
         <!-- @slot prefix	输入框头部内容，只对 type="text" 有效 -->
         <slot slot="prefix" name="prefix"/>
 
@@ -37,8 +37,15 @@ export default {
       type: String,
       default: 'normal',
     },
+    /**
+     * 清空 $MIMI.Input
+     */
+    clearable:Boolean,
   },
   computed: {
+    inputClearable() {
+      return this.clearable || this.$MIMI.Input.clearable
+    },
     evet() {
       return this.$listeners
     },

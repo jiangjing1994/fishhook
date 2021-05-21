@@ -1,10 +1,21 @@
-<template lang="pug">
-    div
-        KemLabelText( v-if='uiType ==="text"' :value='label')
-        el-select( v-bind="$attrs" :value='v'  v-else v-on="evet" :multiple='multiple' :placeholder="placeholder" :filterable='filterable' :clearable='clearable' :style='`width:${width}`' )
-            el-option(v-for="(item,index) in list " :key="index"  :label="item.label" :disabled="item.disabled" :value="item.value")
-                slot(:scope="item")
-
+<template>
+    <div>
+        <KemLabelText v-if="uiType ==='text'" :value="label"/>
+          <el-select
+            v-else
+            v-bind="$attrs"
+            :value="v" :multiple="multiple"
+            :placeholder="placeholder"
+            :filterable="filterable"
+            :clearable="inputClearable"
+            :style="`width:${width}`"
+            v-on="evet"
+>
+            <el-option v-for="(item,index) in list " :key="index" :label="item.label" :disabled="item.disabled" :value="item.value">
+              <slot :scope="item"></slot>
+            </el-option>
+          </el-select>
+     </div>
 </template>
 <script>
 /**
@@ -19,10 +30,7 @@ export default {
       type: String,
       default: '请选择',
     },
-    clearable: {
-      type: Boolean,
-      default: true,
-    },
+
     filterable: {
       type: Boolean,
       default: true,
@@ -58,6 +66,7 @@ export default {
     }
   },
   computed: {
+
     v() {
       let value = ''
       if (!this.$attrs.value) {

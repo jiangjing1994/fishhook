@@ -74,8 +74,16 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * 清空 $MIMI.Input
+     */
+    clearable:Boolean,
   },
   computed: {
+    inputClearable() {
+      return this.clearable || this.$MIMI.Input.clearable
+    },
     list() {
       const { label, value } = this.defaultProps
       let options = this.isService ? this.data : this.options
