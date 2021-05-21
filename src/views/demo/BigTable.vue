@@ -1,12 +1,22 @@
 <template>
   <div>
-    <avue-crud v-loadmore="handelLoadmore" :data="filteredData" :option="option" :data-size="tableData.length"></avue-crud>
-    <KemTable :big-data="true" :table-height="300" :table-data="tableData" :column="option.column" />
+    <avue-crud :data="filteredData" v-loadmore="handelLoadmore"  :option="option" :data-size="tableData.length">
+      <template slot="expand" slot-scope="scope">
+        {{ scope.row.title }}
+      </template>
+    </avue-crud>
+
+    <KemTable :big-data="true" :table-height="600" :table-data="tableData" :expand="true" :merge-option="option" :column="column" >
+      <template slot="expand" slot-scope="{ scope }">
+        {{ scope.row.title }}
+      </template>
+    </KemTable>>
 
   </div>
 
 </template>
 <script>
+import Mock from 'mockjs'
 export default {
   name:'BigTable',
   directives:{
@@ -69,20 +79,53 @@ export default {
       option:{
         height:300,
         expand:true,
-        selection:true,
-        index:true,
-        selectionFixed:false,
         expandFixed:false,
         menuFixed:false,
-        column:[{
+         rowKey:'id',
+        column:[
+          {
+            label:'姓名',
+            prop:'name',
+            width:200,
+          },
+          {label:'年龄', prop:'sex'},
+          {label:'author', prop:'author'},
+          {label:'reviewer', prop:'reviewer'},
+          {label:'title', prop:'title',overHidden:true},
+          {label:'content_short', prop:'content_short'},
+          {label:'forecast', prop:'forecast'},
+          {label:'importance', prop:'importance'},
+          {label:'type', prop:'type'},
+
+        ],
+
+      },
+      column:[
+        {
           label:'姓名',
           prop:'name',
           width:200,
-        },{
-          label:'年龄',
-          prop:'sex'
-        }]
-      },
+        },
+        {label:'年龄', prop:'sex'},
+        {label:'author', prop:'author'},
+        {label:'reviewer', prop:'reviewer'},
+        {label:'title', prop:'title'},
+        {label:'content_short', prop:'content_short'},
+        {label:'forecast', prop:'forecast'},
+        {label:'importance', prop:'importance'},
+        {label:'type', prop:'type'},
+        {label:'status', prop:'status'},
+        {label:'display_time', prop:'display_time'},
+        {label:'pageviews', prop:'pageviews'},
+        {label:'platforms', prop:'platforms'},
+        {label:'code', prop:'code'},
+        {label:'formalCode', prop:'formalCode'},
+        {label:'system', prop:'system'},
+        {label:'createUser', prop:'createUser'},
+        {label:'createTime', prop:'createTime'},
+        {label:'processInstanceId', prop:'processInstanceId'},
+      ],
+
       currentStartIndex: 0,
       currentEndIndex: 20
     };
@@ -113,13 +156,41 @@ export default {
     getTableData() {
       let cont = 0;
       let tableData = [];
-      while (cont < 10000) {
+      while (cont < 1000) {
         cont = cont + 1;
-        let object = {
-          id:cont,
-          name: '王小虎' + cont,
-          sex:cont
-        }
+        let object =  Mock.mock(
+          {
+            id:cont,
+            name: '王小虎' + cont,
+            sex:cont,
+            author: '@first',
+            reviewer: '@first',
+            title: '@title(100, 1000)',
+            content_short: 'mock data',
+            forecast: '@float(0, 100, 2, 2)',
+            importance: '@integer(1, 3)',
+            'type|1': ['CN', 'US', 'JP', 'EU'],
+            'status|1': ['published', 'draft', 'deleted'],
+            display_time: '@datetime',
+
+            comment_disabled: true,
+            pageviews: '@integer(300, 5000)',
+            platforms: ['a-platform'],
+
+            code: '@increment',
+            formalCode: '@increment',
+
+            system: '@title(5, 10)',
+            //type: '非市场口需求',
+            createUser: '@first',
+            createTime: '@datetime',
+            dealTime: null,
+            formalId: null,
+            processInstanceId: '@increment',
+          }
+        )
+
+
         tableData.push(object);
       }
       setTimeout(() => {

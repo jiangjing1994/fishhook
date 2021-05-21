@@ -813,8 +813,14 @@ const defaultPage = {
        * 列展开手风琴
        */
       expandChanges(row, expendList) {
+        /** 手风琴展开
+         * @event expandChanges
+         * @type {Event}
+         */
+        this.$emit('expandChanges', { row, expendList })
         if (this.treeProps) return
 
+        if (this.bigData) return;
         if (expendList.length) {
           this.expandRowKeys = []
           if (row) {
@@ -823,11 +829,7 @@ const defaultPage = {
         } else {
           this.expandRowKeys = []
         }
-        /** 手风琴展开
-         * @event expandChanges
-         * @type {Event}
-         */
-        this.$emit('expandChanges', { row, expendList })
+
       },
 
       /**
