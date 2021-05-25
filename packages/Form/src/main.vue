@@ -117,7 +117,8 @@
 </template>
 
 <script lang="jsx">
-import { cloneDeep, debounce } from '../../utils'
+import {cloneDeep, debounce} from '../../utils'
+import FormItem from './FormItem'
 
 // element UI 组件
 let defaultaAlias = {
@@ -132,7 +133,6 @@ let defaultaAlias = {
   },
 }
 
-import FormItem from './FormItem'
 /**
  * @displayName Form 配置化表单
  */
@@ -237,17 +237,16 @@ export default {
       return this.rowGutter || this.$MIMI.Form.rowGutter
     },
     rules() {
-      let rules = this.computedItems.reduce((total, item) => {
+      return this.computedItems.reduce((total, item) => {
         if (item.rules) {
           let rules = item.rules
-          if (typeof rules === 'function') {
+          if (typeof rules==='function') {
             rules = rules(this.data)
           }
           total[item.prop] = rules
         }
         return total
       }, {})
-      return rules
     },
     computedFormData() {
       const data = cloneDeep(this.data)

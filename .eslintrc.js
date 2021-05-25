@@ -27,5 +27,6 @@ module.exports = {
     'vue/max-attributes-per-line': 'off',
     'vue/no-template-shadow': 'off',
     'vue/no-unused-vars': 'off',
+    'vue/no-use-v-if-with-v-for': 'off',
   },
 }

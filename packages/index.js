@@ -31,11 +31,10 @@ import KemTransfer from './Transfer'
 import KemTag from './Tag'
 import KemTagGroup from './TagGroup'
 import KemRangePicker from './RangePicker'
+import KemIcon from './Icon'
 import ElementUI from 'element-ui'
 import Avue from '@smallwei/avue'
 import '@smallwei/avue/lib/index.css'
-import 'element-ui/lib/theme-chalk/index.css'
-//import './theme/index.css'
 import { Tree as KemViewTree, Alert as KemViewAlert } from 'view-design'
 import 'view-design/dist/styles/iview.css'
 
@@ -74,6 +73,7 @@ const components = [
   KemTag,
   KemTagGroup,
   KemRangePicker,
+  KemIcon,
 
 ]
 
@@ -200,6 +200,7 @@ export default {
   KemTag,
   KemTagGroup,
   KemRangePicker,
+  KemIcon,
 
 
 }

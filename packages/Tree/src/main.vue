@@ -1,325 +1,245 @@
 <template>
-  <div>
-    <KemInput v-model="filterText" style="margin-bottom: 20px">
-      <KemButton
-        v-if="isShowMenu"
-        slot="append"
-        icon="el-icon-plus"
-        @click="onClickNode({}, 'add')"
-      ></KemButton>
-    </KemInput>
-    <el-tree
-      ref="tree"
-      style="overflow: hidden; height: 100%"
-      v-bind="$attrs"
-      :data="treeData"
-      :props="defaultProps"
-      node-key="id"
-      :expand-on-click-node="false"
-      :filter-node-method="filterNodeMethod"
-      :render-content="renderContent"
-      :lazy="lazy"
-      :load="loadNode"
-      @node-click="nodeClick"
-      v-on="evet"
-    />
+  <div ref="treeWrap" :class="prefixCls">
+    <Tree-node
+      v-for="(item, i) in stateTree"
+      :key="i"
+      :data="item"
+      visible
+      :multiple="multiple"
+      :show-checkbox="showCheckbox"
+      :children-key="childrenKey"
+>
+    </Tree-node>
+    <div v-if="!stateTree.length" :class="[prefixCls + '-empty']">{{ localeEmptyText }}</div>
+    <div class="ivu-tree-context-menu" :style="contextMenuStyles">
+      <Dropdown trigger="custom" :visible="contextMenuVisible" transfer @on-clickoutside="handleClickContextMenuOutside">
+        <DropdownMenu slot="list">
+          <slot name="contextMenu"></slot>
+        </DropdownMenu>
+      </Dropdown>
+    </div>
   </div>
 </template>
-<script type="text/jsx">
-/**
- * @displayName Tree 树
- */
+<script>
+import TreeNode from './node.vue';
+
+import Emitter from '../../mixins/emitter';
+import {Dropdown,DropdownMenu } from 'view-design'
+
+const prefixCls = 'ivu-tree';
+
 export default {
-    name:'KemTree',
-    props: {
-        defaultMenuButton:{
-            type:Array,
-            default:()=>{
-                return[
-                    {
-                        type:'info',
-                        icon:'el-icon-info',
-                        text:'详情',
-                        hidden:true
-                    },
-                    {
-                        type:'add',
-                        icon:'el-icon-plus',
-                        text:'增加'
-                    },
-                    {
-                        type:'del',
-                        icon:'el-icon-delete',
-                        text:'删除'
-                    },
-                    {
-                        type:'edit',
-                        icon:'el-icon-edit',
-                        text:'编辑'
-                    },
-
-
-                ]
-            }
-        },
-        // 懒加载
-        lazy:{
-            type:Boolean,
-            default:false
-        },
-
-        // 默认参数
-        defaultParams: {
-            type: Object,
-            default:()=>{
-                return{
-
-                }
-            }
-        },
-
-        defaultProps: {
-            type: Object,
-            default:()=>{
-                return{
-                    children: 'children',
-                    label: 'label',
-                    id:'id',
-                    isLeaf: 'isLeaf'
-
-                }
-            }
-        },
-
-        isShowMenu:{
-            type:Boolean,
-            default:false,
-        },
-        data:{
-            type:Array,
-            default:()=>{
-                return[]
-            }
-        },
-
-        // eslint-disable-next-line vue/require-default-prop
-        request:{
-            type:Function,
-        },
-        // eslint-disable-next-line vue/require-default-prop
-        result:{
-            type:Function,
-        },
-
+  name: 'KemTree',
+  components: { TreeNode, Dropdown, DropdownMenu },
+  mixins: [ Emitter ],
+  provide () {
+    return { TreeInstance: this };
+  },
+  props: {
+    data: {
+      type: Array,
+      default () {
+        return [];
+      }
     },
-
-    data() {
-        return {
-            filterText:'',
-            loading:false,
-            treeData:[]
-        }
+    multiple: {
+      type: Boolean,
+      default: false
     },
-    computed: {
-        evet(){
-            return this.$listeners;
-        },
-
+    showCheckbox: {
+      type: Boolean,
+      default: false
     },
-    watch: {
-        filterText(newValue) {
-            this.filter(newValue)
-        }
+    checkStrictly: {
+      type: Boolean,
+      default: false
     },
-    created(){
-        if(!this.lazy){
-            this.getTreeData()
-        }
-
+    // 当开启 showCheckbox 时，如果开启 checkDirectly，select 将强制转为 check 事件
+    checkDirectly: {
+      type: Boolean,
+      default: false
     },
-
-    methods: {
-        filterNodeMethod(value,data){
-            if (!value) return true;
-            return data[this.defaultProps['label']].indexOf(value) !== -1;
-        },
-
-        filter(val){
-            this.$refs.tree.filter(val);
-        },
-
-
-        async getTreeData(params={}){
-
-            const defaultParams = this.defaultParams
-
-            const request = this.request
-
-            if(request) {
-
-                this.loading = true
-
-                const res = await request({
-                    ...defaultParams,
-                    ...params
-                })
-
-                let data = res
-
-                const result = this.result
-
-                if (result) {
-
-                    data = await result(res)
-
-                }
-
-                this.loading = false
-
-                this.treeData = data
-
-
-            }
-            else {
-                this.treeData = this.data
-            }
-        },
-
-
-        async loadNode(node, resolve){
-
-            this.loadData(node,resolve);
-
-        },
-
-        async loadData( params={},resolve) {
-
-
-            const defaultParams = this.defaultParams
-
-            const request = this.request
-
-            if(request){
-
-                this.loading = true
-
-                const res = await request({
-                    ...defaultParams,
-                    ...params
-                })
-
-                let data = res
-
-                const  result  = this.result
-
-                if(result){
-
-                    data  = await result(res) || []
-                }
-
-                this.loading=false
-
-                resolve(data)
-
-
-            }
-
-
-
-
-        },
-
-        onClickNode(data,type){
-            this.$emit('clickMenus',{
-                ...data,type
-            },)
-        },
-
-        nodeClick(data){
-            this.$emit('nodeClick',{
-                ...data,
-            },)
-
-        },
-        renderContent(h, { node, data, store }) {
-
-            const defaultMenuButton = this.defaultMenuButton
-
-
-            let menuList = []
-            defaultMenuButton.map(item=>{
-                if(!item.hidden){
-                    menuList.push(
-                        <el-dropdown-item>
-                    <span type="text" on-click={(e) => {
-                        e.stopPropagation();
-                        this.onClickNode({node, data, store}, item.type)
-                    }}><i className={item.icon}/> {item.text}</span>
-                        </el-dropdown-item>
-
-                    )
-                }
-
-
-
-
-            })
-
-            const str =
-                <el-dropdown
-                    placement="bottom"
-                >
-              <span className="el-dropdown-link" on-click={(e) =>{e.stopPropagation()} }>
-                <KemButton  type="text" icon="el-icon-more-outline"></KemButton>
-              </span>
-                    <el-dropdown-menu slot="dropdown">
-                        { menuList }
-                    </el-dropdown-menu>
-                </el-dropdown>
-
-
-            return (
-                <div class="custom-tree-node">
-                    <div class="text-ellipsis">
-                        {node.label}
-                    </div>
-                    <div class="button__boody">
-                        {this.isShowMenu ? str : ''}
-                    </div>
-                </div>
-            );
-        }
+    emptyText: {
+      type: String
+    },
+    childrenKey: {
+      type: String,
+      default: 'children'
+    },
+    loadData: {
+      type: Function
+    },
+    render: {
+      type: Function
+    },
+    selectNode: {
+      type: Boolean,
+      default: true
+    },
+    expandNode: {
+      type: Boolean,
+      default: false
     }
+  },
+  data () {
+    return {
+      prefixCls: prefixCls,
+      stateTree: this.data,
+      flatState: [],
+      contextMenuVisible: false,
+      contextMenuStyles: {
+        top: 0,
+        left: 0
+      }
+    };
+  },
+  computed: {
+    localeEmptyText () {
+      if (typeof this.emptyText === 'undefined') {
+        return '暂无数据';
+      } else {
+        return this.emptyText;
+      }
+    },
+  },
+  watch: {
+    data: {
+      deep: true,
+      handler () {
+        this.stateTree = this.data;
+        this.flatState = this.compileFlatState();
+        this.rebuildTree();
+      }
+    }
+  },
+  created(){
+    this.flatState = this.compileFlatState();
+    this.rebuildTree();
+  },
+  mounted () {
+    this.$on('on-check', this.handleCheck);
+    this.$on('on-selected', this.handleSelect);
+    this.$on('toggle-expand', node => this.$emit('on-toggle-expand', node));
+    this.$on('contextmenu', this.handleContextmenu);
+  },
+  methods: {
+    compileFlatState () { // so we have always a relation parent/children of each node
+      let keyCounter = 0;
+      let childrenKey = this.childrenKey;
+      const flatTree = [];
+      function flattenChildren(node, parent) {
+        node.nodeKey = keyCounter++;
+        flatTree[node.nodeKey] = { node: node, nodeKey: node.nodeKey };
+        if (typeof parent != 'undefined') {
+          flatTree[node.nodeKey].parent = parent.nodeKey;
+          flatTree[parent.nodeKey][childrenKey].push(node.nodeKey);
+        }
+
+        if (node[childrenKey]) {
+          flatTree[node.nodeKey][childrenKey] = [];
+          node[childrenKey].forEach(child => flattenChildren(child, node));
+        }
+      }
+      this.stateTree.forEach(rootNode => {
+        flattenChildren(rootNode);
+      });
+      return flatTree;
+    },
+    updateTreeUp(nodeKey){
+      const parentKey = this.flatState[nodeKey].parent;
+      if (typeof parentKey == 'undefined' || this.checkStrictly) return;
+
+      const node = this.flatState[nodeKey].node;
+      const parent = this.flatState[parentKey].node;
+      if (node.checked == parent.checked && node.indeterminate == parent.indeterminate) return; // no need to update upwards
+
+      if (node.checked == true) {
+        this.$set(parent, 'checked', parent[this.childrenKey].every(node => node.checked));
+        this.$set(parent, 'indeterminate', !parent.checked);
+      } else {
+        this.$set(parent, 'checked', false);
+        this.$set(parent, 'indeterminate', parent[this.childrenKey].some(node => node.checked || node.indeterminate));
+      }
+      this.updateTreeUp(parentKey);
+    },
+    rebuildTree () { // only called when `data` prop changes
+      const checkedNodes = this.getCheckedNodes();
+      checkedNodes.forEach(node => {
+        this.updateTreeDown(node, {checked: true});
+        // propagate upwards
+        const parentKey = this.flatState[node.nodeKey].parent;
+        if (!parentKey && parentKey !== 0) return;
+        const parent = this.flatState[parentKey].node;
+        const childHasCheckSetter = typeof node.checked != 'undefined' && node.checked;
+        if (childHasCheckSetter && parent.checked != node.checked) {
+          this.updateTreeUp(node.nodeKey); // update tree upwards
+        }
+      });
+    },
+
+    getSelectedNodes () {
+      /* public API */
+      return this.flatState.filter(obj => obj.node.selected).map(obj => obj.node);
+    },
+    getCheckedNodes () {
+      /* public API */
+      return this.flatState.filter(obj => obj.node.checked).map(obj => obj.node);
+    },
+    getCheckedAndIndeterminateNodes () {
+      /* public API */
+      return this.flatState.filter(obj => (obj.node.checked || obj.node.indeterminate)).map(obj => obj.node);
+    },
+    updateTreeDown(node, changes = {}) {
+      if (this.checkStrictly) return;
+
+      for (let key in changes) {
+        this.$set(node, key, changes[key]);
+      }
+      if (node[this.childrenKey]) {
+        node[this.childrenKey].forEach(child => {
+          this.updateTreeDown(child, changes);
+        });
+      }
+    },
+    handleSelect (nodeKey) {
+      if (!this.flatState[nodeKey]) return;
+      const node = this.flatState[nodeKey].node;
+      if (!this.multiple){ // reset previously selected node
+        const currentSelectedKey = this.flatState.findIndex(obj => obj.node.selected);
+        if (currentSelectedKey >= 0 && currentSelectedKey !== nodeKey) this.$set(this.flatState[currentSelectedKey].node, 'selected', false);
+      }
+      this.$set(node, 'selected', !node.selected);
+
+      this.$emit('on-select-change', this.getSelectedNodes(), node);
+    },
+    handleCheck({ checked, nodeKey }) {
+      if (!this.flatState[nodeKey]) return;
+      const node = this.flatState[nodeKey].node;
+      this.$set(node, 'checked', checked);
+      this.$set(node, 'indeterminate', false);
+
+      this.updateTreeUp(nodeKey); // propagate up
+      this.updateTreeDown(node, {checked, indeterminate: false}); // reset `indeterminate` when going down
+
+      this.$emit('on-check-change', this.getCheckedNodes(), node);
+    },
+    handleContextmenu ({ data, event }) {
+      if (this.contextMenuVisible) this.handleClickContextMenuOutside();
+      this.$nextTick(() => {
+        const $TreeWrap = this.$refs.treeWrap;
+        const TreeBounding = $TreeWrap.getBoundingClientRect();
+        const position = {
+          left: `${event.clientX - TreeBounding.left}px`,
+          top: `${event.clientY - TreeBounding.top}px`
+        };
+        this.contextMenuStyles = position;
+        this.contextMenuVisible = true;
+        this.$emit('on-contextmenu', data, event, position);
+      });
+    },
+    handleClickContextMenuOutside () {
+      this.contextMenuVisible = false;
+    }
+  }
 };
 </script>
-
-<style lang="scss">
-.custom-tree-node {
-  position: relative;
-  font-size: 12px;
-  display: block;
-  width: 100%;
-  height: 100%;
-  line-height: 26px;
-  .text-ellipsis {
-    position: absolute;
-    width: calc(100% - 40px);
-    height: 100%;
-    overflow: hidden;
-    left: 0;
-    top: 0;
-    z-index: 10;
-    text-align: left;
-  }
-  .button__boody {
-    position: absolute;
-    width: 20px;
-    height: 100%;
-    right: 0px;
-    padding: 0 10px;
-    top: 0;
-    background-color: #fff;
-    z-index: 20;
-  }
-}
-</style>

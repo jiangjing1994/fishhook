@@ -22,6 +22,8 @@
 
 </template>
 <script>
+import {isExitsVariable} from "../../utils";
+
 /**
  * @displayName Input 输入框
  */
@@ -40,11 +42,14 @@ export default {
     /**
      * 清空 $MIMI.Input
      */
-    clearable:Boolean,
+     clearable: {
+      type: Boolean,
+      default:undefined
+    },
   },
   computed: {
     inputClearable() {
-      return this.clearable || this.$MIMI.Input.clearable
+      return  isExitsVariable(this.clearable) ? this.clearable : this.$MIMI.Input.clearable
     },
     evet() {
       return this.$listeners

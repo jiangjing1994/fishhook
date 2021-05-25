@@ -1,12 +1,12 @@
 <template>
   <div>
-    <avue-crud :data="filteredData" v-loadmore="handelLoadmore"  :option="option" :data-size="tableData.length">
+    <avue-crud v-loadmore="handelLoadmore" :data="filteredData" :option="option" :data-size="tableData.length">
       <template slot="expand" slot-scope="scope">
         {{ scope.row.title }}
       </template>
     </avue-crud>
 
-    <KemTable :big-data="true" :table-height="600" :table-data="tableData" :expand="true" :merge-option="option" :column="column" >
+    <KemTable :big-data="true" :table-height="600" :table-data="tableData" :is-show-header="false" :expand="true" :merge-option="option" :column="column" >
       <template slot="expand" slot-scope="{ scope }">
         {{ scope.row.title }}
       </template>
@@ -81,7 +81,8 @@ export default {
         expand:true,
         expandFixed:false,
         menuFixed:false,
-         rowKey:'id',
+        rowKey:'id',
+        showHeader:false,
         column:[
           {
             label:'姓名',

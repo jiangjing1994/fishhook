@@ -1,4 +1,4 @@
-import { get } from '../utils'
+import {get, isExitsVariable} from '../utils'
 export default {
   data() {
     return {
@@ -78,11 +78,14 @@ export default {
     /**
      * 清空 $MIMI.Input
      */
-    clearable:Boolean,
+    clearable: {
+      type: Boolean,
+      default:undefined
+    },
   },
   computed: {
     inputClearable() {
-      return this.clearable || this.$MIMI.Input.clearable
+      return  isExitsVariable(this.clearable) ? this.clearable : this.$MIMI.Input.clearable
     },
     list() {
       const { label, value } = this.defaultProps

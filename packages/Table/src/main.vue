@@ -1,6 +1,7 @@
 <template>
   <div class="kem-table__body">
 
+    1{{ isShowHeader }} 2{{ tableIsShowHeader }} 3{{ $props.isShowHeader }}
     <div v-if="headerPermission" v-loading="loading" class="header_body">
       <div v-if="headerTopPermission" class="header__body-top">
         <slot name="menuTop"></slot>
@@ -111,7 +112,7 @@
 </template>
 
 <script lang="jsx">
-import {cloneDeep, debounce, get} from '../../utils'
+import {cloneDeep, debounce, get,isExitsVariable} from '../../utils'
 
 const defaultPage = {
     pageSizes: [5, 10, 20, 50],
@@ -300,7 +301,7 @@ const defaultPage = {
        */
       isShowBorder: {
         type: Boolean,
-        default: true,
+        default:undefined
       },
 
       /**
@@ -308,18 +309,23 @@ const defaultPage = {
        */
       isShowStripe: {
         type: Boolean,
+        default:undefined
+
       },
       /**
        * 是否显示索引 支持$MIMI
        */
       isShowIndex: {
         type: Boolean,
+        default:undefined
+
       },
       /**
        * 是否显示表头 支持$MIMI
        */
       isShowHeader: {
         type: Boolean,
+        default:undefined
       },
       /**
        * 合并选项 支持option下的所有属性及props没有暴露的属性 支持$MIMI方式
@@ -483,22 +489,23 @@ const defaultPage = {
         if (this.bigData){
           return false
         }
-        return this.isShowIndex || this.$MIMI.Table.isShowIndex
+        return  isExitsVariable(this.isShowIndex) ? this.isShowIndex : this.$MIMI.Table.isShowIndex
+
       },
       tableIndexLabel() {
         return this.indexLabel || this.$MIMI.Table.indexLabel
       },
       tableIsShowHeader() {
-        return this.isShowHeader || this.$MIMI.Table.isShowHeader
-      },
+        return  isExitsVariable(this.isShowHeader) ? this.isShowHeader : this.$MIMI.Table.isShowHeader
+       },
       tableSize() {
         return this.size || this.$MIMI.Table.size
       },
       tableIsShowStripe() {
-        return this.isShowStripe || this.$MIMI.Table.isShowStripe
+         return  isExitsVariable(this.isShowStripe) ? this.isShowStripe : this.$MIMI.Table.isShowStripe
       },
       tableIsShowBorder() {
-        return this.isShowBorder || this.$MIMI.Table.isShowBorder
+         return  isExitsVariable(this.isShowBorder) ? this.isShowBorder : this.$MIMI.Table.isShowBorder
       },
       tableMenuWidth() {
         return this.menuWidth || this.$MIMI.Table.menuWidth
