@@ -1,7 +1,5 @@
 <template>
   <div class="kem-table__body">
-
-    1{{ isShowHeader }} 2{{ tableIsShowHeader }} 3{{ $props.isShowHeader }}
     <div v-if="headerPermission" v-loading="loading" class="header_body">
       <div v-if="headerTopPermission" class="header__body-top">
         <slot name="menuTop"></slot>
