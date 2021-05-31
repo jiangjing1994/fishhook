@@ -26,10 +26,10 @@ import TreeNode from './node.vue';
 import Emitter from '../../mixins/emitter';
 import {Dropdown,DropdownMenu } from 'view-design'
 
-const prefixCls = 'ivu-tree';
+const prefixCls = 'kem-tree';
 
 export default {
-  name: 'KemTree',
+  name: 'Tree',
   components: { TreeNode, Dropdown, DropdownMenu },
   mixins: [ Emitter ],
   provide () {

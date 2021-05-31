@@ -66,7 +66,7 @@
                 <span v-else>{{ data[item.prop] }}</span>
               </slot>
             </el-form-item>
-            <div v-else style="margin-bottom: 14px; padding-right: 20px">
+            <div v-else style="margin-bottom: 14px;">
               <slot :name="item.slot" v-bind="{ item }">
                 <component
                   :is="item.component"

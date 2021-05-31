@@ -3,16 +3,16 @@
     <ul :class="classes">
       <li @contextmenu.stop="handleContextmenu(data, $event)" @selectstart.stop="handlePreventSelect(data, $event)">
                 <span :class="arrowClasses" @click="handleExpand">
-                    <KemIcon v-if="showArrow" :type="arrowType" :custom="customArrowType" :size="arrowSize" />
-                    <KemIcon v-if="showLoading" type="ios-loading" class="ivu-load-loop" />
+                    <ViewIcon v-if="showArrow" :type="arrowType" :custom="customArrowType" :size="arrowSize" />
+                    <ViewIcon v-if="showLoading" type="ios-loading" class="ivu-load-loop" />
                 </span>
-        <Checkbox
+        <ViewCheckbox
           v-if="showCheckbox"
           :value="data.checked"
           :indeterminate="data.indeterminate"
           :disabled="data.disabled || data.disableCheckbox"
           @click.native.prevent="handleCheck"
-        ></Checkbox>
+        ></ViewCheckbox>
         <span :class="titleClasses" @click="handleClickNode">
                     <Render v-if="data.render" :render="data.render" :data="data" :node="node"></Render>
                     <Render v-else-if="isParentRender" :render="parentRender" :data="data" :node="node"></Render>
@@ -38,13 +38,12 @@ import Render from './render';
 import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition';
 import Emitter from '../../mixins/emitter';
 import { findComponentUpward } from '../../utils';
-import {Checkbox} from 'view-design'
 
-const prefixCls = 'ivu-tree';
+const prefixCls = 'kem-tree';
 
 export default {
   name: 'TreeNode',
-  components: { Checkbox, ElCollapseTransition, Render },
+  components: {  ElCollapseTransition, Render },
   mixins: [ Emitter ],
   inject: ['TreeInstance'],
   props: {
@@ -141,11 +140,11 @@ export default {
     arrowType () {
       let type = 'ios-arrow-forward';
 
-      if (this.$IVIEW) {
-        if (this.$IVIEW.tree.customArrow) {
+      if (this.$MIMI) {
+        if (this.$MIMI.Tree.customArrow) {
           type = '';
-        } else if (this.$IVIEW.tree.arrow) {
-          type = this.$IVIEW.tree.arrow;
+        } else if (this.$MIMI.Tree.arrow) {
+          type = this.$MIMI.Tree.arrow;
         }
       }
       return type;
@@ -154,9 +153,9 @@ export default {
     customArrowType () {
       let type = '';
 
-      if (this.$IVIEW) {
-        if (this.$IVIEW.tree.customArrow) {
-          type = this.$IVIEW.tree.customArrow;
+      if (this.$MIMI) {
+        if (this.$MIMI.Tree.customArrow) {
+          type = this.$MIMI.Tree.customArrow;
         }
       }
       return type;
@@ -165,9 +164,9 @@ export default {
     arrowSize () {
       let size = '';
 
-      if (this.$IVIEW) {
-        if (this.$IVIEW.tree.arrowSize) {
-          size = this.$IVIEW.tree.arrowSize;
+      if (this.$MIMI) {
+        if (this.$MIMI.Tree.arrowSize) {
+          size = this.$MIMI.Tree.arrowSize;
         }
       }
       return size;
@@ -218,14 +217,17 @@ export default {
       }
     },
     handleCheck () {
+
       if (this.data.disabled) return;
       const changes = {
         checked: !this.data.checked && !this.data.indeterminate,
         nodeKey: this.data.nodeKey
       };
       this.dispatch('Tree', 'on-check', changes);
+
     },
     handleContextmenu (data, event) {
+
       if (data.contextmenu) {
         event.preventDefault();
         this.dispatch('Tree', 'contextmenu', { data, event });

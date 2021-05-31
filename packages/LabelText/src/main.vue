@@ -9,10 +9,8 @@
  */
 export default {
   name: 'KemLabelText',
-
   props: {
     value: {
-      type: String,
       default: '',
     },
   },

@@ -1,9 +1,7 @@
-
 <template>
   <div style="text-align: left">
     <KemTree :data="baseData" show-checkbox></KemTree>
-    <KemViewTree :data="baseData" show-checkbox></KemViewTree>
-
+    <ViewTree :data="baseData" show-checkbox></ViewTree>
   </div>
  </template>
 

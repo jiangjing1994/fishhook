@@ -5,7 +5,7 @@ import store from './store'
 
 // @ts-ignore
 import KemUI from '../packages'
-import '../packages/theme/index.scss'
+//import '../packages/theme/index.scss'
 //import './style/index.scss'
  Vue.config.productionTip = false
 import Umytable from 'umy-table'

@@ -958,7 +958,7 @@ const defaultPage = {
 
 <style lang="scss">
   .kem-table__body {
-    overflow: auto;
+   // overflow: auto;
     .avue-crud {
       .avue-crud__menu {
         display: none;
