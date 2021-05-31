@@ -3,16 +3,16 @@
     <ul :class="classes">
       <li @contextmenu.stop="handleContextmenu(data, $event)" @selectstart.stop="handlePreventSelect(data, $event)">
                 <span :class="arrowClasses" @click="handleExpand">
-                    <ViewIcon v-if="showArrow" :type="arrowType" :custom="customArrowType" :size="arrowSize" />
-                    <ViewIcon v-if="showLoading" type="ios-loading" class="ivu-load-loop" />
+                    <KemViewIcon v-if="showArrow" :type="arrowType" :custom="customArrowType" :size="arrowSize" />
+                    <KemViewIcon v-if="showLoading" type="ios-loading" class="ivu-load-loop" />
                 </span>
-        <ViewCheckbox
+        <KemViewCheckbox
           v-if="showCheckbox"
           :value="data.checked"
           :indeterminate="data.indeterminate"
           :disabled="data.disabled || data.disableCheckbox"
           @click.native.prevent="handleCheck"
-        ></ViewCheckbox>
+        ></KemViewCheckbox>
         <span :class="titleClasses" @click="handleClickNode">
                     <Render v-if="data.render" :render="data.render" :data="data" :node="node"></Render>
                     <Render v-else-if="isParentRender" :render="parentRender" :data="data" :node="node"></Render>

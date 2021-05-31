@@ -8,7 +8,6 @@ import KemUI from '../packages'
 //import '../packages/theme/index.scss'
 //import './style/index.scss'
  Vue.config.productionTip = false
-import Umytable from 'umy-table'
 
 Vue.use(KemUI, {
   size: 'mini',
@@ -29,8 +28,7 @@ Vue.use(KemUI, {
     },
   }
  })
-Vue.use(Umytable)
-Vue.config.productionTip = false
+ Vue.config.productionTip = false
 
 new Vue({
   router,

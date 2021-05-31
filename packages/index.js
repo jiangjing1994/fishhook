@@ -34,7 +34,7 @@ import KemIcon from './Icon'
 import ElementUI from 'element-ui'
 import Avue from '@smallwei/avue'
 import '@smallwei/avue/lib/index.css'
-import { Tree as ViewTree, Alert as ViewAlert, Icon as ViewIcon , Checkbox as ViewCheckbox } from 'view-design'
+import { Tree as KemViewTree, Alert as KemViewAlert, Icon as KemViewIcon , Checkbox as KemViewCheckbox } from 'view-design'
 import 'view-design/dist/styles/iview.css'
 import './theme/index.scss'
 
@@ -159,10 +159,10 @@ const install = function (Vue, opts = {}) {
   Avue.install(Vue, {
     size: opts.size,
   })
-  Vue.component('ViewTree', ViewTree)
-  Vue.component('ViewAlert', ViewAlert)
-  Vue.component('ViewIcon', ViewIcon)
-  Vue.component('ViewCheckbox', ViewCheckbox)
+  Vue.component('KemViewTree', KemViewTree)
+  Vue.component('KemViewAlert', KemViewAlert)
+  Vue.component('KemViewIcon', KemViewIcon)
+  Vue.component('KemViewCheckbox', KemViewCheckbox)
 
   Vue.component('KemTree', KemTree)
 }
