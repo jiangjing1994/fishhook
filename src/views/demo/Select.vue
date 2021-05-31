@@ -58,7 +58,7 @@ export default {
             options: [
               {
                 label: '区域一',
-                value: 'shanghai',
+                value: 0,
               },
               {
                 label: '区域二',

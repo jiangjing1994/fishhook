@@ -22,6 +22,7 @@
  * @displayName Select下拉框
  */
 import mixins from '../../mixins/async_form_element'
+import {isExitsVariable} from '../../utils'
 export default {
   name: 'KemSelect',
   mixins: [mixins],
@@ -69,9 +70,10 @@ export default {
 
     v() {
       let value = ''
-      if (!this.$attrs.value) {
+      if (!isExitsVariable(this.$attrs.value)){
         return ''
       }
+
       if (this.multiple) {
         if (this.valueDataType === 'array') {
           value = this.$attrs.value
