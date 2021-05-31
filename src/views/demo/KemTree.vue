@@ -1,17 +1,27 @@
 <template>
   <div style="text-align: left">
     <KemTree :data="baseData" show-checkbox></KemTree>
-    <ViewTree :data="baseData" show-checkbox></ViewTree>
+    <KemViewTree :data="baseData" show-checkbox></KemViewTree>
+    <KemViewTree :data="data3" :load-data="loadData" show-checkbox></KemViewTree>
+
   </div>
  </template>
 
 
  <script>
  export default {
-   name: 'KemIcon',
+   name: 'KemTree',
 
    data () {
      return {
+       data3: [
+         {
+           title: 'parent',
+           loading: false,
+           children: []
+         }
+       ],
+
        baseData: [{
          expand: true,
          title: 'parent 1',
@@ -35,7 +45,26 @@
          }]
        }]
      }
-   }
+   },
+   methods: {
+     loadData (item, callback) {
+       setTimeout(() => {
+         const data = [
+           {
+             title: 'children',
+             loading: false,
+             children: []
+           },
+           {
+             title: 'children',
+             loading: false,
+             children: []
+           }
+         ];
+         callback(data);
+       }, 1000);
+     }
+   },
  }
  </script>
 
