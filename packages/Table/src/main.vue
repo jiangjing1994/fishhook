@@ -35,11 +35,17 @@
             :table-loading="loading"
             :search-solt="true"
             :row-style="methodsRowStyle"
+            @cell-mouse-enter="cellMouseEnter"
+            @cell-mouse-leave="cellMouseLeave"
             @size-change="sizeChange"
             @current-change="currentChange"
+            @header-click="headerClick"
             @sort-change="sortChange"
+            @row-contextmenu="rowContextmenu"
             @row-update="rowUpdate"
+            @cell-dblclick="cellDblclick"
             @row-click="rowClick"
+            @row-dblclick="rowDblclick"
             @cell-click="cellClick"
             @tree-load="treeLoad"
             @expand-change="expandChanges"
@@ -874,7 +880,32 @@ const defaultPage = {
         done()
         this.$emit('rowUpdate', this.crudData, { form, index, done, loading })
       },
+      //清空排序
+      clearSort () {
+        this.$refs.crud.clearSort();
+      },
+      //当单元格 hover 进入时会触发该事件
+      cellMouseEnter (row, column, cell, event) {
+        this.$emit("cell-mouse-enter", {row, column, cell, event});
+      },
+      //当单元格 hover 退出时会触发该事件
+      cellMouseLeave (row, column, cell, event) {
+        this.$emit("cell-mouse-leave", {row, column, cell, event});
+      },
 
+      //	当某一列的表头被点击时会触发该事件
+      headerClick (column, event) {
+        this.$emit("header-click", {column, event});
+      },
+      //当某一行被鼠标右键点击时会触发该事件
+      rowContextmenu (row, column, event) {
+        this.$emit("row-contextmenu", {row, column, event});
+      },
+
+      //当某个单元格被双击击时会触发该事件
+      cellDblclick (row, column, cell, event) {
+        this.$emit("cell-dblclick", row, column, cell, event);
+      },
       cellClick(row, column, cell, event) {
         /** 单元格被点击
          * @event cellClick
@@ -897,6 +928,17 @@ const defaultPage = {
         this.$emit('rowClick', {
           row,
           column,
+          event,
+        })
+      },
+
+      rowDblclick(row, event) {
+        /** 行双击
+         * @event rowClick
+         * @type {Event}
+         */
+        this.$emit('rowDblclick', {
+          row,
           event,
         })
       },
