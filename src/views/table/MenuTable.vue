@@ -7,6 +7,9 @@
     :default-params="defaultParams"
     :menu-width="250"
     :expand="true"
+    :selection="true"
+    :is-show-index="false"
+    @selectionChange="selectionChange"
     @clickMenuButton="clickMenuButton"
   >
     <template slot="menu" slot-scope="{ scope }">
@@ -53,6 +56,9 @@ export default {
     }
   },
   methods: {
+    selectionChange(v){
+      console.log(v)
+    },
     result(res) {
       return res.data
     },

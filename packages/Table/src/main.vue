@@ -116,7 +116,7 @@
 </template>
 
 <script lang="jsx">
-import {cloneDeep, debounce, get,isExitsVariable} from '../../utils'
+import {cloneDeep, debounce, get,isExitsVariable,handleTree} from '../../utils'
 
 const defaultPage = {
     pageSizes: [5, 10, 20, 50],
@@ -734,29 +734,38 @@ const defaultPage = {
               this.loading = false
 
              // this.page.total = res[this.tableDefaultProps['total']]
-              this.page.total =  get(res, this.tableDefaultProps['total'])
-              this.crudData = data
+              this.page.total =  get(res, this.tableDefaultProps['total']) ||0
+              //this.crudData = data
+              this.setCrudData(data)
+
             } catch (error) {
               this.loading = false
 
               throw new Error(error)
             }
-          } else {
-            if (this.treeProps) {
-              const { loop } = this.treeProps || false
-
-              if (loop) {
-                this.crudData = this.getTree(this.tableData, '')
-              } else {
-                this.crudData = this.tableData
-              }
-            } else {
-              this.crudData = this.tableData
-
-            }
+          }
+          else {
+            this.setCrudData(this.tableData)
           }
         } catch {
           this.crudData = []
+        }
+      },
+      /**
+       * 给crudData 赋值
+       */
+      setCrudData(tableData){
+        if (this.treeProps) {
+          const { loop } = this.treeProps || false
+          if (loop) {
+            const table = cloneDeep(tableData)
+            this.crudData = handleTree(table, this.treeProps['id'], this.treeProps['pid'], this.treeProps['children'])
+            //this.crudData = this.getTree(tableData, '')
+          } else {
+            this.crudData = tableData
+          }
+        } else {
+          this.crudData = tableData
         }
       },
       /**
@@ -843,25 +852,6 @@ const defaultPage = {
 
       },
 
-      /**
-       * 递归拼装树参数
-       */
-      getTree(treeData, pid) {
-        if (!this.treeProps['pid']) this.treeProps['pid'] = 'pid'
-        if (!this.treeProps['id']) this.treeProps['id'] = 'id'
-        let treeArr = []
-        for (let i = 0; i < treeData.length; i++) {
-          let node = treeData[i]
-          if (node[this.treeProps['pid']] === pid) {
-            let newNode = {
-              ...node,
-              children: this.getTree(treeData, node[this.treeProps['id']]),
-            }
-            treeArr.push(newNode)
-          }
-        }
-        return treeArr
-      },
 
       // 表格增加一行
       rowCellAdd(row) {
