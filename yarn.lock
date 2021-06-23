@@ -10910,19 +10910,6 @@ uglify-to-browserify@~1.0.0:
   resolved "https://registry.npmjs.org/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz#6e0924d6bda6b5afe349e39a6d632850a0f882b7"
   integrity sha1-bgkk1r2mta/jSeOabWMoUKD4grc=
 
-umy-table@1.1.8:
-  version "1.1.8"
-  resolved "https://registry.npmjs.org/umy-table/-/umy-table-1.1.8.tgz#d1d7ad433d0e7276be88dddb4a186ea98c26a2d6"
-  integrity sha512-yqPMFwZ6MUNqI73KamsNKBTbHRA7VuVZDEWobaySghtf4n/s7INuTNQoADB/ROVK57WOXr99Xpnol0aMqGlASA==
-  dependencies:
-    async-validator "~1.8.1"
-    deepmerge "^1.2.0"
-    normalize-wheel "^1.0.1"
-    resize-observer-polyfill "^1.5.0"
-    throttle-debounce "^1.0.1"
-    vuedraggable "^2.23.2"
-    xe-utils "^3.0.0-beta.12"
-
 unbox-primitive@^1.0.0:
   version "1.0.1"
   resolved "https://registry.npmjs.org/unbox-primitive/-/unbox-primitive-1.0.1.tgz#085e215625ec3162574dc8859abee78a59b14471"
@@ -11328,6 +11315,13 @@ vue-inbrowser-compiler@^4.37.0:
     vue-inbrowser-compiler-utils "^4.37.0"
     walkes "^0.2.1"
 
+vue-json-editor@^1.4.3:
+  version "1.4.3"
+  resolved "https://registry.npmjs.org/vue-json-editor/-/vue-json-editor-1.4.3.tgz#004c9037ac91f16dd8fc558c9914e5f33a41d71c"
+  integrity sha512-st9HdXBgCnyEmmfWrZQiKzp4KuYXzmYVUNDn5h6Fa18MrrGS1amnyUFyv7hQFsNBDW27B7BKkdGOqszYT1srAg==
+  dependencies:
+    vue "^2.2.6"
+
 "vue-loader-v16@npm:vue-loader@^16.1.0":
   version "16.2.0"
   resolved "https://registry.npmjs.org/vue-loader/-/vue-loader-16.2.0.tgz#046a53308dd47e58efe20ddec1edec027ce3b46e"
@@ -11438,12 +11432,17 @@ vue@2.6.11:
   resolved "https://registry.npmjs.org/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
   integrity sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==
 
+vue@^2.2.6:
+  version "2.6.14"
+  resolved "https://registry.npmjs.org/vue/-/vue-2.6.14.tgz#e51aa5250250d569a3fbad3a8a5a687d6036e235"
+  integrity sha512-x2284lgYvjOMj3Za7kqzRcUSxBboHqtgRE2zlos1qWaOye5yUmHn42LB1250NJBLRwEcdrB0JRwyPTEPhfQjiQ==
+
 vue@^2.5.17:
   version "2.6.12"
   resolved "https://registry.npmjs.org/vue/-/vue-2.6.12.tgz#f5ebd4fa6bd2869403e29a896aed4904456c9123"
   integrity sha512-uhmLFETqPPNyuLLbsKz6ioJ4q7AZHzD8ZVFNATNyICSZouqP2Sz0rotWQC8UNBF6VGSCs5abnKJoStA6JbCbfg==
 
-vuedraggable@^2.17.0, vuedraggable@^2.23.2:
+vuedraggable@^2.17.0:
   version "2.24.3"
   resolved "https://registry.npmjs.org/vuedraggable/-/vuedraggable-2.24.3.tgz#43c93849b746a24ce503e123d5b259c701ba0d19"
   integrity sha512-6/HDXi92GzB+Hcs9fC6PAAozK1RLt1ewPTLjK0anTYguXLAeySDmcnqE8IC0xa7shvSzRjQXq3/+dsZ7ETGF3g==
@@ -11770,11 +11769,6 @@ ws@^6.0.0, ws@^6.2.1:
   integrity sha512-GIyAXC2cB7LjvpgMt9EKS2ldqr0MTrORaleiOno6TweZ6r3TKtoFQWay/2PceJ3RuBasOHzXNn5Lrw1X0bEjqA==
   dependencies:
     async-limiter "~1.0.0"
-
-xe-utils@^3.0.0-beta.12:
-  version "3.1.15"
-  resolved "https://registry.npmjs.org/xe-utils/-/xe-utils-3.1.15.tgz#d5e953a23de6f6d11b97f42ca037e1c00e826d92"
-  integrity sha512-d1Fucx3ScwuVodikBZTR5MRJpcq8FImcN7NU8rJKBXQhI5ayz+ORxUQ6jJUG5pipGXNlqD1pucFfIBlz2bZr0g==
 
 xtend@^4.0.0, xtend@~4.0.1:
   version "4.0.2"
