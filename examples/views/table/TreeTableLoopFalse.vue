@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { queryTreeElement, queryTreeRoot } from '@/utils/index'
+import { queryTreeElement, queryTreeRoot } from '../../utils/index'
 
 export default {
   name: 'TreeTableLoopFalse',

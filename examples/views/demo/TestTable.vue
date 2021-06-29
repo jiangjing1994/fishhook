@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { queryList } from '@/utils/index'
+import { queryList } from '../../utils/index'
 export default {
   name: 'TestTable',
   data() {

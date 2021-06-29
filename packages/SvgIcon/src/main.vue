@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { isExternal } from '../../../src/utils/validate'
+import { isExternal } from '../../utils'
 
 export default {
   name: 'KemSvgIcon',

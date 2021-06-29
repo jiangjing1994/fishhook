@@ -1,5 +1,11 @@
 import { debounce, throttle, get, cloneDeep, filter, isEqual } from 'lodash'
-
+/**
+ * @param {string} path
+ * @returns {Boolean}
+ */
+export const isExternal = (path) => {
+  return /^(https?:|mailto:|tel:)/.test(path)
+}
 export function uuid(before = '', after = '') {
   const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('')
   const charsLen = chars.length
