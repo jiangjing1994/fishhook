@@ -1,5 +1,5 @@
 <script lang="jsx">
-import { throttle, get } from '../../utils'
+import { throttle, get } from '../../utils.js'
 /**
  * @displayName Button 按钮
  */

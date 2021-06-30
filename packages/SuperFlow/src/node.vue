@@ -119,7 +119,7 @@ export default {
     cursor: crosshair;
 
     &-top {
-      top: -$size/2;
+      top: - $size/2;
       right: 0;
       left: 0;
       height: $size;
@@ -127,14 +127,14 @@ export default {
 
     &-right {
       top: 0;
-      right: -$size/2;
+      right: - $size/2;
       bottom: 0;
       width: $size;
     }
 
     &-bottom {
       right: 0;
-      bottom: -$size/2;
+      bottom: - $size/2;
       left: 0;
       height: $size;
     }
@@ -142,7 +142,7 @@ export default {
     &-left {
       top: 0;
       bottom: 0;
-      left: -$size/2;
+      left: - $size/2;
       width: $size;
     }
   }

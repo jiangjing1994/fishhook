@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { queryTreeElement, queryTreeRoot } from '../../utils/index'
+import { queryTreeElement, queryTreeRoot } from '../../utils'
 
 export default {
   name: 'TreeTableLazy',

@@ -1,42 +1,41 @@
-import KemButton from './Button'
-import KemSvgIcon from './SvgIcon'
-import KemForm from './Form'
-import KemSelect from './Select'
-import KemInput from './Input'
-import KemDialog from './Dialog'
-import KemLabelText from './LabelText'
-import KemTable from './Table'
-import KemPageCard from './PageCard'
-import KemInputNumber from './InputNumber'
-import KemCheckboxGroup from './CheckboxGroup'
-import KemRadioboxGroup from './RadioboxGroup'
-import KemColorPicker from './ColorPicker'
-import KemDataView from './DataView'
-import KemInputColor from './InputColor'
-import KemTimeline from './Timeline'
-import KemSwitch from './Switch'
-import KemCountUp from './CountUp'
-import KemDataIcons from './DataIcons'
-import KemInputSlider from './InputSlider'
-import KemTree from './Tree'
-import KemSteps from './Steps'
-import KemCrud from './Crud'
-import KemChooseArrayElement from './ChooseArrayElement'
-import KemSearch from './Search'
-import KemInputPassWord from './InputPassWord'
-import KemDatePicker from './DatePicker'
-import KemSuperFlow from './SuperFlow'
-import KemTransfer from './Transfer'
-import KemTag from './Tag'
-import KemTagGroup from './TagGroup'
-import KemRangePicker from './RangePicker'
-import KemIcon from './Icon'
+import KemButton from '../packages/Button'
+import KemSvgIcon from '../packages/SvgIcon'
+import KemForm from '../packages/Form'
+import KemSelect from '../packages/Select'
+import KemInput from '../packages/Input'
+import KemDialog from '../packages/Dialog'
+import KemLabelText from '../packages/LabelText'
+import KemTable from '../packages/Table'
+import KemPageCard from '../packages/PageCard'
+import KemInputNumber from '../packages/InputNumber'
+import KemCheckboxGroup from '../packages/CheckboxGroup'
+import KemRadioboxGroup from '../packages/RadioboxGroup'
+import KemColorPicker from '../packages/ColorPicker'
+import KemDataView from '../packages/DataView'
+import KemInputColor from '../packages/InputColor'
+import KemTimeline from '../packages/Timeline'
+import KemSwitch from '../packages/Switch'
+import KemCountUp from '../packages/CountUp'
+import KemDataIcons from '../packages/DataIcons'
+import KemInputSlider from '../packages/InputSlider'
+import KemTree from '../packages/Tree'
+import KemSteps from '../packages/Steps'
+import KemCrud from '../packages/Crud'
+import KemChooseArrayElement from '../packages/ChooseArrayElement'
+import KemSearch from '../packages/Search'
+import KemInputPassWord from '../packages/InputPassWord'
+import KemDatePicker from '../packages/DatePicker'
+ import KemTransfer from '../packages/Transfer'
+import KemTag from '../packages/Tag'
+import KemTagGroup from '../packages/TagGroup'
+import KemRangePicker from '../packages/RangePicker'
+import KemIcon from '../packages/Icon'
 import ElementUI from 'element-ui'
 import Avue from '@smallwei/avue'
 import '@smallwei/avue/lib/index.css'
 import { Tree as KemViewTree, Alert as KemViewAlert, Icon as KemViewIcon , Checkbox as KemViewCheckbox } from 'view-design'
 import 'view-design/dist/styles/iview.css'
-import './theme/index.scss'
+import '../packages/theme/index.scss'
 
 const components = [
   KemButton,
@@ -59,14 +58,13 @@ const components = [
   KemCountUp,
   KemDataIcons,
   KemInputSlider,
-   KemSteps,
+  KemSteps,
   KemChooseArrayElement,
   KemCrud,
   KemSearch,
   KemInputPassWord,
   KemDatePicker,
-  KemSuperFlow,
-  KemTransfer,
+   KemTransfer,
   KemTag,
   KemTagGroup,
   KemRangePicker,
@@ -199,8 +197,7 @@ export default {
   KemSearch,
   KemInputPassWord,
   KemDatePicker,
-  KemSuperFlow,
-  KemTransfer,
+   KemTransfer,
   KemTag,
   KemTagGroup,
   KemRangePicker,

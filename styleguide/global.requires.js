@@ -5,7 +5,7 @@
  */
 
 import Vue from 'vue'
-import KemUI from '../packages'
+import KemUI from '@'
 
 Vue.use(KemUI)
 

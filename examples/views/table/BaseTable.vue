@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { queryList } from '../../utils/index'
+import { queryList } from '../../utils'
 export default {
   name: 'BaseTable',
   data() {

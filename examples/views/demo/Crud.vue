@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { queryList, saveForm, deleteForm } from '../../utils/index'
+import { queryList, saveForm, deleteForm } from '../../utils'
 export default {
   name: 'Crud',
   data() {

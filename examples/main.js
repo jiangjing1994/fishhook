@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 
 // @ts-ignore
-import KemUI from '../packages'
+import KemUI from '@'
 //import '../packages/theme/index.scss'
 //import './style/index.scss'
  Vue.config.productionTip = false

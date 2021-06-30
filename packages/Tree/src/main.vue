@@ -21,7 +21,7 @@
   </div>
 </template>
 <script>
-import TreeNode from './node.vue';
+import TreeNode from '../../Tree/src/node.vue';
 
 import Emitter from '../../mixins/emitter';
 import {Dropdown,DropdownMenu } from 'view-design'
