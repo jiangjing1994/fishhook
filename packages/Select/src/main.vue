@@ -11,6 +11,12 @@
             :style="`width:${width}`"
             v-on="evet"
 >
+            <!-- @slot prefix	Select 组件头部内容 -->
+            <slot slot="prefix" name="prefix"/>
+
+            <!-- @slot empty	Select empty -->
+            <slot slot="empty" name="empty"/>
+
             <el-option v-for="(item,index) in list " :key="index" :label="item.label" :disabled="item.disabled" :value="item.value">
               <slot :scope="item"></slot>
             </el-option>

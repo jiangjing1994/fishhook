@@ -11,6 +11,10 @@
     ></KemSelect>
 
     <KemSelect v-model="multipleValue" multiple :options="options"></KemSelect>
+    <KemSelect v-model="multipleValue" multiple :options="options">
+      <div slot="prefix">prefix</div>
+      <div slot="empty">没有呀呀呀呀</div>
+    </KemSelect>
     <KemSelect v-model="value" :options="options"></KemSelect>
 
     <KemSelect v-model="value" :options="options">
