@@ -1,11 +1,21 @@
 <template>
   <div>
     {{ value2 }}
+    {{ value10 }}
     <KemButton @click="updataTransferRequest"> 点击改变下拉查询的条件</KemButton>
     <KemSelect
-      v-model="value2"
+      v-model="value10"
+      :value-clear="true"
+      value-key="value"
+      :request="transferRequest"
+      :default-params="defaultParams"
+      :default-props="{ label: 'transferName', value: 'id' }"
+    ></KemSelect>
+     <KemSelect
+      v-model="value10"
       :value-clear="true"
       :request="transferRequest"
+      value-key="id"
       :default-params="defaultParams"
       :default-props="{ label: 'transferName', value: 'id' }"
     ></KemSelect>
@@ -43,6 +53,7 @@ export default {
       value: '',
       dictType: 'transfer',
       value2: '',
+      value10:{},
       b: null,
       color: '#000',
       number: 3,
