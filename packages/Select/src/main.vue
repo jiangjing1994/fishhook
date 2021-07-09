@@ -1,34 +1,35 @@
 <template>
-    <div>
-        <KemLabelText v-if="uiType ==='text'" :value="label"/>
-          <el-select
-            v-else
-            v-bind="$attrs"
-            :value="v" :multiple="multiple"
-            :placeholder="placeholder"
-            :filterable="filterable"
-            :clearable="inputClearable"
-            :style="`width:${width}`"
-            v-on="evet"
->
-            <!-- @slot prefix	Select 组件头部内容 -->
-            <slot slot="prefix" name="prefix"/>
+  <div>
+    <KemLabelText v-if="uiType ==='text'" :value="label"/>
+    <el-select
+      v-else
+      v-bind="$attrs"
+      :value="v" :multiple="multiple"
+      :placeholder="placeholder"
+      :filterable="filterable"
+      :clearable="inputClearable"
+      :style="`width:${width}`"
+      :value-key="valueKey"
+      v-on="evet"
+    >
+      <!-- @slot prefix	Select 组件头部内容 -->
+      <slot slot="prefix" name="prefix"/>
 
-            <!-- @slot empty	Select empty -->
-            <slot slot="empty" name="empty"/>
+      <!-- @slot empty	Select empty -->
+      <slot slot="empty" name="empty"/>
 
-            <el-option v-for="(item,index) in list " :key="index" :label="item.label" :disabled="item.disabled" :value="item.value">
-              <slot :scope="item"></slot>
-            </el-option>
-          </el-select>
-     </div>
+      <el-option v-for="(item,index) in list " :key="index" :label="item.label" :disabled="item.disabled" :value="getoptionValue(item)">
+        <slot :scope="item"></slot>
+      </el-option>
+    </el-select>
+  </div>
 </template>
 <script>
 /**
  * @displayName Select下拉框
  */
 import mixins from '../../mixins/async_form_element'
-import {isExitsVariable} from '../../utils'
+import {isExitsVariable,isObject} from '../../utils'
 export default {
   name: 'KemSelect',
   mixins: [mixins],
@@ -45,6 +46,10 @@ export default {
     multiple: {
       type: Boolean,
       default: false,
+    },
+    valueKey: {
+      type: String,
+      default: '',
     },
 
     /**
@@ -92,6 +97,16 @@ export default {
         return this.$attrs.value
       }
     },
+  },
+  methods: {
+    getoptionValue(item) {
+      if (this.valueKey) {
+        return item
+      }else {
+        return item.value
+
+      }
+    }
   },
 }
 </script>

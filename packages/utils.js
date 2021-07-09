@@ -1,4 +1,4 @@
-import { debounce, throttle, get, cloneDeep, filter, isEqual } from 'lodash'
+import { debounce, throttle, get, cloneDeep, filter, isEqual,set } from 'lodash'
 /**
  * @param {string} path
  * @returns {Boolean}
@@ -121,4 +121,49 @@ export function handleTree(data, id, parentId, children) {
   return tree;
 }
 
-export { debounce, throttle, get, cloneDeep, filter, isEqual }
+
+  export function single(pre, obj) {
+    // 全部 value 将扁平到此对象中
+    const singleObj = {}
+
+    // 递归处理的函数映射集
+    const process = {
+      String(prefix, obj) {
+        singleObj[prefix] = obj
+      },
+      Array(prefix, obj) {
+        singleObj[prefix] = obj
+      },
+      Boolean(prefix, obj) {
+        singleObj[prefix] = obj
+      },
+
+      Object(prefix, obj) {
+        for (let i in obj) {
+          if (prefix){
+            process[typeOf(obj[i])](`${prefix}_${i}`, obj[i])
+
+          }else {
+            process[typeOf(obj[i])](`${i}`, obj[i])
+
+          }
+        }
+      },
+      Number(prefix, obj) {
+        singleObj[prefix] = obj
+      },
+      Undefined() {},
+      Null() {}
+    }
+
+    process[typeOf(obj)](pre, obj)
+
+    return singleObj
+  }
+
+// 判断对象类型
+export function typeOf(obj) {
+  return Object.prototype.toString.call(obj).slice(8, -1)
+}
+
+export { debounce, throttle, get, set,cloneDeep, filter, isEqual }
