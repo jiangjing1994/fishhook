@@ -21,14 +21,14 @@
 
 <script>
 export default {
-  name:'AAA',
+  name:'JsxForm1',
   data() {
     return {
       formConfig:{
         labelPosition: 'right'
       },
       form: {
-        name: '',
+        name: '222',
         age: 18,
         gender: 'male',
         hobby: ['html', 'css', 'js'],
