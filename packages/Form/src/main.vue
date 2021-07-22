@@ -66,7 +66,7 @@
                 <span v-else>{{ data[item.prop] }}</span>
               </slot>
             </el-form-item>
-            <div v-else style="margin-bottom: 14px;">
+            <div v-else class="label-text-none"  >
               <slot :name="item.slot" v-bind="{ item }">
                 <component
                   :is="item.component"
@@ -421,6 +421,9 @@ export default {
     border-bottom: 1px solid #eee;
   }
 
+  .label-text-none{
+    margin-bottom: 14px;
+  }
   .el-form-item__label {
     font-weight: bold;
     font-size: 12px;
