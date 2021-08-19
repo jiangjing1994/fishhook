@@ -38,6 +38,7 @@ import '@smallwei/avue/lib/index.css'
 import { Tree as KemViewTree, Alert as KemViewAlert, Icon as KemViewIcon , Checkbox as KemViewCheckbox } from 'view-design'
 import 'view-design/dist/styles/iview.css'
 import './theme/index.scss'
+import {  isExitsVariable } from './utils'
 
 const components = [
   KemButton,
@@ -102,10 +103,12 @@ const install = function (Vue, opts = {}) {
     Table: {
       size: opts['Table']?.size || size,
       type: opts['Table']?.type || 'primary',
-      isShowIndex: opts['Table']?.isShowIndex || true,
-      isShowHeader: opts['Table']?.isShowHeader || true,
-      isShowStripe: opts['Table']?.isShowStripe || true,
-      isShowBorder: opts['Table']?.isShowBorder || true,
+
+      isShowIndex: isExitsVariable(opts['Table']?.isShowIndex) ? opts['Table']?.isShowIndex : true,
+      isShowHeader: isExitsVariable(opts['Table']?.isShowHeader) ? opts['Table']?.isShowHeader : true,
+      isShowBorder: isExitsVariable(opts['Table']?.isShowBorder) ? opts['Table']?.isShowBorder : true,
+      isShowStripe: isExitsVariable(opts['Table']?.isShowStripe) ? opts['Table']?.isShowStripe : false,
+
       selection: opts['Table']?.selection || false,
       indexLabel: opts['Table']?.indexLabel || '序号',
       align: opts['Table']?.align || 'center',
@@ -151,7 +154,7 @@ const install = function (Vue, opts = {}) {
 
     // 输入组件
     Input:{
-      clearable: opts['Input']?.clearable || true,
+       clearable:  isExitsVariable(opts['Input']?.clearable) ? opts['Input']?.clearable : true,
     }
   }
 
