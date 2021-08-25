@@ -6,13 +6,13 @@
         <!-- @slot prefix	输入框头部内容，只对 type="text" 有效 -->
         <slot slot="prefix" name="prefix"/>
 
-        <!-- @slot suffix	输入框头部内容，只对 type="text" 有效 -->
+        <!-- @slot suffix	输入框尾部内容，只对 type="text" 有效 -->
         <slot slot="suffix" name="suffix"/>
 
-        <!-- @slot prepend	输入框头部内容，只对 type="text" 有效 -->
+        <!-- @slot prepend	输入框前置内容，只对 type="text" 有效 -->
         <slot slot="prepend" name="prepend"/>
 
-        <!-- @slot append	输入框头部内容，只对 type="text" 有效 -->
+        <!-- @slot append	输入框后置内容，只对 type="text" 有效 -->
         <slot slot="append" name="append"/>
       </el-input>
     </div>

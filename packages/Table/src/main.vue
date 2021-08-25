@@ -1001,7 +1001,7 @@ export default {
       border-bottom: 0px solid #d9ecff !important;
     }
     .el-table--striped .el-table__body tr.el-table__row--striped td {
-      background-color: inherit;
+    //  background-color: inherit;
     }
     width: 100% !important;
     .el-card {

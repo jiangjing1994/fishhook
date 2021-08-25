@@ -34,13 +34,13 @@
               </el-alert>
             </div>
             <el-form-item v-if="labelType === 'default'" :prop="item.prop">
-              <render-content
-                v-if="item.labelRender"
-                slot="label"
-                :render="item.labelRender"
-                :data="item"
-              />
-              <span v-else slot="label">
+              <span slot="label" style="padding-right: 10px" :style="formLabelStyle">
+                       <render-content
+                         v-if="item.labelRender"
+                          :render="item.labelRender"
+                         :data="item"
+                       />
+              <span v-else >
                 {{ item.label }}
                 <el-tooltip
                   v-if="item.tip && item.tipType !== 'alert'"
@@ -50,9 +50,16 @@
                   <template slot="content">
                     <pre>{{ item.tip }}</pre>
                   </template>
-                  <i class="el-icon el-icon-info" style="cursor: pointer"></i> : </el-tooltip
-                >：
+                  <i class="el-icon el-icon-info" style="cursor: pointer"></i> : </el-tooltip>
+                <!-- @slot suffix	label尾部内容  -->
+                <span v-if="$slots.labelSuffix || formLabelSuffix" >
+                  <slot name="labelSuffix" >
+                      {{ formLabelSuffix }}
+                  </slot>
+                </span>
               </span>
+              </span>
+
               <slot :name="item.slot" v-bind="{ item }">
                 <component
                   :is="item.component"
@@ -66,7 +73,7 @@
                 <span v-else>{{ data[item.prop] }}</span>
               </slot>
             </el-form-item>
-            <div v-else style="margin-bottom: 14px;">
+            <div v-else class="label-text-none" >
               <slot :name="item.slot" v-bind="{ item }">
                 <component
                   :is="item.component"
@@ -219,6 +226,14 @@ export default {
       type: String,
       default: 'default',
     },
+    labelSuffix: {
+      type: String,
+      default: '',
+    },
+    labelStyle: {
+      type: Object,
+
+    },
   },
   data() {
     return {
@@ -227,6 +242,15 @@ export default {
     }
   },
   computed: {
+    formLabelSuffix() {
+      return this.labelSuffix || this.$MIMI.Form.labelSuffix
+    },
+    formLabelStyle() {
+      return {
+        ...this.$MIMI.Form.labelStyle,
+        ...this.labelStyle,
+      }
+    },
     computedConfig() {
       return {
         ...this.$MIMI.Form.formConfig,
@@ -421,6 +445,9 @@ export default {
     border-bottom: 1px solid #eee;
   }
 
+  .label-text-none{
+    margin-bottom: 14px;
+  }
   .el-form-item__label {
     font-weight: bold;
     font-size: 12px;

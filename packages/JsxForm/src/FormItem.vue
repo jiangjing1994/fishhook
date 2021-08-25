@@ -148,17 +148,33 @@
         </div>
       </section>
 
-      <template v-else>
+      <template v-if="column.render">
         <render :form="form" :root-form="rootForm" :render="column.render" :scope="{ itemIndex }" />
       </template>
 
-      <template v-if="column.renderError" slot="error" slot-scope="scope">
-        <render
-          :form="form"
-          :root-form="rootForm"
-          :render="column.renderError"
-          :scope="{ ...scope, itemIndex }"
+      <template v-if="column.component">
+        <component
+          :is="column.component"
+          :ref="column.ref || `cp-${column.prop}`"
+          v-model="form[column.prop]"
+          :data="form"
+          v-bind="column.props"
+          v-on="column.listeners"
         />
+
+
+      </template>
+
+      <template v-if="column.renderError" slot="error" slot-scope="scope">
+        <div class="el-form-item__error">
+          <render
+            :form="form"
+            :root-form="rootForm"
+            :render="column.renderError"
+            :scope="{ ...scope, itemIndex }"
+          />
+        </div>
+
       </template>
     </el-form-item>
 
@@ -296,7 +312,20 @@ export default {
           return <span class={[this.column.class]}>{value}</span>;
         };
       }
-      if (!this.column.render) {
+      if (this.column.component) {
+
+        let { component , prop, props, ...theArgs } = this.column
+        if (typeof props === 'function') {
+          props = props(this.form)
+        }
+        return {
+          component,
+          prop,
+          props,
+          ...theArgs,
+        }
+      }
+      if (!this.column.render && !this.column.component) {
         this.column.render = (h, form) => {
           if (this.column.prop) {
             let value =

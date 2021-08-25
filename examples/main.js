@@ -14,12 +14,19 @@ Vue.use(KemUI, {
   Button: {
     size: 'mini',
   },
+  Form: {
+    labelSuffix: 'mini',
+  },
   Table:{
     align: "left",
-
+    isShowIndex: false,
+    isShowStripe: false,
+    isShowBorder: false,
+    isShowHeader: false,
     indexLabel: "序 号",
     mergeOption: {
       indexWidth: 100,
+
      },
     pageOption: {
       pageSizes: [5, 10, 20, 50],
