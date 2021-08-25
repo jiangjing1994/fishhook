@@ -5,15 +5,19 @@
       <KemForm
         ref="form"
         :form-items="formItems"
-        :data="form"
+         :data="form"
         :row-gutter="10"
         :form-rules="formRules"
         :form-config="{
           labelPositon:'right'
         }"
         :read-only="readOnly"
+        label-suffix=" "
         @updataFormData="updataFormData"
       >
+        <template slot="labelSuffix">
+
+        </template>
         <template slot="resource">
           <el-radio-group v-model="form.resource">
             <el-radio label="线上品牌商赞助"></el-radio>
@@ -29,6 +33,7 @@
         :read-only="readOnly"
         @updataFormData="updataFormData"
       >
+
         <template slot="resource">
           <el-radio-group v-model="form.resource">
             <el-radio label="线上品牌商赞助"></el-radio>

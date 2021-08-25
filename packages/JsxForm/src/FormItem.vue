@@ -2,7 +2,6 @@
   <el-col
     :span="column.span || 12"
   >
-    {{ column }}
     <el-form-item
       v-bind="$attrs"
       :prop="propPath"

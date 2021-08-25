@@ -2,6 +2,27 @@
   <div style="text-align: left; display: flex; justify-content: center">
     <KemPageCard style="width: 800px; margin-right: 20px" header="Form">
       <pre>{{ form }}</pre>
+
+      222
+      <KemForm
+        ref="form"
+        :form-items="formItems"
+         :model="form"
+        :row-gutter="10"
+        :form-rules="formRules"
+        :form-config="{
+          labelPositon:'right'
+        }"
+        :read-only="readOnly"
+        @updataFormData="updataFormData"
+      >
+        <template slot="resource">
+          <el-radio-group v-model="form.resource">
+            <el-radio label="线上品牌商赞助"></el-radio>
+            <el-radio label="线下场地免费"></el-radio>
+          </el-radio-group>
+        </template>
+      </KemForm>
       <JsxForm
         ref="form"
         :form-items="formItems"

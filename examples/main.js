@@ -14,6 +14,9 @@ Vue.use(KemUI, {
   Button: {
     size: 'mini',
   },
+  Form: {
+    labelSuffix: 'mini',
+  },
   Table:{
     align: "left",
     isShowIndex: false,

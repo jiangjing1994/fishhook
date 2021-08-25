@@ -140,7 +140,12 @@ const install = function (Vue, opts = {}) {
         size,
         ...opts['Form']?.formConfig,
       },
+      labelStyle: {
+
+        ...opts['Form']?.labelStyle,
+      },
       rowGutter: opts['Form']?.rowGutter || 0,
+      labelSuffix: opts['Form']?.labelSuffix || '',
 
     },
     Tag: {
