@@ -672,7 +672,7 @@ export default {
     },
     column: {
       handler() {
-        this.renderTable()
+       // this.renderTable()
       },
       deep: true,
     },
