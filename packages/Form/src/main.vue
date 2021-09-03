@@ -15,6 +15,10 @@
         v-for="(item, index) in computedItems"
         :key="getItemKey(item, index)"
         :md="item.md"
+        :offset="item.offset"
+        :pull="item.pull"
+        :push="item.push"
+        :tag="item.tag"
         :sm="item.sm"
         :span="getItemSpan(item)"
       >
