@@ -38,6 +38,7 @@ export default {
       uiType: 'text',
       value: '123',
       form: {
+       // prop1: 0,
         prop3: 'Nanjing',
         prop4: '这是KemInput',
         prop6: 'shanghai',
@@ -48,6 +49,41 @@ export default {
     formItems() {
       const uiType = this.uiType
       return [
+        {
+          label: '静态条件11',
+          prop: 'prop00',
+          span: 13,
+          component: 'KemSelect',
+          props: {
+            autoSelect: true,
+            defaultProps: {
+              label: "metrics.metricsName",
+              value: "metrics.metricsId",
+            },
+            options: [
+              {
+                "metrics": {
+                  "metricsId": 1,
+                  "metricsCode": "cpu_usage",
+                  "metricsName": "cpu使用率测试"
+                }
+              },
+              {
+                "metrics": {
+                  "metricsId": 2,
+                  "metricsCode": "cpu_usage2",
+                  "metricsName": "cpu使用率测试2"
+                }
+              }, {
+                "metrics": {
+                  "metricsId": 3,
+                  "metricsCode": "cpu_usage3",
+                  "metricsName": "cpu使用率测试3"
+                }
+              },
+            ],
+          },
+        },
         {
           label: '静态条件',
           prop: 'prop1',
@@ -77,6 +113,7 @@ export default {
           component: 'KemSelect',
           props: {
             request: transferRequest,
+            autoSelect: true,
             defaultProps: {
               label: 'transferName',
               value: 'id',

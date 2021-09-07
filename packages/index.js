@@ -39,6 +39,7 @@ import { Tree as KemViewTree, Alert as KemViewAlert, Icon as KemViewIcon , Check
 import 'view-design/dist/styles/iview.css'
 import './theme/index.scss'
 import {  isExitsVariable } from './utils'
+import  './utils'
 
 const components = [
   KemButton,

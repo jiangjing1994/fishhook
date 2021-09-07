@@ -194,8 +194,7 @@ export default {
     },
     initialValue(data) {
       if (this.autoSelect && data instanceof Array && data.length > 0) {
-        let value = data[0][this.defaultProps['value']]
-
+         let value = get(data[0],this.defaultProps['value'])
         if (this.dataType === 'Array') {
           value = [value]
         }
