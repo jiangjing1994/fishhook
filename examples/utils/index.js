@@ -10,7 +10,7 @@ export const mockList = ({ count = 20 }) => {
   for (let i = 0; i < count; i++) {
     List.push(
       Mock.mock({
-        id: '@increment',
+        id: '@datetime',
         timestamp: +Mock.Random.date('T'),
         author: '@first',
         reviewer: '@first',
@@ -28,7 +28,7 @@ export const mockList = ({ count = 20 }) => {
         image_uri,
         platforms: ['a-platform'],
 
-        code: '@increment',
+        code: '@datetime',
         formalCode: '@increment',
 
         system: '@title(5, 10)',

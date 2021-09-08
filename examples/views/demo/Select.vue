@@ -56,9 +56,10 @@ export default {
           component: 'KemSelect',
           props: {
             autoSelect: true,
+            valueKey:'metricsId',
             defaultProps: {
               label: "metrics.metricsName",
-              value: "metrics.metricsId",
+              value: "metrics",
             },
             options: [
               {
