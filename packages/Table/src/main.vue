@@ -1,6 +1,6 @@
 <template>
   <div class="kem-table__body">
-    <div v-if="headerPermission" v-loading="loading" class="header_body">
+    <div v-if="headerPermission" v-loading="loading && !autoRefresh" class="header_body">
       <div v-if="headerTopPermission" class="header__body-top">
         <slot name="menuTop"></slot>
       </div>
@@ -10,9 +10,7 @@
         </div>
         <div class="header__body-right">
           <slot name="menuRight"></slot>
-          <KemButton v-if="menuPermissionAdd" @click="clickMenuButton({ type: 'add' })"
-            >新增</KemButton
-          >
+          <KemButton v-if="menuPermissionAdd" @click="clickMenuButton({ type: 'add' })">新增</KemButton>
         </div>
       </div>
       <div v-if="headerBottomPermission" class="header__body-bottom">
@@ -34,7 +32,7 @@
       :data="filteredData"
       :option="computedOption"
       :page.sync="page"
-      :table-loading="loading"
+      :table-loading="loading && !autoRefresh"
       :search-solt="true"
       :row-style="methodsRowStyle"
       @cell-mouse-enter="cellMouseEnter"
@@ -93,7 +91,9 @@
         <slot name="expand" :scope="scope" />
       </template>
 
-      <template v-if="!loading" slot="menu" slot-scope="scope">
+<!--      <template v-if="!loading" slot="menu" slot-scope="scope">-->
+<!--      todo test-->
+      <template slot="menu" slot-scope="scope">
         <KemButton
           v-if="menuPermissionDetail"
           :type="`${menuButtonType}.detail`"
@@ -290,6 +290,12 @@ export default {
     menuWidth: {
       type: Number,
     },
+    /**
+     * 定时刷新
+     */
+    waitRefresh: {
+      type: Number,
+    },
     menuButton: {
       type: Array,
       default: () => {
@@ -469,12 +475,13 @@ export default {
       obj: {},
       sort: {},
       loading: false,
+      relodaMenu: false,
       expandRowKeys: [],
       currentStartIndex: 0,
       currentEndIndex: 20,
+      timer: null,
     }
   },
-
   computed: {
     filteredData() {
       if (this.bigData) {
@@ -677,9 +684,20 @@ export default {
       deep: true,
     },
   },
+  beforeDestroy() {
+    if (this.waitRefresh) {
+      clearTimeout(this.timer);
+    }
+  },
+
 
   created() {
     this.renderTable()
+    if (this.waitRefresh) {
+      this.timer = setInterval(() => {
+        this.renderTable();
+      }, this.waitRefresh);
+    }
   },
   methods: {
     /**
@@ -768,6 +786,10 @@ export default {
       } else {
         this.crudData = tableData
       }
+      this.relodaMenu = false
+      this.$nextTick(()=>{
+        this.relodaMenu = true
+      })
     },
     /**
      * 表格渲染

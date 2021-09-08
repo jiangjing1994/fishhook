@@ -101,7 +101,7 @@ export default {
   methods: {
     getoptionValue(item) {
       if (this.valueKey) {
-        return item
+        return item.value
       }else {
         return item.value
 

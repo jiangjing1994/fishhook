@@ -19,6 +19,10 @@
       <!-- 我有一个带搜索框的大表哥-->
       <SerachTable></SerachTable>
     </KemPageCard>
+    <KemPageCard header="定时刷新滴表格">
+      <!--定时刷新滴表格 数据是异步的-->
+      <WaitRefreshTable></WaitRefreshTable>
+    </KemPageCard>
   </div>
 </template>
 
@@ -28,6 +32,7 @@ import BaseTable from '../table/BaseTable'
 import MenuTable from '../table/MenuTable'
 import SerachTable from '../table/SerachTable'
 import SelectionTable from '../table/SelectionTable'
+import WaitRefreshTable from '../table/WaitRefreshTable'
 export default {
   name: 'Table',
   components: {
@@ -36,6 +41,7 @@ export default {
     MenuTable,
     SerachTable,
     SelectionTable,
+    WaitRefreshTable,
   },
 }
 </script>
