@@ -32,6 +32,7 @@ import KemTagGroup from './TagGroup'
 import KemRangePicker from './RangePicker'
 import KemIcon from './Icon'
 import JsxForm from './JsxForm'
+import KemD52tButton from './D52tButton'
 import ElementUI from 'element-ui'
 import Avue from '@smallwei/avue'
 import '@smallwei/avue/lib/index.css'
@@ -74,6 +75,7 @@ const components = [
   KemTagGroup,
   KemRangePicker,
   KemIcon,
+  KemD52tButton,
   JsxForm,
 
 ]
@@ -216,6 +218,7 @@ export default {
   KemTagGroup,
   KemRangePicker,
   KemIcon,
+  KemD52tButton,
   JsxForm,
 
 

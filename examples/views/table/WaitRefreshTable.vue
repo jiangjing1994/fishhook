@@ -6,11 +6,14 @@
     :result="result"
     :default-params="defaultParams"
     :menu-width="250"
-    :wait-refresh="2000"
+    :wait-refresh="waitRefresh"
     @clickMenuButton="clickMenuButton"
   >
+    <template slot="menuTop">
+      <KemButton @click="toggle"> {{ waitRefresh }}切换定时</KemButton>
+    </template>
     <template slot="menu" slot-scope="{ scope }">
-      <KemButton v-if="'Mark' === scope.row.createUser" @click="sadasda(scope.row.createUser)" type="text">{{
+      <KemButton v-if="'Mark' === scope.row.createUser" type="text" @click="sadasda(scope.row.createUser)">{{
         scope.row.createUser
       }}</KemButton>
     </template>
@@ -26,7 +29,7 @@ export default {
       defaultParams: {},
       request: queryList,
       menuButton: ['delBtn','addBtn','editBtn'],
-
+      waitRefresh:2000,
       column: [
         { label: '业务需求编号', prop: 'code', sortable: true },
         { label: '需求主题', prop: 'title' },
@@ -40,6 +43,10 @@ export default {
   methods: {
     result(res) {
       return res.data
+    },
+    toggle(value) {
+      if (this.waitRefresh) this.waitRefresh = 0
+      else this.waitRefresh = 2000
     },
     sadasda(value) {
      console.log(value)
