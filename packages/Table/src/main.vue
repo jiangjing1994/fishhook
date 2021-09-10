@@ -683,21 +683,36 @@ export default {
       },
       deep: true,
     },
+    waitRefresh: {
+      handler() {
+        if (this.waitRefresh ) {
+          this.timer = setInterval(() => {
+            this.renderTable();
+          }, this.waitRefresh);
+        }
+        else {
+          if (this.timer) {
+            clearTimeout(this.timer);
+           }
+          this.renderTable();
+         }
+
+      },
+       immediate:true,
+    },
   },
   beforeDestroy() {
-    if (this.waitRefresh) {
+    if (this.timer) {
       clearTimeout(this.timer);
     }
   },
 
 
+
+
   created() {
     this.renderTable()
-    if (this.waitRefresh) {
-      this.timer = setInterval(() => {
-        this.renderTable();
-      }, this.waitRefresh);
-    }
+
   },
   methods: {
     /**
