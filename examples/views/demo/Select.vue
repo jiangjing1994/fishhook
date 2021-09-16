@@ -27,7 +27,7 @@ const transferRequest = () => {
 const transferRequest2 = () => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve(['动态数据1','动态数据2','动态数据3','动态数据4',])
+      resolve(['动态数据1', '动态数据2', '动态数据3', '动态数据4'])
     }, 500)
   })
 }
@@ -38,7 +38,7 @@ export default {
       uiType: 'text',
       value: '123',
       form: {
-       // prop1: 0,
+        // prop1: 0,
         prop3: 'Nanjing',
         prop4: '这是KemInput',
         prop6: 'shanghai',
@@ -56,31 +56,54 @@ export default {
           component: 'KemSelect',
           props: {
             autoSelect: true,
-            valueKey:'metricsId',
+            valueKey: 'metricsId',
             defaultProps: {
-              label: "metrics.metricsName",
-              value: "metrics",
+              label: 'metrics.metricsName',
+              value: 'metrics',
             },
             options: [
               {
-                "metrics": {
-                  "metricsId": 1,
-                  "metricsCode": "cpu_usage",
-                  "metricsName": "cpu使用率测试"
-                }
+                metrics: {
+                  metricsId: 1,
+                  metricsCode: 'cpu_usage',
+                  metricsName: 'cpu使用率测试',
+                },
               },
               {
-                "metrics": {
-                  "metricsId": 2,
-                  "metricsCode": "cpu_usage2",
-                  "metricsName": "cpu使用率测试2"
-                }
-              }, {
-                "metrics": {
-                  "metricsId": 3,
-                  "metricsCode": "cpu_usage3",
-                  "metricsName": "cpu使用率测试3"
-                }
+                metrics: {
+                  metricsId: 2,
+                  metricsCode: 'cpu_usage2',
+                  metricsName: 'cpu使用率测试2',
+                },
+              },
+              {
+                metrics: {
+                  metricsId: 3,
+                  metricsCode: 'cpu_usage3',
+                  metricsName: 'cpu使用率测试3',
+                },
+              },
+            ],
+          },
+        },
+        {
+          label: 'valueIsObject',
+          prop: 'wqeqe',
+          span: 13,
+          component: 'KemSelect',
+          props: {
+            autoSelect: true,
+            valueIsObject: true,
+            valueKey: 'metricsId',
+            defaultProps: {
+              label: 'metricsName',
+              value: 'metricsId',
+            },
+            options: [
+              {
+                metricsId: 3,
+                metricsCode: 'cpu_usage3',
+                metricsName: 'cpu使用率测试3',
               },
             ],
           },
@@ -100,7 +123,8 @@ export default {
               {
                 label: '区域二',
                 value: 'beijing',
-              }, {
+              },
+              {
                 label: '区域san',
                 value: 'beijingss',
               },

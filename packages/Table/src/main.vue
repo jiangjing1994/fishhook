@@ -175,6 +175,8 @@ export default {
   directives: {
     loadmore: {
       componentUpdated: function (el, binding, vnode, oldVnode) {
+        console.log(2222222222)
+
         // 设置默认溢出显示数量
         var spillDataNum = 20
 
