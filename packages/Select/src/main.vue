@@ -47,6 +47,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    valueIsObject: {
+      type: Boolean,
+      default: false,
+    },
     valueKey: {
       type: String,
       default: '',
@@ -100,8 +104,8 @@ export default {
   },
   methods: {
     getoptionValue(item) {
-      if (this.valueKey) {
-        return item.value
+      if (this.valueIsObject) {
+        return item
       }else {
         return item.value
 

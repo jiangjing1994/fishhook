@@ -1,10 +1,10 @@
 <template>
   <div>
-    <avue-crud v-loadmore="handelLoadmore" :data="filteredData" :option="option" :data-size="tableData.length">
-      <template slot="expand" slot-scope="scope">
-        {{ scope.row.title }}
-      </template>
-    </avue-crud>
+<!--    <avue-crud v-loadmore="handelLoadmore" :data="filteredData" :option="option" :data-size="tableData.length">-->
+<!--      <template slot="expand" slot-scope="scope">-->
+<!--        {{ scope.row.title }}-->
+<!--      </template>-->
+<!--    </avue-crud>-->
 
     <KemTable :big-data="true" :table-height="600" :table-data="tableData" :is-show-header="false" :expand="true" :merge-option="option" :column="column" >
       <template slot="expand" slot-scope="{ scope }">
