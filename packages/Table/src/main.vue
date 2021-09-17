@@ -91,8 +91,8 @@
         <slot name="expand" :scope="scope" />
       </template>
 
-<!--      <template v-if="!loading" slot="menu" slot-scope="scope">-->
-<!--      todo test-->
+      <!--      <template v-if="!loading" slot="menu" slot-scope="scope">-->
+      <!--      todo test-->
       <template slot="menu" slot-scope="scope">
         <KemButton
           v-if="menuPermissionDetail"
@@ -175,8 +175,6 @@ export default {
   directives: {
     loadmore: {
       componentUpdated: function (el, binding, vnode, oldVnode) {
-        console.log(2222222222)
-
         // 设置默认溢出显示数量
         var spillDataNum = 20
 
@@ -681,40 +679,34 @@ export default {
     },
     column: {
       handler() {
-       // this.renderTable()
+        // this.renderTable()
       },
       deep: true,
     },
     waitRefresh: {
       handler() {
-        if (this.waitRefresh ) {
+        if (this.waitRefresh) {
           this.timer = setInterval(() => {
-            this.renderTable();
-          }, this.waitRefresh);
-        }
-        else {
+            this.renderTable()
+          }, this.waitRefresh)
+        } else {
           if (this.timer) {
-            clearTimeout(this.timer);
-           }
-          this.renderTable();
-         }
-
+            clearTimeout(this.timer)
+          }
+          this.renderTable()
+        }
       },
-       immediate:true,
+      immediate: true,
     },
   },
   beforeDestroy() {
     if (this.timer) {
-      clearTimeout(this.timer);
+      clearTimeout(this.timer)
     }
   },
 
-
-
-
   created() {
     this.renderTable()
-
   },
   methods: {
     /**
@@ -804,7 +796,7 @@ export default {
         this.crudData = tableData
       }
       this.relodaMenu = false
-      this.$nextTick(()=>{
+      this.$nextTick(() => {
         this.relodaMenu = true
       })
     },
@@ -1021,6 +1013,29 @@ export default {
       this.currentEndIndex = currentEndIndex
       this.$emit('handelLoadmore', currentStartIndex, currentEndIndex)
     },
+
+    toggleRowSelection(row, selected) {
+      this.$refs.crud.toggleRowSelection(row, selected)
+    },
+    toggleIdSelection(ids, selected) {
+      const rowKey = this.rowKey
+      if (this.rowKey) {
+        try {
+          if (ids && ids instanceof Array) {
+            this.filteredData
+              .filter((item) => ids.some((i) => i === item[rowKey]))
+              .forEach((row) => {
+                this.$refs.crud.toggleRowSelection(row, selected)
+              })
+          }
+        } catch (e) {
+          throw new Error(e)
+        }
+      } else {
+        throw new Error(`Need rowKey !!!!!!!`)
+      }
+
+    },
   },
 }
 </script>
@@ -1040,7 +1055,7 @@ export default {
       border-bottom: 0px solid #d9ecff !important;
     }
     .el-table--striped .el-table__body tr.el-table__row--striped td {
-    //  background-color: inherit;
+      //  background-color: inherit;
     }
     width: 100% !important;
     .el-card {
