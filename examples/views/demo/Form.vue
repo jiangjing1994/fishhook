@@ -392,7 +392,6 @@ export default {
       this.formItems = [{ label: '活动名称', prop: 'name', span: 24 }]
     },
     test() {
-      console.log(this.$refs.form2.formItemElement())
       this.$refs.form2.formItemElement().clickButtonItem({ value: 'aaa' })
     },
     clickDel(v) {
