@@ -1,4 +1,4 @@
-import { debounce, throttle, get, cloneDeep, filter, isEqual,set } from 'lodash'
+import { debounce, throttle, get, cloneDeep, filter, isEqual, set } from 'lodash'
 /**
  * @param {string} path
  * @returns {Boolean}
@@ -55,20 +55,20 @@ export function isExitsVariable(d) {
 }
 
 // Find components upward
-export function findComponentUpward (context, componentName, componentNames) {
+export function findComponentUpward(context, componentName, componentNames) {
   if (typeof componentName === 'string') {
-    componentNames = [componentName];
+    componentNames = [componentName]
   } else {
-    componentNames = componentName;
+    componentNames = componentName
   }
 
-  let parent = context.$parent;
-  let name = parent.$options.name;
+  let parent = context.$parent
+  let name = parent.$options.name
   while (parent && (!name || componentNames.indexOf(name) < 0)) {
-    parent = parent.$parent;
-    if (parent) name = parent.$options.name;
+    parent = parent.$parent
+    if (parent) name = parent.$options.name
   }
-  return parent;
+  return parent
 }
 /**
  * 构造树型结构数据
@@ -79,91 +79,88 @@ export function findComponentUpward (context, componentName, componentNames) {
  */
 export function handleTree(data, id, parentId, children) {
   let config = {
-    id: id || "id",
-    parentId: parentId || "parentId",
-    childrenList: children || "children",
-  };
+    id: id || 'id',
+    parentId: parentId || 'parentId',
+    childrenList: children || 'children',
+  }
 
-  var childrenListMap = {};
-  var nodeIds = {};
-  var tree = [];
+  var childrenListMap = {}
+  var nodeIds = {}
+  var tree = []
 
   for (let d of data) {
-    let parentId = d[config.parentId];
+    let parentId = d[config.parentId]
     if (childrenListMap[parentId] == null) {
-      childrenListMap[parentId] = [];
+      childrenListMap[parentId] = []
     }
-    nodeIds[d[config.id]] = d;
-    childrenListMap[parentId].push(d);
+    nodeIds[d[config.id]] = d
+    childrenListMap[parentId].push(d)
   }
 
   for (let d of data) {
-    let parentId = d[config.parentId];
+    let parentId = d[config.parentId]
     if (nodeIds[parentId] == null) {
-      tree.push(d);
+      tree.push(d)
     }
   }
 
   for (let t of tree) {
-    adaptToChildrenList(t);
+    adaptToChildrenList(t)
   }
 
   function adaptToChildrenList(o) {
     if (childrenListMap[o[config.id]] !== null) {
-      o[config.childrenList] = childrenListMap[o[config.id]];
+      o[config.childrenList] = childrenListMap[o[config.id]]
     }
     if (o[config.childrenList]) {
       for (let c of o[config.childrenList]) {
-        adaptToChildrenList(c);
+        adaptToChildrenList(c)
       }
     }
   }
-  return tree;
+  return tree
 }
 
+export function single(pre, obj) {
+  // 全部 value 将扁平到此对象中
+  const singleObj = {}
 
-  export function single(pre, obj) {
-    // 全部 value 将扁平到此对象中
-    const singleObj = {}
+  // 递归处理的函数映射集
+  const process = {
+    String(prefix, obj) {
+      singleObj[prefix] = obj
+    },
+    Array(prefix, obj) {
+      singleObj[prefix] = obj
+    },
+    Boolean(prefix, obj) {
+      singleObj[prefix] = obj
+    },
 
-    // 递归处理的函数映射集
-    const process = {
-      String(prefix, obj) {
-        singleObj[prefix] = obj
-      },
-      Array(prefix, obj) {
-        singleObj[prefix] = obj
-      },
-      Boolean(prefix, obj) {
-        singleObj[prefix] = obj
-      },
-
-      Object(prefix, obj) {
-        for (let i in obj) {
-          if (prefix){
-            process[typeOf(obj[i])](`${prefix}_${i}`, obj[i])
-
-          }else {
-            process[typeOf(obj[i])](`${i}`, obj[i])
-
-          }
+    Object(prefix, obj) {
+      for (let i in obj) {
+        if (prefix) {
+          process[typeOf(obj[i])](`${prefix}_${i}`, obj[i])
+        } else {
+          process[typeOf(obj[i])](`${i}`, obj[i])
         }
-      },
-      Number(prefix, obj) {
-        singleObj[prefix] = obj
-      },
-      Undefined() {},
-      Null() {}
-    }
-
-    process[typeOf(obj)](pre, obj)
-
-    return singleObj
+      }
+    },
+    Number(prefix, obj) {
+      singleObj[prefix] = obj
+    },
+    Undefined() {},
+    Null() {},
   }
+
+  process[typeOf(obj)](pre, obj)
+
+  return singleObj
+}
 
 // 判断对象类型
 export function typeOf(obj) {
   return Object.prototype.toString.call(obj).slice(8, -1)
 }
 
-export { debounce, throttle, get, set,cloneDeep, filter, isEqual }
+export { debounce, throttle, get, set, cloneDeep, filter, isEqual }

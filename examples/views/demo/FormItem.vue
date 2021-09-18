@@ -11,7 +11,7 @@
       :default-params="defaultParams"
       :default-props="{ label: 'transferName', value: 'id' }"
     ></KemSelect>
-     <KemSelect
+    <KemSelect
       v-model="value10"
       :value-clear="true"
       :request="transferRequest"
@@ -53,7 +53,7 @@ export default {
       value: '',
       dictType: 'transfer',
       value2: '',
-      value10:{},
+      value10: {},
       b: null,
       color: '#000',
       number: 3,

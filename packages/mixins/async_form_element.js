@@ -1,4 +1,4 @@
-import {get, isExitsVariable} from '../utils'
+import { get, isExitsVariable } from '../utils'
 export default {
   data() {
     return {
@@ -80,32 +80,31 @@ export default {
      */
     clearable: {
       type: Boolean,
-      default:undefined
+      default: undefined,
     },
   },
   computed: {
     inputClearable() {
-      return  isExitsVariable(this.clearable) ? this.clearable : this.$MIMI.Input.clearable
+      return isExitsVariable(this.clearable) ? this.clearable : this.$MIMI.Input.clearable
     },
     list() {
       const { label, value } = this.defaultProps
       let options = this.isService ? this.data : this.options
 
-      if (!label || !value){
+      if (!label || !value) {
         return options.map((item) => {
           return {
-            label:item,
-            value:item,
+            label: item,
+            value: item,
           }
         })
-
       }
 
       return options.map((item) => {
         return {
           ...item,
-          label:get(item,label),
-          value:get(item,value),
+          label: get(item, label),
+          value: get(item, value),
         }
       })
     },
@@ -194,7 +193,7 @@ export default {
     },
     initialValue(data) {
       if (this.autoSelect && data instanceof Array && data.length > 0) {
-         let value = get(data[0],this.defaultProps['value'])
+        let value = get(data[0], this.defaultProps['value'])
         if (this.dataType === 'Array') {
           value = [value]
         }

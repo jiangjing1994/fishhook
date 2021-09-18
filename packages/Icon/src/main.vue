@@ -6,53 +6,51 @@
 /**
  * @displayName KemIcon
  */
-const prefixCls = 'ivu-icon';
+const prefixCls = 'ivu-icon'
 export default {
   name: 'KemIcon',
   props: {
     type: {
       type: String,
-      default: ''
+      default: '',
     },
     size: [Number, String],
     color: String,
     custom: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   computed: {
-    classes () {
+    classes() {
       return [
         `${prefixCls}`,
         {
           [`${prefixCls}-${this.type}`]: this.type !== '',
           [`${this.custom}`]: this.custom !== '',
-        }
-      ];
+        },
+      ]
     },
-    styles () {
-      let style = {};
+    styles() {
+      let style = {}
 
       if (this.size) {
-        style['font-size'] = `${this.size}px`;
+        style['font-size'] = `${this.size}px`
       }
 
       if (this.color) {
-        style.color = this.color;
+        style.color = this.color
       }
 
-      return style;
-    }
+      return style
+    },
   },
   methods: {
-    handleClick (event) {
-      this.$emit('click', event);
-    }
-  }
+    handleClick(event) {
+      this.$emit('click', event)
+    },
+  },
 }
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

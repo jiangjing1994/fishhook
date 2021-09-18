@@ -1,33 +1,32 @@
-
 $tree-prefix-cls: #{$--css-prefix}tree;
 //.ivu-tree{
 //  background-color: #007AFF;
 //}
 .#{$tree-prefix-cls} {
-   ul{
+  ul {
     list-style: none;
-     margin: 0;
+    margin: 0;
     padding: 0;
     font-size: $--font-size-base;
-    &.#{dropdown-prefix-cls}-menu{
+    &.#{dropdown-prefix-cls}-menu {
       padding: 0;
     }
-    li{
+    li {
       list-style: none;
       margin: 8px 0;
       padding: 0;
       white-space: nowrap;
       outline: none;
 
-      &.#{dropdown-item-prefix-cls}{
+      &.#{dropdown-item-prefix-cls} {
         margin: 0;
         padding: 7px 16px;
         white-space: nowrap;
       }
     }
   }
-  li{
-    ul{
+  li {
+    ul {
       margin: 0;
       padding: 0 0 0 18px;
     }
@@ -42,14 +41,14 @@ $tree-prefix-cls: #{$--css-prefix}tree;
     color: $--tree-font-color;
     transition: all $--transition-time $--ease-in-out;
     &:hover {
-      background-color: mix( #fff,$--color-primary,90%);
+      background-color: mix(#fff, $--color-primary, 90%);
     }
-    &-selected, &-selected:hover{
-      background-color: mix(#fff,$--color-primary, 80%);
-
+    &-selected,
+    &-selected:hover {
+      background-color: mix(#fff, $--color-primary, 80%);
     }
   }
-  &-arrow{
+  &-arrow {
     cursor: pointer;
     width: 12px;
     text-align: center;
@@ -60,7 +59,7 @@ $tree-prefix-cls: #{$--css-prefix}tree;
       font-size: $--font-size-base;
       vertical-align: middle;
     }
-    &-open{
+    &-open {
       i {
         transform: rotate(90deg);
       }
@@ -71,12 +70,12 @@ $tree-prefix-cls: #{$--css-prefix}tree;
     //        display: none;
     //    }
     //}
-    &-disabled{
+    &-disabled {
       cursor: $--font-color-disabled-base;
     }
   }
 
-  .#{checkbox-prefix-cls}-wrapper{
+  .#{checkbox-prefix-cls}-wrapper {
     margin-right: 4px;
     margin-left: 4px;
   }

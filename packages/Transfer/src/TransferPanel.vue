@@ -10,41 +10,40 @@
       <!--                <span>{{ checkedSummary }}</span>-->
       <!--            </el-checkbox>-->
       <KemInput
-          v-if="filterable"
-          v-model="query"
-          style="margin-bottom: 10px"
-          :placeholder="placeholder"
-          @mouseenter.native="inputHover = true"
-          @mouseleave.native="inputHover = false"
+        v-if="filterable"
+        v-model="query"
+        style="margin-bottom: 10px"
+        :placeholder="placeholder"
+        @mouseenter.native="inputHover = true"
+        @mouseleave.native="inputHover = false"
       >
         <i
-            slot="prefix"
-            :class="['el-input__icon', 'el-icon-' + inputIcon]"
-            @click="clearQuery"
+          slot="prefix"
+          :class="['el-input__icon', 'el-icon-' + inputIcon]"
+          @click="clearQuery"
         ></i>
       </KemInput>
 
-      <div class="label_body" @click="show=!show">
-        <i :class="show?'el-icon-caret-bottom':'el-icon-caret-right'"></i>
+      <div class="label_body" @click="show = !show">
+        <i :class="show ? 'el-icon-caret-bottom' : 'el-icon-caret-right'"></i>
         <span class="label-text" :style="labelTextstyle">{{ label }}</span>
         <div v-show="countShow" class="count_body" :style="countBodystyle">{{ data.length }}</div>
       </div>
       <el-collapse-transition>
         <div v-show="show">
           <KemTagGroup
-              v-show="!hasNoMatch && data.length > 0"
-              v-model="checked"
-              :selected="selected"
-              :options="filteredData"
-              :default-props="{
-                label: labelProp,
-                value: keyProp,
-              }"
-              :render-content="renderContent"
-              @click="clickTag"
+            v-show="!hasNoMatch && data.length > 0"
+            v-model="checked"
+            :selected="selected"
+            :options="filteredData"
+            :default-props="{
+              label: labelProp,
+              value: keyProp,
+            }"
+            :render-content="renderContent"
+            @click="clickTag"
           >
           </KemTagGroup>
-
         </div>
       </el-collapse-transition>
       <p v-show="hasNoMatch" class="el-transfer-panel__empty">{{ t('el.transfer.noMatch') }}</p>
@@ -107,7 +106,6 @@ export default {
     panelConfig: Object,
   },
 
-
   data() {
     return {
       checked: [],
@@ -120,24 +118,21 @@ export default {
   },
 
   computed: {
-    label(){
-      const {label} = this.panelConfig
+    label() {
+      const { label } = this.panelConfig
       return label || '显示项'
-
     },
-    countShow(){
-      const {count} = this.panelConfig
+    countShow() {
+      const { count } = this.panelConfig
       return count || true
-
     },
     labelTextstyle() {
-      const {labelStyle} = this.panelConfig
-      return labelStyle || {};
+      const { labelStyle } = this.panelConfig
+      return labelStyle || {}
     },
     countBodystyle() {
-
-      const {countStyle} = this.panelConfig
-      return countStyle || {};
+      const { countStyle } = this.panelConfig
+      return countStyle || {}
     },
     filteredData() {
       return this.data.filter((item) => {
@@ -160,8 +155,8 @@ export default {
       const { noChecked, hasChecked } = this.format
       if (noChecked && hasChecked) {
         return checkedLength > 0
-            ? hasChecked.replace(/\${checked}/g, checkedLength).replace(/\${total}/g, dataLength)
-            : noChecked.replace(/\${total}/g, dataLength)
+          ? hasChecked.replace(/\${checked}/g, checkedLength).replace(/\${total}/g, dataLength)
+          : noChecked.replace(/\${total}/g, dataLength)
       } else {
         return `${checkedLength}/${dataLength}`
       }
@@ -202,8 +197,8 @@ export default {
       this.updateAllChecked()
       if (this.checkChangeByUser) {
         const movedKeys = val
-            .concat(oldVal)
-            .filter((v) => val.indexOf(v) === -1 || oldVal.indexOf(v) === -1)
+          .concat(oldVal)
+          .filter((v) => val.indexOf(v) === -1 || oldVal.indexOf(v) === -1)
         this.$emit('checked-change', val, movedKeys)
       } else {
         this.$emit('checked-change', val)
@@ -231,9 +226,9 @@ export default {
       immediate: true,
       handler(val, oldVal) {
         if (
-            oldVal &&
-            val.length === oldVal.length &&
-            val.every((item) => oldVal.indexOf(item) > -1)
+          oldVal &&
+          val.length === oldVal.length &&
+          val.every((item) => oldVal.indexOf(item) > -1)
         )
           return
         const checked = []
@@ -260,8 +255,8 @@ export default {
     updateAllChecked() {
       const checkableDataKeys = this.checkableData.map((item) => item[this.keyProp])
       this.allChecked =
-          checkableDataKeys.length > 0 &&
-          checkableDataKeys.every((item) => this.checked.indexOf(item) > -1)
+        checkableDataKeys.length > 0 &&
+        checkableDataKeys.every((item) => this.checked.indexOf(item) > -1)
     },
 
     handleAllCheckedChange(value) {
@@ -289,38 +284,35 @@ export default {
   border-radius: 5px;
 
   overflow: auto;
-  .label_body{
+  .label_body {
     height: 21px;
 
     line-height: 21px;
     text-align: left;
     margin-bottom: 5px;
-    >i{
+    > i {
       font-size: 12px;
-      transform: scale(.8);
+      transform: scale(0.8);
     }
-    .label-text{
+    .label-text {
       padding-left: 5px;
-      cursor:pointer;
+      cursor: pointer;
       font-size: 14px;
       color: rgba(0, 0, 0, 0.65);
     }
-    .count_body{
+    .count_body {
       width: 16px;
       height: 16px;
       border-radius: 10px;
-      background: rgba(82, 196, 26, .1);
-      color: rgba(82, 196, 26,1);
+      background: rgba(82, 196, 26, 0.1);
+      color: rgba(82, 196, 26, 1);
       display: inline-block;
       font-size: 12px;
       line-height: 16px;
       text-align: center;
       margin-left: 5px;
       font-weight: bold;
-
     }
-
-
   }
 }
 </style>

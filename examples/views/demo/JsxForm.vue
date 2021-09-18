@@ -1,6 +1,6 @@
 <template>
   <div style="text-align: left; display: flex; justify-content: center">
-    <KemPageCard style=" ; margin-right: 20px" header="Form">
+    <KemPageCard style="margin-right: 20px" header="Form">
       <pre>{{ form }}</pre>
       <jsx-form
         ref="jsxFormRef"
@@ -10,22 +10,19 @@
         :form-config="formConfig"
         size="small"
         :row-gutter="20"
-         empty-text="--"
+        empty-text="--"
       />
     </KemPageCard>
-
   </div>
-
-
 </template>
 
 <script>
 export default {
-  name:'JsxForm1',
+  name: 'JsxForm1',
   data() {
     return {
-      formConfig:{
-        labelPosition: 'right'
+      formConfig: {
+        labelPosition: 'right',
       },
       form: {
         name: '222',
@@ -34,19 +31,19 @@ export default {
         hobby: ['html', 'css', 'js'],
         time: {
           start: new Date().getTime(),
-          end: new Date().getTime()
+          end: new Date().getTime(),
         },
         skill: [
           {
             name: 'math',
-            point: 90
-          }
-        ]
+            point: 90,
+          },
+        ],
       },
       rules: {
-        name: [{ required: true, message: '请输入姓名', trigger: 'blur' }]
-      }
-    };
+        name: [{ required: true, message: '请输入姓名', trigger: 'blur' }],
+      },
+    }
   },
   computed: {
     column() {
@@ -59,14 +56,14 @@ export default {
         // 返回数据示例：<span>{{ form.name }}<span>
         {
           prop: 'name',
-          label: '姓名'
+          label: '姓名',
         },
 
         // show接收一个方法，根据返回值决定表单项是否显示
         {
           prop: 'custom_hidden',
           label: '自定义隐藏',
-          show: (form, root) => false
+          show: (form, root) => false,
         },
 
         // 使用formatter格式化数据
@@ -76,9 +73,9 @@ export default {
           label: '性别',
           class: 'gender-icon',
           formatter: (form, root) => {
-            const genderNameMap = { male: '男生', female: '女生' };
-            return genderNameMap[form.gender];
-          }
+            const genderNameMap = { male: '男生', female: '女生' }
+            return genderNameMap[form.gender]
+          },
         },
 
         /**
@@ -91,22 +88,20 @@ export default {
          **/
         {
           prop: 'age',
-          renderLabel: (h, form, root) => <span style='color: red;'>年龄</span>,
-          renderError: (h, form, root, { error }) => (
-            <span style='color: blue'>{error}</span>
-          ),
+          renderLabel: (h, form, root) => <span style="color: red;">年龄</span>,
+          renderError: (h, form, root, { error }) => <span style="color: blue">{error}</span>,
           rules: [
             { required: true, message: '请输入年龄', trigger: 'blur' },
-            { type: 'number', min: 1, message: 'hahaha', trigger: 'blur' }
+            { type: 'number', min: 1, message: 'hahaha', trigger: 'blur' },
           ],
           render: (h, form, root) => (
             <kem-input-number
               v-model={form.age}
               onChange={this.handleChange}
               max={20}
-              label='描述文字'
+              label="描述文字"
             />
-          )
+          ),
         },
 
         // 注意Vue中JSX语法的书写规则，部分属性无法传递，需进行包裹后方可传递
@@ -121,17 +116,17 @@ export default {
                 children: [
                   {
                     name: 'HTML',
-                    id: 'html'
+                    id: 'html',
                   },
                   {
                     name: 'JavaScript',
-                    id: 'js'
+                    id: 'js',
                   },
                   {
                     name: 'CSS',
-                    id: 'css'
-                  }
-                ]
+                    id: 'css',
+                  },
+                ],
               },
               {
                 name: '后端',
@@ -139,19 +134,19 @@ export default {
                 children: [
                   {
                     name: 'JAVA',
-                    id: 'java'
+                    id: 'java',
                   },
                   {
                     name: 'Golang',
-                    id: 'golang'
+                    id: 'golang',
                   },
                   {
                     name: 'Python',
-                    id: 'python'
-                  }
-                ]
-              }
-            ];
+                    id: 'python',
+                  },
+                ],
+              },
+            ]
             /**
              * 特别注意
              * 由于 el-cascader 需要传递名称为 'props' 的属性
@@ -165,15 +160,13 @@ export default {
                 label: 'name',
                 value: 'id',
                 multiple: true,
-                emitPath: false
+                emitPath: false,
               },
               clearable: true,
-              filterable: true
-            };
-            return (
-              <el-cascader {...{ props: cascaderProps }} v-model={form.hobby} />
-            );
-          }
+              filterable: true,
+            }
+            return <el-cascader {...{ props: cascaderProps }} v-model={form.hobby} />
+          },
         },
 
         {
@@ -194,7 +187,7 @@ export default {
                 }, 500)
               })
             }
-            const  props= {
+            const props = {
               // options: [
               //   { label: "circle", value: "circle" },
               //   { label: "rect", value: "rect" },
@@ -214,10 +207,8 @@ export default {
                 dictType: 'transfer',
               },
             }
-            return (
-              <kem-select {...{ props: props }} v-model={form.aaa} />
-            );
-          }
+            return <kem-select {...{ props: props }} v-model={form.aaa} />
+          },
         },
 
         /**
@@ -237,31 +228,31 @@ export default {
           layout: {
             type: 'flex',
             align: 'middle',
-            justify: 'start'
+            justify: 'start',
           },
           children: [
             {
               prop: 'start',
               label: '开始时间',
               layout: {
-                span: 10
+                span: 10,
               },
               render: (h, form, root) => {
-                return <el-date-picker v-model={form.start} />;
-              }
+                return <el-date-picker v-model={form.start} />
+              },
             },
             {
               prop: 'end',
               label: '结束时间',
               layout: {
                 span: 10,
-                offset: 1
+                offset: 1,
               },
               render: (h, form, root) => {
-                return <el-date-picker v-model={form.end} />;
-              }
-            }
-          ]
+                return <el-date-picker v-model={form.end} />
+              },
+            },
+          ],
         },
 
         /**
@@ -285,8 +276,8 @@ export default {
                 prop: 'name',
                 label: '名称',
                 render: (h, form, root) => {
-                  return <el-input v-model={form.name} />;
-                }
+                  return <el-input v-model={form.name} />
+                },
               },
               {
                 prop: 'point',
@@ -295,26 +286,26 @@ export default {
                 show: (form, root, itemIndex) => true,
                 render: (h, form, root, { itemIndex }) => {
                   // itemIndex: 当前元素位于数组的index，默认为-1
-                  return <el-input-number v-model={form.point} />;
-                }
-              }
-            ];
-          }
-        }
-      ];
-    }
+                  return <el-input-number v-model={form.point} />
+                },
+              },
+            ]
+          },
+        },
+      ]
+    },
   },
   methods: {
     handleChange(val) {
       // 这里同样可以使用 el-form 的 Form Methods，同原生 element-ui 的使用方式相同
       this.$refs.jsxFormRef.validateField('age', (err) => {
         if (err) {
-          console.error(err);
-          return;
+          console.error(err)
+          return
         }
-        console.log(val);
-      });
-    }
-  }
-};
+        console.log(val)
+      })
+    },
+  },
+}
 </script>

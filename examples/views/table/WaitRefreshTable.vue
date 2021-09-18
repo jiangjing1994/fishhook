@@ -13,9 +13,12 @@
       <KemButton @click="toggle"> {{ waitRefresh }}切换定时</KemButton>
     </template>
     <template slot="menu" slot-scope="{ scope }">
-      <KemButton v-if="'Mark' === scope.row.createUser" type="text" @click="sadasda(scope.row.createUser)">{{
-        scope.row.createUser
-      }}</KemButton>
+      <KemButton
+        v-if="'Mark' === scope.row.createUser"
+        type="text"
+        @click="sadasda(scope.row.createUser)"
+        >{{ scope.row.createUser }}</KemButton
+      >
     </template>
   </KemTable>
 </template>
@@ -28,8 +31,8 @@ export default {
     return {
       defaultParams: {},
       request: queryList,
-      menuButton: ['delBtn','addBtn','editBtn'],
-      waitRefresh:2000,
+      menuButton: ['delBtn', 'addBtn', 'editBtn'],
+      waitRefresh: 2000,
       column: [
         { label: '业务需求编号', prop: 'code', sortable: true },
         { label: '需求主题', prop: 'title' },
@@ -49,7 +52,7 @@ export default {
       else this.waitRefresh = 2000
     },
     sadasda(value) {
-     console.log(value)
+      console.log(value)
     },
     rowClick(value) {
       this.$message.success(JSON.stringify(value))

@@ -14,8 +14,12 @@
       @clickMenuButton="clickMenuButton"
     />
     <div style="margin-top: 20px">
-      <el-button @click="toggleSelection([tableData[1], tableData[2]])">切换第二、第三行的选中状态</el-button>
-      <el-button @click="toggleSelectionIds([tableData[1], tableData[2]])">根据id切换第二、第三行的选中状态</el-button>
+      <el-button @click="toggleSelection([tableData[1], tableData[2]])"
+        >切换第二、第三行的选中状态</el-button
+      >
+      <el-button @click="toggleSelectionIds([tableData[1], tableData[2]])"
+        >根据id切换第二、第三行的选中状态</el-button
+      >
       <el-button @click="toggleAllSelection()">选择all</el-button>
       <el-button @click="toggleSelection()">取消选择</el-button>
     </div>
@@ -31,7 +35,7 @@ export default {
       defaultParams: {},
       request: queryList,
       menuButton: ['allBtn', 'addBtn', 'delBtn'],
-      tableData:[],
+      tableData: [],
       column: [
         { label: '业务需求编号', prop: 'code' },
         { label: '需求主题', prop: 'title' },
@@ -44,7 +48,7 @@ export default {
   },
   methods: {
     result(res) {
-       this.tableData =  res.data
+      this.tableData = res.data
       return res.data
     },
     selectionChange(value) {
@@ -70,25 +74,19 @@ export default {
     },
     toggleSelectionIds(rows) {
       if (rows) {
-
-
         let ids = rows.map((row) => {
-
           return row.timestamp
         })
         this.$refs.multipleTable.toggleIdSelection(ids)
-
       } else {
         this.$refs.multipleTable.$refs.crud.clearSelection()
       }
     },
     toggleAllSelection(rows) {
       this.$refs.multipleTable.$refs.crud.toggleAllSelection()
-
     },
     clearSelection() {
       this.$refs.multipleTable.$refs.crud.clearSelection()
-
     },
     handleSelectionChange(val) {
       this.multipleSelection = val

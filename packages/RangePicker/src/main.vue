@@ -1,6 +1,6 @@
 <template>
   <div>
-     {{ computedValue }}
+    {{ computedValue }}
     <el-date-picker
       v-model="computedValue"
       value-format="yyyy-MM-dd hh:mm:ss"
@@ -11,24 +11,24 @@
     >
     </el-date-picker>
   </div>
-
 </template>
 
-<script>/**
+<script>
+/**
  * @displayName RangePicker 范围选择器
  */
 export default {
-  name: "KemRangePicker",
+  name: 'KemRangePicker',
   props: {
     uiType: {
       type: String,
-      default: "normal"
+      default: 'normal',
     },
     value: {
       type: Object,
       default: () => {
-        return {};
-      }
+        return {}
+      },
     },
     /**
      * 字段映射默认 start end
@@ -37,51 +37,48 @@ export default {
       type: Object,
       default: () => {
         return {
-          start: "start",
-          end: "end"
-        };
-      }
-    }
+          start: 'start',
+          end: 'end',
+        }
+      },
+    },
   },
   data() {
     return {
-      value1: []
+      value1: [],
     }
   },
 
   computed: {
     evet() {
-      return this.$listeners;
+      return this.$listeners
     },
     label() {
-      return this.$attrs.value;
+      return this.$attrs.value
     },
-    computedValue:{
-      get(){
-        const { start, end } = this.defaultProps;
-        let value = this.value;
-        const startValue =  value[start]  || ''
-        const endValue =  value[end] || ''
+    computedValue: {
+      get() {
+        const { start, end } = this.defaultProps
+        let value = this.value
+        const startValue = value[start] || ''
+        const endValue = value[end] || ''
 
-        if (startValue && endValue){
+        if (startValue && endValue) {
           return [startValue, endValue]
-        }else {
+        } else {
           return []
         }
-
       },
-      set(value){
-        const { start, end } = this.defaultProps;
-        let newValue  = this.value
+      set(value) {
+        const { start, end } = this.defaultProps
+        let newValue = this.value
         newValue[start] = value[0]
         newValue[end] = value[1]
 
-        this.$emit('input',newValue)
-
-      }
-
-    }
-  }
-};
+        this.$emit('input', newValue)
+      },
+    },
+  },
+}
 </script>
 <style lang="scss"></style>

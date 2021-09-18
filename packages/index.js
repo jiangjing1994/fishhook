@@ -36,11 +36,16 @@ import KemD52tButton from './D52tButton'
 import ElementUI from 'element-ui'
 import Avue from '@smallwei/avue'
 import '@smallwei/avue/lib/index.css'
-import { Tree as KemViewTree, Alert as KemViewAlert, Icon as KemViewIcon , Checkbox as KemViewCheckbox } from 'view-design'
+import {
+  Tree as KemViewTree,
+  Alert as KemViewAlert,
+  Icon as KemViewIcon,
+  Checkbox as KemViewCheckbox,
+} from 'view-design'
 import 'view-design/dist/styles/iview.css'
 import './theme/index.scss'
-import {  isExitsVariable } from './utils'
-import  './utils'
+import { isExitsVariable } from './utils'
+import './utils'
 
 const components = [
   KemButton,
@@ -63,7 +68,7 @@ const components = [
   KemCountUp,
   KemDataIcons,
   KemInputSlider,
-   KemSteps,
+  KemSteps,
   KemChooseArrayElement,
   KemCrud,
   KemSearch,
@@ -77,7 +82,6 @@ const components = [
   KemIcon,
   KemD52tButton,
   JsxForm,
-
 ]
 
 const install = function (Vue, opts = {}) {
@@ -108,9 +112,15 @@ const install = function (Vue, opts = {}) {
       type: opts['Table']?.type || 'primary',
 
       isShowIndex: isExitsVariable(opts['Table']?.isShowIndex) ? opts['Table']?.isShowIndex : true,
-      isShowHeader: isExitsVariable(opts['Table']?.isShowHeader) ? opts['Table']?.isShowHeader : true,
-      isShowBorder: isExitsVariable(opts['Table']?.isShowBorder) ? opts['Table']?.isShowBorder : true,
-      isShowStripe: isExitsVariable(opts['Table']?.isShowStripe) ? opts['Table']?.isShowStripe : false,
+      isShowHeader: isExitsVariable(opts['Table']?.isShowHeader)
+        ? opts['Table']?.isShowHeader
+        : true,
+      isShowBorder: isExitsVariable(opts['Table']?.isShowBorder)
+        ? opts['Table']?.isShowBorder
+        : true,
+      isShowStripe: isExitsVariable(opts['Table']?.isShowStripe)
+        ? opts['Table']?.isShowStripe
+        : false,
 
       selection: opts['Table']?.selection || false,
       indexLabel: opts['Table']?.indexLabel || '序号',
@@ -132,7 +142,6 @@ const install = function (Vue, opts = {}) {
       orderProps: opts['Table']?.orderProps || {
         ascending: 'ascending',
         descending: 'descending',
-
       },
       mergeOption: opts['Table']?.mergeOption || {},
     },
@@ -144,26 +153,24 @@ const install = function (Vue, opts = {}) {
         ...opts['Form']?.formConfig,
       },
       labelStyle: {
-
         ...opts['Form']?.labelStyle,
       },
       rowGutter: opts['Form']?.rowGutter || 0,
       labelSuffix: opts['Form']?.labelSuffix || '',
-
     },
     Tag: {
       size: opts.Tag?.size || size,
     },
     Tree: {
-      arrow: opts.tree ? opts.tree.arrow ? opts.tree.arrow : '' : '',
-      customArrow: opts.tree ? opts.tree.customArrow ? opts.tree.customArrow : '' : '',
-      arrowSize: opts.tree ? opts.tree.arrowSize ? opts.tree.arrowSize : '' : ''
+      arrow: opts.tree ? (opts.tree.arrow ? opts.tree.arrow : '') : '',
+      customArrow: opts.tree ? (opts.tree.customArrow ? opts.tree.customArrow : '') : '',
+      arrowSize: opts.tree ? (opts.tree.arrowSize ? opts.tree.arrowSize : '') : '',
     },
 
     // 输入组件
-    Input:{
-       clearable:  isExitsVariable(opts['Input']?.clearable) ? opts['Input']?.clearable : true,
-    }
+    Input: {
+      clearable: isExitsVariable(opts['Input']?.clearable) ? opts['Input']?.clearable : true,
+    },
   }
 
   ElementUI.install(Vue, {
@@ -220,6 +227,4 @@ export default {
   KemIcon,
   KemD52tButton,
   JsxForm,
-
-
 }

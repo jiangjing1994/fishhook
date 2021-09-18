@@ -1,28 +1,23 @@
 <template>
   <div class="kem-tag_group">
-
-    <div
-        v-for="(item, index) in list"
-        :key="index"
-    >
+    <div v-for="(item, index) in list" :key="index">
       <KemTag
-          v-if="!renderContent"
-          :label="item.value"
-          :disabled="item.disabled"
-          style="margin-right: 8px"
+        v-if="!renderContent"
+        :label="item.value"
+        :disabled="item.disabled"
+        style="margin-right: 8px"
       >
         {{ item.label }}
         <div class="kem-tag__btn" @click="click(item)">
-          <i  class="el-icon-error"></i>
+          <i class="el-icon-error"></i>
         </div>
       </KemTag>
-      <div style="display: flex;justify-content: space-between;align-items: center">
+      <div style="display: flex; justify-content: space-between; align-items: center">
         <option-content :option="item" :selected="selected"></option-content>
         <!--        <div class="kem-tag__btn" @click="click(item)">-->
         <!--          <i class="el-icon-error"></i>-->
         <!--        </div>-->
       </div>
-
     </div>
   </div>
 </template>
@@ -33,35 +28,33 @@ import mixins from '../../mixins/async_form_element'
  */
 export default {
   name: 'KemTagGroup',
-  components:{
+  components: {
     OptionContent: {
       props: {
         option: Object,
         selected: Boolean,
-        click: Function
+        click: Function,
       },
       render(h) {
-        const getParent = vm => {
+        const getParent = (vm) => {
           if (vm.$options.componentName === 'ElTransferPanel') {
-            return vm;
+            return vm
           } else if (vm.$parent) {
-            return getParent(vm.$parent);
+            return getParent(vm.$parent)
           } else {
-            return vm;
+            return vm
           }
-        };
-        const panel = getParent(this);
+        }
+        const panel = getParent(this)
         this.option['selected'] = this.selected
-         return panel.renderContent(h, this.option,this.$parent.click)
-
-      }
-    }
-
+        return panel.renderContent(h, this.option, this.$parent.click)
+      },
+    },
   },
   mixins: [mixins],
   props: {
-    renderContent:Function,
-    selected:Boolean
+    renderContent: Function,
+    selected: Boolean,
   },
   data() {
     return {}

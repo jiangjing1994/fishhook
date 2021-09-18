@@ -20,7 +20,7 @@ export default {
       menuButton: ['allBtn', 'addBtn', 'delBtn'],
 
       column: [
-        { label: '业务需求编号', prop: 'code' ,sortable:true},
+        { label: '业务需求编号', prop: 'code', sortable: true },
         { label: '需求主题', prop: 'title' },
         { label: '需求类型', prop: 'type' },
         { label: '需求提交人', prop: 'createUser' },

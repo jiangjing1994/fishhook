@@ -10,7 +10,9 @@
         </div>
         <div class="header__body-right">
           <slot name="menuRight"></slot>
-          <KemButton v-if="menuPermissionAdd" @click="clickMenuButton({ type: 'add' })">新增</KemButton>
+          <KemButton v-if="menuPermissionAdd" @click="clickMenuButton({ type: 'add' })"
+            >新增</KemButton
+          >
         </div>
       </div>
       <div v-if="headerBottomPermission" class="header__body-bottom">
@@ -1034,7 +1036,6 @@ export default {
       } else {
         throw new Error(`Need rowKey !!!!!!!`)
       }
-
     },
   },
 }

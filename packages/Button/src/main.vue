@@ -103,17 +103,17 @@ export default {
      */
     throttle(method) {
       return throttle(
-          (...args) => {
-            this.$emit(method, ...args)
-          },
-          this.buttonWait,
-          {
-            //[wait=0] (number): 需要节流的毫秒数。
-            // [options.leading=true] (boolean): 指定调用在节流开始前，默认true。
-            // [options.trailing=true] (boolean): 指定调用在节流结束后，默认true。
-            leading: true,
-            trailing: false,
-          }
+        (...args) => {
+          this.$emit(method, ...args)
+        },
+        this.buttonWait,
+        {
+          //[wait=0] (number): 需要节流的毫秒数。
+          // [options.leading=true] (boolean): 指定调用在节流开始前，默认true。
+          // [options.trailing=true] (boolean): 指定调用在节流结束后，默认true。
+          leading: true,
+          trailing: false,
+        }
       )
     },
   },
@@ -123,27 +123,23 @@ export default {
 
     const baseButton = () => {
       return (
-          <el-button
-              props={this.$attrs}
-              type={type}
-              size={this.buttonSize}
-              style={this.style}
-              on={this.evet}
-          >
-            {this.$slots.default}
-          </el-button>
+        <el-button
+          props={this.$attrs}
+          type={type}
+          size={this.buttonSize}
+          style={this.style}
+          on={this.evet}
+        >
+          {this.$slots.default}
+        </el-button>
       )
     }
 
     const tipbutton = (button) => {
       return (
-          <el-tooltip
-              effect={this.tipEffect}
-              placement={this.tipPlacement}
-              content={this.tip}
-          >
-            {button}
-          </el-tooltip>
+        <el-tooltip effect={this.tipEffect} placement={this.tipPlacement} content={this.tip}>
+          {button}
+        </el-tooltip>
       )
     }
 
@@ -163,10 +159,10 @@ export default {
       }
 
       return (
-          <el-dropdown size={this.buttonSize} v-on:command={handleCommand}>
-            <div style="padding: 0 8px">{button}</div>
-            <el-dropdown-menu slot="dropdown">{dropdownItem}</el-dropdown-menu>
-          </el-dropdown>
+        <el-dropdown size={this.buttonSize} v-on:command={handleCommand}>
+          <div style="padding: 0 8px">{button}</div>
+          <el-dropdown-menu slot="dropdown">{dropdownItem}</el-dropdown-menu>
+        </el-dropdown>
       )
     }
 
@@ -203,25 +199,25 @@ export default {
       }
 
       return (
-          <el-button
-              style="padding:4px 10px"
-              size="mini"
-              type={get(specialButtonConfig, type).type}
-              icon={get(specialButtonConfig, type).icon}
-              on={this.evet}
-              round={true}
-          >
-            {this.$slots.default || get(specialButtonConfig, type).text}
-          </el-button>
+        <el-button
+          style="padding:4px 10px"
+          size="mini"
+          type={get(specialButtonConfig, type).type}
+          icon={get(specialButtonConfig, type).icon}
+          on={this.evet}
+          round={true}
+        >
+          {this.$slots.default || get(specialButtonConfig, type).text}
+        </el-button>
       )
     }
 
-    const noneBtn = ()=>{
-      return ( <span on={this.evet}>{this.$slots.default}</span>)
+    const noneBtn = () => {
+      return <span on={this.evet}>{this.$slots.default}</span>
     }
     let btn = type.indexOf('.') !== -1 ? specialButton(type) : baseButton(type)
 
-    if (type === 'none'){
+    if (type === 'none') {
       btn = noneBtn()
     }
     if (this.selectButtonGroup) {

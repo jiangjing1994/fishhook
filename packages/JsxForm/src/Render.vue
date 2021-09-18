@@ -5,21 +5,26 @@ export default {
   props: {
     form: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     rootForm: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     render: {
       type: Function,
-      default: function() {}
+      default: function () {},
     },
     scope: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
-  render: (h, ctx) => (ctx.props.render ? (ctx.props.render(h, ctx.props.form, ctx.props.rootForm, ctx.props.scope) || <span>{ctx.parent.emptyWords}</span>) : ctx.parent.emptyWords)
-};
+  render: (h, ctx) =>
+    ctx.props.render
+      ? ctx.props.render(h, ctx.props.form, ctx.props.rootForm, ctx.props.scope) || (
+          <span>{ctx.parent.emptyWords}</span>
+        )
+      : ctx.parent.emptyWords,
+}
 </script>
