@@ -49,6 +49,7 @@
       @row-click="rowClick"
       @row-dblclick="rowDblclick"
       @cell-click="cellClick"
+      @on-load="onLoad"
       @tree-load="treeLoad"
       @expand-change="expandChanges"
       @selection-change="selectionChange"
@@ -463,6 +464,14 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * 分页选中
+     */
+    reserveSelection: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {
@@ -479,6 +488,7 @@ export default {
       loading: false,
       relodaMenu: false,
       expandRowKeys: [],
+      selectedKeys: [],
       currentStartIndex: 0,
       currentEndIndex: 20,
       timer: null,
@@ -550,6 +560,7 @@ export default {
         delBtn: false,
         addBtn: false,
         editBtn: false,
+        reserveSelection: this.reserveSelection,
         refreshBtn: false,
         columnBtn: false,
         height: this.tableHeight,
@@ -799,6 +810,9 @@ export default {
       }
       this.relodaMenu = false
       this.$nextTick(() => {
+        if (this.reserveSelection) {
+          this.toggleIdSelection(this.selectedKeys, true)
+        }
         this.relodaMenu = true
       })
     },
@@ -857,6 +871,7 @@ export default {
         return item[this.rowKey]
       })
 
+      this.selectedKeys = ids
       this.$emit('selectionChange', {
         ids,
         list,
@@ -927,6 +942,10 @@ export default {
     //当某个单元格被双击击时会触发该事件
     cellDblclick(row, column, cell, event) {
       this.$emit('cell-dblclick', row, column, cell, event)
+    },
+
+    onLoad(page) {
+      this.$emit('on-load', page)
     },
     cellClick(row, column, cell, event) {
       /** 单元格被点击

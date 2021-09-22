@@ -1,5 +1,14 @@
 <template>
   <div>
+    {{ page }}
+    <avue-crud :page.sync="page" :data="data" :option="option" @on-load="onLoad"> </avue-crud>
+    <avue-crud
+      :data="data1"
+      :option="option"
+      :page.sync="page1"
+      @size-change="sizeChange"
+      @current-change="currentChange"
+    ></avue-crud>
     <KemTable
       ref="multipleTable"
       :column="column"
@@ -9,7 +18,7 @@
       :default-params="defaultParams"
       :menu-width="250"
       :selection="true"
-      row-key="timestamp"
+      row-key="organize_id"
       @selectionChange="selectionChange"
       @clickMenuButton="clickMenuButton"
     />
@@ -27,26 +36,167 @@
 </template>
 
 <script>
-import { queryList } from '../../utils/index'
+import { queryList2 } from '../../utils/index'
 export default {
   name: 'SelectionTable',
   data() {
     return {
+      page: {
+        pageSize: 2,
+        pageSizes: [2, 3],
+      },
+      page1: {
+        currentPage: 1,
+        pageSize: 2,
+        pageSizes: [2, 3],
+      },
+      data: [],
+      data1: [],
+      option: {
+        selection: true,
+        rowKey: 'organize_id',
+        reserveSelection: true,
+        align: 'center',
+        menuAlign: 'center',
+        column: [
+          {
+            label: '姓名',
+            prop: 'name',
+          },
+          {
+            label: '性别',
+            prop: 'sex',
+          },
+        ],
+      },
       defaultParams: {},
-      request: queryList,
+      request: queryList2,
       menuButton: ['allBtn', 'addBtn', 'delBtn'],
       tableData: [],
       column: [
-        { label: '业务需求编号', prop: 'code' },
-        { label: '需求主题', prop: 'title' },
-        { label: '需求类型', prop: 'type' },
-        { label: '需求提交人', prop: 'createUser' },
-        { label: '需求提交时间', prop: 'createTime' },
-        { label: '正式需求编号', prop: 'formalCode' },
+        { label: 'organize_id', prop: 'organize_id' },
+        { label: 'parent_organize_id', prop: 'parent_organize_id' },
+        { label: 'organize_name', prop: 'organize_name' },
+        { label: 'code', prop: 'code' },
+        { label: 'org_type', prop: 'org_type' },
+        { label: 'state', prop: 'state' },
+        { label: 'create_date', prop: 'create_date' },
+        { label: 'ext1', prop: 'ext1' },
+        { label: 'ext2', prop: 'ext2' },
+        { label: 'ext3', prop: 'ext3' },
       ],
     }
   },
+  created() {
+    this.getList()
+  },
+
   methods: {
+    sizeChange(val) {
+      this.page1.currentPage = 1
+      this.page1.pageSize = val
+      this.getList()
+      this.$message.success('行数' + val)
+    },
+    currentChange(val) {
+      this.page1.currentPage = val
+      this.getList()
+      this.$message.success('页码' + val)
+    },
+    getList() {
+      this.page1.total = 40
+      if (this.page1.currentPage === 1) {
+        this.data1 = [
+          {
+            id: 1,
+            name: '张三',
+            sex: '男',
+          },
+          {
+            id: 2,
+            name: '李四',
+            sex: '女',
+          },
+        ]
+      } else if (this.page1.currentPage == 2) {
+        this.data1 = [
+          {
+            id: 3,
+            name: '王五',
+            sex: '女',
+          },
+          {
+            id: 4,
+            name: '赵六',
+            sex: '女',
+          },
+        ]
+      }
+      if (this.page1.currentPage === 1) {
+        this.data1 = [
+          {
+            id: 1,
+            name: '张三',
+            sex: '男',
+          },
+          {
+            id: 2,
+            name: '李四',
+            sex: '女',
+          },
+        ]
+      } else if (this.page1.currentPage == 2) {
+        this.data1 = [
+          {
+            id: 3,
+            name: '王五',
+            sex: '女',
+          },
+          {
+            id: 4,
+            name: '赵六',
+            sex: '女',
+          },
+        ]
+      }
+    },
+    onLoad(page, a) {
+      console.log(a)
+      console.log(page)
+
+      setTimeout(() => {
+        this.page.total = 40
+
+        if (this.page.currentPage === 1) {
+          this.data = [
+            {
+              organize_id: 1,
+              name: '张三',
+              sex: '男',
+            },
+            {
+              organize_id: 2,
+              name: '李四',
+              sex: '女',
+            },
+          ]
+        } else if (this.page.currentPage == 2) {
+          this.data = [
+            {
+              organize_id: 3,
+              name: '王五',
+              sex: '女',
+            },
+            {
+              organize_id: 4,
+              name: '赵六',
+              sex: '女',
+            },
+          ]
+        }
+      }, 2000)
+    },
+
     result(res) {
       this.tableData = res.data
       return res.data
@@ -75,7 +225,7 @@ export default {
     toggleSelectionIds(rows) {
       if (rows) {
         let ids = rows.map((row) => {
-          return row.timestamp
+          return row.organize_id
         })
         this.$refs.multipleTable.toggleIdSelection(ids)
       } else {
