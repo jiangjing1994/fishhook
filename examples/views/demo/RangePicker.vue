@@ -1,23 +1,20 @@
- <template>
-   <div>
-     <pre>{{ value }}</pre>
-     <KemRangePicker v-model="value"/>
-
-   </div>
+<template>
+  <div>
+    <pre>{{ value }}</pre>
+    <KemRangePicker v-model="value" />
+  </div>
 </template>
 
- <script>
+<script>
 export default {
-    name: 'RangePicker',
+  name: 'RangePicker',
 
-    data() {
-        return {
-            value: {}
-        }
-    },
- }
+  data() {
+    return {
+      value: {},
+    }
+  },
+}
 </script>
 
- <style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

@@ -1,10 +1,11 @@
 <template>
   <div>
-    <KemLabelText v-if="uiType ==='text'" :value="label"/>
+    <KemLabelText v-if="uiType === 'text'" :value="label" />
     <el-select
       v-else
       v-bind="$attrs"
-      :value="v" :multiple="multiple"
+      :value="v"
+      :multiple="multiple"
       :placeholder="placeholder"
       :filterable="filterable"
       :clearable="inputClearable"
@@ -13,12 +14,18 @@
       v-on="evet"
     >
       <!-- @slot prefix	Select 组件头部内容 -->
-      <slot slot="prefix" name="prefix"/>
+      <slot slot="prefix" name="prefix" />
 
       <!-- @slot empty	Select empty -->
-      <slot slot="empty" name="empty"/>
+      <slot slot="empty" name="empty" />
 
-      <el-option v-for="(item,index) in list " :key="index" :label="item.label" :disabled="item.disabled" :value="getoptionValue(item)">
+      <el-option
+        v-for="(item, index) in list"
+        :key="index"
+        :label="item.label"
+        :disabled="item.disabled"
+        :value="getoptionValue(item)"
+      >
         <slot :scope="item"></slot>
       </el-option>
     </el-select>
@@ -29,7 +36,7 @@
  * @displayName Select下拉框
  */
 import mixins from '../../mixins/async_form_element'
-import {isExitsVariable,isObject} from '../../utils'
+import { isExitsVariable, isObject } from '../../utils'
 export default {
   name: 'KemSelect',
   mixins: [mixins],
@@ -82,10 +89,9 @@ export default {
     }
   },
   computed: {
-
     v() {
       let value = ''
-      if (!isExitsVariable(this.$attrs.value)){
+      if (!isExitsVariable(this.$attrs.value)) {
         return ''
       }
 
@@ -106,11 +112,10 @@ export default {
     getoptionValue(item) {
       if (this.valueIsObject) {
         return item
-      }else {
+      } else {
         return item.value
-
       }
-    }
+    },
   },
 }
 </script>

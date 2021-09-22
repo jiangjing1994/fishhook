@@ -1,4 +1,4 @@
--  Example: 简单表格静态数据纯用于展示
+- Example: 简单表格静态数据纯用于展示
 
 ```vue
 <template>

@@ -1,15 +1,15 @@
-import JsxForm from './src/Form';
+import JsxForm from './src/Form'
 
-JsxForm.install = function(Vue, option = {}) {
+JsxForm.install = function (Vue, option = {}) {
   const defaultOption = {
     emptyText: '',
-    formClass: ''
-  };
+    formClass: '',
+  }
   Vue.prototype.$jsxForm = {
     ...defaultOption,
-    ...option
-  };
-  Vue.component(JsxForm.name, JsxForm);
-};
+    ...option,
+  }
+  Vue.component(JsxForm.name, JsxForm)
+}
 
-export default JsxForm;
+export default JsxForm

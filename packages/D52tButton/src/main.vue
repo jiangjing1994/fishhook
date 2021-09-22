@@ -2,13 +2,15 @@
   <div @click="focus">
     <KemInput v-model="value" readonly @click.stop="focus">
       <span slot="suffix">
-          <i v-if="!$slots.default" class="el-input__icon el-icon-circle-close kem-d52t-button-icon" @click.stop="click"></i>
+        <i
+          v-if="!$slots.default"
+          class="el-input__icon el-icon-circle-close kem-d52t-button-icon"
+          @click.stop="click"
+        ></i>
         <span v-else @click.stop="click">
-                   <slot></slot>
-
+          <slot></slot>
         </span>
-       </span>
-
+      </span>
     </KemInput>
   </div>
 </template>
@@ -25,20 +27,19 @@ export default {
   },
   methods: {
     focus() {
-       this.$emit('focus')
+      this.$emit('focus')
     },
     click() {
       this.$emit('click')
-
     },
   },
 }
 </script>
 
-<style lang="scss"  >
-.kem-d52t-button-icon{
+<style lang="scss">
+.kem-d52t-button-icon {
   cursor: pointer;
-  &:hover{
+  &:hover {
     color: #0f80ff;
   }
 }

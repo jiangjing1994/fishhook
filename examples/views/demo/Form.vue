@@ -5,19 +5,17 @@
       <KemForm
         ref="form"
         :form-items="formItems"
-         :data="form"
+        :data="form"
         :row-gutter="10"
         :form-rules="formRules"
         :form-config="{
-          labelPositon:'right'
+          labelPositon: 'right',
         }"
         :read-only="readOnly"
         label-suffix=" "
         @updataFormData="updataFormData"
       >
-        <template slot="labelSuffix">
-
-        </template>
+        <template slot="labelSuffix"> </template>
         <template slot="resource">
           <el-radio-group v-model="form.resource">
             <el-radio label="线上品牌商赞助"></el-radio>
@@ -33,7 +31,6 @@
         :read-only="readOnly"
         @updataFormData="updataFormData"
       >
-
         <template slot="resource">
           <el-radio-group v-model="form.resource">
             <el-radio label="线上品牌商赞助"></el-radio>
@@ -95,7 +92,7 @@ export default {
         ],
       },
       formItems: [
-        { label: '活动名称', prop: 'name', span: 8,  offset: 16, pull: 16, tip: 'sasa' },
+        { label: '活动名称', prop: 'name', span: 8, offset: 16, pull: 16, tip: 'sasa' },
         { label: '电子邮箱', prop: 'email', span: 8 },
         { label: '人员总数', prop: 'num', span: 8, component: 'KemInputNumber' },
         {

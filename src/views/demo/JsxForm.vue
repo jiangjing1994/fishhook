@@ -1,29 +1,25 @@
- <template>
-    <div></div>
+<template>
+  <div></div>
 </template>
 
- <script>
+<script>
 export default {
-    name: 'KemJsxForm',
-    props: {
-        propName: {
-            type: Number,
-            default: 0
-        },
+  name: 'KemJsxForm',
+  props: {
+    propName: {
+      type: Number,
+      default: 0,
     },
-    data() {
-        return {
-            value: ''
-        }
-    },
-    methods: {
-        name() {
-
-        }
-    },
+  },
+  data() {
+    return {
+      value: '',
+    }
+  },
+  methods: {
+    name() {},
+  },
 }
 </script>
 
- <style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

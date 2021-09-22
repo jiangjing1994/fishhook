@@ -1,7 +1,5 @@
 <template>
-  <el-col
-    :span="column.span || 12"
-  >
+  <el-col :span="column.span || 12">
     <el-form-item
       v-bind="$attrs"
       :prop="propPath"
@@ -13,47 +11,45 @@
       :inline-message="column.inlineMessage"
       :size="column.size"
       :class="[
-      'jsx-form-item',
-      formClass && formClass + '-item',
-      calcLabelPosition && `is-label-${calcLabelPosition}`,
-      column.class,
-    ]"
+        'jsx-form-item',
+        formClass && formClass + '-item',
+        calcLabelPosition && `is-label-${calcLabelPosition}`,
+        column.class,
+      ]"
       v-on="$listeners"
     >
       <template v-if="column.renderLabel" slot="label">
-      <span
-        :class="[
-          'jsx-form-item__label-wrap',
-          (column.required || isRequired) && 'is-required',
-        ]"
-        :style="labelStyle"
-      >
-        <render
-          :form="form"
-          :root-form="rootForm"
-          :render="column.renderLabel"
-          :scope="{ itemIndex }"
-        />
-      </span>
+        <span
+          :class="['jsx-form-item__label-wrap', (column.required || isRequired) && 'is-required']"
+          :style="labelStyle"
+        >
+          <render
+            :form="form"
+            :root-form="rootForm"
+            :render="column.renderLabel"
+            :scope="{ itemIndex }"
+          />
+        </span>
       </template>
 
-      <template v-if="!column.renderLabel && calcLabelWidth && {}.hasOwnProperty.call(column, 'label')" slot="label">
-      <span
-        :class="[
-          'jsx-form-item__label-wrap',
-          (column.required || isRequired) && 'is-required',
-        ]"
-        :style="labelStyle"
-      >{{ column.label }}:</span>
+      <template
+        v-if="!column.renderLabel && calcLabelWidth && {}.hasOwnProperty.call(column, 'label')"
+        slot="label"
+      >
+        <span
+          :class="['jsx-form-item__label-wrap', (column.required || isRequired) && 'is-required']"
+          :style="labelStyle"
+          >{{ column.label }}:</span
+        >
       </template>
 
       <section
         v-if="column.children"
         :class="[
-        'jsx-form-item__object',
-        formClass && formClass + '-item__object',
-        column.children && !column.children.length && 'is-empty',
-      ]"
+          'jsx-form-item__object',
+          formClass && formClass + '-item__object',
+          column.children && !column.children.length && 'is-empty',
+        ]"
       >
         <template v-if="column.layout">
           <el-row v-bind="column.layout">
@@ -99,10 +95,7 @@
 
       <section
         v-else-if="column.item"
-        :class="[
-        'jsx-form-item__array',
-        formClass && formClass + '-item__array',
-      ]"
+        :class="['jsx-form-item__array', formClass && formClass + '-item__array']"
       >
         <div v-for="(value, index) in form[column.prop]" :key="index" class="array-item">
           <div class="array-item__content">
@@ -135,16 +128,17 @@
         <div class="array-add" :class="[disabled && 'is-disabled']">
           <el-button
             :icon="
-            {}.hasOwnProperty.call(column, 'itemButtonIcon')
-              ? column.itemButtonIcon
-              : 'el-icon-plus'
-          "
+              {}.hasOwnProperty.call(column, 'itemButtonIcon')
+                ? column.itemButtonIcon
+                : 'el-icon-plus'
+            "
             :disabled="disabled"
             size="mini"
             type="primary"
             plain
             @click="handleAddItem"
-          >{{ column.itemButtonText }}</el-button>
+            >{{ column.itemButtonText }}</el-button
+          >
         </div>
       </section>
 
@@ -161,8 +155,6 @@
           v-bind="column.props"
           v-on="column.listeners"
         />
-
-
       </template>
 
       <template v-if="column.renderError" slot="error" slot-scope="scope">
@@ -174,19 +166,17 @@
             :scope="{ ...scope, itemIndex }"
           />
         </div>
-
       </template>
     </el-form-item>
-
   </el-col>
 </template>
 
 <script>
-import Render from "./Render";
-import { getPropByPath } from "./utils";
+import Render from './Render'
+import { getPropByPath } from './utils'
 
 export default {
-  name: "JsxFormItem",
+  name: 'JsxFormItem',
 
   components: { Render },
   props: {
@@ -204,7 +194,7 @@ export default {
     },
     emptyWords: {
       type: String,
-      default: "",
+      default: '',
     },
     arrayIndex: {
       type: Number,
@@ -212,15 +202,15 @@ export default {
     },
     parentFullProp: {
       type: String,
-      default: "",
+      default: '',
     },
     labelPosition: {
       type: String,
-      default: "",
+      default: '',
     },
     labelWidth: {
       type: String,
-      default: "",
+      default: '',
     },
     itemIndex: {
       type: Number,
@@ -238,65 +228,64 @@ export default {
   computed: {
     propPath() {
       if (!this.parentFullProp) {
-        return this.column.prop;
+        return this.column.prop
       }
-      return this.parentFullProp + "." + this.column.prop;
+      return this.parentFullProp + '.' + this.column.prop
     },
     formClass() {
-      return this.$jsxForm ? this.$jsxForm.formClass : "";
+      return this.$jsxForm ? this.$jsxForm.formClass : ''
     },
     calcLabelWidth() {
       // if (this.calcLabelPosition === 'top') {
       //   return 'auto';
       // }
-      return this.column.labelWidth || this.labelWidth;
+      return this.column.labelWidth || this.labelWidth
     },
     calcLabelPosition() {
-      return this.column.labelPosition || this.labelPosition || "top";
+      return this.column.labelPosition || this.labelPosition || 'top'
     },
     labelStyle() {
       return {
-        width: this.calcLabelWidth || "auto",
-        display: "inline-block",
-        textAlign: (["left", "right"].includes(this.calcLabelPosition) && this.calcLabelPosition) || "left",
-      };
+        width: this.calcLabelWidth || 'auto',
+        display: 'inline-block',
+        textAlign:
+          (['left', 'right'].includes(this.calcLabelPosition) && this.calcLabelPosition) || 'left',
+      }
     },
     isRequired() {
-      const rules = this.getRules();
-      let isRequired = false;
+      const rules = this.getRules()
+      let isRequired = false
 
       if (rules && rules.length) {
         rules.every((rule) => {
           if (rule.required) {
-            isRequired = true;
-            return false;
+            isRequired = true
+            return false
           }
-          return true;
-        });
+          return true
+        })
       }
-      return isRequired;
+      return isRequired
     },
   },
   watch: {
     column: {
       handler() {
-        this.setColumn();
+        this.setColumn()
       },
       immediate: true,
     },
   },
   methods: {
-
     getRules() {
-      let formRules = this.formRules;
-      const selfRules = this.column.rules;
-      const requiredRule =
-        this.column.required !== undefined ? { required: !!this.required } : [];
+      let formRules = this.formRules
+      const selfRules = this.column.rules
+      const requiredRule = this.column.required !== undefined ? { required: !!this.required } : []
 
-      const prop = getPropByPath(formRules, this.column.prop || "");
-      formRules = formRules ? prop.o[this.column.prop || ""] || prop.v : [];
+      const prop = getPropByPath(formRules, this.column.prop || '')
+      formRules = formRules ? prop.o[this.column.prop || ''] || prop.v : []
 
-      return [].concat(selfRules || formRules || []).concat(requiredRule);
+      return [].concat(selfRules || formRules || []).concat(requiredRule)
     },
 
     /**
@@ -305,16 +294,15 @@ export default {
     setColumn() {
       if (this.column.formatter) {
         this.column.render = (h, form, rootForm) => {
-          let value = this.column.formatter(form, rootForm);
+          let value = this.column.formatter(form, rootForm)
           if (!value && value !== 0) {
-            value = this.emptyWords;
+            value = this.emptyWords
           }
-          return <span class={[this.column.class]}>{value}</span>;
-        };
+          return <span class={[this.column.class]}>{value}</span>
+        }
       }
       if (this.column.component) {
-
-        let { component , prop, props, ...theArgs } = this.column
+        let { component, prop, props, ...theArgs } = this.column
         if (typeof props === 'function') {
           props = props(this.form)
         }
@@ -330,14 +318,14 @@ export default {
           if (this.column.prop) {
             let value =
               (this.$attrs.value && this.$attrs.value[this.column.prop]) ||
-              (form && form[this.column.prop]);
+              (form && form[this.column.prop])
             if (!value && value !== 0) {
-              value = this.emptyWords;
+              value = this.emptyWords
             }
-            return <span class={[this.column.class]}>{value}</span>;
+            return <span class={[this.column.class]}>{value}</span>
           }
-          return <span>{this.emptyWords}</span>;
-        };
+          return <span>{this.emptyWords}</span>
+        }
       }
     },
 
@@ -345,7 +333,7 @@ export default {
      * 获取上一级的完整prop路径
      */
     getParentPropForArray(idx) {
-      return `${this.propPath}.${idx}`;
+      return `${this.propPath}.${idx}`
     },
 
     /**
@@ -353,44 +341,44 @@ export default {
      */
     _getNewArrayItem(obj, column) {
       column.forEach((it) => {
-        if (Object.prototype.hasOwnProperty.call(it, "children")) {
-          obj[it.prop] = {};
-          this._getNewArrayItem(obj[it.prop], it.children);
-        } else if (Object.prototype.hasOwnProperty.call(it, "item")) {
-          obj[it.prop] = [];
+        if (Object.prototype.hasOwnProperty.call(it, 'children')) {
+          obj[it.prop] = {}
+          this._getNewArrayItem(obj[it.prop], it.children)
+        } else if (Object.prototype.hasOwnProperty.call(it, 'item')) {
+          obj[it.prop] = []
         } else {
-          obj[it.prop] = {}.hasOwnProperty.call(it, "value") ? it.value : undefined;
+          obj[it.prop] = {}.hasOwnProperty.call(it, 'value') ? it.value : undefined
         }
-      });
-      return obj;
+      })
+      return obj
     },
 
     /**
      * 数组新增元素
      */
     handleAddItem() {
-      let item = {};
-      const column = this.column.item(this.form, this.rootForm);
-      item = this._getNewArrayItem(item, column);
-      this.form[this.column.prop].push(item);
+      let item = {}
+      const column = this.column.item(this.form, this.rootForm)
+      item = this._getNewArrayItem(item, column)
+      this.form[this.column.prop].push(item)
     },
 
     /**
      * 数组删除元素
      */
     handleDeleteItem(idx) {
-      this.form[this.column.prop].splice(idx, 1);
+      this.form[this.column.prop].splice(idx, 1)
     },
 
     getColSpan(col) {
-      const defaultSpan = Math.floor(24 / this.column.children.length);
+      const defaultSpan = Math.floor(24 / this.column.children.length)
       if (col.layout && col.layout.span) {
-        return col.layout.span;
+        return col.layout.span
       }
-      return defaultSpan;
-    }
+      return defaultSpan
+    },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -480,14 +468,13 @@ export default {
       display: flex;
       flex-direction: row;
       ::v-deep .el-form-item__label {
-
-        .jsx-form-item__label-wrap{
+        .jsx-form-item__label-wrap {
           font-weight: bold;
           font-size: 12px;
           padding: 0 10px 0 0;
         }
         .jsx-form-item__label-wrap.is-required::before {
-          content: "*";
+          content: '*';
           color: #f56c6c;
           margin-right: 4px;
         }

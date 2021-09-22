@@ -8,41 +8,37 @@
         :form-items="formItems"
         :form-rules="formRules"
         :form-config="{
-          labelPositon:'right'
+          labelPositon: 'right',
         }"
-         @input="aa"
+        @input="aa"
       >
       </KemForm>
     </KemPageCard>
-
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'Form2',
   data() {
-    return{
-      form:{
-        legendVisible:true,
+    return {
+      form: {
+        legendVisible: true,
         legend: {
-          type:'plain'
-        }
+          type: 'plain',
+        },
       },
-      form2:  {
-        "legendVisible": true,
-        "legend.type": "plain"
+      form2: {
+        legendVisible: true,
+        'legend.type': 'plain',
       },
       formRules: {
-         'legend.type': [
-          { required: true, message: '请输入邮箱地址', trigger: 'change' },
-         ],
+        'legend.type': [{ required: true, message: '请输入邮箱地址', trigger: 'change' }],
       },
 
       formItems: [
-        { label: "禁用", prop: "legendVisible", span: 24, component: "el-switch" },
-/*
+        { label: '禁用', prop: 'legendVisible', span: 24, component: 'el-switch' },
+        /*
         {
           label: "icon",
           prop: "legend.icon",
@@ -63,30 +59,27 @@ export default {
         },
 */
         {
-          label: "图例的类型",
-          prop: "legend.type",
+          label: '图例的类型',
+          prop: 'legend.type',
           span: 24,
-          component: "KemSelect",
+          component: 'KemSelect',
           props: {
             options: [
-              { label: "plain", value: "plain" },
-              { label: "scroll", value: "scroll" },
-
-
+              { label: 'plain', value: 'plain' },
+              { label: 'scroll', value: 'scroll' },
             ],
           },
         },
       ],
-
     }
   },
   methods: {
     aa(a) {
       console.log(a)
       //this.form= a
-    }
+    },
   },
- }
+}
 </script>
 
 <style scoped></style>

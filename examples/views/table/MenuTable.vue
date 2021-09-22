@@ -56,7 +56,7 @@ export default {
     }
   },
   methods: {
-    selectionChange(v){
+    selectionChange(v) {
       console.log(v)
     },
     result(res) {

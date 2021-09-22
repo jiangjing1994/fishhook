@@ -1,12 +1,12 @@
 <template>
-  <div style="text-align: left;height: 400px">
+  <div style="text-align: left; height: 400px">
     <pre>{{ value }}</pre>
     <KemTransfer
-        v-model="value"
-        :data="data"
-        :render-content="renderContent"
-        :selected-panel="selectedPanel"
-        :not-selected-panel="notSelectedPanel"
+      v-model="value"
+      :data="data"
+      :render-content="renderContent"
+      :selected-panel="selectedPanel"
+      :not-selected-panel="notSelectedPanel"
     ></KemTransfer>
     <!--    <el-transfer v-model="value" :data="data"></el-transfer>-->
   </div>
@@ -37,23 +37,23 @@ export default {
     return {
       data: generateData(),
       value: [1, 4],
-      selectedPanel:{
+      selectedPanel: {
         label: '已选字段',
-        count:true,
-        countStyle:{
-          background:' rgba(82, 196, 26, .1)',
-          color:' rgba(82, 196, 26,1)'
+        count: true,
+        countStyle: {
+          background: ' rgba(82, 196, 26, .1)',
+          color: ' rgba(82, 196, 26,1)',
         },
-        labelStyle:{},
+        labelStyle: {},
       },
-      notSelectedPanel:{
+      notSelectedPanel: {
         label: '可选字段',
-        count:true,
-        countStyle:{
-          background:' rgba(255, 153, 0, .1)',
-          color:' rgba(255, 153, 0,1)'
+        count: true,
+        countStyle: {
+          background: ' rgba(255, 153, 0, .1)',
+          color: ' rgba(255, 153, 0,1)',
         },
-        labelStyle:{},
+        labelStyle: {},
       },
     }
   },
@@ -63,28 +63,36 @@ export default {
     //     click(option)
     //   }}>{ option.key } - { option.label }sdsd</span>;
     // }
-    renderContent(h, option,click) {
+    renderContent(h, option, click) {
       let flage = 1
-      if(this.value.indexOf(option.key)===-1){
-        flage  = 0
+      if (this.value.indexOf(option.key) === -1) {
+        flage = 0
       }
-      return  <div class="transfer-row" >
-        <div>
-          <span class="icon">stripe</span>
-          <span class="title">{ option.label }</span>
+      return (
+        <div class="transfer-row">
+          <div>
+            <span class="icon">stripe</span>
+            <span class="title">{option.label}</span>
+          </div>
+          <div
+            class="btn"
+            onClick={() => {
+              console.log(this.value)
+              click(option)
+            }}
+          >
+            {' '}
+            {flage === 0 ? '+' : '-'}
+          </div>
         </div>
-        <div class ="btn" onClick={()=>{
-          console.log(this.value )
-          click(option)
-        }}> {flage===0?'+':'-'}</div>
-      </div>;
-    }
+      )
+    },
   },
 }
 </script>
 
 <style lang="scss">
-.transfer-row{
+.transfer-row {
   height: 30px;
   line-height: 30px;
   font-size: 14px;
@@ -94,10 +102,10 @@ export default {
   align-items: center;
   width: 100%;
   padding: 0 15px;
-  &:hover{
+  &:hover {
     background: rgba(0, 122, 255, 0.05);
   }
-  >div .icon{
+  > div .icon {
     color: rgba(0, 122, 255, 1);
     font-size: 12px;
     height: 20px;
@@ -106,22 +114,17 @@ export default {
     background: rgba(0, 122, 255, 0.05);
     // background-color: rebeccapurple;
     border-radius: 4px;
-    padding: 0  5px;
+    padding: 0 5px;
     margin-right: 5px;
   }
-  >.btn{
+  > .btn {
     height: 100%;
     padding: 0 10px;
     color: rgba(0, 0, 0, 0.45);
-    &:hover{
+    &:hover {
       color: rgba(0, 122, 255, 1);
       cursor: pointer;
-
     }
-
   }
-
-
 }
-
 </style>

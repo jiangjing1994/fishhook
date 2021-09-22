@@ -39,29 +39,26 @@
             </div>
             <el-form-item v-if="labelType === 'default'" :prop="item.prop">
               <span slot="label" style="padding-right: 10px" :style="formLabelStyle">
-                       <render-content
-                         v-if="item.labelRender"
-                          :render="item.labelRender"
-                         :data="item"
-                       />
-              <span v-else >
-                {{ item.label }}
-                <el-tooltip
-                  v-if="item.tip && item.tipType !== 'alert'"
-                  effect="dark"
-                  placement="bottom"
-                >
-                  <template slot="content">
-                    <pre>{{ item.tip }}</pre>
-                  </template>
-                  <i class="el-icon el-icon-info" style="cursor: pointer"></i> : </el-tooltip>
-                <!-- @slot suffix	label尾部内容  -->
-                <span v-if="$slots.labelSuffix || formLabelSuffix" >
-                  <slot name="labelSuffix" >
+                <render-content v-if="item.labelRender" :render="item.labelRender" :data="item" />
+                <span v-else>
+                  {{ item.label }}
+                  <el-tooltip
+                    v-if="item.tip && item.tipType !== 'alert'"
+                    effect="dark"
+                    placement="bottom"
+                  >
+                    <template slot="content">
+                      <pre>{{ item.tip }}</pre>
+                    </template>
+                    <i class="el-icon el-icon-info" style="cursor: pointer"></i> :
+                  </el-tooltip>
+                  <!-- @slot suffix	label尾部内容  -->
+                  <span v-if="$slots.labelSuffix || formLabelSuffix">
+                    <slot name="labelSuffix">
                       {{ formLabelSuffix }}
-                  </slot>
+                    </slot>
+                  </span>
                 </span>
-              </span>
               </span>
 
               <slot :name="item.slot" v-bind="{ item }">
@@ -77,7 +74,7 @@
                 <span v-else>{{ data[item.prop] }}</span>
               </slot>
             </el-form-item>
-            <div v-else class="label-text-none" >
+            <div v-else class="label-text-none">
               <slot :name="item.slot" v-bind="{ item }">
                 <component
                   :is="item.component"
@@ -128,7 +125,7 @@
 </template>
 
 <script lang="jsx">
-import {cloneDeep, debounce} from '../../utils'
+import { cloneDeep, debounce } from '../../utils'
 import FormItem from './FormItem'
 
 // element UI 组件
@@ -236,7 +233,6 @@ export default {
     },
     labelStyle: {
       type: Object,
-
     },
   },
   data() {
@@ -268,7 +264,7 @@ export default {
       return this.computedItems.reduce((total, item) => {
         if (item.rules) {
           let rules = item.rules
-          if (typeof rules==='function') {
+          if (typeof rules === 'function') {
             rules = rules(this.data)
           }
           total[item.prop] = rules
@@ -449,7 +445,7 @@ export default {
     border-bottom: 1px solid #eee;
   }
 
-  .label-text-none{
+  .label-text-none {
     margin-bottom: 14px;
   }
   .el-form-item__label {

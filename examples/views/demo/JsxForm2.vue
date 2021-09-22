@@ -7,11 +7,11 @@
       <KemForm
         ref="form"
         :form-items="formItems"
-         :model="form"
+        :model="form"
         :row-gutter="10"
         :form-rules="formRules"
         :form-config="{
-          labelPositon:'right'
+          labelPositon: 'right',
         }"
         :read-only="readOnly"
         @updataFormData="updataFormData"
@@ -26,11 +26,11 @@
       <JsxForm
         ref="form"
         :form-items="formItems"
-         :model="form"
+        :model="form"
         :row-gutter="10"
         :form-rules="formRules"
         :form-config="{
-          labelPositon:'right'
+          labelPositon: 'right',
         }"
         :read-only="readOnly"
         @updataFormData="updataFormData"
@@ -49,17 +49,16 @@
         <KemButton @click="submitForm">提交</KemButton>
       </div>
     </KemPageCard>
-
-   </div>
+  </div>
 </template>
 
 <script>
- export default {
+export default {
   name: 'JsxForm2',
   data() {
     return {
       form: {
-        name:'123'
+        name: '123',
       },
       readOnly: false,
       formRules: {
@@ -70,8 +69,8 @@
         ],
       },
       formItems: [
-        { label: '活动名称', prop: 'name',   tip: 'sasa' },
-        { label: '电子邮箱', prop: 'email', span: 12 ,component: 'KemInput' },
+        { label: '活动名称', prop: 'name', tip: 'sasa' },
+        { label: '电子邮箱', prop: 'email', span: 12, component: 'KemInput' },
         { label: '人员总数', prop: 'num', span: 12, component: 'KemInputNumber' },
         {
           label: 'lalalal',
@@ -173,7 +172,6 @@
         // },
         // { label: '特殊资源', prop: 'resource', slot: 'resource', span: 24 },
       ],
-
     }
   },
   methods: {

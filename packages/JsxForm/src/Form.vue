@@ -12,7 +12,6 @@
 
     <el-row class="fomr_item_body" :gutter="computedRowGutter">
       <template v-for="(item, idx) in column">
-
         <jsx-form-item
           v-if="!item.show || item.show(model, model, -1)"
           :key="getItemKey(item, idx)"
@@ -27,14 +26,12 @@
           :disabled="disabled"
         />
       </template>
-
     </el-row>
-
   </el-form>
 </template>
 
 <script>
-import JsxFormItem from './FormItem';
+import JsxFormItem from './FormItem'
 
 export default {
   name: 'JsxForm',
@@ -67,30 +64,30 @@ export default {
 
     model: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
 
     emptyText: {
       type: String,
-      default: ''
+      default: '',
     },
 
     labelPosition: {
       type: String,
-      default: ''
+      default: '',
     },
     labelWidth: {
       type: String,
-      default: ''
+      default: '',
     },
     rules: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     disabled: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   computed: {
     computedConfig() {
@@ -105,7 +102,7 @@ export default {
     computedFormRules() {
       return this.formRules
     },
-    column(){
+    column() {
       let formItems = this.formItems
 
       if (typeof formItems === 'function') {
@@ -116,30 +113,30 @@ export default {
     },
 
     emptyWords() {
-      return this.emptyText || (this.$jsxForm && this.$jsxForm.emptyText) || '';
+      return this.emptyText || (this.$jsxForm && this.$jsxForm.emptyText) || ''
     },
     formClass() {
-      return this.$jsxForm ? this.$jsxForm.formClass : '';
-    }
+      return this.$jsxForm ? this.$jsxForm.formClass : ''
+    },
   },
   methods: {
     getItemKey(item, index) {
       return `${item.prop}-${index}`
     },
     validate(cb) {
-      this.$refs.elForm.validate(cb);
+      this.$refs.elForm.validate(cb)
     },
     validateField(props, cb) {
-      this.$refs.elForm.validateField(props, cb);
+      this.$refs.elForm.validateField(props, cb)
     },
     resetFields() {
-      this.$refs.elForm.resetFields();
+      this.$refs.elForm.resetFields()
     },
     clearValidate(props) {
-      this.$refs.elForm.clearValidate(props);
-    }
-  }
-};
+      this.$refs.elForm.clearValidate(props)
+    },
+  },
+}
 </script>
 
 <style lang="scss">
@@ -159,7 +156,5 @@ export default {
       display: flex;
     }
   }
-
 }
-
 </style>

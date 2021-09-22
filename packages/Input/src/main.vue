@@ -1,28 +1,29 @@
-
 <template>
-    <div>
-      <KemLabelText v-if="uiType ==='text'" :value="label"></KemLabelText>
-      <el-input v-else v-bind="$attrs" :placeholder="placeholder" :clearable="inputClearable" v-on="evet">
-        <!-- @slot prefix	输入框头部内容，只对 type="text" 有效 -->
-        <slot slot="prefix" name="prefix"/>
+  <div>
+    <KemLabelText v-if="uiType === 'text'" :value="label"></KemLabelText>
+    <el-input
+      v-else
+      v-bind="$attrs"
+      :placeholder="placeholder"
+      :clearable="inputClearable"
+      v-on="evet"
+    >
+      <!-- @slot prefix	输入框头部内容，只对 type="text" 有效 -->
+      <slot slot="prefix" name="prefix" />
 
-        <!-- @slot suffix	输入框尾部内容，只对 type="text" 有效 -->
-        <slot slot="suffix" name="suffix"/>
+      <!-- @slot suffix	输入框尾部内容，只对 type="text" 有效 -->
+      <slot slot="suffix" name="suffix" />
 
-        <!-- @slot prepend	输入框前置内容，只对 type="text" 有效 -->
-        <slot slot="prepend" name="prepend"/>
+      <!-- @slot prepend	输入框前置内容，只对 type="text" 有效 -->
+      <slot slot="prepend" name="prepend" />
 
-        <!-- @slot append	输入框后置内容，只对 type="text" 有效 -->
-        <slot slot="append" name="append"/>
-      </el-input>
-    </div>
-
-
-
-
+      <!-- @slot append	输入框后置内容，只对 type="text" 有效 -->
+      <slot slot="append" name="append" />
+    </el-input>
+  </div>
 </template>
 <script>
-import {isExitsVariable} from "../../utils";
+import { isExitsVariable } from '../../utils'
 
 /**
  * @displayName Input 输入框
@@ -42,14 +43,14 @@ export default {
     /**
      * 清空 $MIMI.Input
      */
-     clearable: {
+    clearable: {
       type: Boolean,
-      default:undefined
+      default: undefined,
     },
   },
   computed: {
     inputClearable() {
-      return  isExitsVariable(this.clearable) ? this.clearable : this.$MIMI.Input.clearable
+      return isExitsVariable(this.clearable) ? this.clearable : this.$MIMI.Input.clearable
     },
     evet() {
       return this.$listeners

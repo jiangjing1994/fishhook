@@ -8,7 +8,6 @@
     :rules="computedFormRules || rules"
     :model="computedData"
   >
-
     <pre>
       {{ computedData }}
     </pre>
@@ -53,7 +52,8 @@
                   <template slot="content">
                     <pre>{{ item.tip }}</pre>
                   </template>
-                  <i class="el-icon el-icon-info" style="cursor: pointer"></i> : </el-tooltip>：
+                  <i class="el-icon el-icon-info" style="cursor: pointer"></i> : </el-tooltip
+                >：
               </span>
               <slot :name="item.slot" v-bind="{ item }">
                 <component
@@ -68,7 +68,7 @@
                 <span v-else>{{ computedData[item.prop] }}</span>
               </slot>
             </el-form-item>
-            <div v-else style="margin-bottom: 14px;">
+            <div v-else style="margin-bottom: 14px">
               <slot :name="item.slot" v-bind="{ item }">
                 <component
                   :is="item.component"
@@ -119,7 +119,7 @@
 </template>
 
 <script lang="jsx">
-import {cloneDeep, debounce,single ,set} from '../../utils'
+import { cloneDeep, debounce, single, set } from '../../utils'
 import FormItem from './FormItem'
 
 // element UI 组件
@@ -218,7 +218,6 @@ export default {
       default: false,
     },
 
-
     /**
      * 表单组
      */
@@ -257,7 +256,7 @@ export default {
       return this.computedItems.reduce((total, item) => {
         if (item.rules) {
           let rules = item.rules
-          if (typeof rules==='function') {
+          if (typeof rules === 'function') {
             rules = rules(this.computedData)
           }
           total[item.prop] = rules
@@ -301,13 +300,11 @@ export default {
     computedFormRules() {
       const formRules = cloneDeep(this.formRules)
       let obj = {}
-      for(let key  in formRules){
-        obj[key.replace(".", "_")] = formRules[key]
+      for (let key in formRules) {
+        obj[key.replace('.', '_')] = formRules[key]
       }
       return obj
     },
-
-
   },
 
   watch: {
@@ -325,10 +322,9 @@ export default {
         console.log(value)
         let a = {}
         for (const i in value) {
-          set( a,i,value[i])
+          set(a, i, value[i])
         }
-        this.$emit('input',a)
-
+        this.$emit('input', a)
       },
       deep: true,
       immediate: false,
@@ -349,9 +345,8 @@ export default {
     },
   },
   created() {
-    this.computedData =  single('',  cloneDeep(this.data))
+    this.computedData = single('', cloneDeep(this.data))
     this.getComputedItems()
-
   },
   methods: {
     getComputedItems() {
@@ -367,7 +362,7 @@ export default {
           for (const item of initialFormItems) {
             // 剩余参数语法允许我们将一个不定数量的参数表示为一个数组。theArgs
             let { component = 'KemInput', showIf, prop, props, ...theArgs } = item
-            if (prop) prop = prop.replace(".", "_")
+            if (prop) prop = prop.replace('.', '_')
 
             let isShow = true
             if (typeof showIf === 'function' && !showIf(this.computedData)) {

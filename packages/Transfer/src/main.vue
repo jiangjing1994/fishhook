@@ -1,48 +1,48 @@
 <template>
   <div class="kem-transfer_body" :style="transferStyle">
-
     <div class="filter_body">
       <KemInput
-          v-model="query"
-          style="margin-bottom: 10px"
-          @mouseenter.native="inputHover = true"
-          @mouseleave.native="inputHover = false"
+        v-model="query"
+        style="margin-bottom: 10px"
+        @mouseenter.native="inputHover = true"
+        @mouseleave.native="inputHover = false"
       >
-        <i slot="prefix" :class="['el-input__icon', 'el-icon-' + inputIcon]" @click="clearQuery"></i>
+        <i
+          slot="prefix"
+          :class="['el-input__icon', 'el-icon-' + inputIcon]"
+          @click="clearQuery"
+        ></i>
       </KemInput>
     </div>
-    <div class="conten_body" >
+    <div class="conten_body">
       <transfer-panel
-          ref="rightPanel"
-          v-bind="$props"
-          :data="targetData"
-          :selected="true"
-          :default-checked="rightDefaultChecked"
-          :placeholder="filterPlaceholder || t('el.transfer.filterPlaceholder')"
-          :render-content="renderContent"
-          :panel-config="selectedPanel"
-          @checked-change="onTargetCheckedChange"
-          @clickTag="addToLeft"
+        ref="rightPanel"
+        v-bind="$props"
+        :data="targetData"
+        :selected="true"
+        :default-checked="rightDefaultChecked"
+        :placeholder="filterPlaceholder || t('el.transfer.filterPlaceholder')"
+        :render-content="renderContent"
+        :panel-config="selectedPanel"
+        @checked-change="onTargetCheckedChange"
+        @clickTag="addToLeft"
       >
       </transfer-panel>
 
       <transfer-panel
-          ref="leftPanel"
-          v-bind="$props"
-          :data="sourceData"
-          :selected="false"
-
-          :panel-config="notSelectedPanel"
-          :default-checked="leftDefaultChecked"
-          :placeholder="filterPlaceholder || t('el.transfer.filterPlaceholder')"
-          :render-content="renderContent"
-
-          @checked-change="onSourceCheckedChange"
-          @clickTag="addToRight"
+        ref="leftPanel"
+        v-bind="$props"
+        :data="sourceData"
+        :selected="false"
+        :panel-config="notSelectedPanel"
+        :default-checked="leftDefaultChecked"
+        :placeholder="filterPlaceholder || t('el.transfer.filterPlaceholder')"
+        :render-content="renderContent"
+        @checked-change="onSourceCheckedChange"
+        @clickTag="addToRight"
       >
       </transfer-panel>
     </div>
-
   </div>
 </template>
 
@@ -68,9 +68,9 @@ export default {
     /** 穿梭框高度
      * @values 100%, 300px,
      */
-    height:{
-      type:[String,Number],
-      default:'100%'
+    height: {
+      type: [String, Number],
+      default: '100%',
     },
 
     /** 面板配置左
@@ -79,17 +79,16 @@ export default {
      * @param {boolean} countStyle 基数区域样式
      * @param {boolean} labelStyle 标签区域样式
      */
-    selectedPanel:{
-      type:Object,
-      default:()=>{
-        return{
+    selectedPanel: {
+      type: Object,
+      default: () => {
+        return {
           label: '已选字段',
-          count:true,
-          countStyle:{},
-          labelStyle:{},
-
+          count: true,
+          countStyle: {},
+          labelStyle: {},
         }
-      }
+      },
     },
     /** 面板配置左
      * @param {string} label 标签名
@@ -97,17 +96,16 @@ export default {
      * @param {boolean} countStyle 基数区域样式
      * @param {boolean} labelStyle 标签区域样式
      */
-    notSelectedPanel:{
-      type:Object,
-      default:()=>{
-        return{
+    notSelectedPanel: {
+      type: Object,
+      default: () => {
+        return {
           label: '可选字段',
-          count:true,
-          countStyle:{},
-          labelStyle:{},
-
+          count: true,
+          countStyle: {},
+          labelStyle: {},
         }
-      }
+      },
     },
     data: {
       type: Array,
@@ -184,8 +182,8 @@ export default {
   },
   computed: {
     transferStyle() {
-      return{
-        height: this.height
+      return {
+        height: this.height,
       }
     },
 
@@ -225,7 +223,6 @@ export default {
     query(val) {
       this.$refs.leftPanel.query = val
       this.$refs.rightPanel.query = val
-
     },
     value(val) {
       this.dispatch('ElFormItem', 'el.form.change', val)
@@ -276,9 +273,9 @@ export default {
         }
       })
       currentValue =
-          this.targetOrder === 'unshift'
-              ? itemsToBeMoved.concat(currentValue)
-              : currentValue.concat(itemsToBeMoved)
+        this.targetOrder === 'unshift'
+          ? itemsToBeMoved.concat(currentValue)
+          : currentValue.concat(itemsToBeMoved)
       this.$emit('input', currentValue)
       this.$emit('change', currentValue, 'right', this.leftChecked)
     },
@@ -292,22 +289,20 @@ export default {
 </script>
 
 <style lang="scss">
-.kem-transfer_body{
+.kem-transfer_body {
   position: relative;
-  .filter_body{
+  .filter_body {
     position: absolute;
     width: 100%;
     background-color: #ffffff;
     z-index: 1;
   }
-  .conten_body{
+  .conten_body {
     overflow: auto;
     position: absolute;
     width: 100%;
     height: 100%;
     padding-top: 40px;
-
   }
 }
-
 </style>
