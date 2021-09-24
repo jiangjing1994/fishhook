@@ -1,6 +1,10 @@
 <template>
   <div @click="focus">
-    <KemInput v-model="value" readonly @click.stop="focus">
+    <el-link v-if="uiType === 'text'">
+      <KemLabelText :value="value" />
+    </el-link>
+
+    <KemInput v-else v-model="value" readonly @click.stop="focus">
       <span slot="suffix">
         <i
           v-if="!$slots.default"
@@ -21,7 +25,19 @@
  */
 export default {
   name: 'KemD52tButton',
-  props: ['value'],
+  props: {
+    /**
+     * ui类型
+     * @values normal , text
+     */
+    uiType: {
+      type: String,
+      default: 'normal',
+    },
+    value: {
+      type: String,
+    },
+  },
   data() {
     return {}
   },

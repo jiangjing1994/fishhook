@@ -22,7 +22,7 @@ Vue.use(KemUI, {
     isShowIndex: false,
     isShowStripe: false,
     isShowBorder: false,
-    isShowHeader: false,
+    // isShowHeader: false,
     indexLabel: '序 号',
     mergeOption: {
       indexWidth: 100,

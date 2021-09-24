@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div style="text-align: left">
     <KemD52tButton value="123" @focus="focus" @click="click"></KemD52tButton>
     <KemD52tButton value="123" @focus="focus" @click="click">111</KemD52tButton>
+    <KemD52tButton ui-type="text" value="123" @focus="focus" @click="click">111</KemD52tButton>
   </div>
 </template>
 

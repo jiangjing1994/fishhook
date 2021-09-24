@@ -700,13 +700,13 @@ export default {
       handler() {
         if (this.waitRefresh) {
           this.timer = setInterval(() => {
-            this.renderTable()
+            this.getListData()
           }, this.waitRefresh)
         } else {
           if (this.timer) {
             clearTimeout(this.timer)
           }
-          this.renderTable()
+          this.getListData()
         }
       },
       immediate: true,

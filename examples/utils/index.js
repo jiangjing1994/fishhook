@@ -766,18 +766,29 @@ export const queryList = (params = {}) => {
 }
 
 function goPage(params, data) {
+  const { appendcolumnNumber } = params
+  data = data.map((item) => {
+    const object = {}
+    for (let i = 1; i < appendcolumnNumber + 1; i++) {
+      object['prop' + i] = i + Mock.mock('@title(1, 3)')
+    }
+    return Mock.mock({
+      sj: '@integer(300, 5000)',
+      ...object,
+      ...item,
+    })
+  })
   const { pageNo = 1, pageSize = 10 } = params
   const start = (pageNo - 1) * pageSize
   return data.slice(start, start + pageSize)
 }
 
 export const queryList2 = (params = {}) => {
-  const { type } = params
   return new Promise((resolve) => {
     const data = goPage(params, obj)
-    setTimeout(() => {
-      console.log(params)
+    console.log(data)
 
+    setTimeout(() => {
       resolve({
         data: data,
         msg: '查询成功',

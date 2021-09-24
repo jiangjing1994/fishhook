@@ -62,10 +62,8 @@
   </el-row>
 </template>
 <script>
-import KemInputTree from '../../../packages/SelectTree/src/main'
 export default {
   name: 'SelectTree',
-  components: { KemInputTree },
   data() {
     return {
       form: '',

@@ -1,14 +1,19 @@
-<template lang="pug">
-    el-input-number(
-        v-bind="$attrs"
-        v-on="evet"
-        class="kem-input-number__body"
-        :controls-position="controlsPosition"
-        :controls='controls'
-        :precision='precision'
-        :step='step'
-        style='width:100%;'
-        :placeholder="placeholder")
+<template>
+  <div>
+    <KemLabelText v-if="uiType === 'text'" :value="$attrs.value" />
+    <el-input-number
+      v-else
+      v-bind="$attrs"
+      class="kem-input-number__body"
+      :controls-position="controlsPosition"
+      :controls="controls"
+      :precision="precision"
+      :step="step"
+      style="width: 100%"
+      :placeholder="placeholder"
+      v-on="evet"
+    ></el-input-number>
+  </div>
 </template>
 <script>
 /**
@@ -17,6 +22,14 @@
 export default {
   name: 'KemInputNumber',
   props: {
+    /**
+     * ui类型
+     * @values normal , text
+     */
+    uiType: {
+      type: String,
+      default: 'normal',
+    },
     placeholder: {
       type: String,
       default: '请输入数字',

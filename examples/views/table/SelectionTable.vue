@@ -16,6 +16,7 @@
       :request="request"
       :result="result"
       :default-params="defaultParams"
+      :reserve-selection="true"
       :menu-width="250"
       :selection="true"
       row-key="organize_id"
