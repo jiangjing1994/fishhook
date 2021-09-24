@@ -6,7 +6,7 @@
 </template>
 <script>
 export default {
-  name: 'SelectTree',
+  name: 'InputTree',
 }
 </script>
 ```

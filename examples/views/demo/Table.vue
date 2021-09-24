@@ -23,6 +23,10 @@
       <!--定时刷新滴表格 数据是异步的-->
       <WaitRefreshTable></WaitRefreshTable>
     </KemPageCard>
+    <KemPageCard header="动态列表格">
+      <!--动态列表格 数据是异步的-->
+      <AsyncColumnTable></AsyncColumnTable>
+    </KemPageCard>
   </div>
 </template>
 
@@ -33,6 +37,7 @@ import MenuTable from '../table/MenuTable'
 import SerachTable from '../table/SerachTable'
 import SelectionTable from '../table/SelectionTable'
 import WaitRefreshTable from '../table/WaitRefreshTable'
+import AsyncColumnTable from '../table/AsyncColumnTable'
 export default {
   name: 'Table',
   components: {
@@ -42,6 +47,7 @@ export default {
     SerachTable,
     SelectionTable,
     WaitRefreshTable,
+    AsyncColumnTable,
   },
 }
 </script>
