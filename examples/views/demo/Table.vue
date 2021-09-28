@@ -27,6 +27,10 @@
       <!--动态列表格 数据是异步的-->
       <AsyncColumnTable></AsyncColumnTable>
     </KemPageCard>
+    <KemPageCard header="自定义表头">
+      <!--自定义表头-->
+      <HeaderColumnTable></HeaderColumnTable>
+    </KemPageCard>
   </div>
 </template>
 
@@ -38,6 +42,7 @@ import SerachTable from '../table/SerachTable'
 import SelectionTable from '../table/SelectionTable'
 import WaitRefreshTable from '../table/WaitRefreshTable'
 import AsyncColumnTable from '../table/AsyncColumnTable'
+import HeaderColumnTable from '../table/HeaderColumnTable'
 export default {
   name: 'Table',
   components: {
@@ -48,6 +53,7 @@ export default {
     SelectionTable,
     WaitRefreshTable,
     AsyncColumnTable,
+    HeaderColumnTable,
   },
 }
 </script>

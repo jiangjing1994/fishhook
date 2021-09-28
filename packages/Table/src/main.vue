@@ -54,6 +54,16 @@
       @expand-change="expandChanges"
       @selection-change="selectionChange"
     >
+      <!--      <template slot="typeHeader" slot-scope="{ column }">-->
+      <!--        <el-tag>{{ (column || {}).label }}-{{ (column || {}).prop }}</el-tag>-->
+      <!--      </template>-->
+      <template
+        v-for="(item, key) in headerColumn"
+        :slot="item.prop + 'Header'"
+        slot-scope="{ column }"
+      >
+        <slot :name="item.prop + 'Header'" :column="column"></slot>
+      </template>
       <template v-for="(item, key) in computedOption.column" :slot="item.prop" slot-scope="scope">
         <!--开发中-->
         <render-content
@@ -548,6 +558,11 @@ export default {
     },
     tableMergeOption() {
       return this.mergeOption || this.$MIMI.Table.mergeOption
+    },
+
+    headerColumn() {
+      const column = this.computedOption.column ?? []
+      return column.filter((item) => item.headerslot)
     },
 
     computedOption() {
