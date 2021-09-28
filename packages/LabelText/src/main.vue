@@ -1,5 +1,5 @@
 <template>
-  <span style="padding: 0 8px; font-size: 0.95em">
+  <span class="kem-label-text">
     {{ value }}
   </span>
 </template>
@@ -24,4 +24,9 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style>
+.kem-label-text {
+  padding: 0 8px;
+  font-size: 0.95em;
+}
+</style>

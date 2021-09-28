@@ -163,6 +163,11 @@ const install = function (Vue, opts = {}) {
     Tag: {
       size: opts.Tag?.size || size,
     },
+    LabelText: {
+      labelStyle: {
+        ...opts['LabelText']?.labelStyle,
+      },
+    },
     Tree: {
       arrow: opts.tree ? (opts.tree.arrow ? opts.tree.arrow : '') : '',
       customArrow: opts.tree ? (opts.tree.customArrow ? opts.tree.customArrow : '') : '',
