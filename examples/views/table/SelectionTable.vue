@@ -8,7 +8,14 @@
       :page.sync="page1"
       @size-change="sizeChange"
       @current-change="currentChange"
-    ></avue-crud>
+    >
+      <template slot="nameHeader" slot-scope="{ column }">
+        <el-tag>{{ (column || {}).label }}-{{ (column || {}).prop }}</el-tag>
+      </template>
+      <template slot="sexHeader" slot-scope="{ column }">
+        <el-tag>{{ (column || {}).label }}-{{ (column || {}).prop }}</el-tag>
+      </template>
+    </avue-crud>
     <KemTable
       ref="multipleTable"
       :column="column"
@@ -63,10 +70,12 @@ export default {
           {
             label: '姓名',
             prop: 'name',
+            headerslot: 'name',
           },
           {
             label: '性别',
             prop: 'sex',
+            headerslot: true,
           },
         ],
       },
