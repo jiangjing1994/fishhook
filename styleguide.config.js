@@ -12,7 +12,6 @@ const isProd = process.env.NODE_ENV === 'production'
 // 		'packages/Button/index.js',
 // 	]
 // }
-
 //获得当前组件的目录结构
 // const componentFilesDir = getComponentFiles(baseComponentsUrl)
 module.exports = {

@@ -834,13 +834,6 @@
     "@babel/types" "^7.4.4"
     esutils "^2.0.2"
 
-"@babel/runtime@7.x":
-  version "7.15.4"
-  resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.15.4.tgz#fd17d16bfdf878e6dd02d19753a39fa8a8d9c84a"
-  integrity sha512-99catp6bHCaxr4sJ/DbTGgHS4+Rs2RVd2g7iOap6SLGPDknRK9ztKNsE/Fg6QhSeh1FGE5f6gHGQmvvn3I3xhw==
-  dependencies:
-    regenerator-runtime "^0.13.4"
-
 "@babel/runtime@^7.0.0", "@babel/runtime@^7.11.0", "@babel/runtime@^7.3.1", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4":
   version "7.13.17"
   resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.13.17.tgz#8966d1fc9593bf848602f0662d6b4d0069e3a7ec"
@@ -967,24 +960,17 @@
   resolved "https://registry.npmjs.org/@popperjs/core/-/core-2.9.2.tgz#adea7b6953cbb34651766b0548468e743c6a2353"
   integrity sha512-VZMYa7+fXHdwIq1TDhSXoVmSPEGM/aa+6Aiq3nVVJ9bXr24zScr+NlKFKC3iPljA7ho/GAZr+d2jOf5GIRC30Q==
 
-"@popperjs/core@^2.9.2":
-  version "2.10.1"
-  resolved "https://registry.npmjs.org/@popperjs/core/-/core-2.10.1.tgz#728ecd95ab207aab8a9a4e421f0422db329232be"
-  integrity sha512-HnUhk1Sy9IuKrxEMdIRCxpIqPw6BFsbYSEUO9p/hNw5sMld/+3OLMWQP80F8/db9qsv3qUjs7ZR5bS/R+iinXw==
-
-"@smallwei/avue@2.8.4":
-  version "2.8.4"
-  resolved "https://registry.npmjs.org/@smallwei/avue/-/avue-2.8.4.tgz#39320eb53c556aca99133c9f90d8d823034db475"
-  integrity sha512-KtyjKZYasMkn8EJ7k+rN0Giqc+eQISNmHgVXmnpHRKAjlGy8I/dTTJHs+EK0E2ZKfVdlwDkKJVdHPNa4YPGl8A==
+"@smallwei/avue@2.8.22":
+  version "2.8.22"
+  resolved "https://registry.npmjs.org/@smallwei/avue/-/avue-2.8.22.tgz#c518f7876695179cd5d52f5905cb4f16553fc877"
+  integrity sha512-HAjxY0CXCMKisCaga+XlUJ+vJGFenXjuxCjnMpVXiKCJ5clQKrD2XxSgoW1/Lp+6QmpQbzop3C+yc6Cxn6LGnw==
   dependencies:
-    async-validator "^1.10.0"
-    axios "^0.18.0"
+    axios "^0.21.1"
     countup.js "^1.9.3"
-    dayjs "^1.7.8"
+    dayjs "^1.10.4"
     deepmerge "^3.1.0"
-    element-ui "^2.11.0"
+    element-ui "^2.15.1"
     nprogress "^0.2.0"
-    vant "^2.10.9"
     vue "^2.5.17"
     vuedraggable "^2.17.0"
 
@@ -1203,19 +1189,7 @@
     "@types/webpack-sources" "*"
     source-map "^0.6.0"
 
-"@vant/icons@^1.7.1":
-  version "1.7.1"
-  resolved "https://registry.npmjs.org/@vant/icons/-/icons-1.7.1.tgz#49ae420302b5581e54e6894891e5a05bc76e9f87"
-  integrity sha512-66LPEq89w4kl258nALZcRNd14eUJC8VajvTJwvZKOaZawz6CUeVZ6ybhedTUhQhRjeA8SyWD7dFt4ALf33Sabw==
-
-"@vant/popperjs@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@vant/popperjs/-/popperjs-1.1.0.tgz#b4edee5bbfa6fb18705986e313d4fd5f17942a0f"
-  integrity sha512-8MD1gz146awV/uPxYjz4pet22f7a9YVKqk7T+gFkWFwT9mEcrIUEg/xPrdOnWKLP9puXyYtm7oVfSDSefZ/p/w==
-  dependencies:
-    "@popperjs/core" "^2.9.2"
-
-"@vue/babel-helper-vue-jsx-merge-props@^1.0.0", "@vue/babel-helper-vue-jsx-merge-props@^1.2.1":
+"@vue/babel-helper-vue-jsx-merge-props@^1.2.1":
   version "1.2.1"
   resolved "https://registry.npmjs.org/@vue/babel-helper-vue-jsx-merge-props/-/babel-helper-vue-jsx-merge-props-1.2.1.tgz#31624a7a505fb14da1d58023725a4c5f270e6a81"
   integrity sha512-QOi5OW45e2R20VygMSNhyQHvpdUwQZqGPc748JLGCYEy+yp8fNFNdbNIGAgZmi9e+2JHPd6i6idRuqivyicIkA==
@@ -2068,11 +2042,6 @@ async-limiter@~1.0.0:
   resolved "https://registry.npmjs.org/async-limiter/-/async-limiter-1.0.1.tgz#dd379e94f0db8310b08291f9d64c3209766617fd"
   integrity sha512-csOlWGAcRFJaI6m+F2WKdnMKr4HhdhFVBk0H/QbJFMCr+uO2kwohwXQPxw/9OCxp05r5ghVBFSyioixx3gfkNQ==
 
-async-validator@^1.10.0:
-  version "1.12.2"
-  resolved "https://registry.npmjs.org/async-validator/-/async-validator-1.12.2.tgz#beae671e7174d2938b7b4b69d2fb7e722b7fd72c"
-  integrity sha512-57EETfCPFiB7M4QscvQzWSGNsmtkjjzZv318SK1CBlstk+hycV72ocjriMOOM48HjvmoAoJGpJNjC7Z76RlnZA==
-
 async-validator@^3.3.0:
   version "3.5.1"
   resolved "https://registry.npmjs.org/async-validator/-/async-validator-3.5.1.tgz#cd62b9688b2465f48420e27adb47760ab1b5559f"
@@ -2132,13 +2101,12 @@ axios@0.19.2:
   dependencies:
     follow-redirects "1.5.10"
 
-axios@^0.18.0:
-  version "0.18.1"
-  resolved "https://registry.npmjs.org/axios/-/axios-0.18.1.tgz#ff3f0de2e7b5d180e757ad98000f1081b87bcea3"
-  integrity sha512-0BfJq4NSfQXd+SkFdrvFbG7addhYSBA2mQwISr46pD6E5iqkWg02RAs8vyTT/j0RTnoYmeXauBuSv1qKwR179g==
+axios@^0.21.1:
+  version "0.21.4"
+  resolved "https://registry.npmjs.org/axios/-/axios-0.21.4.tgz#c67b90dc0568e5c1cf2b0b858c43ba28e2eda575"
+  integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
   dependencies:
-    follow-redirects "1.5.10"
-    is-buffer "^2.0.2"
+    follow-redirects "^1.14.0"
 
 babel-eslint@^10.1.0:
   version "10.1.0"
@@ -3732,10 +3700,10 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
-dayjs@^1.7.8:
-  version "1.10.4"
-  resolved "https://registry.npmjs.org/dayjs/-/dayjs-1.10.4.tgz#8e544a9b8683f61783f570980a8a80eaf54ab1e2"
-  integrity sha512-RI/Hh4kqRc1UKLOAf/T5zdMMX5DQIlDxwUe3wSyMMnEbGunnpENCdbUgM+dW7kXidZqCttBrmw7BhN4TMddkCw==
+dayjs@^1.10.4:
+  version "1.10.7"
+  resolved "https://registry.npmjs.org/dayjs/-/dayjs-1.10.7.tgz#2cf5f91add28116748440866a0a1d26f3a6ce468"
+  integrity sha512-P6twpd70BcPK34K26uJ1KT3wlhpuOAPoMwJzpsIWUxHZ7wpmbdZL/hQqBDfz7hGurYSa5PhzdhDHtt319hL3ig==
 
 de-indent@^1.0.2:
   version "1.0.2"
@@ -4138,10 +4106,10 @@ element-ui@2.13.2:
     resize-observer-polyfill "^1.5.0"
     throttle-debounce "^1.0.1"
 
-element-ui@^2.11.0:
-  version "2.15.1"
-  resolved "https://registry.npmjs.org/element-ui/-/element-ui-2.15.1.tgz#ada00aa6e32c02774a2e77563dd84668f813cdff"
-  integrity sha512-TqlScAKGH97XndSScUDeEHIzL1x7yg7DvQdKPEOUdiDcyIz3y3FJJBlpHYaJT96FOn1xpIcUZb+I2FJeU9EcrQ==
+element-ui@^2.15.1:
+  version "2.15.6"
+  resolved "https://registry.npmjs.org/element-ui/-/element-ui-2.15.6.tgz#c9609add35af5a686a4b7685dc1d757c75e01df3"
+  integrity sha512-rcYXEKd/j2G0AgficAOk1Zd1AsnHRkhmrK4yLHmNOiimU2JfsywgfKUjMoFuT6pQx0luhovj8lFjpE4Fnt58Iw==
   dependencies:
     async-validator "~1.8.1"
     babel-helper-vue-jsx-merge-props "^2.0.0"
@@ -4943,6 +4911,11 @@ follow-redirects@^1.0.0:
   version "1.13.3"
   resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.13.3.tgz#e5598ad50174c1bc4e872301e82ac2cd97f90267"
   integrity sha512-DUgl6+HDzB0iEptNQEXLx/KhTmDb8tZUHSeLqpnjpknR70H0nC2t9N73BK6fN4hOvJ84pKlIQVQ4k5FFlBedKA==
+
+follow-redirects@^1.14.0:
+  version "1.14.4"
+  resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.14.4.tgz#838fdf48a8bbdd79e52ee51fb1c94e3ed98b9379"
+  integrity sha512-zwGkiSXC1MUJG/qmeIFH2HBJx9u0V46QGUe3YR1fXG8bXQxq7fLj0RjLZQ5nubr9qNJUZrH+xUcwXEoXNpfS+g==
 
 for-in@^1.0.1, for-in@^1.0.2:
   version "1.0.2"
@@ -5973,7 +5946,7 @@ is-buffer@^1.1.5:
   resolved "https://registry.npmjs.org/is-buffer/-/is-buffer-1.1.6.tgz#efaa2ea9daa0d7ab2ea13a97b2b8ad51fefbe8be"
   integrity sha512-NcdALwpXkTm5Zvvbk7owOUSvVvBKDgKP5/ewfXEznmQFfs4ZRmanOeKBTjRVjka3QFoN6XJ+9F3USqfHqTaU5w==
 
-is-buffer@^2.0.0, is-buffer@^2.0.2:
+is-buffer@^2.0.0:
   version "2.0.5"
   resolved "https://registry.npmjs.org/is-buffer/-/is-buffer-2.0.5.tgz#ebc252e400d22ff8d77fa09888821a24a658c191"
   integrity sha512-i2R6zNFDwgEHJyQUtJEk0XFi1i0dPFn/oqjK3/vPCcDeJvW5NQ83V8QbicfF1SupOaB0h8ntgBC2YiE7dfyctQ==
@@ -11212,17 +11185,6 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-vant@^2.10.9:
-  version "2.12.29"
-  resolved "https://registry.npmjs.org/vant/-/vant-2.12.29.tgz#b909a1ec9e10cb57d27fb04684c84635a6ac3138"
-  integrity sha512-LFLShCM6TFGv2yfDqBDQRuTd7vS7LjmsHpdJLbmyt1rqtGU1yOamtIgMVvvjKluqg5FoIvcBjaO94p6lKAf9NQ==
-  dependencies:
-    "@babel/runtime" "7.x"
-    "@vant/icons" "^1.7.1"
-    "@vant/popperjs" "^1.1.0"
-    "@vue/babel-helper-vue-jsx-merge-props" "^1.0.0"
-    vue-lazyload "1.2.3"
-
 vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.npmjs.org/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
@@ -11350,11 +11312,6 @@ vue-inbrowser-compiler@^4.37.0:
     detect-browser "^5.2.0"
     vue-inbrowser-compiler-utils "^4.37.0"
     walkes "^0.2.1"
-
-vue-lazyload@1.2.3:
-  version "1.2.3"
-  resolved "https://registry.npmjs.org/vue-lazyload/-/vue-lazyload-1.2.3.tgz#901f9ec15c7e6ca78781a2bae4a343686bdedb2c"
-  integrity sha512-DC0ZwxanbRhx79tlA3zY5OYJkH8FYp3WBAnAJbrcuoS8eye1P73rcgAZhyxFSPUluJUTelMB+i/+VkNU/qVm7g==
 
 "vue-loader-v16@npm:vue-loader@^16.1.0":
   version "16.2.0"
