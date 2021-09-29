@@ -10,9 +10,7 @@
         </div>
         <div class="header__body-right">
           <slot name="menuRight"></slot>
-          <KemButton v-if="menuPermissionAdd" @click="clickMenuButton({ type: 'add' })"
-            >新增</KemButton
-          >
+          <KemButton v-if="menuPermissionAdd" @click="clickMenuButton({ type: 'add' })">新增</KemButton>
         </div>
       </div>
       <div v-if="headerBottomPermission" class="header__body-bottom">
@@ -57,11 +55,7 @@
       <!--      <template slot="typeHeader" slot-scope="{ column }">-->
       <!--        <el-tag>{{ (column || {}).label }}-{{ (column || {}).prop }}</el-tag>-->
       <!--      </template>-->
-      <template
-        v-for="(item, key) in headerColumn"
-        :slot="item.prop + 'Header'"
-        slot-scope="{ column }"
-      >
+      <template v-for="(item, key) in headerColumn" :slot="item.prop + 'Header'" slot-scope="{ column }">
         <slot :name="item.prop + 'Header'" :column="column"></slot>
       </template>
       <template v-for="(item, key) in computedOption.column" :slot="item.prop" slot-scope="scope">
@@ -85,9 +79,7 @@
           v-on="item.listeners"
         />
 
-        <span v-if="!item.nativeSlot && !item.component" :key="key">{{
-          scope.row[item.prop]
-        }}</span>
+        <span v-if="!item.nativeSlot && !item.component" :key="key">{{ scope.row[item.prop] }}</span>
 
         <slot v-else :name="item.prop" :scope="scope"></slot>
       </template>
@@ -105,8 +97,8 @@
       </template>
 
       <!--      <template v-if="!loading" slot="menu" slot-scope="scope">-->
-      <!--      todo test-->
-      <template slot="menu" slot-scope="scope">
+      <!-- todo test-->
+      <template v-if="relodaMenu" slot="menu" slot-scope="scope">
         <KemButton
           v-if="menuPermissionDetail"
           :type="`${menuButtonType}.detail`"
@@ -597,24 +589,19 @@ export default {
       if (this.isShowPage) {
         option.page = true
       }
-      const header =
-        !!(this.$scopedSlots.menuLeft || this.$scopedSlots.menuRight) || this.menuPermissionAdd
+      const header = !!(this.$scopedSlots.menuLeft || this.$scopedSlots.menuRight) || this.menuPermissionAdd
 
       const menu =
-        !!this.$scopedSlots.menu ||
-        this.menuPermissionDel ||
-        this.menuPermissionEdit ||
-        this.menuPermissionDetail
+        !!this.$scopedSlots.menu || this.menuPermissionDel || this.menuPermissionEdit || this.menuPermissionDetail
 
       const column = this.column.map((item) => {
-        if (this.columnOverHidden) {
-          item = {
-            overHidden: true,
-            ...item,
-          }
+        item = {
+          ...item,
         }
+
         item.nativeSlot = !!item.slot
         item.slot = true
+        item.overHidden = this.columnOverHidden
         return item
       })
 
@@ -810,12 +797,7 @@ export default {
         const { loop } = this.treeProps || false
         if (loop) {
           const table = cloneDeep(tableData)
-          this.crudData = handleTree(
-            table,
-            this.treeProps['id'],
-            this.treeProps['pid'],
-            this.treeProps['children']
-          )
+          this.crudData = handleTree(table, this.treeProps['id'], this.treeProps['pid'], this.treeProps['children'])
           //this.crudData = this.getTree(tableData, '')
         } else {
           this.crudData = tableData
