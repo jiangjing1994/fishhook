@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { queryList } from '../../utils/index'
+import { queryList } from '../../../examples/utils/index'
 export default {
   name: 'SimpaleTable',
   data() {
@@ -69,7 +69,7 @@ export default {
 </template>
 
 <script>
-import { queryList } from '../../utils/index'
+import { queryList } from '../../../examples/utils/index'
 export default {
   name: 'BaseTable',
   data() {
@@ -147,7 +147,7 @@ export default {
 </template>
 
 <script>
-import { queryList } from '../../utils/index'
+import { queryList } from '../../../examples/utils/index'
 export default {
   name: 'MenuTable',
   data() {
@@ -227,7 +227,7 @@ export default {
 </template>
 
 <script>
-import { queryList } from '../../utils/index'
+import { queryList } from '../../../examples/utils/index'
 export default {
   name: 'SimpaleTable',
   data() {

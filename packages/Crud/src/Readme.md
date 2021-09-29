@@ -15,11 +15,7 @@
     <!--args 存在缺陷不推荐使用-->
     <KemCrud ref="kemcrud" :args="args" :form-items="formItems" :form-rules="formRules">
       <template slot="color">
-        <KemColorPicker
-          v-model="args.color"
-          style="position: absolute"
-          size="mini"
-        ></KemColorPicker>
+        <KemColorPicker v-model="args.color" style="position: absolute" size="mini"></KemColorPicker>
       </template>
       <template slot="append" slot-scope="{ scope }"> append表单框后置内容 {{ scope }} </template>
     </KemCrud>
@@ -27,7 +23,7 @@
 </template>
 
 <script>
-import { queryList, saveForm, deleteForm } from '../../utils/index'
+import { queryList, saveForm, deleteForm } from '../../../examples/utils/index'
 export default {
   name: 'Crud',
   data() {
