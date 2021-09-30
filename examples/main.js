@@ -5,9 +5,6 @@ import store from './store'
 
 // @ts-ignore
 import KemUI from '../packages'
-//import '../packages/theme/index.scss'
-//import './style/index.scss'
-Vue.config.productionTip = false
 
 Vue.use(KemUI, {
   size: 'mini',
