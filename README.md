@@ -93,7 +93,7 @@ Vue.use(ElementUI)
 
 ### Table
 
-- loading 关闭
+- ~~loading 关闭~~
 - menu-left right 等样式自定义
 
 ### Form
