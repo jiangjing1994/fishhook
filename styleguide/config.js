@@ -40,7 +40,7 @@ let getIgnoreFiles = function (path) {
     return path + item
   })
 }
-let result = getComponentFiles('./src/components')
+let result = getComponentFiles('./examples/components')
 console.log(result)
 module.exports = {
   getComponentFiles,
