@@ -707,8 +707,8 @@ export default {
         } else {
           if (this.timer) {
             clearTimeout(this.timer)
+            this.getListData()
           }
-          this.getListData()
         }
       },
       immediate: true,
