@@ -4,9 +4,9 @@ import router from './router'
 import store from './store'
 
 // @ts-ignore
-import KemUI from '../packages'
+import FishhookUI from '../packages'
 
-Vue.use(KemUI, {
+Vue.use(FishhookUI, {
   size: 'mini',
   Button: {
     size: 'mini',

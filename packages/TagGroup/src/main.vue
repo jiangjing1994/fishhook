@@ -1,18 +1,13 @@
 <template>
   <div class="kem-tag_group">
     <div v-for="(item, index) in list" :key="index">
-      <KemTag
-        v-if="!renderContent"
-        :label="item.value"
-        :disabled="item.disabled"
-        style="margin-right: 8px"
-      >
-        {{ item.label }}
+      <KemTag v-if="!renderContent" :label="item.value" :disabled="item.disabled" style="margin-right: 8px">
+        {{ item.label }}111
         <div class="kem-tag__btn" @click="click(item)">
           <i class="el-icon-error"></i>
         </div>
       </KemTag>
-      <div style="display: flex; justify-content: space-between; align-items: center">
+      <div v-else style="display: flex; justify-content: space-between; align-items: center">
         <option-content :option="item" :selected="selected"></option-content>
         <!--        <div class="kem-tag__btn" @click="click(item)">-->
         <!--          <i class="el-icon-error"></i>-->

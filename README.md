@@ -55,7 +55,7 @@ Vue.use(ElementUI)
 
 ## 如何贡献
 
-非常欢迎你的加入！[提一个 Issue](https://github.com/jiangjing1994/mimi/issues/new) 或者提交一个 Pull Request
+非常欢迎你的加入！[提一个 Issue](https://github.com/jiangjing1994/fishhook/issues/new) 或者提交一个 Pull Request
 
 ### Pull Request
 
@@ -91,6 +91,6 @@ Vue.use(ElementUI)
 
 ## 🌈 资源
 
-- [github](https://github.com/jiangjing1994/mimi/)
-- [doc](https://jiangjing1994.github.io/mimi/)
+- [github](https://github.com/jiangjing1994/fishhook/)
+- [doc](https://jiangjing1994.github.io/fishhook/)
 - [npm](https://www.npmjs.com/package/@jiangjing94/mimi/)

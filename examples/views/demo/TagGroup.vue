@@ -5,12 +5,12 @@
       v-model="value"
       :options="[
         {
-          label: '区域一',
+          label: '区域一111',
           value: 'shanghai',
           isShow: true,
         },
         {
-          label: '区域二',
+          label: '11212',
           value: 'beijing',
           isShow: false,
         },

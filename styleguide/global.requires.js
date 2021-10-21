@@ -5,9 +5,9 @@
  */
 
 import Vue from 'vue'
-import KemUI from '../packages'
+import FishhookUI from '../packages'
 
-Vue.use(KemUI)
+Vue.use(FishhookUI)
 
 // 引入utils
 // import "./../../assets/js/utils.js";
