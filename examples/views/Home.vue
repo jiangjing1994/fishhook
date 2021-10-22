@@ -1,31 +1,18 @@
 <template>
-  <div class="home" style="background-color: #ffffff; padding: 40px; padding-top: 0">
-    <h4
-      style="
-        font-size: 20px;
-        padding: 0;
-        margin: 0;
-        background-color: #f3f3f3;
-        margin-bottom: 20px;
-        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-      "
-    >
+  <div class="home" style="background-color: #ffffff; padding: 10px; padding-top: 0">
+    <h4 style="font-size: 16px; padding: 0; margin: 0; text-align: left; position: absolute">
       <h5>版本 v{{ version }}</h5>
       <h5>
-        <a href="https://github.com/hellonainai/mimi">GitHub</a>
+        <a href="https://github.com/jiangjing1994/fishhook/">GitHub</a>
       </h5>
       <h5>
-        <a href="https://github.com/hellonainai/mimi/tree/master/src/views/demo">代码demo</a>
+        <a href="https://github.com/jiangjing1994/fishhook/tree/master/examples/views/demo">代码demo</a>
       </h5>
       <h5>
-        <a href="https://hellonainai.github.io/mimi/#/">预览</a>
+        <a href="https://jiangjing1994.github.io/fishhook/">预览</a>
       </h5>
     </h4>
-    <img
-      alt="Vue logo"
-      src="../assets/Y3QHT]~954YQ`HF004PQJ6A.jpg"
-      style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2)"
-    />
+    <img alt="Vue logo" src="../assets/log.jpg" />
   </div>
 </template>
 
@@ -45,7 +32,6 @@ export default {
 <style>
 .home h5 {
   padding: 5px;
-  display: inline-block;
   color: #16045f;
 }
 </style>

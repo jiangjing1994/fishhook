@@ -4,7 +4,6 @@ const config = require('./package.json')
 const path = require('path')
 // const { getComponentFiles } = require('./styleguide/config.js')
 // const baseComponentsUrl = './packages'
-
 //获取当前的环境
 const isProd = process.env.NODE_ENV === 'production'
 // const componentFilesDir = () =>{

@@ -3,6 +3,7 @@ module.exports = {
   resolve: {
     alias: {
       '@': resolve('src'),
+      '@examples': resolve('examples'),
     },
   },
 }
