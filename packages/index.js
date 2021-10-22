@@ -34,6 +34,7 @@ import KemIcon from './Icon'
 import JsxForm from './JsxForm'
 import KemD52tButton from './D52tButton'
 import KemInputTree from './InputTree'
+import KemFlipNnumber from './FlipNnumber'
 import ElementUI from 'element-ui'
 import Avue from '@smallwei/avue'
 import '@smallwei/avue/lib/index.css'
@@ -83,6 +84,7 @@ const components = [
   KemIcon,
   KemD52tButton,
   KemInputTree,
+  KemFlipNnumber,
   JsxForm,
 ]
 
@@ -114,15 +116,9 @@ const install = function (Vue, opts = {}) {
       type: opts['Table']?.type || 'primary',
 
       isShowIndex: isExitsVariable(opts['Table']?.isShowIndex) ? opts['Table']?.isShowIndex : true,
-      isShowHeader: isExitsVariable(opts['Table']?.isShowHeader)
-        ? opts['Table']?.isShowHeader
-        : true,
-      isShowBorder: isExitsVariable(opts['Table']?.isShowBorder)
-        ? opts['Table']?.isShowBorder
-        : true,
-      isShowStripe: isExitsVariable(opts['Table']?.isShowStripe)
-        ? opts['Table']?.isShowStripe
-        : false,
+      isShowHeader: isExitsVariable(opts['Table']?.isShowHeader) ? opts['Table']?.isShowHeader : true,
+      isShowBorder: isExitsVariable(opts['Table']?.isShowBorder) ? opts['Table']?.isShowBorder : true,
+      isShowStripe: isExitsVariable(opts['Table']?.isShowStripe) ? opts['Table']?.isShowStripe : false,
 
       selection: opts['Table']?.selection || false,
       indexLabel: opts['Table']?.indexLabel || '序号',
@@ -234,5 +230,6 @@ export default {
   KemIcon,
   KemD52tButton,
   KemInputTree,
+  KemFlipNnumber,
   JsxForm,
 }
