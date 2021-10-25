@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import backgroundImage from '@examples/assets/view.jpg'
+import backgroundImage from '../../../examples/assets/view.jpg'
 
 export default {
   name: 'DataView',

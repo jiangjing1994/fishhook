@@ -701,16 +701,20 @@ const obj = [
   },
 ]
 
-export const queryTreeRoot = () => {
+export const queryTreeRoot = ({ pageNo }) => {
+  console.log(333333)
+  console.log(pageNo)
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({
         msg: 'success',
-
+        page_no: 1,
+        page_size: 22,
+        status: 1,
         obj: [
           {
-            organize_id: 2,
-            organize_name: '中国移动通信集团湖南有限公司',
+            organize_id: 1 + pageNo,
+            organize_name: '公司' + 1 + pageNo,
             code: '2',
             org_type: 1,
             state: 1,
@@ -721,8 +725,8 @@ export const queryTreeRoot = () => {
             children_count: 48,
           },
           {
-            organize_id: 3,
-            organize_name: '中国移动通信集团青海有限公司',
+            organize_id: 2 + pageNo,
+            organize_name: '公司' + 2 + pageNo,
             code: '3',
             org_type: 1,
             notes: '青海',

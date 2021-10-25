@@ -18,12 +18,12 @@ module.exports = {
   title: 'MimiUi && 组件',
   sections: [
     {
-      name: 'MimiUI 😓',
+      name: 'MimiUI',
       description: 'MimiUi && 组件',
       content: './README.md',
     },
     {
-      name: 'Example 😅',
+      name: 'Example',
       sections: [
         {
           name: '表单 Form',

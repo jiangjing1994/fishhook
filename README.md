@@ -1,14 +1,14 @@
-## ✨ 快速开始
+## ✨ 姜太公钓鱼愿者上钩 ✨
 
 > 前人挖坑后人埋，看你埋得过来不过来。
 
-### 🖥 安装
+### 安装
 
 ```shell
 yarn add @jiangjing94/mimi
 ```
 
-### 🛡 引用
+### 引用
 
 ```javascript
 // main.js
@@ -21,7 +21,7 @@ Vue.use(MimiUI, { size: 'mini', zIndex: 3000 })
 Vue.use(ElementUI)
 ```
 
-> Vue.use() 顺序不要变 😶
+> Vue.use() 顺序不要变！
 
 ## 🌍 其他
 
