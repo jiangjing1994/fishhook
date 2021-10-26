@@ -1,15 +1,15 @@
 <template>
   <div class="home" style="background-color: #ffffff; padding: 10px; padding-top: 0">
     <h4 style="font-size: 16px; padding: 0; margin: 0; text-align: left; position: absolute">
-      <h5>版本 v{{ version }}</h5>
+      <h5>版本号 v{{ version }}</h5>
       <h5>
-        <a href="https://github.com/jiangjing1994/fishhook/">GitHub</a>
+        <a href="https://github.com/jiangjing1994/fishhook/">代码仓库</a>
       </h5>
       <h5>
-        <a href="https://github.com/jiangjing1994/fishhook/tree/master/examples/views/demo">代码demo</a>
+        <a href="https://github.com/jiangjing1994/fishhook/tree/master/examples/views/demo">代码预览</a>
       </h5>
       <h5>
-        <a href="https://jiangjing1994.github.io/fishhook/">预览</a>
+        <a href="https://jiangjing1994.github.io/fishhook/">文档</a>
       </h5>
     </h4>
     <img alt="Vue logo" src="../assets/log.jpg" />

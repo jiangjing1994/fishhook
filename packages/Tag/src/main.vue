@@ -14,7 +14,7 @@ export default {
     size: String,
     effect: {
       type: String,
-      default: 'dark',
+      default: 'light',
       validator(val) {
         return ['dark', 'light', 'plain'].indexOf(val) !== -1
       },
@@ -51,11 +51,7 @@ export default {
       </span>
     )
 
-    return this.disableTransitions ? (
-      tagEl
-    ) : (
-      <transition name="el-zoom-in-center">{tagEl}</transition>
-    )
+    return this.disableTransitions ? tagEl : <transition name="el-zoom-in-center">{tagEl}</transition>
   },
 }
 </script>

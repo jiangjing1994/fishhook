@@ -1,21 +1,12 @@
 <template>
   <KemPageCard header="标签">
+    <el-tag>标签一</el-tag>
+    <el-tag type="success">标签二</el-tag>
+    <kem-tag>标签一</kem-tag>
+    <kem-tag closable type="success">标签二</kem-tag>
+
     <pre>{{ value }}</pre>
-    <KemTagGroup
-      v-model="value"
-      :options="[
-        {
-          label: '区域一111',
-          value: 'shanghai',
-          isShow: true,
-        },
-        {
-          label: '11212',
-          value: 'beijing',
-          isShow: false,
-        },
-      ]"
-    />
+    <KemTagGroup v-model="value" :options="options" @tagAppend="tagAppend" />
   </KemPageCard>
 </template>
 
@@ -39,6 +30,18 @@ export default {
   data() {
     return {
       value: [],
+      options: [
+        {
+          label: '区域一111',
+          value: 'shanghai',
+          isShow: true,
+        },
+        {
+          label: '区域22',
+          value: 'beijing',
+          isShow: false,
+        },
+      ],
       uiType: 'text',
       form: {
         prop3: ['Nanjing'],
@@ -137,6 +140,12 @@ export default {
     },
   },
   methods: {
+    tagAppend(v) {
+      this.options.push({
+        label: v,
+        value: v,
+      })
+    },
     dianwo() {
       if (this.uiType === '') {
         this.uiType = 'text'
