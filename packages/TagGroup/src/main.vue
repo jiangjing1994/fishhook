@@ -62,6 +62,9 @@ export default {
       deep: true,
     },
   },
+  created() {
+    this.selected = this.$attrs.value ?? []
+  },
 
   methods: {
     showInput() {
@@ -105,7 +108,7 @@ export default {
 <style lang="scss">
 .kem-tag_group {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   .is-active {
     border-width: 2px;

@@ -29,7 +29,7 @@ export default {
   name: 'TagGroup',
   data() {
     return {
-      value: [],
+      value: ['shanghai'],
       options: [
         {
           label: '区域一111',
