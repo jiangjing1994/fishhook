@@ -7,8 +7,10 @@
       :disabled="item.disabled"
       style="margin-right: 8px"
       effect="plain"
+      closable
       :class="isActive(item) ? 'is-active' : ''"
       @click="onClick(item)"
+      @close="handleClose(item)"
     >
       <div
         class="label_box"
@@ -84,6 +86,10 @@ export default {
   },
 
   methods: {
+    handleClose(val) {
+      debugger
+    },
+
     onContextmenu(event, item) {
       this.$contextmenu({
         items: [
