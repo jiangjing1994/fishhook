@@ -5,17 +5,17 @@
       :key="index"
       :label="item.value"
       :disabled="item.disabled"
-      style="margin-right: 8px"
+      style="margin-right: 8px; padding: 2px 10px !important"
       effect="plain"
+      closable
       :class="isActive(item) ? 'is-active' : ''"
       @click="onClick(item)"
+      @close="handleClose(item)"
     >
-      <div class="label_box">
-        {{ item.label }}
+      {{ item.label }}111
 
-        <div v-if="isActive(item)" class="triangle-bottomright"></div>
-        <div v-if="isActive(item)" class="dg-icon">✓</div>
-      </div>
+      <!--        <div v-if="isActive(item)" class="triangle-bottomright" ></div>-->
+      <!--        <div v-if="isActive(item)" class="dg-icon" >✓</div>-->
     </KemTag>
 
     <div class="kem-tag_group-append">
@@ -77,6 +77,13 @@ export default {
   },
 
   methods: {
+    handleClose(val) {
+      debugger
+    },
+    rightShow(val) {
+      console.log(val)
+      debugger
+    },
     showInput() {
       this.inputVisible = true
       this.$nextTick((_) => {
@@ -143,7 +150,7 @@ export default {
       font-size: 12px;
       position: relative;
       overflow: hidden;
-      .triangle-bottomright {
+      .triangle-bottom {
         position: absolute;
         right: -1px;
         bottom: -1px;
@@ -152,7 +159,20 @@ export default {
         border-bottom: 15px solid #3964fd;
         border-left: 15px solid transparent;
       }
+      .triangle-bottomright {
+        position: absolute;
+
+        display: inline-block;
+        right: -1px;
+        bottom: -1px;
+        width: 0;
+        height: 0;
+        border-bottom: 15px solid #3964fd;
+        border-left: 15px solid transparent;
+      }
       .dg-icon {
+        width: auto;
+        display: inline-block;
         position: absolute;
         right: -1px;
         bottom: -3px;
