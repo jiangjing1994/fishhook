@@ -7,13 +7,13 @@
       :disabled="item.disabled"
       style="margin-right: 8px"
       effect="plain"
-      closable
       :class="isActive(item) ? 'is-active' : ''"
       @click="onClick(item)"
       @close="handleClose(item)"
     >
       <div
         class="label_box"
+        :class="'label_box-' + uiType"
         @contextmenu.prevent="
           (event) => {
             onContextmenu(event, item)
@@ -21,9 +21,9 @@
         "
       >
         {{ item.label }}
-
-        <div v-if="isActive(item)" class="triangle-bottomright"></div>
-        <div v-if="isActive(item)" class="dg-icon">✓</div>
+        <i v-if="uiType === 'closable'" class="el-tag__close el-icon-close" @click="handleClose(item)" />
+        <div v-if="isActive(item) && uiType === 'normal'" class="triangle-bottomright"></div>
+        <div v-if="isActive(item) && uiType === 'normal'" class="dg-icon">✓</div>
       </div>
     </KemTag>
 
@@ -65,6 +65,11 @@ export default {
       type: Boolean,
       default: true,
     },
+    uiType: {
+      // normal closable
+      type: String,
+      default: 'normal',
+    },
   },
   data() {
     return {
@@ -86,8 +91,8 @@ export default {
   },
 
   methods: {
-    handleClose(val) {
-      debugger
+    handleClose(item) {
+      this.$emit('tagDel', item)
     },
 
     onContextmenu(event, item) {
@@ -168,6 +173,7 @@ export default {
     padding: 0 !important;
     height: auto;
     border-radius: 4px;
+
     .label_box {
       padding: 2px 14px;
       //height: 100%;
@@ -195,6 +201,9 @@ export default {
         transform: scale(0.7);
       }
       //  cursor: pointer;
+    }
+    .label_box-closable {
+      padding-right: 6px;
     }
   }
   .kem-tag_group-append {

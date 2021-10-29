@@ -6,7 +6,8 @@
     <kem-tag closable type="success">标签二</kem-tag>
 
     <pre>{{ value }}</pre>
-    <KemTagGroup v-model="value" :options="options" @tagAppend="tagAppend" />
+    <KemTagGroup v-model="value" :options="options" style="margin-bottom: 20px" @tagAppend="tagAppend" />
+    <KemTagGroup v-model="value" ui-type="closable" :options="options" @tagAppend="tagAppend" />
   </KemPageCard>
 </template>
 
