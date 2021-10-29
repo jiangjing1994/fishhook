@@ -10,7 +10,14 @@
       :class="isActive(item) ? 'is-active' : ''"
       @click="onClick(item)"
     >
-      <div class="label_box">
+      <div
+        class="label_box"
+        @contextmenu.prevent="
+          (event) => {
+            onContextmenu(event, item)
+          }
+        "
+      >
         {{ item.label }}
 
         <div v-if="isActive(item)" class="triangle-bottomright"></div>
@@ -77,6 +84,25 @@ export default {
   },
 
   methods: {
+    onContextmenu(event, item) {
+      this.$contextmenu({
+        items: [
+          {
+            label: '删除',
+            onClick: () => {
+              this.$emit('tagDel', item)
+            },
+          },
+        ],
+        event,
+        //x: event.clientX,
+        //y: event.clientY,
+        customClass: 'custom-class',
+        zIndex: 3,
+        minWidth: 80,
+      })
+      return false
+    },
     showInput() {
       this.inputVisible = true
       this.$nextTick((_) => {

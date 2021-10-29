@@ -35,6 +35,7 @@ import JsxForm from './JsxForm'
 import KemD52tButton from './D52tButton'
 import KemInputTree from './InputTree'
 import KemFlipNnumber from './FlipNnumber'
+import ContextNenu from './ContextNenu'
 import ElementUI from 'element-ui'
 import Avue from '@smallwei/avue'
 import '@smallwei/avue/lib/index.css'
@@ -182,6 +183,8 @@ const install = function (Vue, opts = {}) {
   Avue.install(Vue, {
     size: opts.size,
   })
+  ContextNenu.install(Vue)
+
   Vue.component('KemViewTree', KemViewTree)
   Vue.component('KemViewAlert', KemViewAlert)
   Vue.component('KemViewIcon', KemViewIcon)
