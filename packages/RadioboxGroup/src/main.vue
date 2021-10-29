@@ -1,13 +1,9 @@
 <template>
   <div class="kem-radio_group">
     <el-radio-group v-bind="$attrs" :disabled="isdisabled" v-on="evet">
-      <el-radio
-        v-for="(item, index) in list"
-        :key="index"
-        :label="item.value"
-        :disabled="item.disabled"
-        >{{ item.label }}</el-radio
-      >
+      <el-radio v-for="(item, index) in list" :key="index" :label="item.value" :disabled="item.disabled">{{
+        item.label
+      }}</el-radio>
     </el-radio-group>
   </div>
 </template>

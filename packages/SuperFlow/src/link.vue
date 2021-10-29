@@ -29,14 +29,6 @@ export default {
       currentPathPointList: null,
     }
   },
-  mounted() {
-    this.ctx = this.$el.getContext('2d')
-    this.draw()
-    this.graph.add('mousemove', this.rootMousemove)
-    this.$once('hook:beforeDestroy', () => {
-      this.graph.remove('mousemove', this.rootMousemove)
-    })
-  },
   computed: {
     styles() {
       return Object.assign(
@@ -69,15 +61,37 @@ export default {
       },
     },
   },
+  watch: {
+    'link.pathPointList'() {
+      this.draw()
+    },
+    inPath() {
+      this.initLine()
+    },
+    'link.meta': {
+      deep: true,
+      handler() {
+        this.draw()
+      },
+    },
+    linkBaseStyle: {
+      deep: true,
+      handler() {
+        this.draw()
+      },
+    },
+  },
+  mounted() {
+    this.ctx = this.$el.getContext('2d')
+    this.draw()
+    this.graph.add('mousemove', this.rootMousemove)
+    this.$once('hook:beforeDestroy', () => {
+      this.graph.remove('mousemove', this.rootMousemove)
+    })
+  },
   methods: {
     draw() {
-      const {
-        pointList,
-        minX,
-        minY,
-        maxX,
-        maxY,
-      } = (this.currentPathPointList = this.link.pathPointList)
+      const { pointList, minX, minY, maxX, maxY } = (this.currentPathPointList = this.link.pathPointList)
 
       this.top = minY - this.padding
       this.right = maxX + this.padding
@@ -282,26 +296,6 @@ export default {
     rootMousemove({ evt }) {
       this.inPath = this.isPointInStroke(evt)
       return this.inPath
-    },
-  },
-  watch: {
-    'link.pathPointList'() {
-      this.draw()
-    },
-    inPath() {
-      this.initLine()
-    },
-    'link.meta': {
-      deep: true,
-      handler() {
-        this.draw()
-      },
-    },
-    linkBaseStyle: {
-      deep: true,
-      handler() {
-        this.draw()
-      },
     },
   },
 }

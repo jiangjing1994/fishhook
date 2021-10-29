@@ -23,24 +23,16 @@
           :class="['jsx-form-item__label-wrap', (column.required || isRequired) && 'is-required']"
           :style="labelStyle"
         >
-          <render
-            :form="form"
-            :root-form="rootForm"
-            :render="column.renderLabel"
-            :scope="{ itemIndex }"
-          />
+          <render :form="form" :root-form="rootForm" :render="column.renderLabel" :scope="{ itemIndex }" />
         </span>
       </template>
 
-      <template
-        v-if="!column.renderLabel && calcLabelWidth && {}.hasOwnProperty.call(column, 'label')"
-        slot="label"
-      >
+      <template v-if="!column.renderLabel && calcLabelWidth && {}.hasOwnProperty.call(column, 'label')" slot="label">
         <span
           :class="['jsx-form-item__label-wrap', (column.required || isRequired) && 'is-required']"
           :style="labelStyle"
-          >{{ column.label }}:</span
-        >
+          >{{ column.label }}:
+        </span>
       </template>
 
       <section
@@ -93,10 +85,7 @@
         </template>
       </section>
 
-      <section
-        v-else-if="column.item"
-        :class="['jsx-form-item__array', formClass && formClass + '-item__array']"
-      >
+      <section v-else-if="column.item" :class="['jsx-form-item__array', formClass && formClass + '-item__array']">
         <div v-for="(value, index) in form[column.prop]" :key="index" class="array-item">
           <div class="array-item__content">
             <template v-for="(col, idx) in column.item(value, rootForm)">
@@ -127,18 +116,14 @@
         </div>
         <div class="array-add" :class="[disabled && 'is-disabled']">
           <el-button
-            :icon="
-              {}.hasOwnProperty.call(column, 'itemButtonIcon')
-                ? column.itemButtonIcon
-                : 'el-icon-plus'
-            "
+            :icon="{}.hasOwnProperty.call(column, 'itemButtonIcon') ? column.itemButtonIcon : 'el-icon-plus'"
             :disabled="disabled"
             size="mini"
             type="primary"
             plain
             @click="handleAddItem"
-            >{{ column.itemButtonText }}</el-button
-          >
+            >{{ column.itemButtonText }}
+          </el-button>
         </div>
       </section>
 
@@ -159,12 +144,7 @@
 
       <template v-if="column.renderError" slot="error" slot-scope="scope">
         <div class="el-form-item__error">
-          <render
-            :form="form"
-            :root-form="rootForm"
-            :render="column.renderError"
-            :scope="{ ...scope, itemIndex }"
-          />
+          <render :form="form" :root-form="rootForm" :render="column.renderError" :scope="{ ...scope, itemIndex }" />
         </div>
       </template>
     </el-form-item>
@@ -248,8 +228,7 @@ export default {
       return {
         width: this.calcLabelWidth || 'auto',
         display: 'inline-block',
-        textAlign:
-          (['left', 'right'].includes(this.calcLabelPosition) && this.calcLabelPosition) || 'left',
+        textAlign: (['left', 'right'].includes(this.calcLabelPosition) && this.calcLabelPosition) || 'left',
       }
     },
     isRequired() {
@@ -316,9 +295,7 @@ export default {
       if (!this.column.render && !this.column.component) {
         this.column.render = (h, form) => {
           if (this.column.prop) {
-            let value =
-              (this.$attrs.value && this.$attrs.value[this.column.prop]) ||
-              (form && form[this.column.prop])
+            let value = (this.$attrs.value && this.$attrs.value[this.column.prop]) || (form && form[this.column.prop])
             if (!value && value !== 0) {
               value = this.emptyWords
             }
