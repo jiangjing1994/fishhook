@@ -42,9 +42,19 @@ export default {
   components: {},
   mixins: [mixins],
   props: {
+    /**
+     * 追加标签按钮文字提示
+     */
     tagAppendText: {
       type: String,
       default: '自定义',
+    },
+    /**
+     * 追加标签的时候是否自动选择
+     */
+    tagAppendAutoSelect: {
+      type: Boolean,
+      default: true,
     },
   },
   data() {
@@ -81,7 +91,9 @@ export default {
           this.$emit('tagAppendError', '不能重复添加')
           throw new Error(`不能重复添加!`)
         } else {
-          this.selected.push(inputValue)
+          if (this.tagAppendAutoSelect) {
+            this.selected.push(inputValue)
+          }
           this.$emit('tagAppend', inputValue)
         }
       }

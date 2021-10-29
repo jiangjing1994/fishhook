@@ -107,7 +107,7 @@ export default {
   }
 
   &-header {
-    background-color: green;
+    //background-color: green;
   }
 
   &-body {
@@ -147,9 +147,9 @@ export default {
     }
   }
 
-  &:hover {
-    box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.4);
-  }
+  //&:hover {
+  //  box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.4);
+  //}
 
   &.isSelect {
     z-index: 2;
