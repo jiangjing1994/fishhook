@@ -1,20 +1,11 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: ''
-
+name: "🔩 功能开发"
+about: 开发新的功能
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+```
+为了统一格式，请将下面一行复制到 `Title` 栏，然后删除这部分
+🔩 功能开发 | 你的标题
+```
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
-
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
-
-**Additional context**
-Add any other context or screenshots about the feature request here.
+如果需要，在这里描述具体内容
