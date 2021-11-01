@@ -109,7 +109,7 @@ export default {
         //x: event.clientX,
         //y: event.clientY,
         customClass: 'custom-class',
-        zIndex: 3,
+        zIndex: 3000,
         minWidth: 80,
       })
       return false
