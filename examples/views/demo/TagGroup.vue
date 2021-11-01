@@ -6,8 +6,17 @@
     <kem-tag closable type="success">标签二</kem-tag>
 
     <pre>{{ value }}</pre>
-    <KemTagGroup v-model="value" :options="options" style="margin-bottom: 20px" @tagAppend="tagAppend" />
-    <KemTagGroup v-model="value" ui-type="closable" :options="options" @tagAppend="tagAppend" />
+    <pre>{{ options }}</pre>
+    <KemTagGroup
+      v-model="value"
+      :options="options"
+      style="margin-bottom: 20px"
+      @tagAppend="tagAppend"
+      @handleTagEditConfirm="handleTagEditConfirm"
+      @tagEdit="tagEdit"
+      @tagDel="tagDel"
+    />
+    <KemTagGroup v-model="value" ui-type="closable" :options="options" />
   </KemPageCard>
 </template>
 
@@ -141,11 +150,40 @@ export default {
     },
   },
   methods: {
+    tagDel(v) {},
     tagAppend(v) {
       this.options.push({
         label: v,
         value: v,
       })
+    },
+    tagEdit(v, index, done) {
+      console.log(index)
+      this.options = this.options.map((item, i) => {
+        if (i === index)
+          return {
+            ...v,
+            isInput: true,
+          }
+        return {
+          ...v,
+          isInput: false,
+        }
+      })
+
+      done()
+      // this.$set(this.options, index, {
+      //   ...v,
+      //   isInput:true
+      // })
+    },
+    handleTagEditConfirm(value, oldItem) {
+      console.log(value, oldItem)
+
+      // this.$set(this.options, index, {
+      //   ...v,
+      //   isInput:true
+      // })
     },
     dianwo() {
       if (this.uiType === '') {
