@@ -1,33 +1,45 @@
 <template>
   <div class="kem-tag_group">
-    <KemTag
-      v-for="(item, index) in list"
-      :key="index"
-      :label="item.value"
-      :disabled="item.disabled"
-      style="margin-right: 8px"
-      effect="plain"
-      :class="isActive(item) ? 'is-active' : ''"
-      @click="onClick(item)"
-      @close="handleClose(item)"
-    >
-      <div
-        class="label_box"
-        :class="'label_box-' + uiType"
-        @contextmenu.prevent="
-          (event) => {
-            onContextmenu(event, item)
-          }
-        "
-      >
-        {{ item.label }}
-        <i v-if="uiType === 'closable'" class="el-tag__close el-icon-close" @click="handleClose(item)" />
-        <div v-if="isActive(item) && uiType === 'normal'" class="triangle-bottomright"></div>
-        <div v-if="isActive(item) && uiType === 'normal'" class="dg-icon">✓</div>
+    <div v-for="(item, index) in list" :key="index" class="kem-tag_group-box">
+      <div v-if="item.isInput && editValue" class="kem-tag_group-eidt">
+        <el-input
+          ref="editTagInput"
+          v-model="editValue"
+          size="mini"
+          @keyup.enter.native="handleTagEditConfirm"
+          @blur="handleTagEditConfirm"
+        >
+        </el-input>
       </div>
-    </KemTag>
 
-    <div class="kem-tag_group-append">
+      <KemTag
+        v-else
+        :label="item.value"
+        :disabled="item.disabled"
+        style="margin-right: 8px"
+        :disable-transitions="true"
+        effect="plain"
+        :class="isActive(item) ? 'is-active' : ''"
+      >
+        <div
+          class="label_box"
+          :class="'label_box-' + uiType"
+          @click.stop="onClick(item)"
+          @contextmenu.prevent="
+            (event) => {
+              onContextmenu(event, item, index)
+            }
+          "
+        >
+          {{ item.label }}
+          <i v-if="uiType === 'closable'" class="el-tag__close el-icon-close" @click="handleClose(item)" />
+          <div v-if="isActive(item) && uiType === 'normal'" class="triangle-bottomright"></div>
+          <div v-if="isActive(item) && uiType === 'normal'" class="dg-icon">✓</div>
+        </div>
+      </KemTag>
+    </div>
+
+    <div v-if="showAppendBtn" class="kem-tag_group-append">
       <el-input
         v-if="inputVisible"
         ref="saveTagInput"
@@ -76,7 +88,20 @@ export default {
       selected: [],
       inputVisible: false,
       inputValue: '',
+      editValue: '',
+      editItem: {},
     }
+  },
+  computed: {
+    showEditBtn() {
+      return this.$listeners.tagEdit
+    },
+    showDelBtn() {
+      return this.$listeners.tagDel
+    },
+    showAppendBtn() {
+      return this.$listeners.tagAppend
+    },
   },
   watch: {
     selected: {
@@ -95,21 +120,49 @@ export default {
       this.$emit('tagDel', item)
     },
 
-    onContextmenu(event, item) {
-      this.$contextmenu({
-        items: [
-          {
-            label: '删除',
-            onClick: () => {
-              this.$emit('tagDel', item)
-            },
+    onContextmenu(event, item, index) {
+      if (!this.showEditBtn && !this.showEditBtn) return
+      this.editValue = ''
+      this.editItem = {}
+      const items = []
+      if (this.showEditBtn) {
+        items.push({
+          label: '修改',
+          icon: 'el-icon-edit',
+          onClick: () => {
+            const done = () => {
+              this.$nextTick((_) => {
+                // setTimeout(()=>{
+
+                this.$refs.editTagInput[0].$refs.input.focus()
+
+                //},500)
+              })
+            }
+            this.editValue = item.label
+            this.editItem = item
+
+            this.$emit('tagEdit', item, index, done)
           },
-        ],
+        })
+      }
+      if (this.showDelBtn) {
+        items.push({
+          label: '删除',
+          icon: 'el-icon-delete',
+          onClick: () => {
+            this.$emit('tagDel', item)
+          },
+        })
+      }
+      this.$contextmenu({
+        items,
+
         event,
         //x: event.clientX,
         //y: event.clientY,
         customClass: 'custom-class',
-        zIndex: 3,
+        zIndex: 3000,
         minWidth: 80,
       })
       return false
@@ -137,6 +190,10 @@ export default {
       this.inputVisible = false
       this.inputValue = ''
     },
+    handleTagEditConfirm() {
+      this.$emit('handleTagEditConfirm', this.editValue, this.editItem)
+      this.editValue = ''
+    },
     onClick(item) {
       const value = item.value
       const index = this.selected.indexOf(value)
@@ -159,53 +216,68 @@ export default {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  .is-active {
-    border-width: 2px;
-    border-color: #3964fd;
-    box-sizing: border-box;
-    //font-weight: bold;
-  }
-  .kem-tag {
-    box-sizing: border-box;
-    border-width: 2px;
-    cursor: pointer;
+  .kem-tag_group-box {
+    display: flex;
+    align-items: center;
+    .is-active {
+      border-width: 2px;
+      border-color: #3964fd;
+      box-sizing: border-box;
+      //font-weight: bold;
+    }
+    .kem-tag {
+      box-sizing: border-box;
+      border-width: 2px;
+      cursor: pointer;
 
-    padding: 0 !important;
-    height: auto;
-    border-radius: 4px;
+      padding: 0 !important;
+      height: auto;
+      border-radius: 4px;
 
-    .label_box {
-      padding: 2px 14px;
-      //height: 100%;
-      width: 100%;
-      font-size: 12px;
-      position: relative;
-      overflow: hidden;
-      .triangle-bottomright {
-        position: absolute;
-        right: -1px;
-        bottom: -1px;
-        width: 0;
-        height: 0;
-        border-bottom: 15px solid #3964fd;
-        border-left: 15px solid transparent;
-      }
-      .dg-icon {
-        position: absolute;
-        right: -1px;
-        bottom: -3px;
-        font-weight: bold;
-        color: #ffffff;
-        line-height: normal;
+      .label_box {
+        padding: 2px 14px;
+        //height: 100%;
+        width: 100%;
         font-size: 12px;
-        transform: scale(0.7);
+        position: relative;
+        overflow: hidden;
+        .triangle-bottomright {
+          position: absolute;
+          right: -1px;
+          bottom: -1px;
+          width: 0;
+          height: 0;
+          border-bottom: 15px solid #3964fd;
+          border-left: 15px solid transparent;
+        }
+        .dg-icon {
+          position: absolute;
+          right: -1px;
+          bottom: -3px;
+          font-weight: bold;
+          color: #ffffff;
+          line-height: normal;
+          font-size: 12px;
+          transform: scale(0.7);
+        }
+        //  cursor: pointer;
       }
-      //  cursor: pointer;
+      .label_box-closable {
+        padding-right: 6px;
+      }
     }
-    .label_box-closable {
-      padding-right: 6px;
+    .kem-tag_group-eidt {
+      display: inline-block;
+      font-size: 12px;
+      width: 100px;
+      margin-right: 6px;
+      .el-input__inner {
+        height: 28px;
+        line-height: 28px;
+      }
     }
   }
+
   .kem-tag_group-append {
     display: inline-block;
     width: 100px;
