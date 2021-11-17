@@ -16,9 +16,9 @@
         v-else
         :label="item.value"
         :disabled="item.disabled"
-        style="margin-right: 8px"
         :disable-transitions="true"
         effect="plain"
+        class="kem-tag_group-spant"
         :class="isActive(item) ? 'is-active' : ''"
       >
         <div
@@ -121,7 +121,7 @@ export default {
     },
 
     onContextmenu(event, item, index) {
-      if (!this.showEditBtn && !this.showEditBtn) return
+      if (!this.showEditBtn && !this.showDelBtn) return
       this.editValue = ''
       this.editItem = {}
       const items = []
@@ -216,6 +216,7 @@ export default {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  width: 100%;
   .kem-tag_group-box {
     display: flex;
     align-items: center;
@@ -275,6 +276,9 @@ export default {
         height: 28px;
         line-height: 28px;
       }
+    }
+    .kem-tag_group-spant {
+      margin-right: 6px;
     }
   }
 
