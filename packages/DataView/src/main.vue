@@ -1,22 +1,13 @@
 <template>
-  <div class="sugar-root" ref="echartsWrapper" :style="canvasType == 0 ? 'height: auto' : ''">
-    <div
-      v-if="canvasType == 0"
-      ref="echartsWrapperhtml2canvas"
-      :style="`background: ${dashboardBackgroundStyle}`"
-    >
+  <div ref="echartsWrapper" class="sugar-root" :style="canvasType == 0 ? 'height: auto' : ''">
+    <div v-if="canvasType == 0" ref="echartsWrapperhtml2canvas" :style="`background: ${dashboardBackgroundStyle}`">
       <slot />
     </div>
     <div v-else-if="canvasType == 1" class="popMenu-wrapper">
-      <div
-        class="dashboard-share-container reportOrDashBackColor"
-        style="background-color: #eeeeee; overflow: hidden"
-      >
+      <div class="dashboard-share-container reportOrDashBackColor" style="background-color: #eeeeee; overflow: hidden">
         <div
           class="dashboard-share-background-image reportOrDashBackImg"
-          :style="`background: ${dashboardBackgroundStyle} ${marginLeft}px top / ${
-            100 * boxWidthPercent
-          }% 100%`"
+          :style="`background: ${dashboardBackgroundStyle} ${marginLeft}px top / ${100 * boxWidthPercent}% 100%`"
         />
         <div :style="`margin: 0  ${marginLeft}px`">
           <div style="position: relative">
@@ -114,13 +105,11 @@ export default {
     window.addEventListener('resize', this.__resizeHandler)
 
     this.$_sidebarElm = document.getElementsByClassName('sidebar-container')[0]
-    this.$_sidebarElm &&
-      this.$_sidebarElm.addEventListener('transitionend', this.$_sidebarResizeHandler)
+    this.$_sidebarElm && this.$_sidebarElm.addEventListener('transitionend', this.$_sidebarResizeHandler)
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.__resizeHandler)
-    this.$_sidebarElm &&
-      this.$_sidebarElm.removeEventListener('transitionend', this.$_sidebarResizeHandler)
+    this.$_sidebarElm && this.$_sidebarElm.removeEventListener('transitionend', this.$_sidebarResizeHandler)
   },
   methods: {
     $_sidebarResizeHandler(e) {

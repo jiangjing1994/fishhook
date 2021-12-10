@@ -1,6 +1,8 @@
 <template>
   <div style="text-align: left">
-    <KemSteps :title-list="titleList" :active="active"></KemSteps>
+    {{ activeIndex }}
+    <KemSteps :options="options" :active-index="activeIndex"></KemSteps>
+    <KemButton @click="next">下一步</KemButton>
   </div>
 </template>
 
@@ -10,7 +12,8 @@ export default {
   data() {
     return {
       // 当前步骤条
-      active: 0,
+      activeIndex: 1,
+      options: [{ label: 'step1' }, { label: 'step2' }, { label: 'step3' }, { label: 'step4' }],
     }
   },
   computed: {
@@ -24,6 +27,11 @@ export default {
         { title: '步骤 6' },
         { title: '步骤 7' },
       ]
+    },
+  },
+  methods: {
+    next() {
+      this.activeIndex++
     },
   },
 }
