@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="kem-select_body">
     <KemLabelText v-if="uiType === 'text'" :value="label" />
     <el-select
       v-else
@@ -26,9 +26,15 @@
         :disabled="item.disabled"
         :value="getoptionValue(item)"
       >
+        <div class="el-select-dropdown__item" style="padding-left: 10px">
+          <div class="kem-select-mask"></div>
+          <el-checkbox :value="isActive(item)" :label="item.label" @click="change"></el-checkbox>
+        </div>
         <slot :scope="item"></slot>
       </el-option>
     </el-select>
+    {{ checkAll }} {{ isIndeterminate }}
+    <el-checkbox v-model="checkAll" :indeterminate="isIndeterminate" @change="handleCheckAllChange">全选</el-checkbox>
   </div>
 </template>
 <script>
@@ -86,6 +92,8 @@ export default {
   data() {
     return {
       data: [],
+      checkAll: false,
+      isIndeterminate: true,
     }
   },
   computed: {
@@ -109,6 +117,22 @@ export default {
     },
   },
   methods: {
+    change(v) {
+      console.log(v)
+    },
+    isActive(item) {
+      // multiple 是否多选逻辑不同
+      if (this.multiple) {
+        return this.v.includes(this.getoptionValue(item))
+      } else {
+        return this.getoptionValue(item) === this.v
+      }
+    },
+    handleCheckAllChange(val) {
+      console.log(val)
+      this.$attrs.value = val ? [] : []
+      this.isIndeterminate = false
+    },
     getoptionValue(item) {
       if (this.valueIsObject) {
         return item
@@ -120,4 +144,13 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style lang="scss">
+.kem-select_body {
+  .kem-select-mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+  }
+}
+</style>
