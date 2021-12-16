@@ -114,11 +114,7 @@ export default {
           if (!this.multiple) {
             this.$emit('input', value)
           } else {
-            if (this.valueDataType === 'string' && this.separator) {
-              this.$emit('input', value.join(this.separator))
-            } else {
-              this.$emit('input', value)
-            }
+            this.exportInputValue(value)
           }
         }
       }
@@ -199,6 +195,14 @@ export default {
         }
 
         this.$attrs.value = value
+        this.$emit('input', value)
+      }
+    },
+    /* input 数据输入 因为数据格式不一样要处理下*/
+    exportInputValue(value) {
+      if (this.valueDataType === 'string' && this.separator) {
+        this.$emit('input', value.join(this.separator))
+      } else {
         this.$emit('input', value)
       }
     },
