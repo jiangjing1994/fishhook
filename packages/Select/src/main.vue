@@ -26,7 +26,7 @@
         :disabled="item.disabled"
         :value="getoptionValue(item)"
       >
-        <div class="el-select-dropdown__item" style="padding-left: 10px">
+        <div v-if="uiType === 'checkbox'" class="el-select-dropdown__item" style="padding-left: 10px">
           <div class="kem-select-mask"></div>
           <div v-if="index === 0 && multiple" class="kem-select-mask-botton" @click.stop>
             <el-checkbox v-model="checkAll" :indeterminate="isIndeterminate" @change="handleCheckAllChange"

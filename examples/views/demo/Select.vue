@@ -226,6 +226,48 @@ export default {
             ],
           },
         },
+        {
+          label: '多选-checkbox',
+          prop: 'prop7',
+          span: 13,
+          component: 'KemSelect',
+          props: {
+            multiple: true,
+            uiType: 'checkbox',
+            options: [
+              {
+                label: '区域一',
+                value: 'shanghai',
+              },
+              {
+                label: '区域二',
+                value: 'beijing',
+              },
+            ],
+          },
+        },
+        {
+          label: '多选-checkbox-valueDataType-string',
+          prop: 'prop8',
+          span: 13,
+          component: 'KemSelect',
+          props: {
+            valueDataType: 'string',
+            multiple: true,
+            uiType: 'checkbox',
+
+            options: [
+              {
+                label: '区域一',
+                value: 'shanghai',
+              },
+              {
+                label: '区域二',
+                value: 'beijing',
+              },
+            ],
+          },
+        },
       ]
     },
   },
