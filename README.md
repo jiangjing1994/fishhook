@@ -1,4 +1,4 @@
-## ✨ 姜太公钓鱼愿者上钩 ✨
+## Fishhook
 
 > 前人挖坑后人埋，看你埋得过来不过来。
 
@@ -23,14 +23,14 @@ Vue.use(ElementUI)
 
 > Vue.use() 顺序不要变！
 
-## 🌍 其他
+## 其他
 
 ### 仓库说明
 
-- 本库高度封装，牺牲一定的体验性，为的是提高开发效率(上班摸鱼)，提倡代码配置化。
-- 如果不想引入包的话可以直接把 packages 包粘到自己的项目里
-- 本库依赖于 elementUi 和 avue
-- 主要作者本人使用，维护看心情
+- 本库高度封装(ui 较难修改，样式主要通过 css 覆盖)，但是可以显著提高开发效率(上班摸鱼)，提倡代码配置化，模块标准化，接口简洁化。
+- 如果不想引入 npm 包的话可以直接把 packages 包里的源码复制到自己的项目里，略作修改即可使用。
+- 本库依赖于 elementUi 和 avue(主要用了表格部分功能，未来会在本地重构)。
+- 主要作者本人使用，维护看心情(毕竟靠爱发电很困难，需求还是得优先满足作者)。
 
 ### 前端开发的一个现状
 
@@ -83,13 +83,14 @@ Vue.use(ElementUI)
 
 ## 浏览器支持
 
-本地开发推荐使用`Chrome 80+` 浏览器支持现代浏览器, 不支持IE
+本地开发推荐使用`Chrome 80+` 浏览器支持现代浏览器, 不支持 IE
 
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt=" Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt=" Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari |
 | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 |                                                                                             not support                                                                                              |                                                                                            last 2 versions                                                                                             |                                                                                                  last 2 versions                                                                                                  |                                                                                                last 2 versions                                                                                                |                                                                                                last 2 versions                                                                                                |
 
-## 🌈 资源
-- [github](https://github.com/jiangjing1994/fishhook/)
-- [doc](https://jiangjing1994.github.io/fishhook/)
-- [npm](https://www.npmjs.com/package/@jiangjing94/mimi/)
+## 资源
+
+- [Github](https://github.com/jiangjing1994/fishhook/)
+- [Docs](https://jiangjing1994.github.io/fishhook/)
+- [Npm](https://www.npmjs.com/package/@jiangjing94/mimi/)
