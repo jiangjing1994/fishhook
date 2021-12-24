@@ -34,7 +34,7 @@
 import JsxFormItem from './FormItem'
 
 export default {
-  name: 'JsxForm',
+  name: 'KemJsxForm',
   components: { JsxFormItem },
   props: {
     /**

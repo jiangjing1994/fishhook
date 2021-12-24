@@ -137,7 +137,7 @@
           :ref="column.ref || `cp-${column.prop}`"
           v-model="form[column.prop]"
           :data="form"
-          v-bind="column.props"
+          v-bind="componentProps(column.props)"
           v-on="column.listeners"
         />
       </template>
@@ -266,7 +266,15 @@ export default {
 
       return [].concat(selfRules || formRules || []).concat(requiredRule)
     },
-
+    /**
+     * 组件方式获取props
+     */
+    componentProps(props) {
+      if (typeof props === 'function') {
+        props = props(this.form)
+      }
+      return props
+    },
     /**
      * 设置fomatter和默认渲染样式
      */
@@ -280,18 +288,18 @@ export default {
           return <span class={[this.column.class]}>{value}</span>
         }
       }
-      if (this.column.component) {
-        let { component, prop, props, ...theArgs } = this.column
-        if (typeof props === 'function') {
-          props = props(this.form)
-        }
-        return {
-          component,
-          prop,
-          props,
-          ...theArgs,
-        }
-      }
+      // if (this.column.component) {
+      //   let { component, prop, props, ...theArgs } = this.column
+      //   if (typeof props === 'function') {
+      //     props = props(this.form)
+      //   }
+      //   return {
+      //     component,
+      //     prop,
+      //     props,
+      //     ...theArgs,
+      //   }
+      // }
       if (!this.column.render && !this.column.component) {
         this.column.render = (h, form) => {
           if (this.column.prop) {

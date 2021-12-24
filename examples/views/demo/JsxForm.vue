@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'JsxForm1',
+  name: 'JsxFormDemo',
   data() {
     return {
       formConfig: {
@@ -95,12 +95,7 @@ export default {
             { type: 'number', min: 1, message: 'hahaha', trigger: 'blur' },
           ],
           render: (h, form, root) => (
-            <kem-input-number
-              v-model={form.age}
-              onChange={this.handleChange}
-              max={20}
-              label="描述文字"
-            />
+            <kem-input-number v-model={form.age} onChange={this.handleChange} max={20} label="描述文字" />
           ),
         },
 

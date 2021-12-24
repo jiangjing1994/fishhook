@@ -31,7 +31,7 @@ import KemTag from './Tag'
 import KemTagGroup from './TagGroup'
 import KemRangePicker from './RangePicker'
 import KemIcon from './Icon'
-import JsxForm from './JsxForm'
+import KemJsxForm from './JsxForm'
 import KemD52tButton from './D52tButton'
 import KemInputTree from './InputTree'
 import KemFlipNnumber from './FlipNnumber'
@@ -86,7 +86,7 @@ const components = [
   KemD52tButton,
   KemInputTree,
   KemFlipNnumber,
-  JsxForm,
+  KemJsxForm,
 ]
 
 const install = function (Vue, opts = {}) {
@@ -234,5 +234,5 @@ export default {
   KemD52tButton,
   KemInputTree,
   KemFlipNnumber,
-  JsxForm,
+  KemJsxForm,
 }

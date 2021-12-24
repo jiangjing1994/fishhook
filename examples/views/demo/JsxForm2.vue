@@ -3,8 +3,7 @@
     <KemPageCard style="width: 800px; margin-right: 20px" header="Form">
       <pre>{{ form }}</pre>
 
-      222
-      <KemForm
+      <KemJsxForm
         ref="form"
         :form-items="formItems"
         :model="form"
@@ -22,26 +21,7 @@
             <el-radio label="线下场地免费"></el-radio>
           </el-radio-group>
         </template>
-      </KemForm>
-      <JsxForm
-        ref="form"
-        :form-items="formItems"
-        :model="form"
-        :row-gutter="10"
-        :form-rules="formRules"
-        :form-config="{
-          labelPositon: 'right',
-        }"
-        :read-only="readOnly"
-        @updataFormData="updataFormData"
-      >
-        <template slot="resource">
-          <el-radio-group v-model="form.resource">
-            <el-radio label="线上品牌商赞助"></el-radio>
-            <el-radio label="线下场地免费"></el-radio>
-          </el-radio-group>
-        </template>
-      </JsxForm>
+      </KemJsxForm>
 
       <div slot="footer">
         <KemButton @click="updataFormItems">切换FormItems</KemButton>
@@ -54,7 +34,7 @@
 
 <script>
 export default {
-  name: 'JsxForm2',
+  name: 'JsxFormDemo2',
   data() {
     return {
       form: {
@@ -69,42 +49,11 @@ export default {
         ],
       },
       formItems: [
-        { label: '活动名称', prop: 'name', tip: 'sasa' },
-        { label: '电子邮箱', prop: 'email', span: 12, component: 'KemInput' },
-        { label: '人员总数', prop: 'num', span: 12, component: 'KemInputNumber' },
+        // { label: '活动名称', prop: 'name', tip: 'sasa' },
+        // { label: '电子邮箱', prop: 'email', span: 12, component: 'KemInput' },
+        // { label: '人员总数', prop: 'num', span: 12, component: 'KemInputNumber' },
         {
-          label: 'lalalal',
-          prop: 'sasas',
-          span: 24,
-          component: 'KemChooseArrayElement',
-          props: {
-            uiType: 'inline',
-
-            formItems: [
-              { label: '活动名称', prop: 'name', span: 24 },
-              {
-                label: '电子邮箱',
-                prop: 'email',
-                span: 24,
-                component: 'KemCheckboxGroup',
-                props: {
-                  options: [
-                    {
-                      label: '区域一',
-                      value: 'shanghai',
-                    },
-                    {
-                      label: '区域二',
-                      value: 'beijing',
-                    },
-                  ],
-                },
-              },
-            ],
-          },
-        },
-        {
-          label: '活动区域',
+          label: '活动区域2',
           prop: 'region',
           span: 24,
           component: 'KemSelect',
@@ -123,53 +72,51 @@ export default {
         },
 
         {
-          label: '二级区域',
+          label: '二级区域2',
           prop: 'region2',
           span: 24,
-          component: 'KemInput',
+          component: 'KemSelect',
           // show: (data) => {
           //   return !data.region
           // },
           props: (data) => {
-            let options = []
-
-            if (data.region === 'shanghai') {
-              options = [
-                {
-                  label: 'shanghai_0001',
-                  value: 'shanghai_0001',
-                },
-                {
-                  label: 'shanghai_0002',
-                  value: 'shanghai_0002',
-                },
-              ]
-            }
             return {
-              multiple: true,
-              options,
+              options: [
+                {
+                  label: data.region,
+                  value: '4444',
+                },
+                {
+                  label: '区域一',
+                  value: 'shanghai',
+                },
+                {
+                  label: '区域二',
+                  value: 'beijing',
+                },
+              ],
             }
           },
         },
-        // { label: '即时配送', prop: 'delivery', span: 24, component: 'KemSwitch' },
-        // {
-        //   label: '活动性质',
-        //   prop: 'type',
-        //   span: 24,
-        //   component: 'KemCheckboxGroup',
-        //   props: {
-        //     options: [
-        //       {
-        //         label: '美食/餐厅线上活动',
-        //         value: 'shanghai',
-        //       },
-        //       {
-        //         label: '地推活动',
-        //         value: 'beijing',
-        //       },
-        //     ],
-        //   },
-        // },
+        { label: '即时配送', prop: 'delivery', span: 24, component: 'KemSwitch' },
+        {
+          label: '活动性质',
+          prop: 'type',
+          span: 24,
+          component: 'KemCheckboxGroup',
+          props: {
+            options: [
+              {
+                label: '美食/餐厅线上活动',
+                value: 'shanghai',
+              },
+              {
+                label: '地推活动',
+                value: 'beijing',
+              },
+            ],
+          },
+        },
         // { label: '特殊资源', prop: 'resource', slot: 'resource', span: 24 },
       ],
     }
