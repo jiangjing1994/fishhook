@@ -24,7 +24,8 @@
       </KemJsxForm>
 
       <div slot="footer">
-        <KemButton @click="updataFormItems">切换FormItems</KemButton>
+        <KemButton @click="updataFormItems(1)">切换FormItems1</KemButton>
+        <KemButton @click="updataFormItems(2)">切换FormItems2</KemButton>
         <KemButton @click="readOnly = !readOnly">只读</KemButton>
         <KemButton @click="submitForm">提交</KemButton>
       </div>
@@ -48,7 +49,8 @@ export default {
           { type: 'email', message: '请输入正确的邮箱地址', trigger: ['change'] },
         ],
       },
-      formItems: [
+      formItems: [],
+      formItems1: [
         // { label: '活动名称', prop: 'name', tip: 'sasa' },
         // { label: '电子邮箱', prop: 'email', span: 12, component: 'KemInput' },
         // { label: '人员总数', prop: 'num', span: 12, component: 'KemInputNumber' },
@@ -117,9 +119,74 @@ export default {
             ],
           },
         },
+        {
+          prop: 'ab',
+          label: 'render方式',
+          render: (h, form, root) => {
+            const transferRequest = () => {
+              return new Promise((resolve) => {
+                setTimeout(() => {
+                  resolve([
+                    { transferName: '动态数据1', id: 'Beijing' },
+                    { transferName: '动态数据2', id: 'Shanghai' },
+                    { transferName: '动态数据3', id: 'Nanjing' },
+                    { transferName: '动态数据4', id: 'Chengdu' },
+                    { transferName: '动态数据5', id: 'Shenzhen' },
+                    { transferName: '动态数据6', id: 'Guangzhou' },
+                  ])
+                }, 500)
+              })
+            }
+            const props = {
+              request: transferRequest,
+              defaultProps: {
+                label: 'transferName',
+                value: 'id',
+              },
+              defaultParams: {
+                dictType: 'transfer',
+              },
+            }
+            return <kem-select {...{ props }} v-model={form.ab} />
+          },
+        },
+
         // { label: '特殊资源', prop: 'resource', slot: 'resource', span: 24 },
       ],
+      formItems2: [
+        { label: '活动名称', prop: 'name', span: 24 },
+        {
+          label: '二级区域2',
+          prop: 'region2',
+          span: 24,
+          component: 'KemSelect',
+          // show: (data) => {
+          //   return !data.region
+          // },
+          props: (data) => {
+            return {
+              options: [
+                {
+                  label: data.region,
+                  value: '4444',
+                },
+                {
+                  label: '区域一',
+                  value: 'shanghai',
+                },
+                {
+                  label: '区域二',
+                  value: 'beijing',
+                },
+              ],
+            }
+          },
+        },
+      ],
     }
+  },
+  created() {
+    this.formItems = this.formItems1
   },
   methods: {
     submitForm() {
@@ -137,8 +204,12 @@ export default {
         this.$message.success('活动名称变了')
       }
     },
-    updataFormItems() {
-      this.formItems = [{ label: '活动名称', prop: 'name', span: 24 }]
+    updataFormItems(value) {
+      if (value === 1) {
+        this.formItems = this.formItems1
+      } else {
+        this.formItems = this.formItems2
+      }
     },
     test() {
       console.log(this.$refs.form2.formItemElement())

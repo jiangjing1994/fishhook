@@ -39,12 +39,12 @@ import ContextNenu from './ContextNenu'
 import ElementUI from 'element-ui'
 import Avue from '@smallwei/avue'
 import '@smallwei/avue/lib/index.css'
-import {
-  Tree as KemViewTree,
-  Alert as KemViewAlert,
-  Icon as KemViewIcon,
-  Checkbox as KemViewCheckbox,
-} from 'view-design'
+// import {
+//   Tree as KemViewTree,
+//   Alert as KemViewAlert,
+//   Icon as KemViewIcon,
+//   Checkbox as KemViewCheckbox,
+// } from 'view-design'
 import 'view-design/dist/styles/iview.css'
 import './theme/index.scss'
 import { isExitsVariable } from './utils'
@@ -185,10 +185,10 @@ const install = function (Vue, opts = {}) {
   })
   ContextNenu.install(Vue)
 
-  Vue.component('KemViewTree', KemViewTree)
-  Vue.component('KemViewAlert', KemViewAlert)
-  Vue.component('KemViewIcon', KemViewIcon)
-  Vue.component('KemViewCheckbox', KemViewCheckbox)
+  // Vue.component('KemViewTree', KemViewTree)
+  // Vue.component('KemViewAlert', KemViewAlert)
+  // Vue.component('KemViewIcon', KemViewIcon)
+  // Vue.component('KemViewCheckbox', KemViewCheckbox)
 
   Vue.component('KemTree', KemTree)
 }
