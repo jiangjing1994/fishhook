@@ -3,8 +3,8 @@
     <el-checkbox-group v-bind="$attrs" :value="v" :disabled="isdisabled" v-on="evet">
       <el-checkbox
         v-for="(item, index) in list"
-        :border="border"
         :key="index"
+        :border="border"
         :label="item.value"
         :disabled="item.disabled"
         >{{ item.label }}</el-checkbox
