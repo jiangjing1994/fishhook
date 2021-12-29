@@ -18,7 +18,7 @@ import KemSwitch from './Switch'
 import KemCountUp from './CountUp'
 import KemDataIcons from './DataIcons'
 import KemInputSlider from './InputSlider'
-import KemTree from './Tree'
+//import KemTree from './Tree'
 import KemSteps from './Steps'
 import KemCrud from './Crud'
 import KemChooseArrayElement from './ChooseArrayElement'
@@ -45,7 +45,7 @@ import '@smallwei/avue/lib/index.css'
 //   Icon as KemViewIcon,
 //   Checkbox as KemViewCheckbox,
 // } from 'view-design'
-import 'view-design/dist/styles/iview.css'
+// import 'view-design/dist/styles/iview.css'
 import './theme/index.scss'
 import { isExitsVariable } from './utils'
 import './utils'
@@ -190,7 +190,7 @@ const install = function (Vue, opts = {}) {
   // Vue.component('KemViewIcon', KemViewIcon)
   // Vue.component('KemViewCheckbox', KemViewCheckbox)
 
-  Vue.component('KemTree', KemTree)
+  //Vue.component('KemTree', KemTree)
 }
 
 if (typeof window !== 'undefined' && window.Vue) {

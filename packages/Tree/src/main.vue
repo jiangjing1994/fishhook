@@ -29,13 +29,16 @@
 import TreeNode from './node.vue'
 
 import Emitter from '../../mixins/emitter'
-import { Dropdown, DropdownMenu } from 'view-design'
+//import { Dropdown, DropdownMenu } from 'view-design'
 
 const prefixCls = 'kem-tree'
 
 export default {
   name: 'Tree',
-  components: { TreeNode, Dropdown, DropdownMenu },
+  components: {
+    TreeNode, //Dropdown, DropdownMenu
+  },
+
   mixins: [Emitter],
   provide() {
     return { TreeInstance: this }
@@ -202,9 +205,7 @@ export default {
     },
     getCheckedAndIndeterminateNodes() {
       /* public API */
-      return this.flatState
-        .filter((obj) => obj.node.checked || obj.node.indeterminate)
-        .map((obj) => obj.node)
+      return this.flatState.filter((obj) => obj.node.checked || obj.node.indeterminate).map((obj) => obj.node)
     },
     updateTreeDown(node, changes = {}) {
       if (this.checkStrictly) return
