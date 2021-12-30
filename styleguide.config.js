@@ -25,36 +25,36 @@ module.exports = {
     {
       name: 'Example',
       sections: [
-        // {
-        //   name: '表单 Form',
-        //   components: () => [
-        //     'packages/Form/src/main.vue',
-        //     'packages/IconSelect/src/main.vue',
-        //     'packages/InputSlider/src/main.vue',
-        //     'packages/Input/src/main.vue',
-        //     'packages/InputColor/src/main.vue',
-        //     'packages/InputNumber/src/main.vue',
-        //     'packages/InputPassWord/src/main.vue',
-        //     'packages/Search/src/main.vue',
-        //     'packages/Select/src/main.vue',
-        //     'packages/LabelText/src/main.vue',
-        //     'packages/CheckboxGroup/src/main.vue',
-        //     'packages/ChooseArrayElement/src/main.vue',
-        //     'packages/ColorPicker/src/main.vue',
-        //     'packages/RadioboxGroup/src/main.vue',
-        //     'packages/DatePicker/src/main.vue',
-        //   ],
-        // },
-        // { name: '表格 Table', components: () => ['packages/Table/src/main.vue'] },
-        // {
-        //   name: '布局 Layout',
-        //   components: () => [
-        //     'packages/DataView/src/main.vue',
-        //     'packages/Dialog/src/main.vue',
-        //     'packages/PageCard/src/main.vue',
-        //     'packages/DataIcons/src/main.vue',
-        //   ],
-        // },
+        {
+          name: '表单 Form',
+          components: () => [
+            'packages/Form/src/main.vue',
+            'packages/IconSelect/src/main.vue',
+            'packages/InputSlider/src/main.vue',
+            'packages/Input/src/main.vue',
+            'packages/InputColor/src/main.vue',
+            'packages/InputNumber/src/main.vue',
+            'packages/InputPassWord/src/main.vue',
+            'packages/Search/src/main.vue',
+            'packages/Select/src/main.vue',
+            'packages/LabelText/src/main.vue',
+            'packages/CheckboxGroup/src/main.vue',
+            'packages/ChooseArrayElement/src/main.vue',
+            'packages/ColorPicker/src/main.vue',
+            'packages/RadioboxGroup/src/main.vue',
+            'packages/DatePicker/src/main.vue',
+          ],
+        },
+        { name: '表格 Table', components: () => ['packages/Table/src/main.vue'] },
+        {
+          name: '布局 Layout',
+          components: () => [
+            'packages/DataView/src/main.vue',
+            'packages/Dialog/src/main.vue',
+            'packages/PageCard/src/main.vue',
+            'packages/DataIcons/src/main.vue',
+          ],
+        },
         {
           name: '其他 Others',
           components: () => [

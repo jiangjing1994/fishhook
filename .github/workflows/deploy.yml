@@ -29,7 +29,7 @@ jobs:
           npm run docs:build
 
       - name: deploy 🚀
-        uses: jamesives/github-pages-deploy-action@4.1.0
+        uses: jamesives/github-pages-deploy-action@4.1.7
         with:
           branch: gh-pages # the branch the action should deploy to.
           folder: doc # the folder the action should deploy.
