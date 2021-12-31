@@ -17,6 +17,7 @@ module.exports = {
   rules: {
     'no-console': onlyProductionError,
     'no-debugger': onlyProductionError,
+    'no-case-declarations': 'off',
     'vue/singleline-html-element-content-newline': 'off',
     'vue/multiline-html-element-content-newline': 'off',
     'vue/html-closing-bracket-spacing': 'off',
@@ -30,5 +31,6 @@ module.exports = {
     'vue/no-unused-vars': 'off',
     'no-unused-vars': 'off',
     'vue/no-use-v-if-with-v-for': 'off',
+    'vue/valid-v-for': 'off',
   },
 }

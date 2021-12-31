@@ -37,8 +37,8 @@ import KemInputTree from './InputTree'
 import KemFlipNnumber from './FlipNnumber'
 import ContextNenu from './ContextNenu'
 import ElementUI from 'element-ui'
-import Avue from '@smallwei/avue'
-import '@smallwei/avue/lib/index.css'
+import Grid from '@jiangjing94/grid'
+import '@jiangjing94/grid/lib/index.css'
 // import {
 //   Tree as KemViewTree,
 //   Alert as KemViewAlert,
@@ -180,7 +180,7 @@ const install = function (Vue, opts = {}) {
   ElementUI.install(Vue, {
     size: opts.size,
   })
-  Avue.install(Vue, {
+  Grid.install(Vue, {
     size: opts.size,
   })
   ContextNenu.install(Vue)

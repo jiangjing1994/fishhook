@@ -42,7 +42,7 @@
     ]
   },
   "dependencies": {
-    "@smallwei/avue": "2.8.22",
+    "@jiangjing94/grid": "^0.0.1",
     "axios": "0.19.2",
     "core-js": "3.6.5",
     "countup.js": "1.9.3",
