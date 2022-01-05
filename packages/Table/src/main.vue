@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <avue-crud
+    <grid
       ref="crud"
       v-model="obj"
       v-loadmore="handelLoadmore"
@@ -118,7 +118,7 @@
 
         <slot name="menu" :scope="scope" />
       </template>
-    </avue-crud>
+    </grid>
   </div>
 </template>
 
@@ -1060,11 +1060,11 @@ export default {
 <style lang="scss">
 .kem-table__body {
   // overflow: auto;
-  .avue-crud {
-    .avue-crud__menu {
+  .grid {
+    .grid__menu {
       display: none;
     }
-    .avue-crud__tip {
+    .grid__tip {
       display: none !important;
     }
     .el-table {
@@ -1079,17 +1079,17 @@ export default {
       // border: 0;
       .el-card__body {
         padding: 10px 0;
-        .avue-crud__header {
+        .grid__header {
           margin-bottom: 0;
         }
-        .avue-crud__menu {
+        .grid__menu {
           height: auto;
           min-height: 0;
           // margin-bottom: 0;
           display: flex;
           justify-content: space-between;
-          .avue-crud__left,
-          .avue-crud__right {
+          .grid__left,
+          .grid__right {
             overflow: auto;
             position: inherit;
             > button {
