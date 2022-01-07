@@ -1,21 +1,15 @@
 <template>
   <div>
     {{ page }}
-    <avue-crud :page.sync="page" :data="data" :option="option" @on-load="onLoad"> </avue-crud>
-    <avue-crud
-      :data="data1"
-      :option="option"
-      :page.sync="page1"
-      @size-change="sizeChange"
-      @current-change="currentChange"
-    >
+    <grid :page.sync="page" :data="data" :option="option" @on-load="onLoad"> </grid>
+    <grid :data="data1" :option="option" :page.sync="page1" @size-change="sizeChange" @current-change="currentChange">
       <template slot="nameHeader" slot-scope="{ column }">
         <el-tag>{{ (column || {}).label }}-{{ (column || {}).prop }}</el-tag>
       </template>
       <template slot="sexHeader" slot-scope="{ column }">
         <el-tag>{{ (column || {}).label }}-{{ (column || {}).prop }}</el-tag>
       </template>
-    </avue-crud>
+    </grid>
     <KemTable
       ref="multipleTable"
       :column="column"
@@ -31,12 +25,8 @@
       @clickMenuButton="clickMenuButton"
     />
     <div style="margin-top: 20px">
-      <el-button @click="toggleSelection([tableData[1], tableData[2]])"
-        >切换第二、第三行的选中状态</el-button
-      >
-      <el-button @click="toggleSelectionIds([tableData[1], tableData[2]])"
-        >根据id切换第二、第三行的选中状态</el-button
-      >
+      <el-button @click="toggleSelection([tableData[1], tableData[2]])">切换第二、第三行的选中状态</el-button>
+      <el-button @click="toggleSelectionIds([tableData[1], tableData[2]])">根据id切换第二、第三行的选中状态</el-button>
       <el-button @click="toggleAllSelection()">选择all</el-button>
       <el-button @click="toggleSelection()">取消选择</el-button>
     </div>
