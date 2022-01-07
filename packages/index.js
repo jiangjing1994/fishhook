@@ -39,13 +39,6 @@ import ContextNenu from './ContextNenu'
 import ElementUI from 'element-ui'
 import Grid from '@jiangjing94/grid'
 import '@jiangjing94/grid/lib/index.css'
-// import {
-//   Tree as KemViewTree,
-//   Alert as KemViewAlert,
-//   Icon as KemViewIcon,
-//   Checkbox as KemViewCheckbox,
-// } from 'view-design'
-// import 'view-design/dist/styles/iview.css'
 import './theme/index.scss'
 import { isExitsVariable } from './utils'
 import './utils'

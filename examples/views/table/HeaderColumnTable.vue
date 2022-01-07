@@ -1,16 +1,11 @@
 <template>
   <div>
-    <avue-crud ref="crud" :option="option" :data="data">
+    <grid ref="crud" :option="option" :data="data">
       <template slot="nameHeader" slot-scope="{ column }">
         <el-tag>{{ (column || {}).label }}-{{ (column || {}).prop }}</el-tag>
       </template>
-    </avue-crud>
-    <KemTable
-      :request="request"
-      :column="column"
-      @rowClick="rowClick"
-      @clickMenuButton="clickMenuButton"
-    >
+    </grid>
+    <KemTable :request="request" :column="column" @rowClick="rowClick" @clickMenuButton="clickMenuButton">
       <template slot="typeHeader" slot-scope="{ column }">
         <el-tag>{{ (column || {}).label }}-{{ (column || {}).prop }}</el-tag>
       </template>
