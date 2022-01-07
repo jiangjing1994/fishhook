@@ -1,6 +1,6 @@
 {
   "name": "@jiangjing94/mimi",
-  "version": "1.4.6-beta.7",
+  "version": "1.4.6",
   "private": false,
   "scripts": {
     "bootstrap": "yarn --frozen-lockfile && yarn gen:version",
@@ -42,8 +42,7 @@
     ]
   },
   "dependencies": {
-    "@jiangjing94/grid": "^0.0.2-beta.2",
-    "@smallwei/avue": "2.8.22",
+    "@jiangjing94/grid": "^0.0.2",
     "axios": "0.19.2",
     "core-js": "3.20.2",
     "countup.js": "1.9.3",
