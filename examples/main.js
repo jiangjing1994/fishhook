@@ -13,7 +13,7 @@ Vue.use(FishhookUI, {
     size: 'mini',
   },
   Form: {
-    labelSuffix: ':',
+    labelSuffix: '@',
   },
   Table: {
     align: 'left',

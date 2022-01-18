@@ -31,7 +31,9 @@
         <span
           :class="['jsx-form-item__label-wrap', (column.required || isRequired) && 'is-required']"
           :style="labelStyle"
-          >{{ column.label }}:
+          >{{ column.label }}
+          <!-- @slot suffix	label尾部内容  -->
+          <span v-if="formLabelSuffix">{{ formLabelSuffix }}</span>
         </span>
       </template>
 
@@ -192,6 +194,10 @@ export default {
       type: String,
       default: '',
     },
+    labelSuffix: {
+      type: String,
+      default: '',
+    },
     itemIndex: {
       type: Number,
       default: -1,
@@ -245,6 +251,9 @@ export default {
         })
       }
       return isRequired
+    },
+    formLabelSuffix() {
+      return this.labelSuffix || this.$MIMI.Form.labelSuffix
     },
   },
   watch: {
