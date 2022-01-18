@@ -1,108 +1,90 @@
 <template>
-  <el-row :span="24">
-    <el-col :span="6">
-      值:{{ form }}<br />
-      <kem-input-tree
-        v-model="form"
-        default-expand-all
-        placeholder="请选择内容"
-        type="tree"
-        :option="dic"
-      ></kem-input-tree>
-    </el-col>
-    <el-col :span="24"></el-col>
-    <el-col :span="6">
-      包含父类值:{{ form1 }}<br />
-      <kem-input-tree
-        v-model="form1"
-        multiple
-        placeholder="请选择内容"
-        type="tree"
-        :option="dic"
-      ></kem-input-tree>
-    </el-col>
-    <el-col :span="24"></el-col>
-    <el-col :span="6">
-      不包含父类值:{{ form2 }}<br />
-      <kem-input-tree
-        v-model="form2"
-        leaf-only
-        multiple
-        placeholder="请选择内容"
-        type="tree"
-        :option="dic"
-      ></kem-input-tree>
-    </el-col>
-    <el-col :span="24"></el-col>
-    <el-col :span="6">
-      半选是否包含父类值:{{ form33 }}<br />
-      半选是不包含父类值:{{ form3 }}<br />
-      <kem-input-tree
-        ref="tree"
-        v-model="form3"
-        include-half-checked
-        multiple
-        placeholder="请选择内容"
-        type="tree"
-        :option="dic"
-      ></kem-input-tree>
-    </el-col>
-    <el-col :span="24"></el-col>
-    <el-col :span="6">
-      父子不关联:{{ form4 }}<br />
-      <kem-input-tree
-        v-model="form4"
-        :check-strictly="true"
-        multiple
-        placeholder="请选择内容"
-        type="tree"
-        :option="dic"
-      ></kem-input-tree>
-    </el-col>
-  </el-row>
+  <div>
+    {{ value }}
+    <KemSelectTree v-model="value" placeholder="请选择内容" :tree-option="treeOption"></KemSelectTree>
+  </div>
 </template>
+
 <script>
 export default {
   name: 'SelectTree',
+  components: {},
   data() {
     return {
-      form: '',
-      form1: [0, 1, 2, 3, 4],
-      form2: [1, 2, 3],
-      form3: [2, 1],
-      form33: [],
-      form4: [0],
-      dic: [
+      value: 1,
+      treeOption: {
+        data: [
+          {
+            label: '一级 1',
+            children: [
+              {
+                label: '二级 1-1',
+                children: [
+                  {
+                    label: '三级 1-1-1',
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            label: '一级 2',
+            children: [
+              {
+                label: '二级 2-1',
+                children: [
+                  {
+                    label: '三级 2-1-1',
+                  },
+                ],
+              },
+              {
+                label: '二级 2-2',
+                children: [
+                  {
+                    label: '三级 2-2-1',
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            label: '一级 3',
+            children: [
+              {
+                label: '二级 3-1',
+                children: [
+                  {
+                    label: '三级 3-1-1',
+                  },
+                ],
+              },
+              {
+                label: '二级 3-2',
+                children: [
+                  {
+                    label: '三级 3-2-1',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      treeData: [
         {
-          label: '选项1',
-          value: 0,
+          value: 1,
+          label: 'text1',
           children: [
-            {
-              label: '选项3',
-              value: 2,
-            },
-            {
-              label: '选项4',
-              value: 3,
-            },
+            { value: 5, label: 'text5' },
+            { value: 6, label: 'text6' },
           ],
         },
-        {
-          label: '选项2',
-          value: 1,
-        },
+        { value: 2, label: 'text2' },
+        { value: 3, label: 'text3' },
+        { value: 4, label: 'text5' },
       ],
     }
-  },
-  watch: {
-    form3: {
-      handler() {
-        this.form33 = this.$refs.tree.getHalfList()
-      },
-    },
-  },
-  mounted() {
-    this.form33 = this.$refs.tree.getHalfList()
   },
 }
 </script>

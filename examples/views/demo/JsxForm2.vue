@@ -2,13 +2,14 @@
   <div style="text-align: left; display: flex; justify-content: center">
     <KemPageCard style="width: 800px; margin-right: 20px" header="Form">
       <pre>{{ form }}</pre>
-
+      sss
       <KemJsxForm
         ref="form"
         :form-items="formItems"
         :model="form"
         :row-gutter="10"
         :form-rules="formRules"
+        label-suffix=":"
         :form-config="{
           labelPositon: 'right',
         }"
@@ -21,6 +22,7 @@
             <el-radio label="线下场地免费"></el-radio>
           </el-radio-group>
         </template>
+        <template slot="labelSuffix"> 3333 </template>
       </KemJsxForm>
 
       <div slot="footer">
@@ -28,6 +30,9 @@
         <KemButton @click="updataFormItems(2)">切换FormItems2</KemButton>
         <KemButton @click="readOnly = !readOnly">只读</KemButton>
         <KemButton @click="submitForm">提交</KemButton>
+        <KemButton @click="validate">validate</KemButton>
+        <KemButton @click="resetFields">resetFields</KemButton>
+        <KemButton @click="clearValidate">clearValidate</KemButton>
       </div>
     </KemPageCard>
   </div>
@@ -40,10 +45,11 @@ export default {
     return {
       form: {
         name: '123',
+        type: [],
       },
       readOnly: false,
       formRules: {
-        region: [{ required: true, message: '请选择活动区域', trigger: 'blur' }],
+        region: [{ required: true, message: '请选择活动区域', trigger: 'change' }],
         email: [
           { required: true, message: '请输入邮箱地址', trigger: 'change' },
           { type: 'email', message: '请输入正确的邮箱地址', trigger: ['change'] },
@@ -52,10 +58,15 @@ export default {
       formItems: [],
       formItems1: [
         // { label: '活动名称', prop: 'name', tip: 'sasa' },
-        // { label: '电子邮箱', prop: 'email', span: 12, component: 'KemInput' },
+        { label: '电子邮箱', prop: 'email', span: 12, component: 'KemInput' },
         // { label: '人员总数', prop: 'num', span: 12, component: 'KemInputNumber' },
         {
           label: '活动区域2',
+          // renderLabel: (h, form, root) => <span style="color: red;"></span>,
+          rules: [
+            { required: true, message: '请输入邮箱地址', trigger: 'change' },
+            { type: 'email', message: '请输入正确的邮箱地址', trigger: ['change'] },
+          ],
           prop: 'region',
           span: 24,
           component: 'KemSelect',
@@ -217,6 +228,17 @@ export default {
     },
     clickDel(v) {
       console.log(v)
+    },
+    validate() {
+      this.$refs.form.validate((a) => {
+        console.log(a)
+      })
+    },
+    resetFields() {
+      this.$refs.form.resetFields()
+    },
+    clearValidate() {
+      this.$refs.form.clearValidate()
     },
   },
 }

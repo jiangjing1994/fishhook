@@ -9,7 +9,6 @@
     v-on="$listeners"
   >
     <div v-if="readOnly" class="mask"></div>
-
     <el-row class="fomr_item_body" :gutter="computedRowGutter">
       <template v-for="(item, idx) in column">
         <jsx-form-item
@@ -25,6 +24,7 @@
           :form-rules="rules"
           :disabled="disabled"
         />
+        <template slot="labelSuffix"> 3333 </template>
       </template>
     </el-row>
   </el-form>

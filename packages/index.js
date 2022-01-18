@@ -33,6 +33,7 @@ import KemRangePicker from './RangePicker'
 import KemIcon from './Icon'
 import KemJsxForm from './JsxForm'
 import KemD52tButton from './D52tButton'
+import KemSelectTree from './SelectTree'
 import KemInputTree from './InputTree'
 import KemFlipNnumber from './FlipNnumber'
 import ContextNenu from './ContextNenu'
@@ -77,6 +78,7 @@ const components = [
   KemRangePicker,
   KemIcon,
   KemD52tButton,
+  KemSelectTree,
   KemInputTree,
   KemFlipNnumber,
   KemJsxForm,
@@ -225,6 +227,7 @@ export default {
   KemRangePicker,
   KemIcon,
   KemD52tButton,
+  KemSelectTree,
   KemInputTree,
   KemFlipNnumber,
   KemJsxForm,

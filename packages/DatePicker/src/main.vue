@@ -13,7 +13,7 @@ export default {
       default: '选择日期',
     },
     /** 选择器类型
-     * @values date, datetime, time
+     * @values year/month/date/week/ datetime/datetimerange/daterange
      */
     type: {
       type: String,
