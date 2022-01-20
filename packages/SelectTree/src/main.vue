@@ -249,7 +249,7 @@ export default {
         //   }
         this.popoverVisible = !this.popoverVisible
         if (this.popoverVisible) {
-          ;(this.$refs.input || this.$refs.reference).focus()
+          (this.$refs.input || this.$refs.reference).focus()
         }
       }
     },
