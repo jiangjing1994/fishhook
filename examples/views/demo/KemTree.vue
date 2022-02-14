@@ -1,6 +1,6 @@
 <template>
   <div style="text-align: left">
-    <KemTree :data="baseData" show-checkbox></KemTree>
+    <!--    <KemTree :data="baseData" show-checkbox></KemTree>-->
     <KemViewTree :data="baseData" show-checkbox></KemViewTree>
     <KemViewTree :data="data3" :load-data="loadData" show-checkbox></KemViewTree>
   </div>
