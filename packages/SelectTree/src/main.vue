@@ -1,480 +1,590 @@
+<!--
+ * @moduleName: 下拉树组件
+ * @Author: dawdler
+ * @Date: 2018-12-19 14:03:03
+ * @LastModifiedBy: dawdler
+ * @LastEditTime: 2020-12-26 14:51:20
+ -->
 <template>
-  <div v-clickoutside="handleClose" class="el-select tree-select" @click.stop="toggleMenu">
-    <el-popover ref="popover" v-model="popoverVisible" trigger="manual" placement="bottom">
-      <el-scrollbar wrap-class="tree-scrollbar-wrapper">
+  <div class="el-tree-select" :class="selectClass">
+    <!-- 下拉文本 -->
+    <el-select
+      :id="'el-tree-select-' + guid"
+      ref="select"
+      v-model="labels"
+      v-popover:popover
+      :style="styles"
+      class="el-tree-select-input"
+      :disabled="disabled"
+      popper-class="select-option"
+      v-bind="selectParams"
+      :popper-append-to-body="false"
+      :filterable="false"
+      :multiple="selectParams.multiple"
+      :title="labels"
+      @remove-tag="_selectRemoveTag"
+      @clear="_selectClearFun"
+      @focus="_popoverShowFun"
+    >
+    </el-select>
+    <!-- 弹出框 -->
+    <el-popover
+      ref="popover"
+      v-model="visible"
+      :placement="placement"
+      :transition="transition"
+      :popper-class="popperClass"
+      :width="width"
+      trigger="click"
+    >
+      <!-- 是否显示搜索框 -->
+      <el-input
+        v-if="treeParams.filterable"
+        v-model="keywords"
+        size="mini"
+        class="input-with-select mb10"
+        @change="_searchFun"
+      >
+        <el-button slot="append" icon="el-icon-search"></el-button>
+      </el-input>
+      <el-scrollbar
+        tag="div"
+        wrap-class="el-select-dropdown__wrap"
+        view-class="el-select-dropdown__list"
+        class="is-empty"
+      >
+        <!-- 树列表 -->
         <el-tree
+          v-show="data.length > 0"
           ref="tree"
-          :data="treeOpt.data"
-          :load="treeOpt.load"
-          :lazy="treeOpt.lazy"
-          :props="treeOpt.props"
-          :node-key="treeOpt.key"
-          :expand-on-click-node="treeOpt.showCheckbox"
-          :show-checkbox="treeOpt.showCheckbox"
-          :check-strictly="multiple ? treeOpt.checkStrictly : true"
-          :default-expanded-keys="treeOpt.defaultExpandedKeys"
-          class="tree-select-popover"
-          @check="treeCheckhandle"
-          @node-click="handleNodeClick"
-        >
-          <span slot-scope="{ node, data }" :class="{ selected: node.selected }">
-            {{ node.label }}
-          </span>
-        </el-tree>
+          v-bind="treeParams"
+          :data="data"
+          :node-key="propsValue"
+          :draggable="false"
+          :current-node-key="ids.length > 0 ? ids[0] : ''"
+          :show-checkbox="selectParams.multiple"
+          :filter-node-method="filterNodeMethod ? filterNodeMethod : _filterFun"
+          :render-content="treeRenderFun"
+          @node-click="_treeNodeClickFun"
+          @check="_treeCheckFun"
+        ></el-tree>
+        <!-- 暂无数据 -->
+        <div v-if="data.length === 0" class="no-data">暂无数据</div>
       </el-scrollbar>
-      <div slot="reference" class="popover-reference">
-        <div
-          v-if="multiple"
-          ref="tags"
-          :style="{ 'max-width': inputWidth - 32 + 'px', width: '100%' }"
-          :class="['el-select__tags', selectDisabled ? 'is-disabled' : '']"
-        >
-          <transition-group @after-leave="resetInputHeight">
-            <el-tag
-              v-for="item in selected"
-              :key="getValueKey(item)"
-              :closable="!selectDisabled"
-              size="small"
-              type="info"
-              disable-transitions
-              @close="deleteTag($event, item)"
-            >
-              <span class="el-select__tags-text">{{ item.label }}</span>
-            </el-tag>
-          </transition-group>
-        </div>
-        <el-input
-          ref="reference"
-          v-model="selectedLabel"
-          :disabled="selectDisabled"
-          :placeholder="currentPlaceholder"
-          readonly
-          @focus="handleFocus"
-        >
-          <template slot="suffix">
-            <i v-show="!showClose" :class="['el-select__caret', 'el-input__icon', 'el-icon-' + iconClass]" />
-          </template>
-        </el-input>
-      </div>
     </el-popover>
   </div>
 </template>
+
 <script>
-/**
- * @displayName KemSelectTree
- */
-import Clickoutside from 'element-ui/lib/utils/clickoutside'
-import { addResizeListener, removeResizeListener } from 'element-ui/lib/utils/resize-event'
+import { on, off } from './utils/dom'
+import { each, guid } from './utils/utils'
+// @group api
 export default {
   name: 'KemSelectTree',
-  directives: { Clickoutside },
-  inject: {
-    elForm: {
-      default: '',
-    },
-
-    elFormItem: {
-      default: '',
-    },
-  },
+  components: {},
   props: {
-    multiple: {
-      type: Boolean,
-      default: false,
-    },
-    // 当子节点都被选中时选中父节点，输入框中只显示父节点
-    showCheckedStrategy: {
-      type: String,
-      default: 'showParent',
-    },
-    showValue: {
-      type: [String, Array],
-      default: '',
-    },
+    // v-model,存储的是treeParams.data里面的id
     value: {
-      type: [String, Array],
-      required: true,
+      // `String` / `Array` / `Number`
+      type: [String, Array, Number],
+      // `''`
+      default() {
+        return ''
+      },
     },
-    placeholder: {
+    // el-select样式
+    styles: {
+      type: Object,
+      // {}
+      default() {
+        return {}
+      },
+    },
+    // 下拉框 挂类
+    selectClass: {
       type: String,
-      default: '',
+      default() {
+        return ''
+      },
     },
+    // popover 挂类
+    popoverClass: {
+      type: String,
+      default() {
+        return ''
+      },
+    },
+    // 是否禁用文本框
     disabled: {
       type: Boolean,
-      default: false,
+      // false
+      default() {
+        return false
+      },
     },
-    treeOption: {
+    // 弹出框位置
+    placement: {
+      type: String,
+      //  bottom
+      default() {
+        return 'bottom'
+      },
+    },
+    // 弹出框过渡动画
+    transition: {
+      type: String,
+      //  el-zoom-in-top
+      default() {
+        return 'el-zoom-in-top'
+      },
+    },
+    // 树渲染方法，具体参考el-tree Function(h, { node, data, store }) {}
+    treeRenderFun: Function,
+    // 搜索过滤方法，具体参考el-tree Function(h, { value, data, node }) {}
+    filterNodeMethod: Function,
+    /*
+    文本框参数，几乎支持el-select所有的API<br>
+    取消参数：<br>
+    设定下拉框的弹出框隐藏：<br>
+    `:popper-append-to-body="false"` <br>
+    搜索从弹出框里面执行： <br>
+    `filterable="false"`
+    */
+    selectParams: {
       type: Object,
+      /*
+      Object默认参数：<br><br>
+      是否可以清空选项：<br>
+      `clearable: true,`<br><br>
+      是否禁用：<br>
+      `disabled: false,`<br><br>
+      搜索框placeholder文字：<br>
+      `placeholder: '请选择',`<br><br>
+      */
       default() {
         return {
-          data: null,
-          lazy: false,
-          load: null,
+          clearable: true,
+          disabled: false,
+          placeholder: '请选择',
+        }
+      },
+    },
+    /*
+    下拉树参数，几乎支持el-tree所有的API<br>
+     取消参数:<br>
+    `:show-checkbox="selectParams.multiple"`<br>
+    使用下拉框参数multiple判断是否对树进行多选<br>
+    取消对el-tree的人为传参show-checkbox<br>
+    `:node-key="propsValue"`     自动获取treeParams.props.value<br>
+    `:draggable="false"`         屏蔽拖动
+    */
+    treeParams: {
+      type: Object,
+      /*
+      Object默认参数：<br><br>
+      在有子级的情况下是否点击父级关闭弹出框,false 只能点击子级关闭弹出框：<br><br>
+      `clickParent: false`<br><br>
+      是否显示搜索框：<br><br>
+      `filterable: false`<br><br>
+      是否只是叶子节点：<br><br>
+      `leafOnly: false`<br><br>
+      是否包含半选节点：<br><br>
+      `includeHalfChecked: false`<br><br>
+      下拉树的数据：<br><br>
+      `data:[]`<br><br>
+      下拉树的props：<br><br>
+      `props: {`<br>
+          `children: 'children',`<br>
+          `label: 'name',`<br>
+          `value: 'flowId',`<br>
+          `disabled: 'disabled'`<br>
+      `}`
+      */
+      default() {
+        return {
+          clickParent: false,
+          filterable: false,
+          leafOnly: false,
+          includeHalfChecked: false,
+          data: [],
           props: {
-            children: '',
-            label: '',
-            disabled: '',
-            isLeaf: '',
+            children: 'children',
+            label: 'name',
+            code: 'code',
+            value: 'flowId',
+            disabled: 'disabled',
           },
-          key: '',
-          showCheckbox: false,
-          checkStrictly: false,
-          defaultExpandedKeys: [],
         }
       },
     },
   },
   data() {
-    const me = this
-    const treeOpt = {
-      showCheckbox: false,
-      checkStrictly: false,
-      ...this.treeOption,
-    }
-    if (treeOpt.lazy && treeOpt.load) {
-      const load = treeOpt.load
-      treeOpt.load = function (node, resolve) {
-        function newResolve(data) {
-          resolve(data)
-          setTimeout(me.nodeLoaded, 200)
-        }
-        load(node, newResolve)
-      }
-    }
     return {
-      showClose: false,
-      popoverVisible: false,
-      selectedLabel: '',
-      inputWidth: 0,
-      selected: this.multiple ? [] : {},
-      menuVisibleOnFocus: false,
-      softFocus: false,
-      allSelectedNodesLoaded: false,
-      currentPlaceholder: '',
-      initialInputHeight: 0,
-      treeOpt,
+      guid: guid(),
+      propsValue: 'flowId',
+      propsLabel: 'name',
+      propsCode: null, // 可能有空的情况
+      propsDisabled: 'disabled',
+      propsChildren: 'children',
+      leafOnly: false,
+      includeHalfChecked: false,
+      data: [],
+      keywords: '',
+      labels: '', // 存储名称，用于下拉框显示内容
+      ids: [], // 存储id
+      visible: false, // popover v-model
+      width: 150,
     }
   },
   computed: {
-    iconClass() {
-      return this.popoverVisible ? 'arrow-up is-reverse' : 'arrow-up'
-    },
-
-    selectDisabled() {
-      return this.disabled || (this.elForm || {}).disabled
+    popperClass() {
+      let _c = 'el-tree-select-popper ' + this.popoverClass
+      return this.disabled ? _c + ' disabled ' : _c
     },
   },
   watch: {
-    popoverVisible(val) {
-      if (!val) {
-        this.menuVisibleOnFocus = false
+    ids: function (val) {
+      if (val !== undefined) {
+        this.$nextTick(() => {
+          this._setSelectNodeFun(val)
+        })
       }
     },
-    value(val, oldVal) {
-      let deSelect
-      if (this.multiple) {
-        this.resetInputHeight()
-        if (oldVal) {
-          deSelect = oldVal.filter((item) => {
-            return !val.includes(item)
-          })
+    value: function (val) {
+      if (this.ids !== val) {
+        this._setMultipleFun()
+        if (this.selectParams.multiple) {
+          this.ids = [...val]
+        } else {
+          this.ids = val === '' ? [] : [val]
         }
-      } else {
-        deSelect = oldVal
       }
-      this.setSelected()
-      this.setDeSelected(deSelect)
-      this.managePlaceholder()
     },
   },
   created() {
-    if (this.multiple && !Array.isArray(this.value)) {
-      this.$emit('input', [])
-    }
-    if (!this.multiple && Array.isArray(this.value)) {
-      this.$emit('input', '')
+    const { props, data, leafOnly, includeHalfChecked } = this.treeParams
+    this._setMultipleFun()
+    this.propsValue = props.value
+    this.propsLabel = props.label
+    this.propsCode = props.code || null // 可能为空
+    this.propsDisabled = props.disabled
+    this.propsChildren = props.children
+    this.leafOnly = leafOnly
+    this.includeHalfChecked = includeHalfChecked
+    this.data = data.length > 0 ? [...data] : []
+    if (this.selectParams.multiple) {
+      this.labels = []
+      this.ids = this.value
+    } else {
+      this.labels = ''
+      this.ids = this.value instanceof Array ? this.value : [this.value]
     }
   },
   mounted() {
-    const reference = this.$refs.reference
-
-    addResizeListener(this.$el, this.handleResize)
-    this.managePlaceholder()
-    this.initialInputHeight = reference.$el.getBoundingClientRect().height
+    this._updateH()
     this.$nextTick(() => {
-      if (reference && reference.$el) {
-        this.inputWidth = reference.$el.getBoundingClientRect().width
-      }
+      on(document, 'mouseup', this._popoverHideFun)
     })
-
-    // 弹出的下拉树菜单
-    this.$refs.popover.$once('show', () => {
-      this.popperElm = this.$refs.popover.popperElm
-      this.popperElm.style.minWidth = this.inputWidth + 'px'
-      this.$refs.popover.updatePopper()
-    })
-
-    this.setSelected()
   },
   beforeDestroy() {
-    if (this.$el && this.handleResize) removeResizeListener(this.$el, this.handleResize)
+    off(document, 'mouseup', this._popoverHideFun)
   },
   methods: {
-    // loadNode(node, resolve) {
-    //   const me = this
-    //   if (node.level === 0) {
-    //     resolve([{label: '根节点'}])
-    //     return
-    //   }
-    //   const data = []
-    //   for (let i = 0; i < 5; i++) {
-    //     data.push({
-    //       label: `项目${node.level}-${i + 1}`
-    //     })
-    //   }
-    //   setTimeout(function() {
-    //     resolve(data)
-    //     setTimeout(me.nodeLoaded, 200)
-    //   }, 3000)
-    // },
-    getValueKey(item) {
-      return item[this.treeOpt.key]
+    // 根据类型判断单选，多选
+    _setMultipleFun() {
+      let multiple = false
+      if (this.value instanceof Array) {
+        multiple = true
+      }
+      this.$set(this.selectParams, 'multiple', multiple)
     },
-    toggleMenu() {
-      // debugger
-      if (!this.selectDisabled) {
-        //   if (this.menuVisibleOnFocus) {
-        //     this.menuVisibleOnFocus = false
-        //   } else {
-        //   }
-        this.popoverVisible = !this.popoverVisible
-        if (this.popoverVisible) {
-          (this.$refs.input || this.$refs.reference).focus()
-        }
-      }
+    // 输入文本框输入内容抛出
+    _searchFun() {
+      /*
+      对外抛出搜索方法，自行判断是走后台查询，还是前端过滤<br>
+      前端过滤：this.$refs.treeSelect.$refs.tree.filter(value);<br>
+      后台查询：this.$refs.treeSelect.treeDataUpdateFun(data);
+      */
+      this.$emit('searchFun', this.keywords)
     },
-    treeCheckhandle(data, state) {
-      // debugger
-      if (this.multiple) {
-        // this.handleMultipCheck(state.checkedKeys)
-        this.$emit('input', state.checkedKeys)
-      } else {
-        this.$emit('input', data[this.treeOpt.key])
-        this.popoverVisible = false
+    //  根据id筛选当前树名称，以及选中树列表
+    _setSelectNodeFun(ids) {
+      const el = this.$refs.tree
+      if (!el) {
+        throw new Error('找不到tree dom')
       }
-    },
-    // handleMultipCheck() {
-    //
-    // },
-    // getMultiResult(checkedKeys, data = this.data) {
-    //   return data.reduce((acc, cur) => {
-    //     if (checkedKeys.includes(cur.value)) {
-    //       acc.push({
-    //         label: cur.label,
-    //         value: cur.value
-    //       })
-    //     } else if (cur.children) {
-    //       acc = acc.concat(this.getMultiResult(checkedKeys, cur.children))
-    //     }
-    //     return acc
-    //   }, [])
-    // },
-    handleNodeClick(data, node, comp) {
-      // debugger
-      // node.selected = true
-      // this.selectedLabel = data.label
-      if (this.treeOpt.showCheckbox || node.disabled) {
-        return
-      }
-      if (this.multiple) {
-        this.handleMultipSelect(data, node, comp)
-      } else {
-        this.handleSingleSelect(data, node, comp)
-        this.popoverVisible = false
-      }
-      this.setSoftFocus()
-    },
-    handleSingleSelect(data, node) {
-      // 已经选中
-      if (node.selected) {
-        return
-      }
-
-      if (this.value) {
-        const tree = this.$refs.tree
-        const oldNode = tree.getNode(this.value)
-        if (oldNode) {
-          oldNode.selected = false
-        }
-      }
-
-      this.selectedLabel = node.label
-      this.$emit('input', node.key)
-    },
-    handleMultipSelect(data, node) {
-      const index = this.value.indexOf(node.key)
-
-      if (index === -1) {
-        // this.selected.push(node)
-        this.value.push(node.key)
-      } else {
-        // 向node中注入selected
-        this.$set(node, 'selected', false)
-        this.value.splice(index, 1)
-        this.$emit('input', this.value)
-      }
-    },
-    setSelected() {
-      // debugger
-      const tree = this.$refs.tree
-      const showCheckbox = this.treeOpt.showCheckbox
-      if (this.multiple) {
-        const result = []
-        let loaded = true
-        if (Array.isArray(this.value)) {
-          if (showCheckbox) {
-            // this.defaultCheckedKeys = this.value
-            tree.setCheckedKeys(this.value)
-          }
-          this.value.forEach((value, index) => {
-            const node = tree.getNode(value)
-            if (node) {
-              this.$set(node, 'selected', true)
-              result.push(node)
-            } else {
-              result.push({
-                label: this.showValue[index] || value,
-                [this.treeOpt.key]: value,
-              })
-              loaded = false
-            }
-          })
-        }
-        this.allSelectedNodesLoaded = loaded
-        this.selected = result
-        this.$nextTick(() => {
-          this.resetInputHeight()
-        })
-      } else {
-        const node = tree.getNode(this.value)
-        // lazy 加载的时候可能节点不存在
-        if (node) {
-          if (showCheckbox) {
-            tree.setCheckedKeys([this.value])
-          }
-          this.$set(node, 'selected', true)
-          this.selected = node
-          this.selectedLabel = node.label
-          this.allSelectedNodesLoaded = true
+      const { multiple } = this.selectParams
+      // 长度为0，清空选择
+      if (ids.length === 0 || this.data.length === 0) {
+        this.labels = multiple ? [] : ''
+        if (multiple) {
+          el.setCheckedKeys([])
         } else {
-          this.selectedLabel = this.showValue || this.value
-          this.selected = {}
-          this.allSelectedNodesLoaded = false
-          if (showCheckbox) {
-            tree.setCheckedKeys([])
+          el.setCurrentKey(null)
+        }
+        return
+      }
+      if (multiple) {
+        // element-ui bug. 如果是父子节点全选 el.setCheckedKeys([非全量id]);之后el.getCheckedNodes()还是全量
+        el.getCheckedNodes(this.leafOnly, this.includeHalfChecked).forEach((item) => {
+          el.setChecked(item, false)
+        })
+        ids.forEach((id) => {
+          el.setChecked(id, true)
+        })
+        const nodes = el.getCheckedNodes(this.leafOnly, this.includeHalfChecked)
+        if (this.propsCode) {
+          // 如果有code   labels=code(name)
+          this.labels =
+            nodes.map((item) =>
+              item[this.propsCode] ? item[this.propsLabel] + '(' + item[this.propsCode] + ')' : item[this.propsLabel]
+            ) || []
+        } else {
+          this.labels = nodes.map((item) => item[this.propsLabel]) || []
+        }
+      } else {
+        el.setCurrentKey(ids[0])
+        const node = el.getCurrentNode()
+        if (node) {
+          if (this.propsCode) {
+            // 如果有code   labels=code(name)
+            this.labels = node[this.propsCode]
+              ? node[this.propsLabel] + '(' + node[this.propsCode] + ')'
+              : node[this.propsLabel]
+          } else {
+            this.labels = node[this.propsLabel]
           }
+        } else {
+          this.labels = ''
         }
       }
+      this._updatePopoverLocationFun()
     },
-    setDeSelected(item) {
-      const tree = this.$refs.tree
-
-      if (this.multiple) {
-        if (Array.isArray(item)) {
-          item.forEach((key) => {
-            const node = tree.getNode(key)
-            if (node) {
-              this.$set(node, 'selected', false)
-            }
+    // 更新popover位置
+    _updatePopoverLocationFun() {
+      // dom高度还没有更新，做一个延迟
+      setTimeout(() => {
+        this.$refs.popover.updatePopper()
+      }, 50)
+    },
+    // 获取MouseEvent.path 针对浏览器兼容性兼容ie11,edge,chrome,firefox,safari
+    _getEventPath(evt) {
+      const path = (evt.composedPath && evt.composedPath()) || evt.path
+      const target = evt.target
+      if (path != null) {
+        return path.indexOf(window) < 0 ? path.concat(window) : path
+      }
+      if (target === window) {
+        return [window]
+      }
+      function getParents(node, memo) {
+        memo = memo || []
+        const parentNode = node.parentNode
+        if (!parentNode) {
+          return memo
+        } else {
+          return getParents(parentNode, memo.concat(parentNode))
+        }
+      }
+      return [target].concat(getParents(target), window)
+    },
+    // 树过滤
+    _filterFun(value, data, node) {
+      if (!value) return true
+      return data[this.propsLabel].indexOf(value) !== -1
+    },
+    // 树点击
+    _treeNodeClickFun(data, node, vm) {
+      const { multiple } = this.selectParams
+      const { clickParent } = this.treeParams
+      const checkStrictly = this.treeParams['check-strictly']
+      const { propsValue, propsChildren, propsDisabled } = this
+      const children = data[propsChildren] || []
+      if (data[propsDisabled]) {
+        // 禁用
+        return
+      }
+      if (node.checked) {
+        const value = data[propsValue]
+        this.ids = this.ids.filter((id) => id !== value)
+        if (!checkStrictly && children.length) {
+          children.forEach((item) => {
+            this.ids = this.ids.filter((id) => id !== item[propsValue])
           })
         }
       } else {
-        const node = tree.getNode(item)
-        if (node) {
-          this.$set(node, 'selected', false)
+        if (!multiple) {
+          // 多选，不关闭，单选，判断是否允许点击父级关闭弹出框
+          if (!clickParent) {
+            // 如果不允许点击父级,自身为末级，允许点击之后关闭
+            if (children.length === 0) {
+              this.ids = [data[propsValue]]
+              this.visible = false
+            } else {
+              // 不允许父级，阻止继续派发
+              return false
+            }
+          } else {
+            this.ids = [data[propsValue]]
+            this.visible = false
+          }
+        } else {
+          if (!clickParent && children.length === 0) {
+            // 如果不能点击父级
+            this.ids.push(data[propsValue])
+          } else if (clickParent) {
+            // 允许点击父级
+            this.ids.push(data[propsValue])
+            // 如果父子关联，将子节点push进勾选项
+            if (!checkStrictly && children.length) {
+              children.forEach((item) => {
+                this.ids.push(item[propsValue])
+              })
+            }
+          }
         }
       }
+      this._emitFun()
+      /*
+      点击节点，对外抛出   `data, node, vm`<br>
+      `data:` 当前点击的节点数据<br>
+      `node:` 当前点击的node<br>
+      `vm:` 当前组件的vm
+      */
+      this.$emit('node-click', data, node, vm)
     },
-    setSoftFocus() {
-      this.softFocus = true
-      // const input = this.$refs.input || this.$refs.reference;
-      const input = this.$refs.reference
-      if (input) {
-        input.focus()
-      }
+    // 树勾选
+    _treeCheckFun(data, node, vm) {
+      this.ids = []
+      const { propsValue } = this
+      node.checkedNodes.forEach((item) => {
+        this.ids.push(item[propsValue])
+      })
+      /*
+      点击复选框，对外抛出   `data, node, vm`<br>
+      `data:` 当前点击的节点数据<br>
+      `node:` 当前点击的node<br>
+      `vm:` 当前组件的vm
+      */
+      this.$emit('check', data, node, vm)
+      this._emitFun()
     },
-    handleFocus() {
-      if (!this.softFocus) {
-        // this.menuVisibleOnFocus = true
-        // this.popoverVisible = true
-      } else {
-        this.softFocus = false
-      }
+    // 下拉框移除tag时触发
+    _selectRemoveTag(tag) {
+      const { data, propsValue, propsLabel, propsChildren } = this
+      each(
+        data,
+        (item) => {
+          if (item[propsLabel] === tag) {
+            const value = item[propsValue]
+            this.ids = this.ids.filter((id) => id !== value)
+          }
+        },
+        propsChildren
+      )
+      this.$refs.tree.setCheckedKeys(this.ids)
+      this.$emit('removeTag', this.ids, tag)
+      this._emitFun()
     },
-    handleClose() {
-      this.popoverVisible = false
+    // 下拉框清空数据
+    _selectClearFun() {
+      this.ids = []
+      const { multiple } = this.selectParams
+      // 下拉框清空，对外抛出``this.$emit('input', multiple ? [] : '');`
+      this.$emit('input', multiple ? [] : '')
+      // 下拉框清空，对外抛出``this.$emit('select-clear');`
+      this.$emit('select-clear')
+      this._updatePopoverLocationFun()
     },
-    resetInputHeight() {
-      if (this.collapseTags && !this.filterable) return
+    // 判断类型，抛出当前选中id
+    _emitFun() {
+      const { multiple } = this.selectParams
+      this.$emit('input', multiple ? this.ids : this.ids.length > 0 ? this.ids[0] : '')
+      this._updatePopoverLocationFun()
+    },
+    // 更新宽度
+    _updateH() {
       this.$nextTick(() => {
-        if (!this.$refs.reference) return
-        // debugger
-        const inputChildNodes = this.$refs.reference.$el.childNodes
-        const input = [].filter.call(inputChildNodes, (item) => item.tagName === 'INPUT')[0]
-        const tags = this.$refs.tags
-        const sizeInMap = this.initialInputHeight || 40
-        input.style.height =
-          this.selected.length === 0
-            ? sizeInMap + 'px'
-            : Math.max(tags ? tags.clientHeight + (tags.clientHeight > sizeInMap ? 6 : 0) : 0, sizeInMap) + 'px'
-        // if (this.visible && this.emptyText !== false) {
-        //   this.broadcast('ElSelectDropdown', 'updatePopper')
-        // }
-        this.$refs.popover.updatePopper()
+        this.width = this.$refs.select.$el.getBoundingClientRect().width
       })
     },
-    nodeLoaded() {
-      // debugger
-      // this.handlePopoverHeight()
-      if (this.allSelectedNodesLoaded) {
-        return
+    // 显示弹出框的时候容错，查看是否和el宽度一致
+    _popoverShowFun(val) {
+      this._updateH()
+    },
+    // 判断是否隐藏弹出框
+    _popoverHideFun(e) {
+      const path = this._getEventPath(e)
+      let isInside = path.some((list) => {
+        // 鼠标在弹出框内部，阻止隐藏弹出框
+        return list.className && typeof list.className === 'string' && list.className.indexOf('el-tree-select') !== -1
+      })
+      if (!isInside) {
+        this.visible = false
       }
-      this.setSelected()
     },
-    deleteTag(event, item) {
-      // debugger
-      this.handleMultipSelect(item.data, item)
+    /**
+     * @vuese
+     * 树列表更新数据
+     * @arg Array
+     */
+    treeDataUpdateFun(data) {
+      this.data = data
+      // 数据更新完成之后，判断是否回显内容
+      if (data.length > 0) {
+        setTimeout(() => {
+          this._setSelectNodeFun(this.ids)
+        }, 300)
+      }
     },
-    managePlaceholder() {
-      const val = this.value
-      this.currentPlaceholder = val.length === 0 ? this.placeholder : ''
-    },
-    resetInputWidth() {
-      this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width
-    },
-    handleResize() {
-      this.resetInputWidth()
-      if (this.multiple) this.resetInputHeight()
+
+    /**
+     * @vuese
+     * 本地过滤方法
+     * @arg String
+     */
+    filterFun(val) {
+      this.$refs.tree.filter(val)
     },
   },
 }
 </script>
-<style lang="scss">
-.tree-select {
-  width: 100%;
+<style>
+.el-tree-select .select-option {
+  display: none !important;
 }
-.tree-scrollbar-wrapper {
-  max-height: 50vh;
+
+[aria-disabled='true'] > .el-tree-node__content {
+  color: inherit !important;
+  background: transparent !important;
+  cursor: no-drop !important;
 }
-.tree-select-popover {
-  .el-tree-node {
-    .selected {
-      color: #409eff;
-      font-weight: 700;
-    }
-  }
+
+.el-tree-select-popper {
+  max-height: 400px;
+  overflow: auto;
 }
-.popover-reference {
-  line-height: normal;
+.el-tree-select-popper.disabled {
+  display: none !important;
+}
+.el-tree-select-popper .el-button--small {
+  width: 25px !important;
+  min-width: 25px !important;
+}
+
+.el-tree-select-popper[x-placement^='bottom'] {
+  margin-top: 5px;
+}
+
+.mb10 {
+  margin-bottom: 10px;
+}
+
+.no-data {
+  height: 32px;
+  line-height: 32px;
+  font-size: 14px;
+  color: #cccccc;
+  text-align: center;
 }
 </style>

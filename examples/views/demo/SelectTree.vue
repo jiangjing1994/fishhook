@@ -1,90 +1,145 @@
+<!--
+ * @Author: dawdler
+ * @Date: 2020-12-26 11:52:05
+ * @Description: demo
+ * @LastModifiedBy: dawdler
+-->
 <template>
-  <div>
-    {{ value }}
-    <KemSelectTree v-model="value" placeholder="请选择内容" :tree-option="treeOption"></KemSelectTree>
-  </div>
+  <KemSelectTree
+    ref="treeSelect"
+    v-model="values"
+    popover-class="test-class-wrap"
+    :styles="styles"
+    :select-params="selectParams"
+    :tree-params="treeParams"
+  ></KemSelectTree>
 </template>
-
 <script>
 export default {
   name: 'SelectTree',
   components: {},
+  props: {
+    params: Object,
+    isSingle: {
+      type: Boolean,
+      default() {
+        return true
+      },
+    },
+  },
   data() {
     return {
-      value: 1,
-      treeOption: {
-        data: [
-          {
-            label: '一级 1',
-            children: [
-              {
-                label: '二级 1-1',
-                children: [
-                  {
-                    label: '三级 1-1-1',
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            label: '一级 2',
-            children: [
-              {
-                label: '二级 2-1',
-                children: [
-                  {
-                    label: '三级 2-1-1',
-                  },
-                ],
-              },
-              {
-                label: '二级 2-2',
-                children: [
-                  {
-                    label: '三级 2-2-1',
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            label: '一级 3',
-            children: [
-              {
-                label: '二级 3-1',
-                children: [
-                  {
-                    label: '三级 3-1-1',
-                  },
-                ],
-              },
-              {
-                label: '二级 3-2',
-                children: [
-                  {
-                    label: '三级 3-2-1',
-                  },
-                ],
-              },
-            ],
-          },
-        ],
+      styles: {
+        width: '300px',
       },
-      treeData: [
-        {
-          value: 1,
-          label: 'text1',
-          children: [
-            { value: 5, label: 'text5' },
-            { value: 6, label: 'text6' },
-          ],
+      // 单选value为字符串，多选为数组
+      values: this.isSingle ? '' : [],
+      selectParams: {
+        clearable: true,
+        placeholder: '请输入内容',
+      },
+      treeParams: {
+        clickParent: true,
+        //  filterable: true,
+        // 只想要子节点，不需要父节点
+        leafOnly: true,
+        includeHalfChecked: false,
+        'check-strictly': false,
+        'default-expand-all': true,
+        'expand-on-click-node': false,
+        'render-content': this._renderFun,
+        data: [],
+        props: {
+          children: 'children',
+          label: 'name',
+          rootId: '0',
+          disabled: 'disabled',
+          parentId: 'parentId',
+          value: 'id',
         },
-        { value: 2, label: 'text2' },
-        { value: 3, label: 'text3' },
-        { value: 4, label: 'text5' },
-      ],
+        ...this.params,
+      },
     }
+  },
+  watch: {},
+  created() {},
+  mounted() {
+    // 手动更新树数据
+    let data = []
+    const { label, children, parentId, value, rootId } = this.treeParams.props
+    for (let i = 0; i < 5; i++) {
+      let rootNode = {
+        [label]: `节点：${i}`,
+        [parentId]: rootId,
+        [value]: i,
+        [children]: [],
+      }
+      for (let a = 0; a < 5; a++) {
+        let subId = `${rootNode[value]}_${a}`
+        let subNode = {
+          [label]: `子节点：${subId}`,
+          [parentId]: rootNode[value],
+          [value]: subId,
+          [children]: [],
+        }
+        for (let b = 0; b < 5; b++) {
+          let endId = `${subId}_${b}`
+          let endNode = {
+            [label]: `末级节点：${endId}`,
+            [parentId]: subNode[value],
+            [value]: endId,
+            [children]: [],
+          }
+          subNode[children].push(endNode)
+        }
+        rootNode[children].push(subNode)
+      }
+      data.push(rootNode)
+    }
+    this.$nextTick(() => {
+      this.$refs.treeSelect.treeDataUpdateFun(data)
+    })
+  },
+  methods: {
+    _filterFun(value, data, node) {
+      debugger
+      if (!value) return true
+      return data.id.indexOf(value) !== -1
+    },
+    // 树点击
+    _nodeClickFun(data, node, vm) {
+      console.log('this _nodeClickFun', this.values, data, node)
+    },
+    // 树过滤
+    _searchFun(value) {
+      console.log(value, '<--_searchFun')
+      // 自行判断 是走后台查询，还是前端过滤
+      this.$refs.treeSelect.filterFun(value)
+      // 后台查询
+      // this.$refs.treeSelect.treeDataUpdateFun(treeData);
+    },
+    // 自定义render
+    _renderFun(h, { node, data, store }) {
+      const { props, clickParent } = this.treeParams
+      return (
+        <span
+          class={[
+            'custom-tree-node',
+            !clickParent && data[props.children] && data[props.children].length ? 'disabled' : null,
+          ]}
+        >
+          <span>{node.label}</span>
+        </span>
+      )
+    },
   },
 }
 </script>
+<style lang="scss">
+.disabled {
+  cursor: no-drop;
+}
+.custom-tree-node {
+  width: calc(100% - 40px);
+}
+</style>
