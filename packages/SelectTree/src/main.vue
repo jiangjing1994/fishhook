@@ -39,7 +39,7 @@
     >
       <!-- 是否显示搜索框 -->
       <el-input
-        v-if="treeParams.filterable"
+        v-if="computedTreeParams.filterable"
         v-model="keywords"
         size="mini"
         class="input-with-select mb10"
@@ -57,7 +57,7 @@
         <el-tree
           v-show="data.length > 0"
           ref="tree"
-          v-bind="treeParams"
+          v-bind="computedTreeParams"
           :data="data"
           :node-key="propsValue"
           :draggable="false"
@@ -202,11 +202,6 @@ export default {
       */
       default() {
         return {
-          clickParent: false,
-          filterable: false,
-          leafOnly: false,
-          includeHalfChecked: false,
-          data: [],
           props: {
             children: 'children',
             label: 'name',
@@ -216,6 +211,9 @@ export default {
           },
         }
       },
+    },
+    options: {
+      type: Array,
     },
   },
   data() {
@@ -241,8 +239,34 @@ export default {
       let _c = 'el-tree-select-popper ' + this.popoverClass
       return this.disabled ? _c + ' disabled ' : _c
     },
+    computedTreeParams() {
+      return {
+        clickParent: true,
+        filterable: false,
+        leafOnly: true,
+        includeHalfChecked: false,
+        defaultExpandAll: true,
+        data: [],
+        props: {
+          children: 'children',
+          label: 'name',
+          code: 'code',
+          value: 'flowId',
+          disabled: 'disabled',
+        },
+        ...this.treeParams,
+      }
+    },
   },
   watch: {
+    options: {
+      immediate: true,
+      deep: true,
+      handler: function handler(value) {
+        this.treeDataUpdateFun(value)
+      },
+    },
+
     ids: function (val) {
       if (val !== undefined) {
         this.$nextTick(() => {
@@ -262,7 +286,7 @@ export default {
     },
   },
   created() {
-    const { props, data, leafOnly, includeHalfChecked } = this.treeParams
+    const { props, data, leafOnly, includeHalfChecked } = this.computedTreeParams
     this._setMultipleFun()
     this.propsValue = props.value
     this.propsLabel = props.label
@@ -396,8 +420,8 @@ export default {
     // 树点击
     _treeNodeClickFun(data, node, vm) {
       const { multiple } = this.selectParams
-      const { clickParent } = this.treeParams
-      const checkStrictly = this.treeParams['check-strictly']
+      const { clickParent } = this.computedTreeParams
+      const checkStrictly = this.computedTreeParams['check-strictly']
       const { propsValue, propsChildren, propsDisabled } = this
       const children = data[propsChildren] || []
       if (data[propsDisabled]) {

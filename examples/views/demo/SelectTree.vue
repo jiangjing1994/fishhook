@@ -5,14 +5,19 @@
  * @LastModifiedBy: dawdler
 -->
 <template>
-  <KemSelectTree
-    ref="treeSelect"
-    v-model="values"
-    popover-class="test-class-wrap"
-    :styles="styles"
-    :select-params="selectParams"
-    :tree-params="treeParams"
-  ></KemSelectTree>
+  <div style="text-align: left; padding-top: 20px">
+    {{ values }}
+    <KemButton @click="changeOptions">修改options</KemButton>
+    <KemSelectTree
+      ref="treeSelect"
+      v-model="values"
+      popover-class="test-class-wrap"
+      :styles="styles"
+      :options="options"
+      :select-params="selectParams"
+      :tree-params="treeParams"
+    ></KemSelectTree>
+  </div>
 </template>
 <script>
 export default {
@@ -29,35 +34,25 @@ export default {
   },
   data() {
     return {
+      options: [],
       styles: {
         width: '300px',
       },
       // 单选value为字符串，多选为数组
-      values: this.isSingle ? '' : [],
+      values: '0_0',
       selectParams: {
         clearable: true,
         placeholder: '请输入内容',
       },
       treeParams: {
-        clickParent: true,
-        //  filterable: true,
-        // 只想要子节点，不需要父节点
-        leafOnly: true,
-        includeHalfChecked: false,
-        'check-strictly': false,
-        'default-expand-all': true,
-        'expand-on-click-node': false,
-        'render-content': this._renderFun,
         data: [],
         props: {
           children: 'children',
           label: 'name',
-          rootId: '0',
           disabled: 'disabled',
           parentId: 'parentId',
           value: 'id',
         },
-        ...this.params,
       },
     }
   },
@@ -97,10 +92,50 @@ export default {
       data.push(rootNode)
     }
     this.$nextTick(() => {
-      this.$refs.treeSelect.treeDataUpdateFun(data)
+      //this.$refs.treeSelect.treeDataUpdateFun(data)
     })
+
+    //this.options = data
   },
   methods: {
+    changeOptions() {
+      // 手动更新树数据
+      let data = []
+      const { label, children, parentId, value, rootId } = this.treeParams.props
+      for (let i = 0; i < 5; i++) {
+        let rootNode = {
+          [label]: `节点：${i}`,
+          [parentId]: rootId,
+          [value]: i,
+          [children]: [],
+        }
+        for (let a = 0; a < 5; a++) {
+          let subId = `${rootNode[value]}_${a}`
+          let subNode = {
+            [label]: `子节点：${subId}`,
+            [parentId]: rootNode[value],
+            [value]: subId,
+            [children]: [],
+          }
+          for (let b = 0; b < 5; b++) {
+            let endId = `${subId}_${b}`
+            let endNode = {
+              [label]: `末级节点：${endId}`,
+              [parentId]: subNode[value],
+              [value]: endId,
+              [children]: [],
+            }
+            subNode[children].push(endNode)
+          }
+          rootNode[children].push(subNode)
+        }
+        data.push(rootNode)
+      }
+      this.$nextTick(() => {
+        //this.$refs.treeSelect.treeDataUpdateFun(data)
+      })
+      this.options = data
+    },
     _filterFun(value, data, node) {
       debugger
       if (!value) return true
