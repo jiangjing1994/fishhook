@@ -9,7 +9,6 @@
         :model="form"
         :row-gutter="10"
         :form-rules="formRules"
-        label-suffix=":"
         :form-config="{
           labelPositon: 'right',
         }"
@@ -162,7 +161,7 @@ export default {
           },
         },
 
-        // { label: '特殊资源', prop: 'resource', slot: 'resource', span: 24 },
+        { label: '特殊资源', prop: 'resource', slot: 'resource', span: 24 },
       ],
       formItems2: [
         { label: '活动名称', prop: 'name', span: 24 },

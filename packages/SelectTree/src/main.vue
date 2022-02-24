@@ -262,8 +262,10 @@ export default {
     options: {
       immediate: true,
       deep: true,
-      handler: function handler(value) {
-        this.treeDataUpdateFun(value)
+      handler(value) {
+        this.$nextTick(() => {
+          this.treeDataUpdateFun(value)
+        })
       },
     },
 

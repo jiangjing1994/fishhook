@@ -7,7 +7,7 @@
 <template>
   <div style="text-align: left; padding-top: 20px">
     {{ values }}
-    <KemButton @click="changeOptions">修改options</KemButton>
+    <el-tag @click="changeOptions">修改options</el-tag>
     <KemSelectTree
       ref="treeSelect"
       v-model="values"
@@ -57,22 +57,21 @@ export default {
     }
   },
   watch: {},
-  created() {},
-  mounted() {
+  created() {
     // 手动更新树数据
     let data = []
     const { label, children, parentId, value, rootId } = this.treeParams.props
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 3; i++) {
       let rootNode = {
-        [label]: `节点：${i}`,
+        [label]: `哈哈哈哈：${i}`,
         [parentId]: rootId,
         [value]: i,
         [children]: [],
       }
-      for (let a = 0; a < 5; a++) {
+      for (let a = 0; a < 3; a++) {
         let subId = `${rootNode[value]}_${a}`
         let subNode = {
-          [label]: `子节点：${subId}`,
+          [label]: `lalalal：${subId}`,
           [parentId]: rootNode[value],
           [value]: subId,
           [children]: [],
@@ -95,7 +94,7 @@ export default {
       //this.$refs.treeSelect.treeDataUpdateFun(data)
     })
 
-    //this.options = data
+    this.options = data
   },
   methods: {
     changeOptions() {
