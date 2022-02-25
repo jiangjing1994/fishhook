@@ -4,14 +4,7 @@
       <div
         v-if="$slots.header || header"
         slot="header"
-        style="
-          display: flex;
-          align-items: center;
-          font-size: 16px;
-          font-weight: bold;
-          padding: 7px;
-          color: #333333;
-        "
+        style="display: flex; align-items: center; font-size: 16px; font-weight: bold; padding: 7px; color: #333333"
       >
         <div class="block-color__cell--left" />
         <slot name="header">
@@ -21,10 +14,7 @@
       <div class="content__body">
         <slot />
       </div>
-      <div
-        v-if="$slots.footer || footer"
-        style="padding: 15px 15px; border-top: 1px solid #ebeef5; text-align: right"
-      >
+      <div v-if="$slots.footer || footer" style="padding: 15px 15px; border-top: 1px solid #ebeef5; text-align: right">
         <slot name="footer">
           {{ footer }}
         </slot>

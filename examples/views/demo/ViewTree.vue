@@ -1,11 +1,6 @@
 <template>
   <div style="text-align: left">
-    <KemViewTree
-      :data="data3"
-      :load-data="loadData"
-      :render="renderContent"
-      class="demo-tree-render"
-    ></KemViewTree>
+    <KemViewTree :data="data3" :load-data="loadData" :render="renderContent" class="demo-tree-render"></KemViewTree>
   </div>
 </template>
 <script>

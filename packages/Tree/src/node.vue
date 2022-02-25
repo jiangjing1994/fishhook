@@ -1,17 +1,9 @@
 <template>
   <el-collapse-transition :appear="appear">
     <ul :class="classes">
-      <li
-        @contextmenu.stop="handleContextmenu(data, $event)"
-        @selectstart.stop="handlePreventSelect(data, $event)"
-      >
+      <li @contextmenu.stop="handleContextmenu(data, $event)" @selectstart.stop="handlePreventSelect(data, $event)">
         <span :class="arrowClasses" @click="handleExpand">
-          <KemViewIcon
-            v-if="showArrow"
-            :type="arrowType"
-            :custom="customArrowType"
-            :size="arrowSize"
-          />
+          <KemViewIcon v-if="showArrow" :type="arrowType" :custom="customArrowType" :size="arrowSize" />
           <KemViewIcon v-if="showLoading" type="ios-loading" class="ivu-load-loop" />
         </span>
         <KemViewCheckbox
@@ -23,12 +15,7 @@
         ></KemViewCheckbox>
         <span :class="titleClasses" @click="handleClickNode">
           <Render v-if="data.render" :render="data.render" :data="data" :node="node"></Render>
-          <Render
-            v-else-if="isParentRender"
-            :render="parentRender"
-            :data="data"
-            :node="node"
-          ></Render>
+          <Render v-else-if="isParentRender" :render="parentRender" :data="data" :node="node"></Render>
           <template v-else>{{ data.title }}</template>
         </span>
         <Tree-node

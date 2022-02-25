@@ -13,12 +13,9 @@
       <KemButton @click="toggle"> {{ waitRefresh }}切换定时</KemButton>
     </template>
     <template slot="menu" slot-scope="{ scope }">
-      <KemButton
-        v-if="'Mark' === scope.row.createUser"
-        type="text"
-        @click="sadasda(scope.row.createUser)"
-        >{{ scope.row.createUser }}</KemButton
-      >
+      <KemButton v-if="'Mark' === scope.row.createUser" type="text" @click="sadasda(scope.row.createUser)">{{
+        scope.row.createUser
+      }}</KemButton>
     </template>
   </KemTable>
 </template>

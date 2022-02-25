@@ -1,20 +1,9 @@
 <template>
   <div>
     <!--todo-->
-    <el-popover
-      placement="bottom-start"
-      width="450"
-      trigger="click"
-      @show="$refs['iconSelect'].reset()"
-    >
+    <el-popover placement="bottom-start" width="450" trigger="click" @show="$refs['iconSelect'].reset()">
       <IconDirectory ref="iconSelect" @selected="selected" />
-      <KemInput
-        slot="reference"
-        v-model="iconvalue"
-        style="width: 250px"
-        placeholder="点击选择图标"
-        readonly
-      >
+      <KemInput slot="reference" v-model="iconvalue" style="width: 250px" placeholder="点击选择图标" readonly>
         <svg-icon
           v-if="iconvalue"
           slot="prefix"

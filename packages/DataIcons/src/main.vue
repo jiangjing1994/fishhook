@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="data-icons_body"
-    :style="`background-color:${backgroundColor};padding: ${gutter}px;padding-bottom: 0;`"
-  >
+  <div class="data-icons_body" :style="`background-color:${backgroundColor};padding: ${gutter}px;padding-bottom: 0;`">
     <el-row :gutter="gutter">
       <template v-for="(item, index) in data">
         <el-col :key="index" :span="span">

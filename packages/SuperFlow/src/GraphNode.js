@@ -5,14 +5,7 @@ import { direction, directionVector } from './types'
 
 export default class GraphNode {
   constructor(props, graph) {
-    const {
-      id = uuid('node'),
-      width = 180,
-      height = 100,
-      coordinate = [0, 0],
-      meta = null,
-      pid = null,
-    } = props
+    const { id = uuid('node'), width = 180, height = 100, coordinate = [0, 0], meta = null, pid = null } = props
 
     this.key = uuid('node')
     this.graph = graph

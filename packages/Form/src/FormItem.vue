@@ -9,33 +9,14 @@
     >
       <template v-if="!item.isFormGroup">
         <div :class="isFormGroup ? 'isformgrouptitle' : ''">
-          <div
-            v-if="item.tip && item.tipType === 'alert'"
-            style="padding: 0 0 0 10px; margin-bottom: 5px"
-          >
-            <el-alert
-              :title="item.tip"
-              style="padding: 5px 6px"
-              type="info"
-              show-icon
-              :closable="false"
-            >
-            </el-alert>
+          <div v-if="item.tip && item.tipType === 'alert'" style="padding: 0 0 0 10px; margin-bottom: 5px">
+            <el-alert :title="item.tip" style="padding: 5px 6px" type="info" show-icon :closable="false"> </el-alert>
           </div>
           <el-form-item :prop="item.prop">
-            <render-content
-              v-if="item.labelRender"
-              slot="label"
-              :render="item.labelRender"
-              :data="item"
-            />
+            <render-content v-if="item.labelRender" slot="label" :render="item.labelRender" :data="item" />
             <span v-else slot="label">
               {{ item.label }}
-              <el-tooltip
-                v-if="item.tip && item.tipType !== 'alert'"
-                effect="dark"
-                placement="bottom"
-              >
+              <el-tooltip v-if="item.tip && item.tipType !== 'alert'" effect="dark" placement="bottom">
                 <template slot="content">
                   <pre>{{ item.tip }}</pre>
                 </template>

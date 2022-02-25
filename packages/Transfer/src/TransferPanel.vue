@@ -17,11 +17,7 @@
         @mouseenter.native="inputHover = true"
         @mouseleave.native="inputHover = false"
       >
-        <i
-          slot="prefix"
-          :class="['el-input__icon', 'el-icon-' + inputIcon]"
-          @click="clearQuery"
-        ></i>
+        <i slot="prefix" :class="['el-input__icon', 'el-icon-' + inputIcon]" @click="clearQuery"></i>
       </KemInput>
 
       <div class="label_body" @click="show = !show">
@@ -196,9 +192,7 @@ export default {
     checked(val, oldVal) {
       this.updateAllChecked()
       if (this.checkChangeByUser) {
-        const movedKeys = val
-          .concat(oldVal)
-          .filter((v) => val.indexOf(v) === -1 || oldVal.indexOf(v) === -1)
+        const movedKeys = val.concat(oldVal).filter((v) => val.indexOf(v) === -1 || oldVal.indexOf(v) === -1)
         this.$emit('checked-change', val, movedKeys)
       } else {
         this.$emit('checked-change', val)
@@ -225,12 +219,7 @@ export default {
     defaultChecked: {
       immediate: true,
       handler(val, oldVal) {
-        if (
-          oldVal &&
-          val.length === oldVal.length &&
-          val.every((item) => oldVal.indexOf(item) > -1)
-        )
-          return
+        if (oldVal && val.length === oldVal.length && val.every((item) => oldVal.indexOf(item) > -1)) return
         const checked = []
         const checkableDataKeys = this.checkableData.map((item) => item[this.keyProp])
         val.forEach((item) => {
@@ -255,8 +244,7 @@ export default {
     updateAllChecked() {
       const checkableDataKeys = this.checkableData.map((item) => item[this.keyProp])
       this.allChecked =
-        checkableDataKeys.length > 0 &&
-        checkableDataKeys.every((item) => this.checked.indexOf(item) > -1)
+        checkableDataKeys.length > 0 && checkableDataKeys.every((item) => this.checked.indexOf(item) > -1)
     },
 
     handleAllCheckedChange(value) {

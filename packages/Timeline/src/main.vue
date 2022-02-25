@@ -14,11 +14,7 @@
           <slot :name="activity.prop" :scope="activity"></slot>
         </template>
 
-        <render-content
-          :key="index"
-          :render="activity.render"
-          :activity="activity"
-        ></render-content>
+        <render-content :key="index" :render="activity.render" :activity="activity"></render-content>
 
         <slot v-if="activity.slot" :name="activity.prop" :scope="activity"></slot>
       </el-timeline-item>

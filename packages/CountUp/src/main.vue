@@ -74,14 +74,7 @@ export default {
   methods: {
     init() {
       if (!this.c) {
-        this.c = new CountUp(
-          this.$el,
-          this.start,
-          this.value,
-          this.decimals,
-          this.duration,
-          this.options
-        )
+        this.c = new CountUp(this.$el, this.start, this.value, this.decimals, this.duration, this.options)
         this.c.start(() => {
           this.callback(this.c)
         })

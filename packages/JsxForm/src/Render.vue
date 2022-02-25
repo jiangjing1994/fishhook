@@ -22,9 +22,7 @@ export default {
   },
   render: (h, ctx) =>
     ctx.props.render
-      ? ctx.props.render(h, ctx.props.form, ctx.props.rootForm, ctx.props.scope) || (
-          <span>{ctx.parent.emptyWords}</span>
-        )
+      ? ctx.props.render(h, ctx.props.form, ctx.props.rootForm, ctx.props.scope) || <span>{ctx.parent.emptyWords}</span>
       : ctx.parent.emptyWords,
 }
 </script>

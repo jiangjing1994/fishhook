@@ -1,13 +1,7 @@
 <template>
   <div>
     <KemLabelText v-if="uiType === 'text'" :value="label"></KemLabelText>
-    <el-input
-      v-else
-      v-bind="$attrs"
-      :placeholder="placeholder"
-      :clearable="inputClearable"
-      v-on="evet"
-    >
+    <el-input v-else v-bind="$attrs" :placeholder="placeholder" :clearable="inputClearable" v-on="evet">
       <!-- @slot prefix	输入框头部内容，只对 type="text" 有效 -->
       <slot slot="prefix" name="prefix" />
 

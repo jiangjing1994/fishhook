@@ -27,16 +27,7 @@
 export default {
   name: 'KemSearch',
   // eslint-disable-next-line vue/require-prop-types
-  props: [
-    'formConfig',
-    'formItems',
-    'formRules',
-    'alias',
-    'isFormGroup',
-    'readOnly',
-    'value',
-    'labelType',
-  ],
+  props: ['formConfig', 'formItems', 'formRules', 'alias', 'isFormGroup', 'readOnly', 'value', 'labelType'],
   data() {
     return {
       showIf: true,
