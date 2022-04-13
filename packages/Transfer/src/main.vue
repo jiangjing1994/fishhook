@@ -7,11 +7,7 @@
         @mouseenter.native="inputHover = true"
         @mouseleave.native="inputHover = false"
       >
-        <i
-          slot="prefix"
-          :class="['el-input__icon', 'el-icon-' + inputIcon]"
-          @click="clearQuery"
-        ></i>
+        <i slot="prefix" :class="['el-input__icon', 'el-icon-' + inputIcon]" @click="clearQuery"></i>
       </KemInput>
     </div>
     <div class="conten_body">
@@ -273,9 +269,7 @@ export default {
         }
       })
       currentValue =
-        this.targetOrder === 'unshift'
-          ? itemsToBeMoved.concat(currentValue)
-          : currentValue.concat(itemsToBeMoved)
+        this.targetOrder === 'unshift' ? itemsToBeMoved.concat(currentValue) : currentValue.concat(itemsToBeMoved)
       this.$emit('input', currentValue)
       this.$emit('change', currentValue, 'right', this.leftChecked)
     },

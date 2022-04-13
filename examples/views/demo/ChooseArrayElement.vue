@@ -2,12 +2,7 @@
   <div style="text-align: left">
     <pre>{{ value }}</pre>
     <KemChooseArrayElement v-model="value.a" :form-items="formItems" button-text="自定义" />
-    <KemChooseArrayElement
-      v-model="value.b"
-      value-data-type="string"
-      ui-type="inline"
-      :form-items="formItems"
-    />
+    <KemChooseArrayElement v-model="value.b" value-data-type="string" ui-type="inline" :form-items="formItems" />
   </div>
 </template>
 

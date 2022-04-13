@@ -5,13 +5,7 @@
         <i :class="scope.row.icon" style="font-size: 24px"></i>
       </template>
     </KemTable>
-    <KemTable
-      :request="request"
-      :column="column"
-      row-key="deptId"
-      :tree-props="treeProps"
-      :is-show-page="false"
-    >
+    <KemTable :request="request" :column="column" row-key="deptId" :tree-props="treeProps" :is-show-page="false">
       <template slot="icon" slot-scope="{ scope }">
         <i :class="scope.row.icon" style="font-size: 24px"></i>
       </template>

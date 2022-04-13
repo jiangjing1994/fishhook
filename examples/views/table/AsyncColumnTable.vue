@@ -16,12 +16,9 @@
       <KemButton @click="aappendCol"> 增加一列{{ appendcolumnNumber }}</KemButton>
     </template>
     <template slot="menu" slot-scope="{ scope }">
-      <KemButton
-        v-if="'Mark' === scope.row.createUser"
-        type="text"
-        @click="sadasda(scope.row.createUser)"
-        >{{ scope.row.createUser }}</KemButton
-      >
+      <KemButton v-if="'Mark' === scope.row.createUser" type="text" @click="sadasda(scope.row.createUser)">{{
+        scope.row.createUser
+      }}</KemButton>
     </template>
     <template v-for="i in appendcolumn" :slot="i.slot" slot-scope="{ scope }">
       {{ scope.row[i.prop] }}

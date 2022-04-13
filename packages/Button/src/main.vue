@@ -123,13 +123,7 @@ export default {
 
     const baseButton = () => {
       return (
-        <el-button
-          props={this.$attrs}
-          type={type}
-          size={this.buttonSize}
-          style={this.style}
-          on={this.evet}
-        >
+        <el-button props={this.$attrs} type={type} size={this.buttonSize} style={this.style} on={this.evet}>
           {this.$slots.default}
         </el-button>
       )

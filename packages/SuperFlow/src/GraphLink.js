@@ -7,14 +7,7 @@ export default class GraphLink {
   static distance = 15
 
   constructor(options, graph) {
-    const {
-      id = uuid('link'),
-      start,
-      end = null,
-      startAt = [0, 0],
-      endAt = [0, 0],
-      meta = null,
-    } = options
+    const { id = uuid('link'), start, end = null, startAt = [0, 0], endAt = [0, 0], meta = null } = options
 
     this.key = uuid('link')
 
@@ -75,9 +68,7 @@ export default class GraphLink {
 
     if (this.end) return
 
-    const relative = this.start.relative(
-      vector(offset).minus(this.graph.origin).minus(this.start.coordinate).end
-    )
+    const relative = this.start.relative(vector(offset).minus(this.graph.origin).minus(this.start.coordinate).end)
 
     this.endDirection = vector(relative.direction).multiply(-1).end
   }
@@ -189,12 +180,7 @@ export default class GraphLink {
 
     const n = 5
 
-    if (
-      position[0] < minX - n ||
-      position[0] > maxX + n ||
-      position[1] < minY - n ||
-      position[1] > maxY + n
-    ) {
+    if (position[0] < minX - n || position[0] > maxX + n || position[1] < minY - n || position[1] > maxY + n) {
       return false
     }
 

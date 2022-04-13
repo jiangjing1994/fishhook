@@ -31,12 +31,7 @@
       </div>
       <div v-else>
         <div slot="footer">
-          <KemButton
-            v-if="!!$listeners.save"
-            type="primary"
-            :loading="footerButton"
-            @click="$emit('save')"
-          >
+          <KemButton v-if="!!$listeners.save" type="primary" :loading="footerButton" @click="$emit('save')">
             确 认
           </KemButton>
           <KemButton type="default" @click="$emit('update:visible', false)"> 取 消 </KemButton>

@@ -1,12 +1,6 @@
 <template>
   <div>
-    <KemTree
-      :request="request"
-      :lazy="true"
-      is-show-menu
-      @clickMenus="clickMenus"
-      @nodeClick="nodeClick"
-    ></KemTree>
+    <KemTree :request="request" :lazy="true" is-show-menu @clickMenus="clickMenus" @nodeClick="nodeClick"></KemTree>
   </div>
 </template>
 

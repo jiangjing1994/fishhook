@@ -420,9 +420,7 @@ export default {
         const verticalList = this.moveNodeConf.verticalList
         const horizontalList = this.moveNodeConf.horizontalList
 
-        const centerList = this.graph.nodeList
-          .filter((item) => item !== node)
-          .map((node) => node.center)
+        const centerList = this.graph.nodeList.filter((item) => item !== node).map((node) => node.center)
 
         arrayReplace(
           verticalList,
@@ -527,9 +525,9 @@ export default {
 
 <style lang="scss">
 .super-flow {
-  font-family: Apple System, 'SF Pro SC', 'SF Pro Display', 'Helvetica Neue', Arial, 'PingFang SC',
-    'Hiragino Sans GB', STHeiti, 'Microsoft YaHei', 'Microsoft JhengHei', 'Source Han Sans SC',
-    'Noto Sans CJK SC', 'Source Han Sans CN', sans-serif;
+  font-family: Apple System, 'SF Pro SC', 'SF Pro Display', 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB',
+    STHeiti, 'Microsoft YaHei', 'Microsoft JhengHei', 'Source Han Sans SC', 'Noto Sans CJK SC', 'Source Han Sans CN',
+    sans-serif;
 
   position: relative;
   background-color: transparent;

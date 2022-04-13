@@ -1,5 +1,5 @@
 <template>
-  <KemPageCard header="一个有趣的crud功能模块">
+  <KemPageCard header="一个有趣的crud功能模块1111">
     <KemTable
       :column="column"
       :menu-button="menuButton"
@@ -11,11 +11,7 @@
     />
     <KemCrud ref="kemcrud" :args="args" :form-items="formItems" :form-rules="formRules">
       <template slot="color">
-        <KemColorPicker
-          v-model="args.color"
-          style="position: absolute"
-          size="mini"
-        ></KemColorPicker>
+        <KemColorPicker v-model="args.color" style="position: absolute" size="mini"></KemColorPicker>
       </template>
       <template slot="append" slot-scope="{ scope }"> append表单框后置内容 {{ scope }} </template>
     </KemCrud>

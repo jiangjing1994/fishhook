@@ -1,12 +1,6 @@
 <template>
   <div>
-    <KemTable
-      :column="column"
-      :menu-width="250"
-      row-key="tagId"
-      :table-data="tableData"
-      :tree-props="treeProps"
-    >
+    <KemTable :column="column" :menu-width="250" row-key="tagId" :table-data="tableData" :tree-props="treeProps">
     </KemTable>
   </div>
 </template>

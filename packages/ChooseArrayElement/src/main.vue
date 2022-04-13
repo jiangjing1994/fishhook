@@ -1,22 +1,11 @@
 <template>
   <div style="position: relative">
     <template v-if="uiType === 'default'">
-      <KemDialog
-        :visible.sync="visible"
-        :modal-append-to-body="false"
-        :close-on-click-modal="true"
-        @save="save"
-      >
+      <KemDialog :visible.sync="visible" :modal-append-to-body="false" :close-on-click-modal="true" @save="save">
         <template slot="header">
           <span>
             {{ title }}
-            <el-tooltip
-              v-if="content"
-              class="item"
-              effect="dark"
-              :content="content"
-              placement="right-end"
-            >
+            <el-tooltip v-if="content" class="item" effect="dark" :content="content" placement="right-end">
               <el-button type="text" icon="el-icon-info"></el-button>
             </el-tooltip>
           </span>
