@@ -18,6 +18,7 @@ import KemSwitch from './Switch'
 import KemCountUp from './CountUp'
 import KemDataIcons from './DataIcons'
 import KemInputSlider from './InputSlider'
+import KemResizeBox from './ResizeBox'
 //import KemTree from './Tree'
 import KemSteps from './Steps'
 import KemCrud from './Crud'
@@ -65,6 +66,7 @@ const components = [
   KemCountUp,
   KemDataIcons,
   KemInputSlider,
+  KemResizeBox,
   KemSteps,
   KemChooseArrayElement,
   KemCrud,
@@ -214,6 +216,7 @@ export default {
   KemCountUp,
   KemDataIcons,
   KemInputSlider,
+  KemResizeBox,
   KemSteps,
   KemChooseArrayElement,
   KemCrud,
