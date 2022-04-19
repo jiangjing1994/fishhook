@@ -6,7 +6,7 @@
 </template>
 <script>
 export default {
-  name: 'ContextNenu',
+  name: 'ContextMenu',
 }
 </script>
 ```

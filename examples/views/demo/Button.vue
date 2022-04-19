@@ -18,6 +18,7 @@
 <script>
 export default {
   name: 'Button',
+  displayName: '按钮',
 
   data() {
     return {

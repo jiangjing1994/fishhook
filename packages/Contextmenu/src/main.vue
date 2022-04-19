@@ -4,10 +4,10 @@
 
 <script>
 /**
- * @displayName KemContextNenu
+ * @displayName KemContextMenu
  */
 export default {
-  name: 'KemContextNenu',
+  name: 'KemContextMenu',
   props: {
     propName: {
       type: Number,

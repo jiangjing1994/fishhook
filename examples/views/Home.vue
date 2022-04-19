@@ -1,6 +1,6 @@
 <template>
-  <div class="home" style="background-color: #ffffff; padding: 10px; padding-top: 0">
-    <h4 style="font-size: 16px; padding: 0; margin: 0; text-align: left; position: absolute">
+  <div class="home">
+    <h4>
       <h5>版本号 v{{ version }}</h5>
       <h5>
         <a href="https://github.com/jiangjing1994/fishhook/">代码仓库</a>
@@ -12,7 +12,7 @@
         <a href="https://jiangjing1994.github.io/fishhook/">文档</a>
       </h5>
     </h4>
-    <img alt="Vue logo" src="../assets/log.jpg" />
+    <img alt="Vue logo" src="../assets/log.png" />
   </div>
 </template>
 
@@ -29,9 +29,32 @@ export default {
   created() {},
 }
 </script>
-<style>
-.home h5 {
-  padding: 5px;
-  color: #16045f;
+<style lang="scss">
+.home {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  // background-color: rgba(34, 54, 234, 0.1);
+  color: #000000;
+  padding: 10px 0 0 0;
+  font-weight: bold;
+  font-size: 16px;
+  &:hover {
+    color: #0312f8;
+    // background-color: #ee0909
+  }
+
+  img {
+    padding: 0;
+    margin: 0;
+  }
+}
+.home h4 {
+  padding-left: 20px;
+}
+.home h5 a {
+  color: inherit;
 }
 </style>

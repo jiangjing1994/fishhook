@@ -37,7 +37,7 @@ import KemD52tButton from './D52tButton'
 import KemSelectTree from './SelectTree'
 import KemInputTree from './InputTree'
 import KemFlipNnumber from './FlipNnumber'
-import ContextNenu from './ContextNenu'
+import ContextMenu from './ContextMenu'
 import ElementUI from 'element-ui'
 import Grid from '@jiangjing94/grid'
 import '@jiangjing94/grid/lib/index.css'
@@ -180,7 +180,7 @@ const install = function (Vue, opts = {}) {
   Grid.install(Vue, {
     size: opts.size,
   })
-  ContextNenu.install(Vue)
+  ContextMenu.install(Vue)
 
   // Vue.component('KemViewTree', KemViewTree)
   // Vue.component('KemViewAlert', KemViewAlert)
