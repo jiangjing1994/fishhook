@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'ContextNenu',
+  name: 'ContextMenu',
   displayName: '',
   methods: {
     onContextmenu(event) {
