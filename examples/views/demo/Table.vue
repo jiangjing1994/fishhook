@@ -1,7 +1,7 @@
 <template>
   <div>
     <KemPageCard header="简单表格静态数据纯用于展示~">
-      <!--简单表格静态数据纯用于展示-->
+      <!--简单表格静态数据纯用于展示-->1111
       <SimpaleTable></SimpaleTable>
     </KemPageCard>
     <KemPageCard header="多选表格">
