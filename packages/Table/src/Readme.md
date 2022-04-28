@@ -1,277 +1,105 @@
-- Example: 简单表格静态数据纯用于展示
+## KemTable
+@displayNameTable配置化表格
 
-```vue
-<template>
-  <KemTable
-    :column="column"
-    :menu-button="menuButton"
-    :request="request"
-    :result="result"
-    :default-params="defaultParams"
-    :menu-width="250"
-    @clickMenuButton="clickMenuButton"
-  />
-</template>
 
-<script>
-import { queryList } from '../../../examples/utils/index'
-export default {
-  name: 'SimpaleTable',
-  data() {
-    return {
-      defaultParams: {},
-      request: queryList,
-      menuButton: ['allBtn', 'addBtn', 'delBtn'],
+### Attributes
+|参数|类型|说明|默认值|
+|------|------|------|------|
+|readOnly|Boolean|——|false|
+|tableData|Array|——|[]|
+|column|Array|——|[]|
+|size|String|sizie尺寸|——|
+|align|String|列跟菜单对齐方式 支持$MIMI|——|
+|expand|Boolean|行展开|false|
+|pageOption|Object|分页器|——|
+|menuWidth|Number|操作栏宽度 支持$MIMI|——|
+|waitRefresh|Number|定时刷新|——|
+|menuButton|Array|——|[]|
+|isShowPage|Boolean|是否显示分页器|true|
+|isShowBorder|Boolean|是否显示边框 支持$MIMI||
+|isShowStripe|Boolean|是否显示斑马线 支持$MIMI||
+|isShowIndex|Boolean|是否显示索引 支持$MIMI||
+|isShowHeader|Boolean|是否显示表头 支持$MIMI||
+|mergeOption|Object|合并选项 支持option下的所有属性及props没有暴露的属性 支持$MIMI方式|——|
+|selection|Boolean|是否开启多选 支持$MIMI||
+|defaultParams|Object|默认参数|{}|
+|autoRefresh|Boolean|表格是否根据queryParams变化自动 刷新数据 默认 true|true|
+|defaultProps|Object|参数转义|——|
+|orderProps|Object|分页参数转义|——|
+|request|Function|异步方法|——|
+|result|Function|结果处理|——|
+|rowStyle|Function|行样式 $Mimi|——|
+|treeLoad|Function|——|{}|
+|tableHeight|Number|表格高度|——|
+|indexLabel|String|索引显示文字|——|
+|menuButtonType|String|菜单按钮滴样式|text|
+|columnOverHidden|Boolean|单元格超出隐藏|true|
+|rowKey|String|rowkey|$index|
+|searchProps|Object、Boolean|搜索框的传值|false|
+|treeProps|Object、Boolean|树的传值|false|
+|bigData|Boolean|大数模式|false|
+|reserveSelection|Boolean|分页选中|false|
 
-      column: [
-        { label: '业务需求编号', prop: 'code' },
-        { label: '需求主题', prop: 'title' },
-        { label: '需求类型', prop: 'type' },
-        { label: '需求提交人', prop: 'createUser' },
-        { label: '需求提交时间', prop: 'createTime' },
-        { label: '正式需求编号', prop: 'formalCode' },
-      ],
-    }
-  },
-  methods: {
-    result(res) {
-      return res.data
-    },
-    rowClick(value) {
-      this.$message.success(JSON.stringify(value))
-    },
-    save(value) {
-      this.$message.success(JSON.stringify(value))
-    },
-    clickMenuButton(value) {
-      this.$message.success(JSON.stringify(value))
-    },
-  },
-}
-</script>
 
-<style scoped></style>
-```
+### Slots
+|name|说明|
+|------|------|
+|menuTop|无描述|
+|menuLeft|无描述|
+|menuRight|无描述|
+|menuBottom|无描述|
 
-- Example: 稍微复杂一丢丢的表格
 
-```vue
-<template>
-  <KemTable
-    :column="column"
-    :menu-button="menuButton"
-    :request="request"
-    :result="result"
-    :default-params="defaultParams"
-    :menu-width="250"
-    @clickMenuButton="clickMenuButton"
-  />
-</template>
+### Events
+|事件名称|说明|
+|------|------|
+|searchFormUpdata|* 搜索条件改变|
+|getDataListSuccess|——|
+|selectionChange|——|
+|expandChanges|* 手风琴展开|
+|rowUpdate|——|
+|cell-mouse-enter|——|
+|cell-mouse-leave|——|
+|header-click|——|
+|row-contextmenu|——|
+|cell-dblclick|——|
+|on-load|——|
+|cellClick|* 单元格被点击|
+|rowClick|* 某一行被点击|
+|rowDblclick|* 行双击|
+|clickMenuButton|* 点击菜单按钮|
+|handelLoadmore|——|
 
-<script>
-import { queryList } from '../../../examples/utils/index'
-export default {
-  name: 'BaseTable',
-  data() {
-    return {
-      defaultParams: {},
-      request: queryList,
-      menuButton: ['allBtn', 'addBtn', 'delBtn'],
 
-      column: [
-        { label: '业务需求编号', prop: 'code' },
-        { label: '需求主题', prop: 'title' },
-        { label: '需求类型', prop: 'type' },
-        { label: '需求提交人', prop: 'createUser' },
-        { label: '需求提交时间', prop: 'createTime' },
-        { label: '正式需求编号', prop: 'formalCode' },
-      ],
-    }
-  },
-  methods: {
-    result(res) {
-      return res.data
-    },
-    rowClick(value) {
-      this.$message.success(JSON.stringify(value))
-    },
-    save(value) {
-      this.$message.success(JSON.stringify(value))
-    },
-    clickMenuButton(value) {
-      this.$message.success(JSON.stringify(value))
-    },
-  },
-}
-</script>
-
-<style scoped></style>
-```
-
-- Example: 各种 menu~expand~花里胡哨版
-
-```vue
-<template>
-  <KemTable
-    :column="column"
-    :menu-button="menuButton"
-    :request="request"
-    :result="result"
-    :default-params="defaultParams"
-    :menu-width="250"
-    :expand="true"
-    @clickMenuButton="clickMenuButton"
-  >
-    <template slot="menu" slot-scope="{ scope }">
-      <KemButton type="text">{{ scope.row.createUser }}</KemButton>
-    </template>
-    <template slot="expand" slot-scope="{ scope }">
-      <div>expand</div>
-      <div>
-        <pre>{{ scope.row }}</pre>
-      </div>
-    </template>
-    <template slot="menuTop">
-      <div class="menu-top-class">menuTop</div>
-    </template>
-    <template slot="menuLeft">
-      <div class="menu-left-class">menuLeft</div>
-    </template>
-    <template slot="menuRight">
-      <div class="menu-right-class">menuRight</div>
-    </template>
-    <template slot="menuBottom">
-      <div class="menu-bottom-class">menuBottom</div>
-    </template>
-  </KemTable>
-</template>
-
-<script>
-import { queryList } from '../../../examples/utils/index'
-export default {
-  name: 'MenuTable',
-  data() {
-    return {
-      defaultParams: {},
-      request: queryList,
-      menuButton: ['delBtn'],
-      column: [
-        { label: '业务需求编号', prop: 'code' },
-        { label: '需求主题', prop: 'title' },
-        { label: '需求类型', prop: 'type' },
-        { label: '需求提交人', prop: 'createUser' },
-        { label: '需求提交时间', prop: 'createTime' },
-        { label: '正式需求编号', prop: 'formalCode' },
-      ],
-    }
-  },
-  methods: {
-    result(res) {
-      return res.data
-    },
-    rowClick(value) {
-      this.$message.success(JSON.stringify(value))
-    },
-    save(value) {
-      this.$message.success(JSON.stringify(value))
-    },
-    clickMenuButton(value) {
-      this.$message.success(JSON.stringify(value))
-    },
-  },
-}
-</script>
-
-<style scoped>
-.menu-top-class {
-  height: 55px;
-  background-color: #d9ecff;
-  text-align: center;
-  line-height: 55px;
-}
-.menu-left-class {
-  height: 55px;
-  background-color: #d9ecff;
-  text-align: center;
-  line-height: 55px;
-}
-.menu-right-class {
-  height: 55px;
-  background-color: #d9ecff;
-  text-align: center;
-  line-height: 55px;
-}
-.menu-bottom-class {
-  height: 55px;
-  background-color: #d9ecff;
-  text-align: center;
-  line-height: 55px;
-}
-</style>
-```
-
-- Example: 我有一个带搜索框的大表哥
-
-```vue
-<template>
-  <KemTable
-    :column="column"
-    :menu-button="menuButton"
-    :request="request"
-    :result="result"
-    :default-params="defaultParams"
-    :menu-width="250"
-    :search-props="searchProps"
-    @clickMenuButton="clickMenuButton"
-  />
-</template>
-
-<script>
-import { queryList } from '../../../examples/utils/index'
-export default {
-  name: 'SimpaleTable',
-  data() {
-    return {
-      defaultParams: {},
-      request: queryList,
-      menuButton: ['allBtn', 'addBtn', 'delBtn'],
-      searchProps: {
-        formItems: [
-          { label: '业务需求编号', prop: 'code', span: 8 },
-          { label: '需求主题', prop: 'title', span: 8 },
-          { label: '选择颜色', prop: 'color', slot: 'color', span: 8 },
-          { label: '需求类型', prop: 'type', span: 8 },
-          { label: '需求提交人', prop: 'createUser', span: 8 },
-          { label: '正式需求编号', prop: 'formalCode', span: 8 },
-        ],
-      },
-
-      column: [
-        { label: '业务需求编号', prop: 'code' },
-        { label: '需求主题', prop: 'title' },
-        { label: '需求类型', prop: 'type' },
-        { label: '需求提交人', prop: 'createUser' },
-        { label: '需求提交时间', prop: 'createTime' },
-        { label: '正式需求编号', prop: 'formalCode' },
-      ],
-    }
-  },
-  methods: {
-    result(res) {
-      return res.data
-    },
-    rowClick(value) {
-      this.$message.success(JSON.stringify(value))
-    },
-    save(value) {
-      this.$message.success(JSON.stringify(value))
-    },
-    clickMenuButton(value) {
-      this.$message.success(JSON.stringify(value))
-    },
-  },
-}
-</script>
-
-<style scoped></style>
-```
+### Methods
+|方法名|说明|参数|返回值|
+|------|------|------|------|
+|menuPermission|判断权限|——|——|
+|getListData `async` |——|——|——|
+|setCrudData|给crudData 赋值|——|——|
+|renderTable|表格渲染|——|——|
+|resetPage|重置分页器分页器|——|——|
+|sizeChange|分页器每页条数改变|——|——|
+|currentChange|当前页数改变|——|——|
+|sortChange|排序|——|——|
+|selectionChange|多选|——|——|
+|expandChanges|列展开手风琴|——|——|
+|rowCellAdd|表格增加一行|——|——|
+|columnInit|表格增加一行|——|——|
+|rowUpdate|当行内编辑点击保存时|——|——|
+|clearSort|清空排序|——|——|
+|cellMouseEnter|当单元格 hover 进入时会触发该事件|——|——|
+|cellMouseLeave|当单元格 hover 退出时会触发该事件|——|——|
+|headerClick|当某一列的表头被点击时会触发该事件|——|——|
+|rowContextmenu|当某一行被鼠标右键点击时会触发该事件|——|——|
+|cellDblclick|当某个单元格被双击击时会触发该事件|——|——|
+|onLoad|——|——|——|
+|cellClick|——|——|——|
+|rowClick|当某一行被点击时会触发该事件|——|——|
+|rowDblclick|——|——|——|
+|methodsRowStyle|单元格样式|——|——|
+|clickMenuButton|点击操作栏的删除按钮|——|——|
+|loadNode|手动渲染|——|——|
+|handelLoadmore|——|——|——|
+|toggleRowSelection|——|——|——|
+|toggleIdSelection|——|——|——|

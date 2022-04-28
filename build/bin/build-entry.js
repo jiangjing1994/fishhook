@@ -1,7 +1,7 @@
 let Components = require('../../components.json')
 let fs = require('fs')
 let render = require('json-templater/string')
-var uppercamelcase = require('uppercamelcase')
+let uppercamelcase = require('uppercamelcase')
 let path = require('path')
 let endOfLine = require('os').EOL
 
