@@ -97,7 +97,7 @@ class RenderMd {
    */
   eventsRender(propsRes, config) {
     const kt = this._getKeysAndTitles(config, ['name', 'desc'])
-    let mdArr = [...this.renderTitle('Events'), ...this.renderTabelHeader(kt.titles)]
+    let mdArr = [...this.renderTitle('Events 事件'), ...this.renderTabelHeader(kt.titles)]
     for (const key in propsRes) {
       if (Object.hasOwnProperty.call(propsRes, key)) {
         const element = propsRes[key]

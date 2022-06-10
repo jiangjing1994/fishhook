@@ -875,8 +875,9 @@ export default {
       })
     },
 
-    /**
-     * 列展开手风琴
+    /** 手风琴展开
+     * @param {object} row 描述
+     * @param {array} expendList
      */
     expandChanges(row, expendList) {
       /** 手风琴展开
@@ -920,6 +921,7 @@ export default {
     },
     //当单元格 hover 进入时会触发该事件
     cellMouseEnter(row, column, cell, event) {
+      //单元格 hover 进入时会触发该事件
       this.$emit('cell-mouse-enter', { row, column, cell, event })
     },
     //当单元格 hover 退出时会触发该事件

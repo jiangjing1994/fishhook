@@ -138,7 +138,10 @@ const extractMethods = (node) => {
         }
         // 提取 参数说明
         let matches = comment.value.matchAll(/(@param)[\s]*{([a-zA-Z]*)}[\s]*(\w*)(.*)/g)
+        console.log(JSON.stringify(comment.value))
+        console.log(JSON.stringify(matches))
         for (const matche of matches) {
+          console.log(matche)
           !methods[item.key.name].params && (methods[item.key.name].params = [])
           methods[item.key.name].params.push({
             name: matche[3],
@@ -154,17 +157,25 @@ const extractMethods = (node) => {
 
 // 提取事件
 const extractEvents = (path) => {
-  // 第一个元素是事件名称
-  const eventName = path.parent.arguments[0]
+  // 第一个元素
+  const event = path.parent.arguments[0]
+  // 事件名称
+  const eventName = event.value
+  // 注释类型
+  const eventType = event.type
+
   let comments = path.parentPath.parent.leadingComments
+
+  const desc = comments
+    ? comments.map((item) => {
+        return item.value.trim().match(/\*\s*[^@]\s*(.*)/)
+      })
+    : '——'
+
   return {
-    name: eventName.value,
-    desc: comments ? comments[0].value.match(/\*\s*[^@]\s*(.*)/)[0] : '——',
-    // desc: comments ? comments.map(item => {
-    //   console.log(comments[0])
-    //  // item.value.trim()
-    //  return item.value.trim().match(/\*\s*[^@]\s*(.*)/)
-    // }) : '——'
+    name: eventName,
+    //desc: comments ? comments[0].value.match(/\*\s*[^@]\s*(.*)/)[0] : '——',
+    desc: JSON.stringify(comments),
   }
 }
 

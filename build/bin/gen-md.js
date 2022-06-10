@@ -14,7 +14,6 @@ const config = {
 }
 
 //console.log(JSON.stringify(parseDocs(vueStr), null, 2));
-console.log(parseDocs(vueStr, config))
 const OUTPUT_PATH = path.join(__dirname, '../../packages/Table/src/Readme.md')
 
 fs.writeFileSync(OUTPUT_PATH, parseDocs(vueStr, config))
