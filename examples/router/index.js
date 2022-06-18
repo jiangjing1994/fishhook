@@ -3,15 +3,13 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 
 import pages from '../views/demo/pages' // 页面文件目录
-
+console.log(pages)
 let routes = []
 
 Object.keys(pages).forEach((item) => {
   routes.push({
     path: `/${pages[item].name}`,
-
     name: pages[item].name,
-
     component: pages[item],
   })
 })

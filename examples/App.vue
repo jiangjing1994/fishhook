@@ -59,8 +59,10 @@ export default {
   height: 100vh;
   padding-top: 60px;
   position: relative;
+
   .nav {
     height: 60px;
+    min-height: 60px;
     width: 100%;
     position: fixed;
     z-index: 9999;
@@ -69,9 +71,14 @@ export default {
     flex-wrap: wrap;
     align-items: flex-start;
     flex-direction: row;
+    align-content: flex-start;
     padding: 5px;
-    background-color: rgb(238, 203, 200);
+    background-color: rgb(252, 226, 224);
     border-bottom: 1px solid rgba(16, 49, 147, 0.2);
+    overflow: hidden;
+    &:hover {
+      height: auto;
+    }
     .nav-block {
       padding: 0 5px;
       font-size: 12px;
@@ -81,6 +88,9 @@ export default {
       a {
         font-weight: bold;
         color: #000000;
+        &:hover {
+          color: #7e68f6;
+        }
 
         &.router-link-exact-active {
           color: #310ef8;
@@ -91,7 +101,8 @@ export default {
   .app-wrapper {
     height: 100%;
     padding: 0 20px;
-    background-color: rgba(227, 173, 164, 0.24);
+    background-color: rgba(164, 214, 227, 0.24);
+    overflow: auto;
     .app-main {
       min-height: calc(100vh - 60px);
       background-color: #ffffff;

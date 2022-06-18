@@ -1,10 +1,10 @@
 <template>
-  <div></div>
+  <div>1111</div>
 </template>
 
 <script>
 export default {
-  name: 'KemCharts',
+  name: 'Charts',
   props: {
     /** 选择器类型
      * @values date, datetime, time

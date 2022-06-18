@@ -6,6 +6,7 @@ import store from './store'
 
 // @ts-ignore
 import FishhookUI from '../packages'
+import DemoDlock from './components/demo-block'
 
 Vue.use(FishhookUI, {
   size: 'mini',
@@ -33,6 +34,7 @@ Vue.use(FishhookUI, {
   },
 })
 Vue.config.productionTip = false
+Vue.component('DemoDlock', DemoDlock)
 
 new Vue({
   router,

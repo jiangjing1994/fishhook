@@ -50,25 +50,25 @@
 |menuBottom|无描述|
 
 
-### Events 事件
+### Events
 |事件名称|说明|
 |------|------|
-|searchFormUpdata|[{"type":"CommentBlock","value":"* 搜索条件改变\n         * @event searchFormUpdata\n         * @type {Event}\n         ","start":11382,"end":11464,"loc":{"start":{"line":543,"column":8,"index":11382},"end":{"line":546,"column":11,"index":11464}}}]|
-|getDataListSuccess||
-|selectionChange||
-|expandChanges|[{"type":"CommentBlock","value":"* 手风琴展开\n       * @event expandChanges\n       * @type {Event}\n       ","start":16144,"end":16216,"loc":{"start":{"line":759,"column":6,"index":16144},"end":{"line":762,"column":9,"index":16216}}}]|
-|rowUpdate||
-|cell-mouse-enter|[{"type":"CommentLine","value":"单元格 hover 进入时会触发该事件","start":17062,"end":17083,"loc":{"start":{"line":800,"column":6,"index":17062},"end":{"line":800,"column":27,"index":17083}}}]|
-|cell-mouse-leave||
-|header-click||
-|row-contextmenu||
-|cell-dblclick||
-|on-load||
-|cellClick|[{"type":"CommentBlock","value":"* 单元格被点击\n       * @event cellClick\n       * @type {Event}\n       ","start":17803,"end":17872,"loc":{"start":{"line":826,"column":6,"index":17803},"end":{"line":829,"column":9,"index":17872}}}]|
-|rowClick|[{"type":"CommentBlock","value":"* 某一行被点击\n       * @event rowClick\n       * @type {Event}\n       ","start":18043,"end":18111,"loc":{"start":{"line":840,"column":6,"index":18043},"end":{"line":843,"column":9,"index":18111}}}]|
-|rowDblclick|[{"type":"CommentBlock","value":"* 行双击\n       * @event rowClick\n       * @type {Event}\n       ","start":18240,"end":18305,"loc":{"start":{"line":852,"column":6,"index":18240},"end":{"line":855,"column":9,"index":18305}}}]|
-|clickMenuButton|[{"type":"CommentBlock","value":"* 点击菜单按钮\n         * @event clickMenuButton\n         * @type {Event}\n         ","start":18974,"end":19055,"loc":{"start":{"line":882,"column":8,"index":18974},"end":{"line":885,"column":11,"index":19055}}}]|
-|handelLoadmore||
+|searchFormUpdata|* 搜索条件改变|
+|getDataListSuccess|——|
+|selectionChange|——|
+|expandChanges|* 手风琴展开|
+|rowUpdate|——|
+|cell-mouse-enter|——|
+|cell-mouse-leave|——|
+|header-click|——|
+|row-contextmenu|——|
+|cell-dblclick|——|
+|on-load|——|
+|cellClick|* 单元格被点击|
+|rowClick|* 某一行被点击|
+|rowDblclick|* 行双击|
+|clickMenuButton|* 点击菜单按钮|
+|handelLoadmore|——|
 
 
 ### Methods
@@ -83,7 +83,7 @@
 |currentChange|当前页数改变|——|——|
 |sortChange|排序|——|——|
 |selectionChange|多选|——|——|
-|expandChanges|风琴展开|row:object(描述),expendList:array|——|
+|expandChanges|列展开手风琴|——|——|
 |rowCellAdd|表格增加一行|——|——|
 |columnInit|表格增加一行|——|——|
 |rowUpdate|当行内编辑点击保存时|——|——|
