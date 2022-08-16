@@ -11,6 +11,7 @@
     :is-show-index="false"
     @selectionChange="selectionChange"
     @clickMenuButton="clickMenuButton"
+
   >
     <template slot="menu" slot-scope="{ scope }">
       <KemButton type="text">{{ scope.row.createUser }}</KemButton>

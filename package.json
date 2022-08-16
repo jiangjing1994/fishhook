@@ -1,6 +1,6 @@
 {
   "name": "@jiangjing94/mimi",
-  "version": "1.4.8",
+  "version": "1.5.0",
   "private": false,
   "scripts": {
     "bootstrap": "yarn --frozen-lockfile && yarn gen:version",
