@@ -17,12 +17,13 @@ import alert from '../md/alert.md'
 import Button from '../demo/Button'
 //import  DemoDlock from '../../components/demo-block'
 export default {
+  name: 'Docs',
+
   components: {
     Button,
     //DemoDlock,
     alert,
   },
-  name: 'Docs',
 }
 </script>
 
