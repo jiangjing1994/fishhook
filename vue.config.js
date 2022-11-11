@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 
 module.exports = {
   publicPath: './',
@@ -11,6 +12,7 @@ module.exports = {
     },
   },
   configureWebpack: (config) => {
+ 
     config.module.rules.push({
       test: /\.md$/,
       use: [

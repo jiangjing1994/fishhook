@@ -8,13 +8,13 @@
 
 <script>
 export default {
-  name: 'KemTree',
+  name: "KemTree",
 
   data() {
     return {
       data3: [
         {
-          title: 'parent',
+          title: "parent",
           loading: false,
           children: [],
         },
@@ -23,24 +23,24 @@ export default {
       baseData: [
         {
           expand: true,
-          title: 'parent 1',
+          title: "parent 1",
           children: [
             {
-              title: 'parent 1-0',
+              title: "parent 1-0",
               expand: true,
               disabled: true,
               children: [
                 {
-                  title: 'leaf',
+                  title: "leaf",
                   disableCheckbox: true,
                 },
                 {
-                  title: 'leaf',
+                  title: "leaf",
                 },
               ],
             },
             {
-              title: 'parent 1-1',
+              title: "parent 1-1",
               expand: true,
               checked: true,
               children: [
@@ -52,28 +52,28 @@ export default {
           ],
         },
       ],
-    }
+    };
   },
   methods: {
     loadData(item, callback) {
       setTimeout(() => {
         const data = [
           {
-            title: 'children',
+            title: "children",
             loading: false,
             children: [],
           },
           {
-            title: 'children',
+            title: "children",
             loading: false,
             children: [],
           },
-        ]
-        callback(data)
-      }, 1000)
+        ];
+        callback(data);
+      }, 1000);
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped></style>
